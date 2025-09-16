@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.oyes.mapper.ClinicSessionMapper">
+	<select id="getSchedule" parameterType="int"  resultType="ClinicSession">
+        SELECT
+           clinic_id,
+           doctor_id,
+           visit_type,
+           reservation_date,
+            to_char(reservation_date,'dy') week,
+           to_char(reservation_date,'am') amPm
+        FROM
+            CLINIC_SESSION 
+        WHERE
+            doctor_id = #{doctor_id}
+    </select>
+</mapper>

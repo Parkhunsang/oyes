@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:insert="~{/header.html::header}"></th:block>
+<head><meta charset="UTF-8"><title>Insert title here</title>
+</head><body>
+<th:block th:if="${result} > 0">
+	<script>
+		alert("탈퇴 되었습니다");
+		location.href="loginForm"
+	</script>
+</th:block>
+<th:block th:if="${result} == 0">
+	<script>
+		alert("탈퇴 실패 ㅠㅠ");
+		history.back()
+	</script>
+</th:block>
+</body>
+</html>

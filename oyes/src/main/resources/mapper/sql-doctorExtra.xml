@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.oyes.mapper.DoctorExtraMapper">
+
+    <resultMap id="doctorExtraResultMap" type="DoctorExtra">
+        <id property="extra_id" column="extra_id"/>
+        <result property="doctor_id" column="doctor_id"/>
+        <result property="sort_code" column="sort_code"/>
+        <result property="extra_data" column="extra_data"/>
+    </resultMap>
+
+    <select id="getDoctorExtra" parameterType="int" resultMap="doctorExtraResultMap">
+        SELECT
+            extra_id,
+            doctor_id,
+            sort_code,
+            extra_data
+        FROM
+            doctor_extra
+        WHERE
+            doctor_id = #{doctor_id}
+        ORDER BY
+            sort_code
+    </select>
+
+</mapper>

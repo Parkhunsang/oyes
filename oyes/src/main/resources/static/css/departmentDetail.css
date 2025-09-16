@@ -1,0 +1,143 @@
+@charset "UTF-8";
+div.top_bar{
+	width:100%;
+	height:42px;
+	background-color:#0E7758;	
+	display:flex;
+	justify-content:center;
+}
+div.center_div{
+	display:flex;
+	justify-content:center;
+}
+ul.top_util_list{
+	width:1200px;
+	height:100%;
+	display:flex;
+	flex-direction:row;
+}
+ul.top_util_list>li{
+	border-left:1px solid #63a8a4;
+}
+ul.top_util_list>li:nth-child(1) {
+	width:42px;
+	height:100%;	
+}
+ul.top_util_list>li:nth-child(1) a{
+	width:100%;
+	height:100%;
+	display:block;
+	text-align:center;
+	line-height:42px;
+}
+ul.top_util_list>li:nth-child(2),ul.top_util_list>li:nth-child(3){
+	width:200px;
+	padding:0 45px 0 20px;
+	box-sizing:border-box;
+	border-right:1px solid #63a8a4;
+}
+ul.top_util_list li:nth-child(2) span, ul.top_util_list li:nth-child(3) span{
+	line-height:42px;
+	color:#fff;
+}
+span.home_icon{
+	width:14px;
+	height:14px;
+	display:inline-block;
+	background:url('/images/home_icon.png') no-repeat center;
+	background-size:cover;
+}
+/* [Gemini 추가] 클릭 드롭다운 스타일 시작 */
+ul.top_util_list > li {
+    position: relative;
+}
+
+ul.drop_list {
+    display: none; /* 기본적으로 숨김 */
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    list-style: none;
+    box-sizing:border-box;
+    min-width: 120px;
+}
+ul.top_util_list li:nth-child(3) ul.drop_list{
+	left:54%;
+}
+/* JS로 토글할 .show 클래스 */
+ul.drop_list.show {
+    display: block;
+}
+ul.drop_list{
+	max-height: 485px;
+	overflow-y:auto;
+}
+ul.drop_list li{
+	width:200px;
+}
+ul.drop_list li a {
+    display: block;
+    padding: 8px 15px;
+    color: #333;
+    text-decoration: none;
+    white-space: nowrap;
+    width: auto;
+    height: auto;
+    line-height: normal;
+}
+ul.drop_list li a:hover {
+    background-color: #EEF8F3;
+}
+ul.top_util_list > li:nth-child(2)>span, ul.top_util_list > li:nth-child(3)>span{
+    cursor: pointer;
+}
+/* [Gemini 추가] 클릭 드롭다운 스타일 끝 */
+
+
+div#container{
+	width:100%;
+	height:auto;
+	margin-top:50px;
+	padding-top:70px;
+}
+section.detail_section{
+	width:1200px;
+	height:100%;
+	margin-top:68px;
+	margin-bottom:120px;
+}
+section.detail_section h1{
+	font:700 34px 'pretendard';
+	margin-bottom:35px;
+}
+ul.choose_btn_list{
+	width:100%;
+	height:50px;
+	display:flex;
+	flex-direction:row;
+	justify-content:space-between;
+	text-align:center;
+	margin-bottom:50px;
+}
+ul.choose_btn_list li{
+	flex:1;
+	border:1px solid #ddd;
+	margin-left:-1px;
+	margin-bottom:-1px;
+}
+ul.choose_btn_list li.selected{
+	background:#0E7758;
+}
+ul.choose_btn_list li.selected a{
+	color:#fff;
+}
+ul.choose_btn_list li a{
+	width:100%;
+	height:100%;
+	font: 400 16px/50px 'pretendard';
+	color:#666;
+}

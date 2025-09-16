@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<th:block th:insert="~{/header.html::header}"></th:block>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" th:href="@{/css/departmentDetail.css}">
+<title>[[${center.center_name}]] | 위치안내</title>
+</head>
+<body>
+	<div layout:fragment="contentFragment" id="container">
+		<section class="detail_section">
+				<h1>[[${center.center_name}]]</h1>
+				<ul class="choose_btn_list">
+					<li><a th:href=@{/center/centerDetail(center_id=${center.center_id})}>진료과소개</a></li>
+					<li><a th:href=@{/center/doctorList(center_id=${center.center_id})}>의료진소개</a></li>
+					<li><a th:href="@{/center/clinicReservation(center_id=${center.center_id})}">진료시간표</a></li>
+					<li class="selected"><a th:href="@{/center/centerPlace(center_id=${center.center_id})}">위치안내</a></li>
+				</ul>
+				<div th:if="${center.center_place_img != null}">
+		              <img th:src="@{/images/} + ${center.center_place_img}" alt="위치 이미지">
+		        </div>
+		</section>      
+	</div>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/layout}">
+<th:block th:insert="~{/header.html::header}"></th:block>
+<head>
+<meta charset="UTF-8">
+<title>[[${center.center_name}]] | 의료진소개</title>
+<link rel="stylesheet" th:href="@{/css/departmentDetail.css}">
+<style>
+	div.doctor_info{
+		width:100%;
+		height:100%;
+	}
+	ul.doctor_info_list{
+		display:grid;
+		grid-template-columns:repeat(2, 1fr);
+	    grid-template-rows:repeat(auto, 1fr);
+		gap:30px;
+	}
+	ul.doctor_info_list>li{
+		height: 288px;
+		display:flex;
+		flex-direction: column;
+		border: 1px solid #ddd;
+	}
+	div.row_wrap{
+		height:238px;
+		display: flex;
+		flex-direction: row;
+	}
+	div.info_img_wrap img{
+		width: 194px;
+		height:100%;
+	}
+	div.info_text_wrap{
+		flex:1;
+		display:flex;
+		flex-direction: column;
+		padding: 40px 20px 0px 32px;
+		box-sizing: border-box;
+		gap: 20px;
+	}
+	div.info_text_wrap span{
+		font-family: 'pretendard';
+	}
+	div.name_wrap{
+		margin-bottom: 12px;
+	}
+	div.name_wrap span{
+		color: #444;
+	}
+	div.name_wrap span:nth-child(1){
+		font-weight: 500;
+		font-size: 20px;
+	}
+	div.name_wrap span:nth-child(2){
+		font-weight: 500;
+	}
+	div.departure_wrap > span:first-child,
+	div.specialty_wrap > span:first-child {
+	  color: #1b926f;
+	  font-weight: 600;
+	}
+	div.departure_wrap > span:last-child,
+	div.specialty_wrap > span:last-child{
+		color: #666;
+	}
+	div.specialty_wrap > span:first-child{
+		margin-right: 16px;
+		line-height: 1.4;
+	}
+	div.departure_wrap{
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		gap: 70px;
+	}
+	span.center-names{
+		flex:1;
+	}
+	div.util_list_wrap{
+		height: 50px;
+	}
+	ul.util_list{
+		height: 100%;
+		display: flex;
+		flex-direction: row;
+	}
+	ul.util_list li{
+		text-align: center;
+		flex:1;
+		border: 1px solid #ddd;
+		margin-left:-1px;
+		margin-bottom:-1px;
+	}
+	ul.util_list li>a{
+		font-weight: 300;
+		font-size: 14px;
+		line-height: 50px;
+	}
+	.icon-sizeXS{
+		width:19px;
+		height:19px;
+		background: url('/images/spr_iconXS.png') no-repeat;
+	}
+	.icon-sizeXS.icon_type03{
+	background-position:-84px 0;
+	}
+	.icon-sizeXS.icon_type02{
+	background-position:-42px 0;
+	}
+	.icon-sizeXS.icon_type01{
+	background-position:0 0;
+	}
+	[class^="icon_"]{
+		display:inline-block;
+		overflow:hidden;
+		position:relative;
+		vertical-align:middle;
+		margin: -3px 10px 0 0;
+	}
+</style>
+</head>
+<body>
+<div layout:fragment="contentFragment" id="container">
+	<section class="detail_section">
+			<h1>[[${center.center_name}]]</h1>
+			<ul class="choose_btn_list">
+				<li><a th:href=@{/center/centerDetail(center_id=${center.center_id})}>센터 소개</a></li>
+				<li class="selected"><a th:href="@{/center/doctorList(center_id=${center.center_id})}">의료진소개</a></li>
+				<li><a th:href="@{/center/clinicReservation(center_id=${center.center_id})}">진료시간표</a></li>
+				<li><a th:href="@{/center/centerPlace(center_id=${center.center_id})}">위치안내</a></li>
+			</ul>
+			
+			<div class="doctor_info">
+				<ul class="doctor_info_list">
+					<li th:each="doctor : ${doctorList}">
+						<div class="row_wrap">
+							<div class="info_img_wrap">
+								<img th:src="@{/images/}+${doctor.doctor_profile_image}" alt="Hero Image">
+							</div>
+							<div class="info_text_wrap">
+								<div class="name_wrap">
+									<span>[[${doctor.doctor_name}]]</span>
+									<span>[[${doctor.doctor_title}]]</span>
+								</div>			
+								<div class="departure_wrap">
+									<span>진료과</span>
+									<span class="center-names">
+										
+										[[${doctor.department_name}]]
+										<th:block th:unless="${#lists.isEmpty(doctor.centerNames)}">
+											, [[${#strings.listJoin(doctor.centerNames, ', ')}]]												
+										</th:block>											
+									</span>
+					 			</div>
+								<div class="specialty_wrap">
+									<span>전문 진료 분야</span>
+									<span>[[${doctor.doctor_doctor_specialty}]]</span>
+								</div>
+							</div>
+						</div>
+						<div class="util_list_wrap">
+							<ul class="util_list">
+								<li><a><i class="icon_type03 icon-sizeXS"></i>진료예약</a></li>
+								<li><a th:href="@{/center/doctorDetail(doctor_id=${doctor.doctor_id})}"><i class="icon_type02 icon-sizeXS"></i>의료진정보</a></li>
+								<li><a><i class="icon_type01 icon-sizeXS"></i>고맙습니다</a></li>
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</div>
+	</section>
+</div>
+</body>
+</html>

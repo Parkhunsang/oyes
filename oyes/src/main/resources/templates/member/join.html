@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:insert="~{/header.html::header}"></th:block>
+<head><meta charset="UTF-8"><title>Insert title here</title>
+</head><body>
+<th:block th:if="${result} > 0">
+	<script>
+		alert("회원가입이 완료되었습니다");
+		location.href="loginForm"
+	</script>
+</th:block>
+<th:block th:if="${result} == 0">
+	<script>
+		alert("회원가입 실패! 잠시 후 다시 시도해 주세요");
+		history.back()
+	</script>
+</th:block>
+<th:block th:if="${result} == -1">
+	<script>
+		alert("중복된 아이디 입니다");
+		history.back()
+	</script>
+</th:block>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.oyes.mapper.MypageMapper">
+	<select id="select" parameterType="string" resultType="member">
+		select * from member where patient_id = #{patient_id}
+	</select>
+	
+	<select id="select_mydoctor" parameterType="integer" resultType="favorite">
+		select a.*, b.DOCTOR_NAME, b.DOCTOR_TITLE, c.DEPARTMENT_ID, c.department_name
+        from   favorite a, 
+               doctor b,
+               department c
+        where  a.patient_no       = #{patient_no}
+        and    a.is_active        = 'y'
+        and    b.doctor_id        = a.doctor_id
+        and    c.department_id(+) = b.department_id
+        order by a.create_date desc, a.doctor_id
+	</select>
+	
+	<select id="select_proposal" parameterType="integer" resultType="proposal">
+		select *
+        from   proposal 
+        where  patient_no  = #{patient_no}
+        order by create_date desc
+	</select>
+	
+	<select id="select_compliment" parameterType="integer" resultType="compliment">
+		select *
+        from   compliment 
+        where  patient_no  = #{patient_no}
+        order by create_date desc, doctor_id
+	</select>
+	
+	<update id="update_myinfo" parameterType="member">
+		update member 
+		set    password     = #{password}, 
+		       mobile_no    = #{mobile_no}, 
+		       email        = #{email},
+		       update_date  = sysdate
+		where patient_id = #{patient_id}
+	</update>
+	
+	<update id="deleteFavorite" parameterType="integer">
+		update favorite 
+		set    is_active = 'n',
+		       update_date = sysdate 
+		where favorite_no = #{favorite_no}
+	</update>
+	
+</mapper>

@@ -1,0 +1,3370 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}"
+>
+	<th:block th:insert="~{/header.html::header}"></th:block>
+<!-- 
+	
+ -->
+
+
+<head>
+	<meta charset="UTF-8">
+	<title>이화여자대학교 의과대학 부속 서울병원</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<!-- 
+	<link rel="shortcut icon" th:href="@{/asset/img/common/favicon_eumc.ico" type="image/x-icon}" />
+	<link rel="stylesheet" th:href="@{/css/feCommon_seoul.min.css}" />
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
+	<script src="/js/jquery.min.js"></script>
+	<script src="/js/jquery-ui.min.js"></script>
+	<script src="/js/webfont.min.js"></script>
+	<script src="/js/kuhCommon.js"></script>
+ -->
+
+</head>
+<body>  
+	<div layout:fragment="contentFragment">
+	<!-- wrap -->
+	<!-- <div id="wrap"> -->
+		<!-- header   		
+		<header id="header" class="header">
+
+		</header>
+		  //header -->
+
+
+		<!-- container -->
+		<div class="container">
+			
+
+<style>
+.section{width: 1300px; margin: 0 auto;}
+.section .section_cont{position: relative; z-index: 130;}
+/* .inpatient {display: none; position: absolute; left: 210px; width: 421px;} */
+.inpatient {display: none; position: absolute; /* right:58px; */ }
+.inpatient .body {position: relative;}
+.inpatient .body .todaychk {position: absolute; padding-right: 15px; width: 100%; height: 36px; line-height: 29px; bottom: 0; left: 0; text-align: right; vertical-align: middle; color: #000000;}
+.inpatient .btnClose {overflow: hidden; position: absolute; top: 0; right: 0px; width: 50px; height: 50px; background: #0e7758 url(/asset/img/common/bg_modal_close.png) no-repeat 50% 50%; text-indent: -999px;}
+.inpatient1 {display: none; position: absolute; right: 58px; width: 400px;}
+.inpatient1 .body {position: relative;}
+.inpatient1 .body .todaychk {position: absolute; padding-right: 30px; width: 100%; line-height: 29px; bottom: 0; left: -75px; text-align: right; vertical-align: middle; color: #000000;}
+.inpatient1 .btnClose {overflow: hidden; position: absolute; top: 0; right: 0px; width: 50px; height: 50px; background: #0e7758 url(/asset/img/common/bg_modal_close.png) no-repeat 50% 50%; text-indent: -999px;}
+.inpatient3 {display: block; position: absolute; right: 660px; top: 880px; width: 180px;}
+.inpatient3 .body {position: relative;}
+/* .inpatient, .inpatient1 {width: 600px; height: 300px; z-index: 49; position: absolute; opacity: 0.90; background: #ffffff; display: none; top: 200px;}
+#inpatientpop {left: 217px;}
+#secondAnnouncementDiv {left: 902px;}
+#inpatientpop1 {left: 50%;}
+.popHeader {padding: 14px 0 14px 25px; width: 600px; height: 50px; background-color: #0E7758; position: relative; color: #ffffff; font-weight: bold;}
+.popClose {position: absolute; top: 10px; right: 10px;}
+.popCont {padding: 5px 25px; width: 600px; height: 210px; overflow-y: auto;color: black;background-color: white;}
+.popCont .col_r{color: red;}
+.popCont .col_b{color: black;font-weight: bold;}
+.inpatient .btnWarp, .inpatient1 .btnWarp {padding-right: 10px; height: 40px; line-height: 40px; background-color: #0E7758; text-align: right;}
+.mainVideo .movControl .movBtn:before {left: 860px;} */
+#boguImg i {background : url(/asset/img/common/bogu.png) no-repeat;}
+#boguImg:hover > i {background : url(/asset/img/common/bogu1.png) no-repeat;}
+.mainSrvList .item .text {margin: 9px 0 16px;}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const mainPopup = document.getElementById("mainPopup");
+        const todayKey = "mainPopupHidden";
+        const today = new Date().toISOString().split("T")[0];
+
+        //오늘 하루 안보기 처리
+        if (localStorage.getItem(todayKey) === today) {
+          mainPopup.style.display = "none";
+          return;
+        }
+
+        // Swiper 설정
+        new Swiper(".main-popup-swiper", {
+            speed: 600,
+            spaceBetween: 40,
+            slidesPerView: 3,
+            navigation: {
+                nextEl: ".main-popup-swiper__button.next",
+                prevEl: ".main-popup-swiper__button.prev"
+            }
+        });
+
+        // 닫기 버튼
+        document.querySelector(".main-popup__button").addEventListener("click", function () {
+            mainPopup.style.display = "none";
+        });
+
+        // 오늘 하루 보지 않기
+        document.querySelector(".main-popup__button02").addEventListener("click", function () {
+          localStorage.setItem(todayKey, today);
+          mainPopup.style.display = "none";
+        });
+    });
+</script>
+<style>
+.popup {
+    display: none;
+    z-index: 400;
+    position: fixed;
+    top: 0;
+    left: 0;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .78)
+}
+
+.popup.active {
+    display: flex
+}
+
+.popup__inner {
+    max-width: 680px;
+    max-height: 80vh
+}
+
+.popup__inner.type2 {
+    overflow: hidden
+}
+
+.popup__tit {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    padding: 0 16px 0 40px;
+    border-bottom: 1px solid #b9b9b9
+}
+
+.popup__tit h2 {
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: -.96px;
+    color: #111;
+    line-height: 1.3
+}
+
+.popup__body {
+    overflow: auto;
+    max-height: calc(80vh - 80px);
+    padding: 40px
+}
+
+.popup__body h3 {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    letter-spacing: -.6px
+}
+
+.popup__body h3.mt-none {
+    margin-top: 0
+}
+
+.popup__body h3.mb-none {
+    margin-bottom: 0
+}
+
+.popup__body h3.mb-none+p {
+    margin-top: 8px
+}
+
+.popup__body .text-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-weight: 500
+}
+
+.popup__info-tit {
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    text-align: center
+}
+
+.popup__desc-point {
+    font-size: 26px;
+    font-weight: 600;
+    color: #111
+}
+
+.item-type2 {
+    display: flex;
+    gap: 20px
+}
+
+.item {
+    flex: 1
+}
+
+.popup.type2 .popup__inner {
+    height: auto
+}
+
+.popup.type2 .popup__body {
+    height: auto;
+    max-height: 700px;
+    background-color: #fff
+}
+
+.popup .popup__body:has(.doctor-list) {
+    height: calc(80vh - 80px)
+}
+
+.popup .info+.info {
+    margin-top: 40px
+}
+
+.popup2 {
+    z-index: 2;
+    position: absolute;
+    bottom: 122px;
+    right: 100px;
+    width: 320px;
+    border-radius: 20px;
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, .25);
+    background-color: #fff
+}
+
+.popup2:after,
+.popup2:before {
+    position: absolute;
+    display: block;
+    content: ""
+}
+
+.popup2:before {
+    top: -36px;
+    right: -28px;
+    width: 114.8px;
+    height: 140px;
+    background-image: url(/img/mascot01.dd45fc94.png)
+}
+
+.popup2:after,
+.popup2:before {
+    z-index: 2;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 100%
+}
+
+.popup2:after {
+    bottom: 20px;
+    left: -28px;
+    width: 82px;
+    height: 100px;
+    background-image: url(/img/mascot02.ae3678b9.png)
+}
+
+.popup2 .swiper {
+    width: 320px;
+    height: 320px;
+    border: 4px solid #fff;
+    border-radius: 20px 20px 0 0
+}
+
+.popup2 .swiper .slide {
+    position: relative
+}
+
+.popup2 .swiper .slide__link:after {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 0 0 20px 10px rgba(0, 0, 0, .25);
+    content: ""
+}
+
+.popup2__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%
+}
+
+.popup2__btn button {
+    position: relative;
+    flex: 1;
+    font-size: 14px;
+    font-weight: 400;
+    color: #717171;
+    padding: 5px 9px 9px
+}
+
+.popup2__btn button:first-child:after {
+    position: absolute;
+    top: 45%;
+    right: 0;
+    transform: translateY(-50%);
+    display: block;
+    width: 1px;
+    height: 12px;
+    background-color: #d9d9d9;
+    content: ""
+}
+
+.popup3 {
+    z-index: 300;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .78)
+}
+
+.popup3.active {
+    display: flex
+}
+
+.popup__wrap {
+    position: relative
+}
+
+.popup__inner {
+    overflow-y: auto;
+    width: 100%;
+    height: auto;
+    max-height: 90vh;
+    background-color: #fff;
+    -o-object-fit: cover;
+    object-fit: cover
+}
+
+.popup3 .close {
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+.popup3 .close,
+.popup3 .cont .img,
+.popup3 .cont .img img {
+    width: 100%;
+    height: 100%
+}
+
+.popup3 .close {
+    position: absolute;
+    top: 0;
+    right: -60px;
+    width: 60px;
+    height: 60px;
+    background-color: #7d1928
+}
+
+.popup3 .main-button {
+    width: 100%
+}
+
+.popup3 .cont .img .item {
+    display: none
+}
+
+.popup3 .cont .img .item.active {
+    display: block
+}
+
+.popup4 {
+    z-index: -2;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    opacity: 0;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .78);
+    pointer-events: none
+}
+
+.popup4.active {
+    z-index: 400;
+    opacity: 1;
+    pointer-events: inherit
+}
+
+.popup4 .popup__inner {
+    max-width: 90%
+}
+
+.popup4 .popup__body {
+    overflow: hidden;
+    height: calc(80vh - 80px);
+    max-height: auto
+}
+
+.popup4 .subSwiper {
+    height: 100%
+}
+
+.swiper-pagination {
+    z-index: 504;
+    width: 100%;
+    bottom: 100px;
+    justify-content: center
+}
+
+.main-popup {
+    width: 1320px;
+    padding: 0 80px;
+    max-width: 100%
+}
+
+.main-popup__cont {
+    position: relative
+}
+
+.main-popup-swiper {
+    margin-top: 8px
+}
+
+.main-popup-swiper,
+.main-popup__item,
+.main-popup__item a,
+.main-popup__list {
+    max-height: calc(100svh - 255px)
+}.main-popup .main-popup--title
+
+
+.main-popup .main-popup--title {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 24px
+}
+
+.main-popup .main-popup--title p.strong {
+    color: #fff;
+    font-size: 42px;
+    padding-bottom: 10px;
+    line-height: 1;
+    z-index: 1;
+    position: relative;
+		text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.32);
+		font-weight: 700;
+}
+
+.main-popup .main-popup--title p.strong:after {
+    content: "";
+    position: absolute;
+    bottom: 7px;
+    left: 0;
+    width: 275px;
+    height: 17px;
+    background-color: #16b1a9;
+    z-index: -1;
+}
+
+.main-popup__cont--top {
+    text-align: right;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 300
+}
+
+.main-popup__cont--top span {
+    position: relative;
+    font-weight: 700;
+    color: #fff;
+    padding: 0 2px;
+		text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.32);
+}
+
+.main-popup__cont--top span:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 10px;
+    background-color: #16b1a9;
+    z-index: -1
+}
+
+.main-popup__item a {
+    width: 100%;
+    height: 100%;
+    display: block;
+    background-color: #d9d9d9;
+}
+
+.main-popup__item a img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    -o-object-fit: contain;
+    object-fit: contain;
+    -o-object-position: center;
+    object-position: center;
+}
+
+.main-popup__button-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+    gap: 32px
+}
+
+.main-popup__button02 {
+    padding: 0 20px 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid #fff;
+    color: #fff;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.main-popup__button,
+.main-popup__button02 {
+    height: 50px;
+    background-image: url(/asset/img/main/close-white.svg);
+    background-repeat: no-repeat
+}
+
+.main-popup__button {
+    border-radius: 100%;
+    background-size: 32px;
+    background-position: 50%;
+    position: relative
+}
+
+.main-popup__button,
+.main-popup__button:after {
+    display: block;
+    width: 50px;
+    background-color: #16b1a9;
+}
+
+.main-popup__button:after {
+    position: absolute;
+    animation: main-popup__button 1.6s ease-out infinite;
+    content: "";
+    height: 50px;
+    border-radius: 50%;
+    top: calc(50% - 25px);
+    left: calc(50% - 25px);
+    z-index: -1
+}
+
+@keyframes main-popup__button {
+    0% {
+        transform: scale(1);
+        opacity: 0
+    }
+
+    40% {
+        opacity: .8
+    }
+
+    to {
+        transform: scale(1.3);
+        opacity: 0
+    }
+
+    ;
+}
+
+.main-popup-swiper__button {
+    width: 60px;
+    height: 60px;
+    display: block;
+    background-size: cover;
+    position: absolute;
+    top: calc(50% - 30px);
+    display: block !important
+}
+
+.main-popup-swiper__button.next {
+    background-image: url(/asset/img/main/main-popup-swiper__button01.svg);
+    right: -80px
+}
+
+.main-popup-swiper__button.prev {
+    background-image: url(/asset/img/main/main-popup-swiper__button02.svg);
+    left: -80px
+}
+
+.main-popup__cont .swiper-wrapper:not(.swiper-wrapper:has(.swiper-slide:nth-of-type(2))) {
+    justify-content: center;
+}
+
+.main-popup__cont .swiper-wrapper {
+    /* justify-content: center !important */
+}
+</style>
+<main id="content" class="main content">
+
+    <div class="popup active" id="mainPopup">
+        <div class="main-popup">
+            <h3 class="main-popup--title">
+                <img src="/asset/img/main/logo_eumc_seoul_txt.png" alt="">
+                <p class="strong">POPUP ZONE</p>
+            </h3>
+            <div class="main-popup__cont">
+                <p class="main-popup__cont--top">팝업 전체 · <span>2개</span></p>
+                <div class="main-popup-swiper swiper">
+                    <div class="swiper-wrapper main-popup__list">
+                        
+                            <div class="swiper-slide main-popup__item">
+                                <a href="">
+                                    <img src="/upload/intro/popup/408287334d234684829f7486c16e1445.jpg" alt="서울 팝업.jpg" />
+                                </a>
+                            </div>
+                        
+                            <div class="swiper-slide main-popup__item">
+                                <a href="">
+                                    <img src="/upload/intro/popup/a6e0ae59677b4280910614ca282161d3.png" alt="250520_사이즈리뉴얼건.png" />
+                                </a>
+                            </div>
+                        
+                    </div>
+                </div>
+                <div class="main-popup-swiper__button-wrap">
+                    <button class="main-popup-swiper__button prev"></button>
+                    <button class="main-popup-swiper__button next"></button>
+                </div>
+            </div>
+            <div class="main-popup__button-wrap">
+                <a href="javascript:;" class="main-popup__button02" style="background-image:none;">오늘 하루 열지 않기</a>
+                <a href="javascript:;" class="main-popup__button"></a>
+            </div>
+        </div>
+    </div>
+
+	
+	
+	<div id="inpatientpop" class="inpatient">
+		<div class="popHeader">
+			이화여자대학교 서울병원
+			<div class="popClose"><a href="javascript:void(0)" class="btnClose"><img src="/asset/img/common/bg_modal_close.png" /></a></div> 
+		</div>
+		<div class="popCont">
+			내용1<br>
+			내용2
+		</div>
+		<div class="btnWarp">
+      <input type="checkbox" id="todaypop" name="todaypop" value="none"><label for="todaypop" style="color: white;">오늘 하루동안 열지 않기</label>
+   </div>
+	</div>
+	<!-- <div id="inpatientpop1" class="inpatient1">
+		<div class="popHeader">
+			코로나바이러스감염증-19 예방을 위한 협조 안내
+			<div class="popClose"><a href="javascript:void(0)" class="btnClose"><img src="/asset/img/common/bg_modal_close.png" /></a></div> 
+		</div>
+		<div class="popCont">
+			코로나바이러스감염증-19 확산과 관련하여 원내 유입을 예방하고자 아래와 같이 안내하오니 불편하시더라도 환자 및 보호자의 안전을 위해 협조해주시기 바랍니다.<br><br>
+			1. 아래의 경우 <span class="col_r">병원 출입과 진료 전 선별진료가 필요</span>합니다.<br>
+			○&nbsp;&nbsp;<span class="col_r">최근 14일 이내 국내 집단발생장소 방문력</span>이 있는 경우<br>
+			○&nbsp;&nbsp;<span class="col_r">발열 또는 호흡기증상이 있으신 분</span><br>
+			※ 선별진료 대상 중 최근 3일 이내 시행한 코로나19 검사(PCR)결과를 지참하신 경우 <br>&nbsp;&nbsp;&nbsp;&nbsp;진료 가능합니다.<br><br>
+			<span class="col_b">2. 아래의 경우 자가격리대상자이므로 질병관리본부(1339) 또는 관할 보건소 문의 후 지시에 따라 진료가 가능합니다.</span><br>
+			○&nbsp;&nbsp;<span class="col_r">최근 14일 이내 해외입국자</span><br>
+			○&nbsp;&nbsp;<span class="col_r">국가로부터 확진환자와 접촉자로 분류되어 문자를 받은 경우</span><br><br>
+			<span class="col_b">3. 입원환자 면회금지 안내사항</span><br>
+			○&nbsp;&nbsp;<span class="col_r">지정된 보호자 1명을 제외한 방문객의 면회를 전면 금지(중환자실은 면회 금지)</span><br>
+			○&nbsp;&nbsp;지정된 보호자는 반드시 보호자출입증을 착용<br>
+			○&nbsp;&nbsp;금지기간 : 감염증 발생 종료 시 까지<br><br>
+			※ 원내 출입문 통제 안내<br>
+			&nbsp;&nbsp;-&nbsp;출입 가능한 곳 : 1층 북문, 지하1층 지하철 연결통로(이외에 출입문 통제)<br>
+			&nbsp;&nbsp;-&nbsp;차량 이용 고객 : 지하3층 T구역, 지하4층 B구역 주차 후 이화M프라자 엘리베이터 <br>&nbsp;&nbsp;&nbsp;&nbsp;이용(주차장에서 이화M프라자 엘리베이터를 바로 확인하실 수 있습니다)<br><br>
+			※ 진료예약 및 진료문의(상담)<br>
+			&nbsp;&nbsp;-&nbsp;해피콜센터 : 1522-7000
+		</div>
+		<div class="btnWarp">
+      <input type="checkbox" id="todaypop1" name="todaypop1" value="none"><label for="todaypop1"  style="color: white;">오늘 하루동안 열지 않기</label>
+   </div>
+	</div> -->
+	
+	<!-- 개인정보 유출 확인 popup -->
+	<div class="laypop new_layer" id="privacyPop">
+		<h3>유출 여부 확인을 위한 개인정보 입력</h3>
+		
+		<br>
+		
+		<h3>개인정보 수집‧이용 동의(필수)</h3>
+		<div class="box_law01">
+			<p class="po">개인정보 수집·이용에 대한 내용을 반드시 확인해주세요.<br /></p>
+			<p>1. 개인정보 등의 수집·이용 목적: 개인정보 유출여부 조회</p>
+			<p>2. 수집하려는 개인정보 항목: (필수)이름, 생년월일</p>
+			<p class="pointtxt">3. 개인정보 등의 보유 및 이용 기간: 저장하지 않음</p>
+			<p>4. 귀하는 본 개인 정보 수집·이용에 대한 동의를 거부할 권리가 있습니다. 동의하지 않을 시에는 유출정보 조회 서비스를 받으실 수 없습니다.</p>
+			<p>위와 같이 개인 정보를 수집·이용하는데 동의하십니까?</p>
+		</div>
+		
+		<div class="alignC">
+			<i class="pointstar">
+				*
+				<span class="he">필수입력</span>
+			</i>
+			<input type="checkbox" id="sign05" data-fe-wrap="form-right" data-fe-label="동의합니다" />
+		</div>
+		
+		<br>
+			
+		<div class="grid-row grid-size02">
+			<div class="grid-col">
+				<button type="button" class="button button-sizeM button-bg button-color01 thisClose" style="color: #0e7758;">취소</button>
+			</div>
+			<div class="grid-col">
+				<button type="button" onclick="privactyChk();" class="button button-sizeM button-bg01">확인</button>
+			</div>
+		</div>
+		<button type="button" class="btnClose">레이어 닫기</button>
+	</div>
+	<!-- //개인정보 유출 확인 popup -->
+	
+	<!--  mainSlide -->
+	<div class="mainSlideWrap">
+		<div class="mainSlide slPagingBg01">
+			
+			
+				
+				<div style="background: url(/upload/main/main/4cfd64650d3e41319d115f2e788dfb73.jpg) 50% 0 no-repeat;">
+					
+					<div>
+						<p class="he">
+							main_01
+						</p>
+					</div>
+					
+				</div>
+				
+				<div style="background: url(/upload/main/main/09dfbd93a12343ee8d53ab6f85349b32.jpg) 50% 0 no-repeat;">
+					
+					<div>
+						<p class="he">
+							main_02
+						</p>
+					</div>
+					
+				</div>
+				
+				<div style="background: url(/upload/main/main/c7e1d415baeb43c7a75dbcd00edc7478.jpg) 50% 0 no-repeat;">
+					
+					<div>
+						<p class="he">
+							main_03
+						</p>
+					</div>
+					
+				</div>
+				
+				<div style="background: url(/upload/main/main/0afc8c8a9f344bf88643fc88b84ea6bb.jpg) 50% 0 no-repeat;">
+					
+					<div>
+						<p class="he">
+							main_04
+						</p>
+					</div>
+					
+				</div>
+				
+			
+			
+			
+		</div>
+	</div>
+	<!--  //mainSlide -->
+
+	<!-- mainBox -->
+	<div class="mainBox">
+		<div class="inner">
+
+			<!-- mainTreatSrh -->
+			<div class="mainTreatSrh">
+				<div class="form">
+					
+						<fieldset>
+							<legend>검색</legend>
+							<strong class="name" style="padding-left: 115px;">검색</strong>
+							<!-- search -->
+							<div class="search">
+								<input type="text" id="searchDeptDr" title="진료과/의료진명 검색어" placeholder="진료과/의료진/질환명을 입력해주세요." />
+								<button type="button">
+									<i class="icon-btnSearch03"></i>
+									<span class="ht">검색</span>
+								</button>
+							</div>
+							<!-- //search -->
+						</fieldset>
+					
+					<!-- autoComplete -->
+					<div class="autoComplete"></div>
+					<!-- //autoComplete -->
+				</div>
+			</div>
+			<!-- //mainTreatSrh -->
+			<!-- 빠른예약 popup -->
+			<div class="laypop new_layer" id="reserpop">
+				<h3>□ 첫 진료 예약</h3>
+				<div class="box_law01">
+				    첫 진료 예약은 처음 오시는 고객의 편의를 위하여 전문 
+				    상담원이 전화로 진료예약을 도와드리는 서비스입니다.<br>
+				    저희 병원에서 진료를 받으신 적 있는 분은 온라인(모바일, 알림톡, 홈페이지) 등 다른 방법을 통해 진료 예약을 진행해 주시기 바랍니다.<br><br>
+				    상담시간<br>
+				    평일 09:00~17:00(토요일, 공휴일 제외)
+				</div>
+				
+				<h3>□ 개인정보 수집‧이용 동의(필수)</h3>
+				<div class="box_law01">
+					<p class="po"><em class="color04">첫 진료 예약 전</em> 개인정보 수집·이용에 대한 내용을 반드시 확인해주세요.<br /></p>
+					<p>1. 개인정보 등의 수집·이용 목적: 첫방문 고객 또는 비회원 고객이 빠르게 예약을 진행하기 위한 용도</p>
+					<p>2. 수집하려는 개인정보 항목: (필수) 이름, 휴대폰번호</p>
+					<p class="pointtxt">3. 개인정보 등의 보유 및 이용 기간: 3개월 후 삭제</p>
+					<p>4. 귀하는 본 개인 정보 수집·이용에 대한 동의를 거부할 권리가 있습니다. 동의하지 않을 시에는 빠른예약 서비스를 받으실 수 없습니다.</p>
+					<p>위와 같이 개인 정보를 수집·이용하는데 동의하십니까?</p>
+				</div>
+				
+				<div class="alignC">
+					<i class="pointstar">
+						*
+						<span class="he">필수입력</span>
+					</i>
+					<input type="checkbox" id="sign01" data-fe-wrap="form-right" data-fe-label="동의합니다" />
+				</div>
+				
+				<br>
+					
+				<div class="grid-row grid-size02">
+					<div class="grid-col">
+						<button type="button" class="button button-sizeM button-bg button-color01 thisClose" style="color: #0e7758;">취소</button>
+					</div>
+					<div class="grid-col">
+						<button type="button" onclick="applyChk('normal');" class="button button-sizeM button-bg01">예약신청</button>
+					</div>
+				</div>
+				<button type="button" class="btnClose">레이어 닫기</button>
+			</div>
+			<!-- //빠른예약 popup -->
+			<!-- 알림톡으로 진료예약 popup -->
+            <div class="laypop" id="reserpop2">
+                <p class="po">카카오 알림톡 간편 진료예약 전 개인정보 수집·이용에 대한 내용을 반드시 확인해주세요.<br /></p>
+                <p>1. 개인정보 등의 수집·이용 목적: 첫방문 고객 또는 비회원 고객이 빠르게 예약을 진행하기 위한 용도</p>
+                <p>2. 수집하려는 개인정보 항목: (필수) 이름, 휴대폰번호</p>
+                <p class="pointtxt">3. 개인정보 등의 보유 및 이용 기간 : 정보 보유하지 않음</p>
+                <p>4. 귀하는 본 개인 정보 수집 · 이용에 대한 동의를 거부할 권리가 있습니다. 동의하지 않을 시에는 간편 진료예약 안내를 카카오 알림톡으로 받으실 수 없습니다.</p>
+                <p>위와 같이 개인 정보를 수집·이용하는데 동의하십니까?</p>
+                <div class="right">
+                    <i class="pointstar">
+                        *
+                        <span class="he">필수입력</span>
+                    </i>
+                    <input type="checkbox" id="sign02" data-fe-wrap="form-right" data-fe-label="동의함" />
+                </div>
+                <div class="btnWrap">
+                    <button type="button" onclick="applyChk('alarm');"
+                        class="button button-sizeM button-bg01 button-block">알림톡으로 진료 예약</button>
+                </div>
+                <button type="button" class="btnClose">레이어 닫기</button>
+            </div>
+            <!-- //알림톡으로 진료예약 popup -->
+
+            <!-- //알림톡 증명서 popup -->
+            <div class="laypop" id="onlinepop1">
+
+                <p class="po">알림톡 증명서 발급</p>
+                <!-- form -->
+                <div class="form">
+                    <form id="formVo2" action="/main.do" method="post">
+                        <input id="type" name="type" value="A" type="hidden"/>
+                        <input id="status" name="status" value="I" type="hidden"/>
+                        <input id="alarm_yn" name="alarm_yn" value="Y" type="hidden"/>
+                        <fieldset>
+                            <legend>첫 방문 환자 예약</legend>
+                            <div class="grid grid-table">
+                                <div class="grid-row">
+                                    <div class="grid-col grid-size04">
+                                        <input id="name2" name="name" title="성함" style="ime-mode:active" placeholder="성함" class="input form-sizeFull" type="text" value="" maxlength="20"/>
+                                    </div>
+                                    <div class="grid-col grid-size06">
+                                        <input id="tel2" name="tel" title="휴대전화번호" onkeydown="onlyNum(this)" placeholder="휴대전화번호" class="input form-sizeFull blX" type="text" value="" maxlength="11"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div>
+                <!-- //form -->
+
+                <h1 class="title" style="margin-top: 20px;">알림톡 증명서 발급 전 개인정보 수집·이용에 대한 내용을 반드시 확인해주세요.<br /></h1>
+                <p>1. 개인정보 등의 수집, 이용목적: 환자의 알림톡을 이용한 증명서 발급 진행을 위한 행위</p>
+                <p>2. 수집하려는 개인정보 항목: (필수) 이름, 휴대폰번호</p>
+                <p class="pointtxt">3. 개인정보 등의 보유 및 이용 기간 : 정보 보유하지 않음</p>
+                <p>4. 귀하는 본 개인 정보 수집 · 이용에 대한 동의를 거부할 권리가 있습니다. 동의하지 않을 시에는 간편 진료예약 안내를 카카오 알림톡으로 받으실 수 없습니다.</p>
+                <p>위와 같이 개인 정보를 수집·이용하는데 동의하십니까?</p>
+                <div class="right">
+                    <i class="pointstar">
+                        *
+                        <span class="he">필수입력</span>
+                    </i>
+                    <input type="checkbox" id="sign02_2" data-fe-wrap="form-right" data-fe-label="동의함" />
+                </div>
+                <div class="btnWrap">
+                    <button type="button" onclick="applyChk2('alarm');"
+                        class="button button-sizeM button-bg01 button-block"
+                        style="background-color: #F7E600 !important; color: #000 !important;" >알림톡(모바일) 발급</button>
+                </div>
+                <button type="button" class="btnClose">레이어 닫기</button>
+            </div>
+            <!-- // 알림톡 증명서 popup 종료 -->
+
+
+			<!-- mainSrvList -->
+			<div class="mainSrv">
+				<ul class="mainSrvList">
+					<li class="item">
+						<h2 class="title">첫 진료 예약</h2>
+						<p class="text">
+							전문 상담사가 첫 진료 환자 예약을 도와드립니다.​<br/>
+							상담시간 : 평일 09:00-17:00 (토요일, 공휴일 제외)
+							<span style="color:#F7E600"> *알림톡은 24시간 예약 가능합니다.</span>
+						</p>
+						<!-- form -->
+						<div class="form">
+							<form id="formVo1" action="/main.do" method="post">
+								<input id="type" name="type" value="A" type="hidden"/>
+								<input id="status" name="status" value="I" type="hidden"/>
+								<input id="alarm_yn" name="alarm_yn" value="N" type="hidden"/>
+								<fieldset>
+									<legend>첫 방문 환자 예약</legend>
+									<div class="grid grid-table">
+										<div class="grid-row">
+											<div class="grid-col grid-size04">
+												<input id="name1" name="name" title="성함" placeholder="성함" class="input form-sizeFull" type="text" value="" maxlength="20"/>
+											</div>
+											<div class="grid-col grid-size06">
+												<input id="tel1" name="tel" title="휴대전화번호" onkeydown="onlyNum(this)" placeholder="휴대전화번호" class="input form-sizeFull blX" type="text" value="" maxlength="11"/>
+											</div>
+										</div>
+									</div>
+									<div class="btnWrap">
+										<div class="grid-row grid-size02">
+										    <div class="grid-col">
+										        <button type="button" id="reser" class="button button-sizeM">예약 신청</button>
+										    </div>
+										    <div class="grid-col">
+										        <button type="button" id="reser2" class="button button-sizeM">알림톡 진료예약</button>
+										    </div>
+										</div>
+									</div>
+								</fieldset>
+							</form>
+						</div>
+						<!-- //form -->
+					</li>
+					<li class="item">
+						<h2 class="title color07">온라인 진료예약/확인</h2>
+						<p class="text">
+							온라인으로 쉽고 빠르게<br/>
+							진료예약 및 조회를 하실 수 있습니다.
+						</p>
+						<div class="grid">
+							<div class="grid-row grid-size02">
+								<div class="grid-col">
+									<button type="button" class="button button-sizeM button-bg02" id="treatRsv03">외래진료 예약</button>
+								</div>
+								<div class="grid-col">
+									<button type="button" class="button button-sizeM button-bg02" id="treatRsv02">건강검진 예약</button>
+								</div>
+							</div>
+						</div>
+						<div class="btnWrap">
+							<button type="button" class="button button-sizeM button-bg02 button-block" id="rsvConfirm">진료예약 확인</button>
+						</div>
+						<p style="color: #09847d; margin-top: 6px;">대표번호: 1522-7000</p>
+					</li>
+					<li class="item">
+						<h2 class="title color06">온라인 증명서 발급</h2>
+						<p class="text">온라인으로 증명서를<br/>발급받으실 수 있습니다.</p>
+						<!-- btnWrap -->
+						<div class="grid-row grid-size02">
+						    <div class="grid-col">
+						        <button type="button" class="button button-sizeM button-bg03" id="onlineRsv01">알림톡 발급서</button>
+						    </div>
+						    <div class="grid-col">
+						        <a href="http://eumcs.medcerti.com" role="button" class="button button-sizeM button-bg03 button-block" target="_blank">인터넷 발급</a>
+						    </div>
+						</div>
+						<div class="btnWrap">
+						    <!-- <a href="http://eumcs.medcerti.com" role="button" class="button button-sizeM button-bg03 button-block" target="_blank">온라인 증명서</a> -->
+							<a th:href="@{/guide/proofInfo.do}" role="button" class="button button-sizeM button-bg03 button-block">증명서 신청/발급 안내</a>
+						</div>
+					</li>
+				</ul>
+				<ul class="mainSrvListEtc">
+					<li class="item"><a th:href="@{/wellness/main.do}" target="_blank"><i class="icon-type02 icon-sizeS"></i> <span>웰니스 건강증진센터</span></a></li>
+					<li class="item"><a href="https://srefer.eumc.ac.kr/index.do" target="_blank"><i class="icon-type03 icon-sizeS"></i> <span>진료협력센터</span></a></li>
+					<li class="item"><a href="http://www.eumc.ac.kr/fund/" target="_blank"><i class="icon-type01 icon-sizeS"></i> <span>발전기금</span></a></li>
+					<li class="item"><a th:href="@{/guide/directions.do}"><i class="icon-type04 icon-sizeS"></i> <span>오시는 길</span></a></li>
+					<!-- <li class="item"><a th:href="@{/guide/parking.do}"><i class="icon-type05 icon-sizeS"></i> <span>주차 안내</span></a></li> -->
+					<li class="item"><a href="https://part.eumc.ac.kr/dept/pogoonyogoan/index.do" target="_blank" title="새창" id="boguImg"><i class="icon-type05 icon-sizeS" style="width: 55px; height: 35px;"></i> <span>보구녀관</span></a></li>
+					<li class="item"><a th:href="@{/funeral/main.do}" target="_blank"><i class="icon-type06 icon-sizeS"></i> <span>장례식장</span></a></li>
+				</ul>
+        <section id="inpatientpop3" class="inpatient3" style="top: 460px; left: 420px;">
+            <div class="body">
+                <!-- 20250424 <a href="https://seoul.eumc.ac.kr/" class="modalJs" data-modal-url="https://seoul.eumc.ac.kr/main/fundWriteLayer.do}"><img src="https://seoul.eumc.ac.kr/images/common/img_project88Banner.png" alt="88기금 팝업 이미지"></a> -->
+            </div>
+        </section>
+			</div>
+			<!-- //mainSrvList -->
+
+		</div>
+	</div>
+	<!-- //mainBox -->
+	<div class="inner">
+		<div class="newMainCont">
+    	
+      <div class="healthWrap">
+      	<div class="tit">
+        	<a th:href="@{/health/replay/list.do}">건강강좌 영상</a>
+        </div>
+        <ul class="contBox">
+        
+        	
+					
+					
+        	<li>
+          	<a href="javascript:void(0)" class="card ani-scale modalJs" data-modal-url="/health/replay/view.do?bbs_no=28387">
+            	<div class="card-img">
+            		<img src="/upload/health/replay/c62da914c782411f8d902b59eccb14e7.jpg" alt="" width="299" height="170" />
+								
+								<i class="icon-btnPlay"></i>
+              </div>
+              <div class="card-body">
+              	<p class="txt">
+									<b>대동맥 질환의 이해와 치료 | 이대대동맥혈관병원 송석원 병원장</b>
+									<span> 송석원 교수</span>
+								</p>
+              </div>
+            </a>
+          </li>
+        
+        	
+					
+					
+        	<li>
+          	<a href="javascript:void(0)" class="card ani-scale modalJs" data-modal-url="/health/replay/view.do?bbs_no=28383">
+            	<div class="card-img">
+            		<img src="/upload/health/replay/b9b7b7fbc5fe433b8792174ecf1628ac.jpg" alt="" width="299" height="170" />
+								
+								<i class="icon-btnPlay"></i>
+              </div>
+              <div class="card-body">
+              	<p class="txt">
+									<b>대동맥 질환자의 영양관리 | 이대서울병원 영양팀 김유나 영양사</b>
+									<span>  교수</span>
+								</p>
+              </div>
+            </a>
+          </li>
+        
+        	
+					
+					
+        	<li>
+          	<a href="javascript:void(0)" class="card ani-scale modalJs" data-modal-url="/health/replay/view.do?bbs_no=28384">
+            	<div class="card-img">
+            		<img src="/upload/health/replay/9cf30be369074d2c82ff5d9779644d35.jpg" alt="" width="299" height="170" />
+								
+								<i class="icon-btnPlay"></i>
+              </div>
+              <div class="card-body">
+              	<p class="txt">
+									<b>대동맥 질환자의 재활운동 | 이대서울병원 재활의학과 전종민 물리치료사</b>
+									<span>  교수</span>
+								</p>
+              </div>
+            </a>
+          </li>
+        
+        </ul>
+      </div>
+      <div class="healthWrap">
+      	<div class="tit">
+        	<a th:href="@{/health/nutrition/list.do}">건강 이야기</a>
+        </div>
+        <ul class="contBox">
+        
+        	<li>
+          	<a th:href="@{/health/nutrition/view.do?bbs_no=28280}" class="card ani-scale">
+            	<div class="card-img">
+            		
+									
+									
+										<img src="/upload/health/nutrition/b5bfb4573d6e4238ae63ec66bb9fe762.png" alt="10명 중 6명 겪는 어깨 통증…‘회전근개 질환’ 치료는? " height="170" />
+									
+								
+              </div>
+              <div class="card-body">
+              	<strong class="title">10명 중 6명 겪는 어깨 통증…‘회전근개 질환’ 치료는? </strong>
+              </div>
+            </a>
+          </li>
+        
+        	<li>
+          	<a th:href="@{/health/nutrition/view.do?bbs_no=27976}" class="card ani-scale">
+            	<div class="card-img">
+            		
+									
+									
+										<img src="/upload/health/nutrition/5b2ef10235c447bead529a4bc1913b4d.png" alt="성인 20%가 경험하는 불면증, 치료는 어떻게?" height="170" />
+									
+								
+              </div>
+              <div class="card-body">
+              	<strong class="title">성인 20%가 경험하는 불면증, 치료는 어떻게?</strong>
+              </div>
+            </a>
+          </li>
+        
+        	<li>
+          	<a th:href="@{/health/nutrition/view.do?bbs_no=27714}" class="card ani-scale">
+            	<div class="card-img">
+            		
+									
+									
+										<img src="/upload/health/nutrition/555ba8614bad481086c6672d8b66bff0.png" alt="암 수술 이후 몸이 붓는다면? “림프부종 의심해봐야”" height="170" />
+									
+								
+              </div>
+              <div class="card-body">
+              	<strong class="title">암 수술 이후 몸이 붓는다면? “림프부종 의심해봐야”</strong>
+              </div>
+            </a>
+          </li>
+        
+        </ul>
+      </div>
+      <div class="healthWrap">
+      	<div class="tit">
+        	<a th:href="@{/health/healthVideo/list.do}">건강 TV</a>
+        </div>
+        <ul class="contBox">
+        
+        	
+					
+					
+        	<li>
+          	<a href="javascript:void(0)" class="card ani-scale modalJs" data-modal-url="/health/healthVideo/view.do?bbs_no=27992">
+            	<div class="card-img">
+            		<img src="/upload/health/healthVideo/a38b138a8a1a4ee0b181bc6c49999f42.jpg" alt="" width="299" height="170" />
+								
+								<i class="icon-btnPlay"></i>
+              </div>
+              <div class="card-body">
+              	<p class="txt">
+									<b>자궁경 수술과 복강경 수술은 다른가요? </b>
+									<span> 장하균 교수</span>
+								</p>
+              </div>
+            </a>
+          </li>
+        
+        	
+					
+					
+        	<li>
+          	<a href="javascript:void(0)" class="card ani-scale modalJs" data-modal-url="/health/healthVideo/view.do?bbs_no=27906">
+            	<div class="card-img">
+            		<img src="/upload/health/healthVideo/b024938481c848a686419171cc3df876.jpg" alt="" width="299" height="170" />
+								
+								<i class="icon-btnPlay"></i>
+              </div>
+              <div class="card-body">
+              	<p class="txt">
+									<b>치매 안 걸리려면?</b>
+									<span> 정지향 교수</span>
+								</p>
+              </div>
+            </a>
+          </li>
+        
+        	
+					
+					
+        	<li>
+          	<a href="javascript:void(0)" class="card ani-scale modalJs" data-modal-url="/health/healthVideo/view.do?bbs_no=27772">
+            	<div class="card-img">
+            		<img src="/upload/health/healthVideo/1ebb78bcfa2c4daa8b75f0cac81cdb95.jpg" alt="" width="299" height="170" />
+								
+								<i class="icon-btnPlay"></i>
+              </div>
+              <div class="card-body">
+              	<p class="txt">
+									<b>노화, 생각보다 훨씬 일찍 시작됩니다</b>
+									<span> 전혜진 교수</span>
+								</p>
+              </div>
+            </a>
+          </li>
+        
+        </ul>
+      </div>
+      <div class="healthWrap">
+      	<div class="tit">
+					<!-- <a href="javascript:void(0)"onclick="thanksList('/customer/write.do')">고맙습니다</a> -->
+					<a th:href="@{/customer/write.do}">고맙습니다</a>
+        </div>
+        <ul class="contBox">
+        
+        
+        	<li>
+						<a href="javascript:void(0)" class="card modalJs" onclick="thxLoginChecker(8685)">
+							<div class="card-body">
+								<strong class="title">교수님 너무너무 감사합니다^^</strong>
+								<ul class="thx-list">
+									<li>로그인 후 확인 가능합니다</li>
+									
+									
+									<li>2025-08-29</li>
+								</ul>
+							</div>
+						</a>
+					</li>
+				
+        	<li>
+						<a href="javascript:void(0)" class="card modalJs" onclick="thxLoginChecker(8677)">
+							<div class="card-body">
+								<strong class="title">정형외과 신상진 교수님 감사합니다.</strong>
+								<ul class="thx-list">
+									<li>로그인 후 확인 가능합니다</li>
+									
+									
+									<li>2025-08-26</li>
+								</ul>
+							</div>
+						</a>
+					</li>
+				
+        	<li>
+						<a href="javascript:void(0)" class="card modalJs" onclick="thxLoginChecker(8672)">
+							<div class="card-body">
+								<strong class="title">조동영 교수님 감사합니다.</strong>
+								<ul class="thx-list">
+									<li>로그인 후 확인 가능합니다</li>
+									
+									
+									<li>2025-08-26</li>
+								</ul>
+							</div>
+						</a>
+					</li>
+				
+        </ul>
+      </div>
+    </div>
+	</div>
+	<style type="text/css">
+	.newMainCont {display: flex;width:1200px;margin:80px auto 0;}
+	.newMainCont .healthWrap {width:calc(100%/4);}
+	.newMainCont .healthWrap .card {border: none;}
+	.newMainCont .healthWrap .tit {margin-bottom: 25px;}
+	.newMainCont .healthWrap .tit a {font-size: 22px;color:#0d7657;padding-right: 40px;background: url(/asset/img/main/ico_plus.png) no-repeat 100% 50%;}
+	.newMainCont .healthWrap > ul {border-left: 1px solid #c8c7cc;border-top: 2px solid #666;border-bottom: 2px solid #666;}
+	.newMainCont .healthWrap > ul > li {height:280px;border-bottom: 1px solid #c8c7cc;}
+	.newMainCont .healthWrap > ul > li:last-child {border-bottom: none;}
+	.newMainCont .healthWrap:last-child > ul {border-right: 1px solid #c8c7cc;}
+	.newMainCont .healthWrap .txt span {font-weight: 300;color:#888;display: block;margin-top: 5px;}
+	.newMainCont .healthWrap .info-list {font-weight: 300;color:#888;margin-top: 25px;}
+	.newMainCont .healthWrap .info-list li {display: flex;}
+	.newMainCont .healthWrap .info-list li span {width:40px;}
+	.newMainCont .healthWrap .thx-list {font-weight: 300;color:#888;margin-top: 25px;}
+	.newMainCont .healthWrap .thx-list li {display: flex;}
+	.newMainCont .healthWrap .thx-list li:last-child {margin-bottom: 0;}
+	</style>
+	<!-- mainNotice -->
+	<div class="mainNotice">
+		<div class="inner">
+			<ul class="mainTab">
+				<li id="tabBoard1" class="current"><a href="javascript:void(0)" onclick="boardTab(1);return false;">언론보도</a></li>
+				<li id="tabBoard2"><a href="javascript:void(0)" onclick="boardTab(2);return false;">보도자료</a></li>
+				<li id="tabBoard3"><a href="javascript:void(0)" onclick="boardTab(3);return false;">공지사항</a></li>
+				<li id="tabBoard4"><a href="javascript:void(0)" onclick="boardTab(4);return false;">채용공고</a></li>
+				<li id="tabBoard5"><a href="javascript:void(0)" onclick="boardTab(5);return false;">입찰공고</a></li>
+			</ul>
+			<div id="mainNotice01">
+				<div class="noticeList">
+					<ol>
+						
+							<li>
+								
+									<a href="https://vod.kbs.co.kr/index.html?source=smr&sname=vod&stype=vod&contents_id=K01_PS-2025160838-01-000_MFSC1&program_code=T2000-0038&program_id=PS-2025160838-01-000&section_code=05&broadcast_complete_yn=N" target="_blank">
+									
+								
+									<strong>[닥터의 경고] 당뇨병, 고혈압에 불을 붙인다!</strong>
+									<span>콜레스테롤은 간에서 약 70~80%가 합성되며, 세포막을 구성하고 지방을 소화하는 데 중요한 원료다. 하지만 과도할 경우 혈관에 쌓여 심각한 문제를 일으킬 수 있어 각별한 주의가 필요하다. 특히 기름진 육류나 과도한 탄수화물 섭취는 중성지방을 높이고 좋은 콜레스테롤(HDL)을 낮춰 혈액을 더욱 기름지게 만든다.  한 환자는 “콜레스테롤을 그리 중요하게 생각하지 않았는데 내경색까지 올 줄은 몰랐다”고 말한다.  오늘 방송에서는 성균관대 의대 가정의학과 강재헌 교수, 경희대 의대 내분비내과 이상 교수, 이대서울병원 신경외과 조동영 교수와 함께 고지혈증이 불러올 치명적 위험과 나쁜 콜레스테롤을 확실히 잡는 방법에 대해 자세히 알아본다.</span>
+								</a>
+								<p>2025-09-01</p>
+							</li>
+						
+							<li>
+								
+									<a href="https://www.shinailbo.co.kr/news/articleView.html?idxno=2107669" target="_blank">
+									
+								
+									<strong>이대대동맥혈관병원 ‘일체형 흉부대동맥 스텐트 삽입술’ 최단기간 50례 달성</strong>
+									<span>이대대동맥혈관병원이 지난 26일 엔도바스테크(Endovastec)사의 ‘카스터(Castor) 분지형 흉부대동맥 스텐트 그라프트’ 삽입술 50례를 달성했다.  이는 지난 4월 국내 최초의 시술 성공 이후, 세계 최단기간 달성한 기록이다.  이번 성과는 의료 현장의 노력과 관계 부처 제도적 기반 위에서 이뤄냈으며, 정책적 지원이 환자 치료 성과로 직결된 대표적인 사례로 꼽힌다.</span>
+								</a>
+								<p>2025-08-29</p>
+							</li>
+						
+							<li>
+								
+									<a href="http://www.wikileaks-kr.org/news/articleView.html?idxno=173972" target="_blank">
+									
+								
+									<strong>이대엄마아기병원, 개원 1주년 심포지엄 성료</strong>
+									<span>이대엄마아기병원은 지난 23일 이대서울병원 지하 2층 컨벤션센터에서 ‘2025 제1차 이대엄마아기병원 심포지엄’을 개최했다. 박미혜 이대엄마아기병원장은 “의료진과 직원들의 노력 덕분에 이대엄마아기병원은 개원 이후 1년 동안 꾸준히 성장했다”며 “2019년 이대서울병원 모아센터로 분만을 시작한 이후 올해 7월 누적 분만 5,000건을 달성하며 저출산 시대 생명의 기적이 탄생하는 희망의 병원으로 자리 잡았다”고 말했다.</span>
+								</a>
+								<p>2025-08-28</p>
+							</li>
+						
+							<li>
+								
+									<a href="https://www.youtube.com/watch?v=x9IPbJzvwXI" target="_blank">
+									
+								
+									<strong>이대서울병원 대동맥혈관병원 송석원 교수 | 생의 골든타임을 사수하다</strong>
+									<span>흉부외과 중에서도 대동맥 분야는 수술 난도가 최고 수준으로 꼽힌다.  이대서울병원 대동맥혈관병원 송석원 교수는 평생 대동맥 외길을 걸어온 명의이자 국내에서 대동맥수술을 가장 많이 하는 의사다.  밤낮없이 초응급환자를 만나며 비극적인 결과를 마주할 때도 있지만 송석원 교수는 의료진이 끝까지 최선을 다하면  환자에게 반드시 삶의 기회가 열린다고 믿는다.</span>
+								</a>
+								<p>2025-08-26</p>
+							</li>
+						
+						
+					</ol>
+					<a th:href="@{/intro/press/list.do}" class="btnMore"><i class="icon-plus"></i><span class="he">더보기</span></a>
+				</div>
+			</div>
+			<div id="mainNotice02" style="display:none">
+				<div class="noticeList">
+					<ol>
+						
+							<li>
+								<a th:href="@{/intro/newdata/view.do?bbs_no=28401}">
+									<strong>이대대동맥혈관병원  ‘일체형 흉부대동맥 스텐트 삽입술’ 최단기간 50례 달성</strong>
+									<span>올해 4월 국내 최초 시술 성공 이후, 4개월 만에 달성
+
+&ldquo;체계적 대동맥 치료 시스템과 제도적 지원의 성과&rdquo;
+
+이대대동맥혈관병원(병원장 송석원)이 지난 26일 엔도바스테크(Endovastec)사의 &lsquo;카스터(Castor) 분지형 흉부대동맥 스텐트 그라프트&rsquo; 삽입술 50례를 달성했다. 이는 지난 4월 국내 최초의 시술 성공 이후, 세계 최단기간 달성한 기록이다. 
+ &nbsp; 
+이번 성과는 의료 현장의 노력과 관계 부처 제도적 기반 위에서 이뤄냈으며, 정책적 지원이 환자 치료 성과로 직결된 대표적인 사례로 꼽힌다. 
+ &nbsp; 
+지난 2019년 식품의약품안전처와 한국의료기기안전정보원은 하이브리드 흉부대동맥 스텐트 그라프트인 &lsquo;이비타 오픈 네오(E-Vita Open NEO)&rsquo;를 국내 최초로 &lsquo;희소&middot;긴급도입 의료기기&rsquo;로 지정해 환자 치료 접근성을 크게 넓혔다. 또한, 건강보험심사평가원은 해당 제품의 원활한 국내 보급을 위해 합리적인 보험 수가를 신속히 책정해 해당 수술이 필요한 응급한 환자들에게 빠르게 사용될 수 있도록 뒷받침했다.
+ &nbsp; 
+이 기반 위에서 카스터 분지형 흉부대동맥 스텐트 그라프트가 희소&middot;긴급도입 의료기기로 도입됐고, 올해 4월 이대대동맥혈관병원의 국내 첫 시술 이후 불과 4개월 만에 50명이 넘는 환자가 새로운 삶을 얻게 됐다.
+이광훈 대동맥센터장은 &ldquo;카스터 분지형 흉부대동맥 스텐트 그라프트는 기존방식으로 치료가 어려웠던 환자들에게 새로운 대안을 제공한다는 점에서 의미가 크다&rdquo;며 &ldquo;세계 최단기간 50례 달성은 이대대동맥혈관병원만의 독특한 EXPRESS(Ewha Xtraordinary PREcision Safe AORTIC Surgery) 시스템과 의료진의 탁월한 술기력, 환자 중심 철학을 입증하는 성과&rdquo;라고 강조했다.
+&nbsp;
+
+송석원 이대대동맥혈관병원장은 &ldquo;이번 성과는 환자 생명을 지키겠다는 의료진의 헌신과 혁신적 치료를 가능하게 한 제도적 지원이 함께 만들어낸 결과&rdquo;라며 &ldquo;앞으로도 최첨단 치료법을 환자에게 안정적으로 제공하기 위해 연구와 임상 경험을 꾸준히 확대하겠다&rdquo;고 밝혔다. 
+
+
+
+▲이대대동맥혈관병원, '일체형 흉부대동맥 스텐트 삽입술' 최단기간 50례 달성 기념사진</span>
+								</a>
+								<p>2025-08-29</p>
+							</li>
+						
+							<li>
+								<a th:href="@{/intro/newdata/view.do?bbs_no=28398}">
+									<strong>이대엄마아기병원, 개원 1주년 기념 심포지엄 개최</strong>
+									<span>
+&ldquo;저출산 시대, 생명이 탄생하는 희망의 병원으로 자리 잡아&rdquo;
+
+이대엄마아기병원(병원장 박미혜)은 지난 23일 이대서울병원 지하2층 컨벤션센터에서 &lsquo;2025 제1차 이대엄마아기병원 심포지엄&rsquo;을 개최했다. 
+ &nbsp; 
+이대엄마아기병원 개원 1주년을 기념해 열린 심포지엄에서는 두 가지 세션으로 나눠 프로그램이 진행됐다. 
+ &nbsp; 
+첫 번째 세션은 What`s new를 주제로 ▲Updated Clinical Insights from Transferred Obstetric Cases(이경아 이대엄마아기병원 고위험산과센터장) ▲삼태임신의 관리(전종관 이대목동병원 산부인과 교수) ▲질식&amp;복식 융모 검사, 다태아 임신의 선택적 유산(양원규 미래아이산부인과 병원장) ▲AI Tools for Doctors - From SciSpace to Gamma: Practical Skills for Clinicians(이유경 미즈메디병원 산부인과 전문의) 등 강의가 진행됐다. 
+ &nbsp; 
+두 번째 세션은 Safe mother&ndash;safe baby를 주제로 ▲임신 중 태아모니터링의 중요성(김수정 이대엄마아기병원 산부인과 교수) ▲미숙아 및 신생아 질환(손진아 이대엄마아기병원 소아청소년과 교수) ▲산후출혈에 대한 효율적 대응(신정란 이대엄마아기병원 고위험산과센터파트장) ▲이화의 조산사 수련과정 교육(문현숙 이대엄마아기병원 에드먼즈간호교육센터장) 등 발표가 이뤄졌다.
+ &nbsp; 
+이와 함께 지난 1년 간 이대엄마아기병원의 주요 성과 및 현황 공유가 이뤄졌고 참석자들은 강의가 끝날 때마다 질의를 이어가며 산모와 신생아 치료 관련 정보 등에 큰 관심을 보였다.
+ &nbsp; 
+
+박미혜 이대엄마아기병원장은 &ldquo;의료진과 직원들의 노력 덕분에 이대엄마아기병원은 개원 이후 1년 동안 꾸준히 성장했다. 특히 2019년 이대서울병원 모아센터로 분만을 시작한 이후 올해 7월 누적 분만 5,000건을 달성하며 &lsquo;저출산 시대, 생명의 기적이 탄생하는 희망의 병원&rsquo;으로 자리 잡았다&rdquo;라며 &ldquo;앞으로도 고위험 산모와 신생아 케어 있어 최상의 의료서비스를 제공할 뿐만 아니라 지역병원과의 협력을 강화하겠다&rdquo;고 말했다.
+
+
+
+▲이대엄마아기병원, 개원 1주년 기념 심포지엄 단체사진
+
+
+
+▲이대엄마아기병원, 개원 1주년 기념 심포지엄 사진</span>
+								</a>
+								<p>2025-08-28</p>
+							</li>
+						
+							<li>
+								<a th:href="@{/intro/newdata/view.do?bbs_no=28341}">
+									<strong>이화의료원 ‘이화 옴니 리더십 아카데미’ 운영</strong>
+									<span>9월 1일부터 15주간 매주 월요일 저녁 강의 진행
+
+인문&middot;자기관리, 건강&middot;헬스케어, 경영&middot;전략 등 통합적 커리큘럼 구성
+
+의료, 경영 등 각 분야의 최신 지견을 이끌고 있는 리더들이 모여 미래 지향적 리더십을 키우는 장이 마련된다.
+ &nbsp; 
+이화여자대학교 의료원(의료원장 유경하)은 이화여자대학교 경영전문대학원(원장 김봉진)과 함께 최고 경영자, 고위 공무원, 전문 경영인 및 임원급 관리자를 대상으로 9월부터 &lsquo;이화 옴니 리더십 아카데미&rsquo;를 운영한다.
+ &nbsp; 
+아카데미에서 &lsquo;이화 웰비즈&rsquo;로 명명한 최고위과정은 오는 9월 1일 입학식과 첫 강의를 시작으로 12월 8일까지 매주 월요일 저녁, 15주 동안 진행되며, 12월 15일 졸업식을 끝으로 마무리된다. 강의는 이화여자대학교 경영대학, 이대목동병원, 이대서울병원 등에서 이뤄진다.
+ &nbsp; 
+이화의료원과 이화여대 경영전문대학원은 이번 최고위과정 개설을 통해 건강하고 균형 잡힌 리더의 역량을 강화하는 한편 인문학 기반의 감성 리더십의 내면화, 전략적 사고와 경영 통찰을 제고한다. 나아가 다양한 산업과 전문 분야의 리더들과 깊이 있는 교류를 통해 지적 자극과 실질적 협업의 가능성을 확장한다. 
+ &nbsp; 
+강의는 ▲인문&middot;자기관리 ▲건강&middot;헬스케어 ▲경영&middot;전략 등 3개의 파트로 의료와 경영학과 인문학을 아우르는 통합적 커리큘럼으로 구성돼 있으며 각 분야를 이끄는 오피니어 리더들이 강사진으로 참여한다.
+ &nbsp; 
+유경하 이화 옴니 리더십 아카데미 원장은 &ldquo;1+1에 대한 답은 수학에서 &lsquo;2&rsquo;로 정해져 있지만, 다른 분야에서는 &lsquo;3 또는 4 이상&rsquo;이 되기도 한다. 이미 각 분야에서의 뛰어난 성과를 낸 리더들이 최고위과정을 통해 내&middot;외적 발전의 시너지를 극대화할 수 있는 기회가 되었으면 한다&rdquo;라고 말했다. 
+ &nbsp; 
+
+한편 지원서 등록 접수는 오는 8월 31일까지, 지원서 교부 및 접수는 이대서울병원 1층 웰에이징센터에서 진행하고 있으며, 문의는 02-6986-5802~3, 5806으로 하면 된다.</span>
+								</a>
+								<p>2025-08-22</p>
+							</li>
+						
+							<li>
+								<a th:href="@{/intro/newdata/view.do?bbs_no=28285}">
+									<strong>이화의료원, 몽골에서 사랑의 인술 펼쳐</strong>
+									<span>
+12회 몽골의료봉사 실시&hellip;2개 지역 2,036명 진료
+
+이화여자대학교 의료원(의료원장 유경하)이 지난 7월 25일부터 8월 1일까지 7박 8일간 몽골 지역에서 12번째 의료봉사를 진행했다. 
+ &nbsp; 
+이화몽골의료봉사단에는 국제의료사업단장 강경호(이대서울병원 외과), 국제의료사업부단장 이희성(이대목동병원 외과), 이대서울병원 소속 비뇨의학과 윤하나, 정형외과 박장원, 이대목동병원 소속 산부인과 김윤환 교수 그리고 간호사 및 행정직을 포함해 이화의료원 인원 14명과 몽골 현지 의료진 16명 등이 참여했다. 
+ &nbsp; 
+올해 의료진들은 몽골 울란바타르 바양골(Bayangol)과 몽골의 서쪽 끝인 바양울기(Bayan-&Ouml;lgii), 2개 지역을 방문해 총 2,036명을 진료했다. 이는 이화몽골의료봉사단 방문 한 해 최다 진료 인원이다. 올해를 포함해 몽골 현지에서 지난 15년간 총 1만 4,343명을 진료하며 사랑의 인술을 펼쳤다. 
+ &nbsp; 
+이화의료원과 몽골의 인연은 지난 2011년으로 거슬러 올라간다. 당시 볼로르마(H. Bolormaa) 몽골 대통령 영부인의 초청으로 지역 밀착형 의료봉사활동을 한 것이 시작이다. 이후 2020년부터 2022년까지 코로나19 시기를 제외하고 매년 의료봉사단을 파견해왔다. 
+ &nbsp; 
+강경호 국제의료사업단장은 &ldquo;몽골에서 15년간 꾸준히 의미있는 활동을 지속했다는 것에 큰 뿌듯함을 느낀다. 몽골 사람들은 우리나라를 &lsquo;무지개의 나라&rsquo;(솔롱고스)라고 부르며 형제 국가로 생각한다. 이번 해외의료봉사를 통해 형제애, 인류애를 유감없이 느끼고 왔다&rdquo;라며 &ldquo;앞으로도 이화의료원의 &lsquo;섬김과 나눔&rsquo;의 설립정신과 뛰어난 진료 역량을 세계에 알리고 외국인 환자를 유치하기 위해 더 노력하겠다&rdquo;고 말했다. 
+
+
+▲이화의료원 몽골의료봉사 발대식
+
+
+
+&nbsp;▲이화의료원 몽골의료봉사단 현지 단체사진
+</span>
+								</a>
+								<p>2025-08-13</p>
+							</li>
+						
+						
+					</ol>
+					<a th:href="@{/intro/newdata/list.do}" class="btnMore"><i class="icon-plus"></i><span class="he">더보기</span></a>
+				</div>
+			</div>
+			<div id="mainNotice03" style="display:none">
+				<div class="noticeList">
+					<ol>
+						
+							<li>
+								<a th:href="@{/intro/notice/view.do?bbs_no=27944}">
+									<strong>[공지]  이화의대부속목동병원 바이오 Core Facility 구축사업 공동연구개발기관(입주기업) 모집 공고문</strong>
+									<span> 
+이화의대부속목동병원 바이오 Core Facility 구축사업 공동연구개발기관(입주기업) 모집 공고문 
+ 
+ 이화의대부속목동병원에서는 E(Environment), W(Well-aging), H(Human cell therapy),       A(AI&middot;Big data) 분야의 우수한 기술을 보유하고 성장 잠재력이 높은 유망 바이오기업을 발굴하여 이화의대부속목동병원이 보유한 시설･장비 및 전문 멘토링 등의 활용을 통해 글로벌 바이오 기업으로의 성장을 촉진하고자, 바이오 Core Facility 구축사업의 공동연구개발기관(입주기업) 모집합니다.  
+2025년 7월 1일 이대목동병원장 
+ 
+ 
+ [바이오 Core Facility 구축사업] 
+ ◎&nbsp;사업개요 
+-바이오 Core Facility(주관연구개발기관)의 장비&middot;시설, 교육&middot;멘토링 등 제공된 환경을 통한 창업자       들의 효율적 성장 촉진 
+-공동연구개발기관(입주기업)들의 기술 개발 및 사업화 수월성 제고 
+ ◎&nbsp;사업내용 : 인프라(장비/입주공간), R&amp;D자금, 투자유치, 멘토링 등 지원 
+ ◎&nbsp;사업기간 : 2단계 2026. 01. 01 ~ 2028. 12. 31(36개월) 
+ ◎&nbsp;추진체계 : (시행부처)과학기술정보통신부, (전문기관)한국연구재단, (주관연구개발기관)이화의대부속목동병원  
+ 
+ 
+ </span>
+								</a>
+								<p>2025-06-30</p>
+							</li>
+						
+							<li>
+								<a th:href="@{/intro/notice/view.do?bbs_no=25930}">
+									<strong>[공지]  이대서울병원 알림톡 간편 서비스 이용 안내</strong>
+									<span>이대서울병원 알림톡 간편 서비스 이용 안내
+
+
+이대서울병원 「알림톡」은 &nbsp;&nbsp;24시간 병원 이용에 필요한 다양한 「간편 서비스」를 &nbsp;&nbsp;제공합니다.
+
+
+■ 알림톡 서비스 종류
+
+
+
+■ 알림톡 자동전송 및 받기
+ 
+ 
+자동전송 : 진료예약 후, 진료받은 후, 알림톡/모바일 결제 후, 검사예약일, 의사 입원지시 후, 입원병실 배정 후, 병실전동 시, 퇴원지시 결정 후, 퇴원진료비 수납 후 등 다양하게 전송 
+ &middot; 
+홈페이지 이용 : 메인화면 알림톡 서비스(환자명, 휴대전화번호 입력 &rarr; 알림톡 서비스 클릭) 
+ &middot; 
+대표전화 이용 : 
+ 1522-7000번 &rarr; &#9319;번 &rarr;
+ ▷ &#9312;번 진료예약
+ ▷ &#9313;번 예약 확인/변경/취소
+ ▷ &#9314;번 제증명 발급 ▷ &#9315;번 간편 서비스 
+
+
+■ 알림톡 받기 &#9312; : 홈페이지 이용 방법
+
+
+■ 알림톡 받기 &#9313; : 대표전화 이용 방법</span>
+								</a>
+								<p>2024-08-29</p>
+							</li>
+						
+							<li>
+								<a th:href="@{/intro/notice/view.do?bbs_no=25185}">
+									<strong>[공지]  Entrance permit application for restricted area(Operating room)</strong>
+									<span>Entrance permit application for restricted area
+(Operating room)
+
+In accordance with Article 39-5 of the Enforcement&nbsp; Regulation of the Medical Service Act, Operating room access is controlled. Anyone wishing to enter except patients and medical staff performing medical practices must accurately provide the following information and obtain prior approval from the hospital.
+
+Unauthorized filming constitutes illegal recording and may result in legal consequences. Your cooperation is appreciated.&nbsp;
+
+
+
+</span>
+								</a>
+								<p>2024-04-03</p>
+							</li>
+						
+							<li>
+								<a th:href="@{/intro/notice/view.do?bbs_no=28356}">
+									<strong>  Ewha Well Biz Humanity Academy - 이화 옴니 리더십 아카데미 원우 모집</strong>
+									<span> 
+ 
+ 
+ 
+ 
+</span>
+								</a>
+								<p>2025-08-25</p>
+							</li>
+						
+						
+					</ol>
+					<a th:href="@{/intro/notice/list.do}" class="btnMore"><i class="icon-plus"></i><span class="he">더보기</span></a>
+				</div>
+			</div>
+			<div id="mainNotice04" style="display:none">
+				<div class="noticeList">
+					<ol>
+						
+							<li>
+								<a th:href="@{/intro/recrut/view.do?bbs_no=28405&bid_status=I}">
+									<strong>[서울병원] 웰니스건강증진센터 계약직 간호사 공개채용 공고 </strong>
+									<span>이대서울병원 웰니스건강증진센터 계약직 간호사 공개채용 공고
+
+▣&nbsp;모집 분야별 세부사항
+
+
+
+
+근무병원
+
+근무부서
+
+직종
+
+채용인원
+
+응시자격 및 안내사항
+
+
+
+서울병원
+
+웰니스
+건강증진센터
+
+간호사
+
+0명
+
+■&nbsp;응시자격
+-&nbsp;간호사 면허 소지자
+■&nbsp;우대사항
+-&nbsp;대학(종합)병원 건강증진센터 근무 유경험자
+-&nbsp;대학(종합)병원 중환자실 및 병동근무 유경험자
+-&nbsp;건강증진센터 업무(접수,&nbsp;검사,&nbsp;내시경,&nbsp;예약상담,&nbsp;결과관리)&nbsp;유경험자
+■&nbsp;근무조건
+-&nbsp;평일&nbsp;8시간 근무&nbsp;*센터 상황에 따라 유동적
+-&nbsp;토요근무 월&nbsp;2회(5월~12월)
+-&nbsp;상황에 따라 휴일 또는 평일 시간외근무 발생 가능
+
+
+
+※목동병원 및 서울병원에서 진행중인 타공고 중복지원은 불가능하오니 지원시 참고바랍니다.
+1.&nbsp;지원서 접수 및 방법
+1)&nbsp;접수기간&nbsp;: 2025.09.01.(월) ~ 채용시까지
+2)&nbsp;접수방법&nbsp;:&nbsp;온라인접수&nbsp;☞&nbsp;https://eumc.applyin.co.kr/
+(※&nbsp;구비서류는 최종합격자에 한해 제출)
+3)&nbsp;문 의&nbsp;:&nbsp;인사노무팀 인사담당(☎&nbsp;02-6986-5603)
+
+2.&nbsp;전형 및 일정
+1)&nbsp;서류전형 합격자 발표&nbsp;:&nbsp;추후 개별공지
+2)&nbsp;면접전형&nbsp;:&nbsp;서류전형 합격자에 한해 추후 개별공지
+3)&nbsp;최종합격자 발표
+4)&nbsp;최종 합격자를 대상으로 채용신체 검사를 시행함
+(채용신체검사 방법 및 세부일정은 개별 공지함)
+
+3.&nbsp;제출서류
+1)&nbsp;최종학교 졸업증명서 및 성적증명서 각&nbsp;1부.
+2)&nbsp;주민등록등본&nbsp;1부.
+3)&nbsp;주민등록초본 또는 병적증명서(남자에 한함) 1부.
+4)&nbsp;직무수행관련 면허증 및 자격증 사본(해당자에 한함)&nbsp;각&nbsp;1부.
+5)&nbsp;경력증명서(해당자에 한함) 1부.
+※&nbsp;제출서류는 최종합격자에 한해 원본으로 제출.
+
+4.&nbsp;기타사항
+1)&nbsp;지원서 등에 허위기재 또는 기재착오,&nbsp;구비서류 미제출,&nbsp;연락불가능 등으로 인한 불이익은 응시자 본인의 책임으로 하며,&nbsp;지원서 상 기재내용이 사실과 다른 경우 합격을 취소함.
+2)&nbsp;장애인,&nbsp;보훈대상자는 관계법령에 따라 우대하며,&nbsp;각 전형별로 가산점을 부여함.(증빙 서류 제출)
+3)&nbsp;남자는 병역필 또는 면제자에 한함.
+4)&nbsp;전형방법 및 일정은 본원 사정에 따라 변경될 수 있음.
+5)&nbsp;최종 합격자가 임용을 포기하는 등의 사정으로 결원을 보충할 필요가 있을 때는&nbsp;6개월 내에 추가합격자를결정할 수 있음.
+6)&nbsp;임용예정 지원자가 선발예정 인원보다 적거나 같은 경우 재공고를 할 수 있으며,&nbsp;적격자가 없는 경우 채용을 하지 않을 수 있음.
+7)&nbsp;본 채용공고는 원내외 사정에 의하여 변경될 수 있으며,&nbsp;변경된 사항은 전형일&nbsp;7일 전까지 변경 공고할 수 있음.
+
+이 화 여 자 대 학 교 의 료 원 장</span>
+								</a>
+								<p>2025-09-01</p>
+							</li>
+						
+							<li>
+								<a th:href="@{/intro/recrut/view.do?bbs_no=28392&bid_status=I}">
+									<strong>[서울병원] 약제팀 계약직 야간 약사 공개채용 공고 </strong>
+									<span>이대서울병원 약제팀 계약직 야간약사 공개채용 공고
+
+▣&nbsp;모집 분야별 세부사항
+
+
+
+
+근무부서
+
+근무병원
+
+직종
+
+채용인원
+
+응시자격 및 안내사항
+
+
+
+약제팀
+
+서울병원
+
+야간약사
+
+0명
+
+■&nbsp;응시자격
+-&nbsp;약학대학 졸업이상인 자
+-&nbsp;약사면허 소지자
+■&nbsp;근무시간
+-&nbsp;오후&nbsp;5시&nbsp;~&nbsp;익일 오전&nbsp;8시(15시간/회),&nbsp;주&nbsp;2회 근무
+
+
+
+※목동병원 및 서울병원에서 진행중인 타공고 중복지원은 불가능하오니 지원시 참고바랍니다.
+
+1.&nbsp;지원서 접수 및 방법
+1)&nbsp;접수기간&nbsp;: 2025.08.28.(목) ~&nbsp;채용시까지
+2)&nbsp;접수방법&nbsp;:&nbsp;온라인접수&nbsp;☞&nbsp;https://eumc.applyin.co.kr/
+(※&nbsp;구비서류는 최종합격자에 한해 제출)
+3)&nbsp;문 의&nbsp;:&nbsp;인사노무팀 인사담당(☎&nbsp;02-6986-5603)
+
+2.&nbsp;전형 및 일정
+1)&nbsp;서류전형 합격자 발표&nbsp;:&nbsp;추후 개별공지
+2)&nbsp;면접전형&nbsp;:&nbsp;서류전형 합격자에 한해 추후 개별공지
+3)&nbsp;최종합격자 발표
+4)&nbsp;최종 합격자를 대상으로 채용신체 검사를 시행함
+(채용신체검사 방법 및 세부일정은 개별 공지함)
+
+3.&nbsp;제출서류
+1)&nbsp;최종학교 졸업증명서 및 성적증명서 원본 각&nbsp;1부.
+2)&nbsp;주민등록등본&nbsp;1부.
+3)&nbsp;주민등록초본 또는 병적증명서(남자에 한함) 1부.
+4)&nbsp;직무수행관련 면허증 및 자격증 사본(해당자에 한함)&nbsp;각&nbsp;1부.
+5)&nbsp;경력증명서(해당자에 한함) 1부.
+※&nbsp;제출서류는 최종합격자에 한해 원본으로 제출.
+
+4.&nbsp;기타사항
+1)&nbsp;지원서 등에 허위기재 또는 기재착오,&nbsp;구비서류 미제출,&nbsp;연락불가능 등으로 인한 불이익은 응시자 본인의 책임으로 하며,&nbsp;지원서 상 기재내용이 사실과 다른 경우 합격을 취소함.
+2)&nbsp;장애인,&nbsp;보훈대상자는 관계법령에 따라 우대하며,&nbsp;각 전형별로 가산점을 부여함.(증빙 서류 제출).
+3)&nbsp;남자는 병역필 또는 면제자에 한함.
+4)&nbsp;전형방법 및 일정은 본원 사정에 따라 변경될 수 있음.
+5)&nbsp;최종 합격자가 임용을 포기하는 등의 사정으로 결원을 보충할 필요가 있을 때는&nbsp;6개월 내에 추가합격자를 결정할 수 있음.
+6)&nbsp;임용예정 지원자가 선발예정 인원보다 적거나 같은 경우 재공고를 할 수 있으며,&nbsp;적격자가 없는 경우 채용을&nbsp;하지 않을 수 있음.
+7)&nbsp;본 채용공고는 원내외 사정에 의하여 변경될 수 있으며,&nbsp;변경된 사항은 전형일&nbsp;7일 전까지 변경 공고할 수 있음.
+이 화 여 자 대 학 교 의 료 원 장</span>
+								</a>
+								<p>2025-08-28</p>
+							</li>
+						
+							<li>
+								<a th:href="@{/intro/recrut/view.do?bbs_no=28353&bid_status=I}">
+									<strong>[서울병원] 약제팀 계약직 주간 약사 공개채용 공고 </strong>
+									<span>이대서울병원 약제팀 계약직 주간 약사 공개채용 공고
+
+▣ 모집 분야별 세부사항 
+ 
+ 
+ 
+ 
+직종  
+ 
+근무부서  
+ 
+근무병원  
+ 
+채용인원  
+ 
+응시자격 및 안내사항  
+ 
+ 
+ 
+ 약사  
+ 
+약제팀  
+ 
+서울  
+ 
+0명  
+ 
+ * 약학대학 졸업이상인 자  
+ * 약사면허 소지자 
+ * 근무시간 : 평일(월~금), 주40시간 근무 
+ * 근무기간 : 채용시 ~ 26년 3월  
+ 
+ 
+
+※목동병원 및 서울병원에서 진행중인 타공고 중복지원은 불가능하오니 지원시 참고바랍니다.
+1. 지원서 접수 및 방법
+ 1) 접수기간 : 2025.08.25.(월) ~ 채용시까지
+ 2) 접수방법 : 온라인접수 ☞ https://eumc.applyin.co.kr/
+ (※ 구비서류는 최종합격자에 한해 제출)
+ 3) 문 의 : 인사노무팀 인사담당(☎ 02-6986-5603)
+2. 전형 및 일정
+ 1) 서류전형 합격자 발표 : 추후 개별공지
+ 2) 면접전형 : 서류전형 합격자에 한해 추후 개별공지
+ 3) 최종합격자 발표
+ 4) 최종 합격자를 대상으로 채용신체 검사를 시행함
+ (채용신체검사 방법 및 세부일정은 개별 공지함)
+3. 제출서류 
+ 1) 최종학교 졸업증명서 원본 각 1부.
+ 2) 주민등록등본 1부.
+ 3) 주민등록초본 또는 병적증명서(남자에 한함) 1부.
+ 4) 직무수행관련 면허증 및 자격증 사본(해당자에 한함) 각 1부.
+ 5) 경력증명서(해당자에 한함) 1부.
+ ※ 제출서류는 최종합격자에 한해 원본으로 제출.
+4. 기타사항
+ 1) 지원서 등에 허위기재 또는 기재착오, 구비서류 미제출, 연락불가능 등으로 인한 불이익은 응시자 본인의 책임으로 하며, 지원서 상 기재내용이 사실과 다른 경우 합격을 취소함.
+ 2) 장애인, 보훈대상자는 관계법령에 따라 우대하며, 각 전형별로 가산점을 부여함.(증빙 서류 제출).
+ 3) 남자는 병역필 또는 면제자에 한함.
+ 4) 전형방법 및 일정은 본원 사정에 따라 변경될 수 있음.
+ 5) 최종 합격자가 임용을 포기하는 등의 사정으로 결원을 보충할 필요가 있을 때는 6개월 내에 추가합격자를 결정할 수 있음.
+ 6) 임용예정 지원자가 선발예정 인원보다 적거나 같은 경우 재공고를 할 수 있으며, 적격자가 없는 경우 채용을 하지 않을 수 있음.
+ 7) 본 채용공고는 원내외 사정에 의하여 변경될 수 있으며, 변경된 사항은 전형일 7일 전까지 변경 공고할 수 있음.
+ 
+이 화 여 자 대 학 교 의 료 원 장</span>
+								</a>
+								<p>2025-08-25</p>
+							</li>
+						
+							<li>
+								<a th:href="@{/intro/recrut/view.do?bbs_no=28282&bid_status=I}">
+									<strong>[서울병원] 간호부 계약직 간호사(외래) 공개채용 공고 </strong>
+									<span>이대서울병원 간호부 계약직 간호사(외래)&nbsp;공개채용 공고
+
+▣&nbsp;모집 분야별 세부사항
+
+
+
+
+근무부서
+
+근무병원
+
+직 종
+
+채용인원
+
+응시자격 및 안내사항
+
+
+
+간호부
+
+서울병원
+
+간호사
+
+0명
+
+■&nbsp;응시자격
+-&nbsp;간호사 면허소지자
+■&nbsp;우대사항
+-&nbsp;대학(종합)병원 근무 경력자
+
+
+
+1.&nbsp;지원서 접수 및 방법
+1)&nbsp;접수기간&nbsp;: 2025.05.23.(금) ~&nbsp;채용시까지
+2)&nbsp;접수방법&nbsp;:&nbsp;온라인접수&nbsp;☞&nbsp;https://eumc.applyin.co.kr/
+(※&nbsp;구비서류는 최종합격자에 한해 제출)
+3)&nbsp;문 의&nbsp;:&nbsp;인사노무팀 인사담당(☎&nbsp;02-6986-5607)
+
+2.&nbsp;전형 및 일정
+1)&nbsp;서류전형 합격자 발표&nbsp;:&nbsp;추후 개별공지
+2)&nbsp;면접전형&nbsp;:&nbsp;서류전형 합격자에 한해 추후 개별공지
+3)&nbsp;최종합격자 발표
+4)&nbsp;최종 합격자를 대상으로 채용신체 검사를 시행함
+(채용신체검사 방법 및 세부일정은 개별 공지함)
+
+3.&nbsp;제출서류
+1)&nbsp;최종학교 졸업증명서 및 성적증명서 각&nbsp;1부.
+2)&nbsp;주민등록등본&nbsp;1부.
+3)&nbsp;주민등록초본 또는 병적증명서(남자에 한함) 1부.
+4)&nbsp;직무수행관련 면허증 및 자격증 사본(해당자에 한함)&nbsp;각&nbsp;1부.
+5)&nbsp;경력증명서(해당자에 한함) 1부.
+※&nbsp;제출서류는 최종합격자에 한해 원본으로 제출.
+
+4.&nbsp;기타사항
+1)&nbsp;지원서 등에 허위기재 또는 기재착오,&nbsp;구비서류 미제출,&nbsp;연락불가능 등으로 인한 불이익은 응시자 본인의 책임으로 하며,&nbsp;지원서 상 기재내용이 사실과 다른 경우 합격을 취소함.
+2)&nbsp;장애인,&nbsp;보훈대상자는 관계법령에 따라 우대하며,&nbsp;각 전형별로 가산점을 부여함.(증빙 서류 제출)
+3)&nbsp;남자는 병역필 또는 면제자에 한함.
+4)&nbsp;전형방법 및 일정은 본원 사정에 따라 변경될 수 있음.
+5)&nbsp;최종 합격자가 임용을 포기하는 등의 사정으로 결원을 보충할 필요가 있을 때는&nbsp;6개월 내에 추가합격자를 결정할 수 있음.
+7)&nbsp;임용예정 지원자가 선발예정 인원보다 적거나 같은 경우 재공고를 할 수 있으며,&nbsp;적격자가 없는 경우 채용을&nbsp;하지 않을 수 있음.
+8)&nbsp;본 채용공고는 원내외 사정에 의하여 변경될 수 있으며,&nbsp;변경된 사항은 전형일&nbsp;7일 전까지 변경 공고할 수 있음.
+
+이 화 여 자 대 학 교 의 료 원 장</span>
+								</a>
+								<p>2025-08-13</p>
+							</li>
+						
+						
+					</ol>
+					<a th:href="@{/intro/recrut/list.do}" class="btnMore"><i class="icon-plus"></i><span class="he">더보기</span></a>
+				</div>
+			</div>
+			<div id="mainNotice05" style="display:none">
+				<div class="noticeList">
+					<ol>
+						
+							<li>
+								<a th:href="@{/intro/bid/view.do?bbs_no=28292&bid_status=I}">
+									<strong>이대서울병원 지하2층 주차장 구역 사무실 전환  관련 <소방 공사> 업체 선정 입찰 공고</strong>
+									<span>
+
+
+
+ &nbsp; 
+
+
+
+이대서울병원 지하2층 주차장 구역 사무실 전환
+ 관련 &lt;소방 공사&gt; 업체 선정 입찰 공고문
+
+
+
+ &nbsp; 
+
+
+
+공고번호 : 이화의료원 제20250818-02호
+ &nbsp; 
+
+
+
+
+1
+
+ &nbsp; 
+
+입찰에 부치는 사항 
+
+
+
+ &nbsp; 
+1) 입찰건명: 이대서울병원 지하2층 주차장 구역 사무실 전환 관련 &lt;소방 공사&gt; 업체선정 
+
+
+
+
+계약 내용
+
+세부 내용
+
+비 고
+
+
+
+계약 방법
+
+제한 경쟁 입찰
+
+&lsquo;입찰참가 자격&rsquo; 확인 요망
+
+
+
+업체 선정
+
+최저가 낙찰제
+
+본원 예정가격 이하 최저금액 제안업체
+
+
+
+ 사업장 소재지
+
+ 서울시 강서구 공항대로 260, 이대서울병원
+
+
+
+ &nbsp; 
+2) 공사 개요
+
+
+
+
+항 목
+
+세부 내용
+
+
+
+계약기간
+
+ 계약일부터 60일내 공사 완료(※. 계약일에 따라 변동될 수 있음)
+
+
+
+공사위치 
+
+ 이대서울병원 내
+
+
+
+공사면적
+
+ 도면 참조(현장설명회 시 배부 예정)
+
+
+
+공사내용
+
+ 이대서울병원 주차장 구역 사무실 전환 관련 &lt;소방 공사&gt; 
+ (※ 도면 및 시방서는 현장설명회를 통하여 배부 예정)
+
+
+
+ &nbsp; 
+3) 입찰참가등록 및 입찰서 제출기간
+
+
+
+
+진행 사항
+
+일 정
+
+장 소
+
+
+
+공고 기간
+
+2025.08.18.(월) ~ 2025.09.03.(수)
+
+이화의료원, 이대서울병원 홈페이지
+
+
+
+현장 설명회
+
+2025.08.26.(화) 15:00 
+
+이대서울병원 시설팀(지하2층)
+
+
+
+입찰서
+접수개시일자
+
+2025.08.27.(수) 10:00
+
+이대서울병원 지하2층 관리팀
+서류접수 (방문제출)
+
+
+
+입찰서
+접수마감일자
+
+2025.09.03.(수) 11:00
+
+
+
+개찰 일시 및 장소
+
+2025.09.03.(수) 13:00 이후
+
+개별통보
+
+
+
+ ※ 위 일정은 병원 사정에 따라 변경될 수 있습니다.
+ ※ 현장 설명회 참석자는 설명회 전일(08/25)까지 붙임 현장 설명회 참가신청서를 메일 제출 바랍니다.
+ (신청서 제출 메일 주소: 30179s@eumc.ac.kr)
+ &nbsp; 
+
+
+
+
+2
+
+ &nbsp; 
+
+입찰참가 자격
+
+
+
+아래에 해당하는 조건을 모두 만족하는 사업자.
+1) 국가를 당사자로 하는 계약에 관한 법률 시행령 제12조 및 제76조에 적합한 업체
+2) 공고일 기준 최근 3년 이내 의료법 제 3조의 3에서 정한 규모의 500병상 이상의 종합병원 중  단일 공사 3천만원 이상 실적이 있는 업체(실적증명시 하도급 실적은 인정하지 않음)
+3) 공고일 기준 소방시설공사업법에 의한 전문소방시설공사업 면허 등록을 필한 업체
+4) 주된 영업소의 소재지가 서울 또는 경기, 인천 지역(법인등기부등본에 명)에 있는 업체
+5) 본원에서 실시하는 현장설명회에 참가하여 본원의 사업내용 및 입찰 조건에 동의한 업체
+ &nbsp; 
+
+
+
+
+3
+
+ &nbsp; 
+
+입찰 관련 제출서류 
+
+
+
+
+
+
+
+ ■ 밀봉하여 제출하는 서류
+
+ &nbsp; 
+
+
+
+ 1) 입찰서(본원 소정양식) 및 입찰내역서 
+
+1부. (※봉인)
+
+
+
+ 2) 입찰이행보증보험증권(※ 입찰금액의 5% 이상으로 발행) 
+
+1부. (※봉인)
+
+
+
+ &nbsp; 
+
+ &nbsp; 
+
+
+
+ ■ 일반 제출 서류(순서대로 제출)
+
+ &nbsp; 
+
+
+
+ 1) 입찰참가 신청서 및 서약서(본원 소정양식) 각
+
+1부.
+
+
+
+ 2) 사업자등록증사본 및 법인등기부 등본 
+
+1부.
+
+
+
+ 3) 법인인감증명서, 사용인감계
+
+1부.
+
+
+
+ 4) 위임장 및 재직 증명서(입찰등록 참가자)
+
+1부.
+
+
+
+ 5) 국세 및 지방세 완납 증명서
+
+1부.
+
+
+
+ 6) 회사소개서 및 일반 현황
+
+1부.
+
+
+
+ 7) 실적증명서(실적금액에 대하여 세금계산서 첨부 필수)
+
+1부.
+
+
+
+  ※ 실적증명 시 하도급 실적은 인정하지 않으며, 준공 완료된 실적만 인정됨 
+ ※ 협회에서 발행하는 공사 실적 확인서로 대체 가능함
+ ※ 당해 준공 등의 사유로 협회 미등록 실적의 경우 본원 소정 양식 제출 
+
+ &nbsp; 
+
+
+
+ 8) 전문소방공사업 면허증 사본
+
+1부.
+
+
+
+ &nbsp; 
+
+ &nbsp; 
+
+
+
+ ※ 제출서류는 순서대로 편철하여 제출 요망 
+
+ &nbsp; 
+
+
+
+ ※ 입찰참가등록서류 제출 시 사용인감도장 지참 요망
+
+ &nbsp; 
+
+
+
+ &nbsp; 
+
+
+
+
+4
+
+ &nbsp; 
+
+가격입찰서 제출방법
+
+
+
+1) 입찰금액은 본원 소정양식(가격입찰서)에 한글과 숫자로 기재하여야 합니다.
+2) 입찰금액은 부가가치세를 포함한 금액으로 작성합니다.
+3) 입찰서, 입찰내역서, 입찰이행보증보험증권은 봉인하여 이대서울병원 관리팀으로 직접 제출하여야 합니다.
+ &nbsp; 
+
+
+
+
+5
+
+ &nbsp; 
+
+입찰보증금의 귀속조치
+
+
+
+계약대상자가 낙찰통지를 받은 후 10일 이내에 계약을 체결하지 않을 때에는「국가를 당사자로 하는 계약에 관한 법률 시행령」제38조의 규정에 따라 입찰보증금은 본원에 귀속된다.
+ &nbsp; 
+
+
+
+
+6
+
+ &nbsp; 
+
+입찰의 무효
+
+
+
+1) 국가를 당사자로 하는 계약에 관한 법률 시행령 제39조 제4항, 동시행규칙 제44조에 해당      하는 입찰은 무효로 합니다.
+
+2) 입찰공고일 현재 청산, 합병 및 매각 등 정리절차 중이거나 계획 중인 사업자와 부도, 워크아웃(워크아웃 대상 또는 진행 중인 업체) 또는 회생 절차 중인 사업자의 입찰은 무효로 합니다.
+&nbsp; &nbsp;&nbsp;
+
+
+
+
+7
+
+ &nbsp; 
+
+낙찰자 결정방법
+
+
+
+1) 낙찰방법 : 예정가격 이하로 최저가 입찰서를 제출한자를 낙찰자로 결정합니다.
+2) 입찰에 있어서 유효한 입찰자가 없거나 낙찰자가 없을 경우, 또는 동일가격 입찰자가 2인    이상일 경우에는 당일 재입찰을 실시하여 낙찰자를 결정할 수 있습니다.
+3) 입찰자나 낙찰자가 없는 경우 또는 낙찰자가 계약을 체결하지 아니하는 경우에는 재공고    입찰에 부칠 수 있습니다.
+ &nbsp; 
+
+
+
+
+8
+
+ &nbsp; 
+
+계약의 체결
+
+
+
+1) 낙찰자는 이대서울병원으로부터 낙찰통지를 받은 후 10일 이내에 소정의 계약양식에 의하여 계약을 체결합니다.
+2) 계약체결 시, 계약 예정금액의 100분의 15이상의 계약보증금 또는 계약이행보증보험증권을 본원에 납부(제출)하여야 합니다.
+ &nbsp; 
+
+
+
+
+9
+
+ &nbsp; 
+
+입찰 공동행위 금지
+
+
+
+개찰결과 담합이라고 판단할 수 있는 정황이 인정된 경우 본원은 당해 입찰을 유찰시키고 재공고 입찰을 실시하며, 모든 입찰자는 재공고 입찰조치에 대하여 이의를 제기할 수 없습니다.
+ &nbsp; 
+
+
+
+
+10
+
+ &nbsp; 
+
+입찰의 연기
+
+
+
+본 입찰은 필요 시 입찰공고 등에 예정된 입찰일시 또는 개찰일시를 연기 할 수 있사오니 본원 홈페이지를 주시하여 주시기 바랍니다.
+ &nbsp; 
+
+
+
+
+11
+
+ &nbsp; 
+
+보험료, 퇴직공제부금비, 산업안전보건관리비 등 사후정산
+
+
+
+1) 국민건강보험료, 국민연금보험료, 노인장기요양보험료, 퇴직공제부금비는 ｢정부입찰 및 계약 집행기준(기획재정부 예규)｣에 정한 바에 따라 기성대가 및 준공대가 지급 시 사후 정산하여야 합니다.
+2) 산업안전보건관리비는 ｢건설업 산업안전보건관리비 계상 및 사용기준(고용노동부 고시)｣ 규정에 따르며, 제8조에 따라 ｢산업안전보건법｣ 제72조 제2항에 위반하여 다른 목적으로 사용하거나 사용하지 않은 안전관리비에 대하여 이를 계약금액에서 감액 조정합니다.
+3) 품질관리비는 ｢건설기술진흥법｣ 제56조 및 동법 시행규칙 제53조, [별표 6] 품질관리비의 산출 및 사용기준을 따르며 동 규정에 의해 정산합니다.
+4) 안전관리비는 ｢건설기술진흥법｣ 제63조 및 동법 시행규칙 제60조에 따라 사후 정산하여야하며, 안전관리비 계상 및 사용기준은 국토교통부장관이 정하여 고시하는 바에 따릅니다.
+ &nbsp; 
+
+
+
+
+12
+
+ &nbsp; 
+
+기타 사항
+
+
+
+1) 입찰에 참가하고자 하는 자는 입찰공고문, 입찰내역서, 과업지시서 등 기타 입찰에 필요한 모든 사항을 숙지하고 입찰에 참가해야하며 해석상 이의가 있을 경우 본원 판단에 따라야 합니다. ※미숙지로 인한 책임은 입찰참가자에게 있습니다.
+2) 제출된 서류는 일체 반환하지 않으며, 입찰관련 제출서류가 허위로 작성되었거나 서류 미비인 경우와 국가를 당사자로 하는 계약에 관한 법률 시행규칙 제44조에 해당하는 입찰은 무효로 합니다.
+3) 낙찰자는 낙찰통지를 받은 후 소정의 절차에 따라 본원이 정한 기한내에 계약을 체결해야 하며, 낙찰자가 계약 체결을 이행하지 않을 시 입찰보증금은 본원에 귀속 됩니다.
+4) 본 입찰은 부득이한 사정상 입찰공고 등에 예정된 입찰일시 또는 개찰일시가 연기되거나, 입찰이 취소 될 수 있사오니 본원 홈페이지를 주시하여 주시기 바랍니다.
+5) 안전 및 보건 확보 의무
+ 가. 본 입찰에 참여하고자 하는 자는「중대재해 처벌 등에 관한 법률」 에 따라 사업장에서 종사자의 안전&middot;보건상 유해 또는 위험을 방지하기 위하여 그 사업 또는 사업장의 특성 및 규모 등을 고려하여 다음과 같이 조치사항을 이행하여야 합니다.
+
+
+
+
+ &nbsp; 
+
+≪계약업체의 안전 및 보건 확보 의무사항(법 제4조, 제9조)≫
+
+ &nbsp; 
+
+
+
+ &nbsp; 
+
+ &nbsp; 
+
+
+
+ &#9312; 재해예방에 필요한 인력･예산･점검 등 안전보건 관리체계의 구축 및 그 이행
+ &#9313; 재해 발생 시 재발 방지 대책의 수립 및 그 이행
+ &#9314; 중앙행정기관･지자체가 관계 법령에 따라 개선, 시정 등을 명한 사항 이행
+ &#9315; 안전･보건 관계 법령에 따른 의무이행에 필요한 관리상의 조치
+
+
+
+ 나. 본 입찰에 참여하고자 하는 자는 중대 재해예방을 위한 안전 및 보건 확보 의무사항을 숙지하신 후 입찰에 응하여야 하며, 계약체결 시에 [본원소정 양식] 「안전보건관리 준수 서약서」를 제출하여야 합니다.
+6) 입찰참가등록은 평일 10:00~16:00까지 수시로 가능합니다.
+7) 본 입찰은 부득이한 사정상 입찰공고 등에 예정된 입찰일시 또는 개찰일시가 연기되거나, 입찰이 취소 될 수 있사오니 본원 홈페이지를 주시하여 주시기 바랍니다.
+8) 입찰이행보증증권 발행시 계약자는 이대서울병원(사업자등록번호: 366-82-00250)으로 발행 바랍니다.
+9) 기타 문의 
+ - 사업 관련 문의: 이대서울병원 시설팀(소방파트)  02)6986-5846
+ - 입찰 관련 문의: 이대서울병원 관리팀(관재파트)  02)6986-5625
+ &nbsp; 
+ &nbsp; 
+2025년 08월
+ &nbsp; 
+
+이화여자대학교 의료원장</span>
+								</a>
+								<p>2025-08-18</p>
+							</li>
+						
+							<li>
+								<a th:href="@{/intro/bid/view.do?bbs_no=28290&bid_status=I}">
+									<strong>이대서울병원 지하2층 주차장 구역 사무실 전환  관련  <전기 공사> 업체 선정 입찰 공고</strong>
+									<span>
+
+
+
+ &nbsp; 
+
+
+
+이대서울병원 지하2층 주차장 구역 사무실 전환
+ 관련 &lt;전기 공사&gt; 업체 선정 입찰 공고문
+
+
+
+ &nbsp; 
+
+
+
+공고번호 : 이화의료원 제20250818-01호
+ &nbsp; 
+
+
+
+
+1
+
+ &nbsp; 
+
+입찰에 부치는 사항 
+
+
+
+ &nbsp; 
+1) 입찰건명: 이대서울병원 지하2층 주차장 구역 사무실 전환 관련 &lt;전기 공사&gt; 업체선정 
+
+
+
+
+계약 내용
+
+세부 내용
+
+비 고
+
+
+
+계약 방법
+
+제한 경쟁 입찰
+
+&lsquo;입찰참가 자격&rsquo; 확인 요망
+
+
+
+업체 선정
+
+최저가 낙찰제
+
+본원 예정가격 이하 최저금액 제안업체
+
+
+
+ 사업장 소재지
+
+ 서울시 강서구 공항대로 260, 이대서울병원
+
+
+
+ &nbsp; 
+2) 공사 개요
+
+
+
+
+항 목
+
+세부 내용
+
+
+
+계약기간
+
+ 계약일부터 60일내 공사 완료(※. 계약일에 따라 변동될 수 있음)
+
+
+
+공사위치 
+
+ 이대서울병원 내
+
+
+
+공사면적
+
+ 도면 참조(현장설명회 시 배부 예정)
+
+
+
+공사내용
+
+ 이대서울병원 주차장 구역 사무실 전환 관련 &lt;전기 공사&gt; 
+ (※ 도면 및 시방서는 현장설명회를 통하여 배부 예정)
+
+
+
+ &nbsp; 
+3) 입찰참가등록 및 입찰서 제출기간
+
+
+
+
+진행 사항
+
+일 정
+
+장 소
+
+
+
+공고 기간
+
+2025.08.18.(월) ~ 2025.09.03.(수)
+
+이화의료원, 이대서울병원 홈페이지
+
+
+
+현장 설명회
+
+2025.08.26.(화) 14:00 
+
+이대서울병원 시설팀(지하2층)
+
+
+
+입찰서
+접수개시일자
+
+2025.08.27.(수) 10:00
+
+이대서울병원 지하2층 관리팀
+서류접수 (방문제출)
+
+
+
+입찰서
+접수마감일자
+
+2025.09.03.(수) 11:00
+
+
+
+개찰 일시 및 장소
+
+2025.09.03.(수) 13:00 이후
+
+개별통보
+
+
+
+ ※ 위 일정은 병원 사정에 따라 변경될 수 있습니다.
+ ※ 현장 설명회 참석자는 설명회 전일(08/25)까지 붙임 현장 설명회 참가신청서를 메일 제출 바랍니다.
+ (신청서 제출 메일 주소: 30179s@eumc.ac.kr)
+ &nbsp; 
+
+
+
+
+2
+
+ &nbsp; 
+
+입찰참가 자격
+
+
+
+아래에 해당하는 조건을 모두 만족하는 사업자.
+1) 국가를 당사자로 하는 계약에 관한 법률 시행령 제12조 및 제76조에 적합한 업체
+2) 공고일 기준 최근 3년 이내 의료법 제 3조의 3에서 정한 규모의 500병상 이상의 종합병원 중  단일 공사 5천만원 이상 실적이 있는 업체(실적증명시 하도급 실적은 인정하지 않음)
+3) 공고일 기준 전기통신공사업법에 의한 전기공사업 면허 등록을 필한 업체
+4) 주된 영업소의 소재지가 서울 또는 경기, 인천 지역(법인등기부등본에 명)에 있는 업체
+5) 본원에서 실시하는 현장설명회에 참가하여 본원의 사업내용 및 입찰 조건에 동의한 업체
+ &nbsp; 
+
+
+
+
+3
+
+ &nbsp; 
+
+입찰 관련 제출서류 
+
+
+
+
+
+
+
+ ■ 밀봉하여 제출하는 서류
+
+ &nbsp; 
+
+
+
+ 1) 입찰서(본원 소정양식) 및 입찰내역서 
+
+1부. (※봉인)
+
+
+
+ 2) 입찰이행보증보험증권(※ 입찰금액의 5% 이상으로 발행) 
+
+1부. (※봉인)
+
+
+
+ &nbsp; 
+
+ &nbsp; 
+
+
+
+ ■ 일반 제출 서류(순서대로 제출)
+
+ &nbsp; 
+
+
+
+ 1) 입찰참가 신청서 및 서약서(본원 소정양식) 각
+
+1부.
+
+
+
+ 2) 사업자등록증사본 및 법인등기부 등본 
+
+1부.
+
+
+
+ 3) 법인인감증명서, 사용인감계
+
+1부.
+
+
+
+ 4) 위임장 및 재직 증명서(입찰등록 참가자)
+
+1부.
+
+
+
+ 5) 국세 및 지방세 완납 증명서
+
+1부.
+
+
+
+ 6) 회사소개서 및 일반 현황
+
+1부.
+
+
+
+ 7) 실적증명서(실적금액에 대하여 세금계산서 첨부 필수)
+
+1부.
+
+
+
+  ※ 실적증명 시 하도급 실적은 인정하지 않으며, 준공 완료된 실적만 인정됨 
+ ※ 협회에서 발행하는 공사 실적 확인서로 대체 가능함
+ ※ 당해 준공 등의 사유로 협회 미등록 실적의 경우 본원 소정 양식 제출 
+
+ &nbsp; 
+
+
+
+ 8) 전기공사업 면허증 사본
+
+1부.
+
+
+
+ &nbsp; 
+
+ &nbsp; 
+
+
+
+ ※ 제출서류는 순서대로 편철하여 제출 요망 
+
+ &nbsp; 
+
+
+
+ ※ 입찰참가등록서류 제출 시 사용인감도장 지참 요망
+
+ &nbsp; 
+
+
+
+ &nbsp; 
+
+
+
+
+4
+
+ &nbsp; 
+
+가격입찰서 제출방법
+
+
+
+1) 입찰금액은 본원 소정양식(가격입찰서)에 한글과 숫자로 기재하여야 합니다.
+2) 입찰금액은 부가가치세를 포함한 금액으로 작성합니다.
+3) 입찰서, 입찰내역서, 입찰이행보증보험증권은 봉인하여 이대서울병원 관리팀으로 직접 제출하여야 합니다.
+ &nbsp; 
+
+
+
+
+5
+
+ &nbsp; 
+
+입찰보증금의 귀속조치
+
+
+
+계약대상자가 낙찰통지를 받은 후 10일 이내에 계약을 체결하지 않을 때에는「국가를 당사자로 하는 계약에 관한 법률 시행령」제38조의 규정에 따라 입찰보증금은 본원에 귀속된다.
+&nbsp; &nbsp;&nbsp;
+
+
+
+
+6
+
+ &nbsp; 
+
+입찰의 무효
+
+
+
+1) 국가를 당사자로 하는 계약에 관한 법률 시행령 제39조 제4항, 동시행규칙 제44조에 해당      하는 입찰은 무효로 합니다.
+2) 입찰공고일 현재 청산, 합병 및 매각 등 정리절차 중이거나 계획 중인 사업자와 부도, 워크아웃(워크아웃 대상 또는 진행 중인 업체) 또는 회생 절차 중인 사업자의 입찰은 무효로 합니다.
+ &nbsp; 
+
+
+
+
+7
+
+ &nbsp; 
+
+낙찰자 결정방법
+
+
+
+1) 낙찰방법 : 예정가격 이하로 최저가 입찰서를 제출한자를 낙찰자로 결정합니다.
+2) 입찰에 있어서 유효한 입찰자가 없거나 낙찰자가 없을 경우, 또는 동일가격 입찰자가 2인    이상일 경우에는 당일 재입찰을 실시하여 낙찰자를 결정할 수 있습니다.
+3) 입찰자나 낙찰자가 없는 경우 또는 낙찰자가 계약을 체결하지 아니하는 경우에는 재공고    입찰에 부칠 수 있습니다.
+ &nbsp; 
+
+
+
+
+8
+
+ &nbsp; 
+
+계약의 체결
+
+
+
+1) 낙찰자는 이대서울병원으로부터 낙찰통지를 받은 후 10일 이내에 소정의 계약양식에 의하여 계약을 체결합니다.
+2) 계약체결 시, 계약 예정금액의 100분의 15이상의 계약보증금 또는 계약이행보증보험증권을 본원에 납부(제출)하여야 합니다.
+ &nbsp; 
+
+
+
+
+9
+
+ &nbsp; 
+
+입찰 공동행위 금지
+
+
+
+개찰결과 담합이라고 판단할 수 있는 정황이 인정된 경우 본원은 당해 입찰을 유찰시키고 재공고 입찰을 실시하며, 모든 입찰자는 재공고 입찰조치에 대하여 이의를 제기할 수 없습니다.
+ &nbsp; 
+
+
+
+
+10
+
+ &nbsp; 
+
+입찰의 연기
+
+
+
+본 입찰은 필요 시 입찰공고 등에 예정된 입찰일시 또는 개찰일시를 연기 할 수 있사오니 본원 홈페이지를 주시하여 주시기 바랍니다.
+ &nbsp; 
+
+
+
+
+11
+
+ &nbsp; 
+
+보험료, 퇴직공제부금비, 산업안전보건관리비 등 사후정산
+
+
+
+1) 국민건강보험료, 국민연금보험료, 노인장기요양보험료, 퇴직공제부금비는 ｢정부입찰 및 계약 집행기준(기획재정부 예규)｣에 정한 바에 따라 기성대가 및 준공대가 지급 시 사후 정산하여야 합니다.
+2) 산업안전보건관리비는 ｢건설업 산업안전보건관리비 계상 및 사용기준(고용노동부 고시)｣ 규정에 따르며, 제8조에 따라 ｢산업안전보건법｣ 제72조 제2항에 위반하여 다른 목적으로 사용하거나 사용하지 않은 안전관리비에 대하여 이를 계약금액에서 감액 조정합니다.
+3) 품질관리비는 ｢건설기술진흥법｣ 제56조 및 동법 시행규칙 제53조, [별표 6] 품질관리비의 산출 및 사용기준을 따르며 동 규정에 의해 정산합니다.
+4) 안전관리비는 ｢건설기술진흥법｣ 제63조 및 동법 시행규칙 제60조에 따라 사후 정산하여야하며, 안전관리비 계상 및 사용기준은 국토교통부장관이 정하여 고시하는 바에 따릅니다.
+ &nbsp; 
+
+
+
+
+12
+
+ &nbsp; 
+
+기타 사항
+
+
+
+1) 입찰에 참가하고자 하는 자는 입찰공고문, 입찰내역서, 과업지시서 등 기타 입찰에 필요한 모든 사항을 숙지하고 입찰에 참가해야하며 해석상 이의가 있을 경우 본원 판단에 따라야 합니다. ※미숙지로 인한 책임은 입찰참가자에게 있습니다.
+2) 제출된 서류는 일체 반환하지 않으며, 입찰관련 제출서류가 허위로 작성되었거나 서류 미비인 경우와 국가를 당사자로 하는 계약에 관한 법률 시행규칙 제44조에 해당하는 입찰은 무효로 합니다.
+3) 낙찰자는 낙찰통지를 받은 후 소정의 절차에 따라 본원이 정한 기한내에 계약을 체결해야 하며, 낙찰자가 계약 체결을 이행하지 않을 시 입찰보증금은 본원에 귀속 됩니다.
+4) 본 입찰은 부득이한 사정상 입찰공고 등에 예정된 입찰일시 또는 개찰일시가 연기되거나, 입찰이 취소 될 수 있사오니 본원 홈페이지를 주시하여 주시기 바랍니다.
+5) 안전 및 보건 확보 의무
+ 가. 본 입찰에 참여하고자 하는 자는「중대재해 처벌 등에 관한 법률」 에 따라 사업장에서 종사자의 안전&middot;보건상 유해 또는 위험을 방지하기 위하여 그 사업 또는 사업장의 특성 및 규모 등을 고려하여 다음과 같이 조치사항을 이행하여야 합니다.
+
+
+
+
+ &nbsp; 
+
+≪계약업체의 안전 및 보건 확보 의무사항(법 제4조, 제9조)≫
+
+ &nbsp; 
+
+
+
+ &nbsp; 
+
+ &nbsp; 
+
+
+
+ &#9312; 재해예방에 필요한 인력･예산･점검 등 안전보건 관리체계의 구축 및 그 이행
+ &#9313; 재해 발생 시 재발 방지 대책의 수립 및 그 이행
+ &#9314; 중앙행정기관･지자체가 관계 법령에 따라 개선, 시정 등을 명한 사항 이행
+ &#9315; 안전･보건 관계 법령에 따른 의무이행에 필요한 관리상의 조치
+
+
+
+ 나. 본 입찰에 참여하고자 하는 자는 중대 재해예방을 위한 안전 및 보건 확보 의무사항을 숙지하신 후 입찰에 응하여야 하며, 계약체결 시에 [본원소정 양식] 「안전보건관리 준수 서약서」를 제출하여야 합니다.
+6) 입찰참가등록은 평일 10:00~16:00까지 수시로 가능합니다.
+7) 본 입찰은 부득이한 사정상 입찰공고 등에 예정된 입찰일시 또는 개찰일시가 연기되거나, 입찰이 취소 될 수 있사오니 본원 홈페이지를 주시하여 주시기 바랍니다.
+8) 입찰이행보증증권 발행시 계약자는 이대서울병원(사업자등록번호: 366-82-00250)으로 발행 바랍니다.
+9) 기타 문의 
+ - 사업 관련 문의: 이대서울병원 시설팀(전기파트)  02)6986-5847
+ - 입찰 관련 문의: 이대서울병원 관리팀(관재파트)  02)6986-5625
+ &nbsp; 
+ &nbsp; 
+2025년 08월
+ &nbsp; 
+이화여자대학교 의료원장
+
+ &nbsp; &nbsp;</span>
+								</a>
+								<p>2025-08-18</p>
+							</li>
+						
+						
+					</ol>
+					<a th:href="@{/intro/bid/list.do}" class="btnMore"><i class="icon-plus"></i><span class="he">더보기</span></a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- //mainNotice -->
+</main>
+
+<!-- modal -->
+<section class="modal modal-mainMedia">
+	<div class="head">
+		<h1 class="title">홍보동영상 보기</h1>
+	</div>
+	<!-- layerContent -->
+	<div class="body">
+		<iframe width="680" height="384" src="https://www.youtube.com/embed/2tR_bEMDdVk" allowfullscreen title="홍보동영상 보기"></iframe>
+	</div>
+	<!-- //layerContent -->
+	<button type="button" class="btnClose">레이어 닫기</button>
+</section>
+<!-- //modal -->
+
+<script type="text/javascript">
+var mySlider;
+$(function() {
+	var popcookie = getCookie("s_todaypop");
+	var popcookie1 = getCookie("s_todaypop1");
+	if(popcookie == ""){
+ 		//$("#inpatientpop").show();
+	}
+	if(popcookie1 == ""){
+		$("#inpatientpop1").show();
+	}
+	// 외래진료예약
+	$('#treatRsv03').click(function() {
+		if('' == null || '' == "") {
+			alert("로그인 후 사용이 가능합니다.");
+			callLoginLayer();
+		} else if('' == null || '' == "") {
+			var now = new Date();
+			var pastYear = now.getFullYear()-14;
+			var month = now.getMonth()+1;
+			var date = now.getDate();
+			var pastToday;
+			pastToday = pastYear + "" + month + "" + date;
+
+			if('' > pastToday) {
+				callParentCertifyLayer();
+			} else {
+				callSelfCertifyLayer('R');
+			}
+		} else {
+			callRsv01();
+		}
+		//alert("코로나19 확산으로 고위험 장소 방문 여부와 증상 등을 확인하기 위해 당분간 전화로만 진료예약/변경/취소가 가능합니다.");
+		//return false;
+	});
+	
+	$("#treatRsv02").click(function(){
+		//alert("코로나19 확산으로 고위험 장소 방문 여부와 증상 등을 확인하기 위해 당분간 전화로만 진료예약/변경/취소가 가능합니다.");
+		//return false;
+ 		location.href = "/wellness/reservation/reservation.do";
+	});
+	
+	//진료예약확인
+	$('#rsvConfirm').click(function() {
+		if('' == null || '' == "") {
+			alert("로그인 후 사용이 가능합니다.");
+			callLoginLayer();
+		} else {
+			location.href="/mypage/reservation/reservationList01.do";
+		}
+	});
+
+	//진료과/의료진 실시간 검색
+	var searchReq = null;
+	$('#searchDeptDr').on('keyup', function(e) {
+		if ($(this).val().length > 0) {
+			if(searchReq != null) searchReq.abort();
+			searchReq = $.ajax({
+					url: "/searchDeptDrAjax.do",
+		      type: "POST",
+		      data: {"searchWord":$(this).val()},
+		      dataType: "html",
+		      success: function(data){
+		    	 $(".autoComplete").html(data);
+		      }
+		  });
+		}
+	});
+	
+	$("#todaypop").change(function(){
+		if($(this).prop("checked")){
+			setCookie("s_todaypop", "none", 1);
+			$(".inpatient").css("display", "none");
+		}
+	});
+	
+	$("#todaypop1").change(function(){
+		if($(this).prop("checked")){
+			setCookie("s_todaypop1", "none", 1);
+			$(".inpatient1").css("display", "none");
+		}
+	});
+	
+	$(".inpatient .btnClose").on("click", function(){
+		if($("#todaypop").prop("checked")){
+			setCookie("s_todaypop", "none", 1);
+		}
+		$(".inpatient").css("display", "none");
+	});
+	
+	$(".inpatient1 .btnClose").on("click", function(){
+		if($("#todaypop1").prop("checked")){
+			setCookie("s_todaypop1", "none", 1);
+		}
+		$(".inpatient1").css("display", "none");
+	});
+	
+	$(".outpatient .btnClose").on("click", function(){
+		$(".outpatient").css("display", "none");
+	});
+
+	//0619 추가
+	$(".thisClose").on("click", function () {
+		$(".new_layer, .backon").hide();
+	});
+
+	//개인정보 팝업 닫기
+	$("#privacyPop .btnClose").on("click", function(){
+		$("#privacyPop").css("display", "none");
+	});
+	
+});
+
+function boardTab(no) {
+	$("#mainNotice01").hide();
+	$("#mainNotice02").hide();
+	$("#mainNotice03").hide();
+	$("#mainNotice04").hide();
+	$("#mainNotice05").hide();
+	$("#tabBoard1").removeClass("current");
+	$("#tabBoard2").removeClass("current");
+	$("#tabBoard3").removeClass("current");
+	$("#tabBoard4").removeClass("current");
+	$("#tabBoard5").removeClass("current");
+	$("#mainNotice0" + no).show();
+	$("#tabBoard" + no).addClass("current");
+}
+
+function healthTab(no) {
+	$("#mainHealth01").hide();
+	$("#mainHealth02").hide();
+	$("#tabHealth1").removeClass("current");
+	$("#tabHealth2").removeClass("current");
+	$("#tabHealth" + no).addClass("current");
+	var obj = $("#mainHealth0" + no);
+	$(obj).find(".bx-viewport").css("height","425px");
+	$(obj).find(".bx-viewport ul li").css("width","372px");
+	$(obj).show();
+	
+}
+
+// 첫 방문, 빠른예약 신청
+function simpleRsvRegProc(method) {
+
+	var form = $('#formVo1');
+	var url = '/simpleRsvRegProcAjax.do';
+	var data = form.serialize();
+	var successMsg = "간편예약 신청이 완료되었습니다.";
+	var errorMsg = "간편예약 신청이 실패하였습니다.\n작성한 항목을 확인해 주세요.";
+	
+ 	if(method == "alarm"){
+ 	 	successMsg = "카카오 알림톡으로 간편 진료예약 안내가 발송되었습니다.";
+ 	 	errorMsg = "카카오 알림톡 예약 신청이 실패하였습니다.\n작성한 항목을 확인해 주세요.";
+	}
+	
+	$.ajax({
+		type : "POST",
+		url : url,
+		data : data,
+		success : function(data) {
+			alert(successMsg);
+			location.reload();
+		},
+		error : function() {
+			alert(errorMsg);
+		}
+	});
+}
+
+// 알림톡 증명서
+function simpleRsvRegProc2(method) {
+
+	var form = $('#formVo2');
+	var url = '/kakaoCertiProcAjax.do';
+	var data = form.serialize();
+	var successMsg = "알림톡 증명서 신청이 완료되었습니다.";
+	var errorMsg = "알림톡 증명서 신청이 실패하였습니다.\n작성한 항목을 확인해 주세요.";
+
+ 	if(method == "alarm"){
+ 	 	successMsg = "카카오 알림톡으로 증명서 발급안내가 발송되었습니다.";
+ 	 	errorMsg = "카카오 알림톡 예약 신청이 실패하였습니다.\n작성한 항목을 확인해 주세요.";
+	}
+
+	$.ajax({
+		type : "POST",
+		url : url,
+		data : data,
+		success : function(data) {
+			alert(successMsg);
+			location.reload();
+		},
+		error : function() {
+			alert(errorMsg);
+		}
+	});
+}
+
+//빠른예약 팝업
+$(document).ready(function( $ ){     
+    $("#reser").on("click", function(event) {  
+    	var pattern1 = /^[0-9]+$/;
+    	var pattern2 = /^[가-힣a-zA-Z]+$/;
+
+    	var validCheck = true;
+    	
+    	if ($('#name1').val() == '' || !pattern2.test($('#name1').val())) {
+    		validCheck = false;
+    		$(this).focus();
+    	}
+    	if ($('#tel1').val() == '' || !pattern1.test($('#tel1').val())) {
+    		validCheck = false;
+    		$(this).focus();
+    	}
+    	
+    	if (!validCheck) {
+    		alert("내용을 정확히 입력해 주세요.");
+    	} else {
+    		$("#reserpop").show();
+    	  $("body").append('<div class="backon"></div>');
+    	}
+    });
+
+    //알림톡 진료예약(알림톡 발급 x)
+    $("#reser2").on("click", function (event) {
+    	var pattern1 = /^[0-9]+$/;
+    	var pattern2 = /^[가-힣a-zA-Z]+$/;
+
+    	var validCheck = true;
+    	
+    	if ($('#name1').val() == '' || !pattern2.test($('#name1').val())) {
+    		validCheck = false;
+    		$(this).focus();
+    	}
+    	if ($('#tel1').val() == '' || !pattern1.test($('#tel1').val())) {
+    		validCheck = false;
+    		$(this).focus();
+    	}
+    	
+    	if (!validCheck) {
+    		alert("내용을 정확히 입력해 주세요.");
+    	} else {
+    		$("#reserpop2").show();
+      	$("body").append('<div class="backon"></div>');
+    	}
+    });
+    
+    $("body").on("click", function(event) { 
+        if(event.target.className == 'btnClose' || event.target.className == 'backon'){
+            $("#reserpop, #reserpop2, #onlinepop1").hide();
+           	$(".backon").hide();
+        }
+    });
+
+    $("#onlineRsv01").on("click", function (event){
+        $("#onlinepop1").show();
+        $("body").append('<div class="backon"></div>');
+    });
+
+ 
+  });
+
+// 개인정보 확인 Popup
+function privacyPopup(){
+	$("#privacyPop").show();
+  $("body").append('<div class="backon"></div>');
+}
+
+// 개인정보 확인 처리
+function privactyChk() {
+	var pattern1 = /^(19|20)\d{2}-(0[1-9]|1[0-2])-([0-2][1-9]|3[01])$/;
+	var pattern2 = /^[가-힣a-zA-Z]+$/;
+	var validCheck = true;
+	var chkFg = false;
+	var reg = $('#privacyMem #reg01').val() + "-" + $('#privacyMem #reg02').val() + "-" + $('#privacyMem #reg03').val();
+
+	if ($('#privacyMem #name').val() == '' || !pattern2.test($('#privacyMem #name').val())) {
+		validCheck = false;
+		$(this).focus();
+	}
+	if (reg == '' || !pattern1.test(reg)) {
+		validCheck = false;
+		$(this).focus();
+	}
+	
+	if (!validCheck) {
+		alert("내용을 정확히 입력해 주세요.");
+		return;
+	}else{
+		$('#privacyMem #reg').val(reg);
+	}
+	
+  // 동의함 체크 여부
+ 	if($('input:checkbox[id="sign05"]').is(":checked") == true) {
+	  chkFg = true;
+  }
+	
+  if(chkFg) {
+		var data = $("#privacyMem").serialize();
+		var url = '/privacyProcAjax.do';
+		var successYMsg = "고객님께 머리 숙여 사과드립니다.\n";
+		successYMsg += $('#privacyMem #name').val() + "님은 개인정보 유출 리스트에 포함되어 있습니다.\n";
+		successYMsg += "확인된 내용은 다음과 같습니다.\n";
+		successYMsg += "[환자정보] : $data$ \n";
+		successYMsg += "관련 문의 사항은 아래의 연락처로 문의 부탁드립니다.\n";
+		successYMsg += "1. 담당부서 : 방사선종양학과\n";
+		successYMsg += "2. 연락처 : 02-6986-3486\n";
+		successYMsg += "3. 운영시간 : 오후 1시 - 5시(월 ~ 금)\n";
+		var successNMsg = "고객님의 개인정보는 유출대상에 포함되어 있지 않습니다.";
+		var errorMsg = "유출 여부 확인이 실패하였습니다.\n작성한 항목을 확인해 주세요.";
+		
+		$.ajax({
+			type : "POST",
+			url : url,
+			data : data,
+			success : function(data) {
+				if(data.result == "success"){
+					if(data.resInfo == "N"){
+						alert(successNMsg);
+					}else{
+						alert(successYMsg.replace("$data$", data.resInfo));
+					}
+				}else{
+					console.log(data);
+					alert(successNMsg);
+				}
+			},
+			error : function() {
+				alert(errorMsg);
+			}
+		});
+  } else {
+	  alert("개인 정보를 수집·이용에 동의하셔야 확인이 가능합니다.");
+	  return;
+  }
+}
+
+// 첫 진료 예약
+function applyChk(method) {
+	var chkFg = false;
+	
+    // 동의함 체크 여부
+    if(method == "alarm"){
+        if($('input:checkbox[id="sign02"]').is(":checked") == true) {
+            $("#formVo1 input[name='alarm_yn']").val("Y");
+            chkFg = true;
+        }
+    }else{
+        if($('input:checkbox[id="sign01"]').is(":checked") == true) {
+            $("#formVo1 input[name='alarm_yn']").val("N");
+            chkFg = true;
+        }
+    }
+		
+    if(chkFg) {
+        simpleRsvRegProc(method);
+    } else {
+        alert("개인 정보를 수집·이용에 동의하셔야 예약 신청이 완료됩니다.");
+    }
+}
+
+// 알림톡 증명서
+function applyChk2(method) {
+    var chkFg = true;
+
+	if(method == "alarm"){
+	    if($('input:checkbox[id="sign02_2"]').is(":checked") == false) {
+		    $("#alarm_yn").val("Y");
+		    chkFg = false;
+		    alert("개인 정보를 수집·이용에 동의하셔야 예약 신청이 완료됩니다.");
+		}
+		else if($('input[id="name2"]').val().trim() === ""){
+		    alert("이름 작성해주시기 바랍니다");
+		    chkFg = false;
+		}
+		else if($('input[id="tel2"]').val().trim() === ""){
+		    alert("휴대폰 번호 작성해주시기 바랍니다");
+		    chkFg = false;
+		}
+	}
+    if(chkFg){
+        simpleRsvRegProc2(method);
+    }
+
+}
+
+function view(link_url){
+
+	var $document = $(document),
+		$body = $document.find('body'),
+		$wrap = $body.find('#wrap').append('<div class="dimmedLayer"></div>'),
+		//$mainVideo = $wrap.find('.mainVideo'),
+		$mainSlide = $wrap.find('.mainSlide');
+	//$('video[name="video"]').addClass('movStop').html('정지');
+	//$mainSlide.find('video:visible')[0].pause();
+	$mainSlide.find('.btnStop').trigger('click');
+
+	var url = '/healthReplayLayer.do';
+
+	$.ajax({
+		type : "POST",
+		url : url,
+		data : {"link_url" : link_url},
+		success: function(data)
+		{
+			console.log(data);
+			feUI.modalMethod.viewLayer('modal-mainHealthReplayView');
+			$("#mainHealthReplayView").html(data);
+		}
+	});
+}
+
+function thxLoginChecker(seq_no) {
+	if('' == null || '' == "") {
+		alert("로그인 후 확인 가능합니다");
+		callLoginLayer();
+	} else {
+		thanksView(seq_no);
+	}
+}
+
+function thanksList(url) {
+	if('' == null || '' == "") {
+		alert("로그인 후 확인 가능합니다");
+		callLoginLayer();
+	} else {
+		location.href = url;
+	}
+}
+
+function thanksView(seq_no) {
+	var url = '/customer/thanks/view.do?seq_no='+seq_no;
+
+	$.ajax({
+		type: "GET",
+		url: url,
+		success: function(data)
+		{
+			feUI.modalMethod.viewLayer('modal-thanksView');
+			$("#thanksView").html(data);
+		}
+	});
+}
+</script>
+<section class="modal modal-sizeM modal-mainHealthReplayView" id="mainHealthReplayView"></section>
+<!-- 고맙습니다 리스트 상세 레이아웃 -->
+<section class="modal modal-sizeM modal-thanks modal-thanksView" id="thanksView"></section>
+<!-- //고맙습니다 리스트 상세 레이아웃 -->
+<style type="text/css">
+.profile-box {width: 100%; margin-bottom: 20px; min-height: 159px;}
+.profile-box.non {display: block;}
+.profile-box.non .tit {font-size: 22px;color:#222;margin-bottom: 5px;font-weight: 700;}
+.profile-box .img-box {width: 22%; margin-right: 20px; float: left;}
+.profile-box .img-box img {max-width: 130px;}
+.profile-box .text-box {width: 78%; float: left; margin-left: -20px; padding-left: 20px;}
+.profile-box .text-box .title {display: block;overflow: hidden;color: #222;font-size: 19px;font-weight: 400;word-break: keep-all}
+.profile-box .text-box .title span {font-size:14px;}
+.profile-box .category-list {margin-top: 15px;}
+.profile-box .category-list li+li {margin-top: 8px;}
+.profile-box .category-list li strong {color:#1b926f;margin-right: 10px;}
+.profile-box + .btn-box {text-align: center;}
+.profile-box + .btn-box a {width:45%;}
+.hr {margin:40px 0;width:100%;border-bottom: 1px dashed #1b926f;}
+
+</style>
+			<section class="modal modal-alert" id="alertMsgLayer"></section>
+		</div>
+		<!-- 진료시간표 레이아웃 -->
+		<section class="modal modal-sizeL modal-schedule" id="modalSchedule"></section>
+		<!-- //진료시간표 레이아웃 -->
+		<!-- //container -->
+
+		<!-- footer  
+		<footer id="footer" class="footer">
+		
+		</footer>
+		 //footer -->
+	</div>
+	<!-- //wrap -->
+
+
+<!-- 
+<script src="/js/jquery.bxslider.js"></script>
+<script src="/js/feSeries.min.js"></script>
+<script src="/js/feCommon.js"></script>
+ -->
+<!-- </div> -->
+</body>
+</html>

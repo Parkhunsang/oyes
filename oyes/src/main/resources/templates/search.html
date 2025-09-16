@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<th:block th:insert="~{/header.html::header}"></th:block>
+<head>
+<style type="text/css">
+div > a {
+	text-decoration: none;
+	outline: none;
+	color: black;
+}
+.search_container {
+    max-width: 70%;
+    margin: 0 auto;
+}
+.search_form {
+	text-align: center;
+}
+.p_link {
+    text-decoration: none;
+	color: #A3A3A3;
+	font-size: 14px;
+	padding: 10px;
+}
+.p_link_active {
+    text-decoration: none;
+	font-weight: bold;
+	color: black;
+	font-size: 14px;
+	padding: 10px;
+}
+.cont_txt {
+	display: flex;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-height: 155px;
+	max-width: 80%;
+}
+</style>
+<script type="text/javascript">
+	function submitForm() {
+	    document.getElementById("submitForm").submit();
+	}
+</script>
+<meta charset="UTF-8">
+</head>
+<body>
+	<div layout:fragment="content">
+		<div class="search_container">
+			<div id="padding" style="width: 100%; min-height: 1px; height: 50px;"></div>
+			<!-- 검색창 -->
+			<div class="container">
+				<div class="search_form">
+					<form action="/search" id="submitForm" style="left: 100px;">
+						<input type="hidden" name="pageNum" value="1">
+						<input type="image" th:src="@{images/btn/search.png}" style="width: 19px; margin-bottom: -5px;" onclick="submitForm()">
+						<input type="text" name="keyword" th:value="${keyword}" placeholder="검색" style="border: none; outline: none; padding: 10px; padding-left: 10px">
+						<div style="border-bottom: 1px solid rgba(128, 128, 128, 0.2); width: 250px; margin: 0 auto;"></div>
+					</form>
+				</div>
+				<div id="padding" style="width: 100%; min-height: 1px; height: 100px;"></div>
+				<ul style="border-width: 0 0 1px 0; border-style: solid; border-color: rgba(128, 128, 128, 0.2); margin-bottom: 20px; padding: 0; position: relative;">
+				    <li style="position: relative;">
+				        <div style="position: absolute; bottom: -1px; left: 0; border-bottom: 1px solid #00f; line-height: 50px;">통합검색</div>
+				    </li>
+				</ul>
+				<div>[[${total}]]개의 검색 결과</div>
+				<div id="padding" style="width: 100%; min-height: 1px; height: 50px;"></div>
+				<!-- 검색 결과 -->
+				<th:block th:if="${#lists.size(uni_list)} == 0">
+					<div id="padding" style="width: 100%; min-height: 1px; height: 100px; text-align: center;">일치하는 데이터가 없습니다</div>
+				</th:block>
+				<!-- 테이블 별 분류 -->
+				<th:block th:if="${#lists.size(uni_list)} > 0" th:each="uni:${uni_list}">
+					<div th:if="${uni.kind} == 'ac'">
+						<div style="display: flex; align-items: center;">
+							<a class="cont_txt" th:href="@{'/academy/academyDetail?a_no=' + ${uni.no}}" style="display: flex;">
+								<img th:src="@{/images/academy/}+${uni.image}" style="max-width: 155px; margin-right: 10px;">
+								<span style="display: flex; flex-direction: column;">
+									<span style="color: rgba(0, 0, 0, 0.7); margin-right: 10px;">강의</span>
+									<span><b>[[${uni.title}]]</b></span>
+									<span style="font-size: 14px;" th:utext="${uni.content}"></span>
+								</span>
+							</a>
+						</div>
+					</div>
+					<div th:if="${uni.kind} == 'st'">
+						<div style="display: flex; align-items: center;">
+							<a class="cont_txt" th:href="@{/staff_Detail(st_no=${uni.no})}" style="display: flex;">
+								<img th:src="@{/upload/staff/}+${uni.image}" style="max-width: 155px; margin-right: 10px;">
+								<span style="display: flex; flex-direction: column;">
+									<span style="color: rgba(0, 0, 0, 0.7); margin-right: 10px;">강사소개</span>
+									<span><b>[[${uni.title}]]</b></span>
+									<span style="font-size: 14px;" th:utext="${uni.content}"></span>
+								</span>
+							</a>
+						</div>
+					</div>
+					<div th:if="${uni.kind} == 'nt'">
+						<div style="display: flex; align-items: center;">
+							<a class="cont_txt" th:href="@{/notice/notice_list_detail(nt_no=${uni.no})}">
+								<img th:src="@{/images/notice/}+${uni.image}" style="max-width: 155px; margin-right: 10px;">
+								<span style="display: flex; flex-direction: column;">
+									<span style="color: rgba(0, 0, 0, 0.7); margin-right: 10px;">공지</span>
+									<span><b>[[${uni.title}]]</b></span>
+									<span style="font-size: 14px;" th:utext="${uni.content}"></span>
+								</span>
+							</a>
+						</div>
+					</div>
+					<div th:if="${uni.kind} == 'ar'">
+						<div style="display: flex; align-items: center;">
+							<a class="cont_txt" th:href="@{/artist/artist_list_detail(ar_no=${uni.no})}">
+								<img th:src="@{/images/artist/}+${uni.image}" style="max-width: 155px; margin-right: 10px;">
+								<span style="display: flex; flex-direction: column;">
+									<span style="color: rgba(0, 0, 0, 0.7); margin-right: 10px;">소식</span>
+									<span><b>[[${uni.title}]]</b></span>
+									<span style="font-size: 14px;" th:utext="${uni.content}"></span>
+								</span>
+							</a>
+						</div>
+					</div>
+					<div id="padding" style="width: 100%; min-height: 1px; height: 50px;"></div>
+				</th:block>
+				<!-- paging -->
+				<div class="paging">
+				    <ul class="pagination justify-content-center">
+				        <!-- 앞에 보여줄 것이 있다(이전) -->
+				        <th:block th:if="${pb.startPage > pb.pagePerBlock}">
+				            <li><a class="p_link" th:href="@{'/search/pageNum/'+${pb.startPage - 1}(keyword=${keyword})}">
+				                <img th:src="@{images/btn/paging_1.png}" style="width: 13px; height: 13px; margin-right: 5px;"></a></li>
+				        </th:block>
+				        <th:block th:unless="${pb.startPage > pb.pagePerBlock}">
+				            <li><img th:src="@{images/btn/paging_1.png}" style="width: 13px; height: 13px; cursor: not-allowed; margin-right: 5px;"></li>
+				        </th:block>
+				        <th:block th:each="i:${#numbers.sequence(pb.startPage,pb.endPage) }">
+				            <th:block th:if="${total > 0}">
+				                <th:block th:if="${pb.currentPage == i }">
+				                    <li><a class="p_link_active" th:href="@{/search(pageNum=${i}, keyword=${keyword})}">[[${i}]]</a></li>
+				                </th:block>
+				                <th:block th:if="${pb.currentPage != i }">
+				                    <li><a class="p_link" th:href="@{/search(pageNum=${i}, keyword=${keyword})}">[[${i}]]</a></li>
+				                </th:block>
+				            </th:block>
+				        </th:block>
+				        <!-- 뒤에 보여줄 것이 남아 있다(다음) -->
+				        <th:block th:if="${pb.endPage < pb.totalPage}"> 
+				            <li><a class="p_link" th:href="@{'/search/pageNum/'+${pb.endPage + 1}(keyword=${keyword})}">
+				                <img th:src="@{images/btn/paging_2.png}" style="width: 13px; height: 13px; margin-left: 5px;"></a></li>
+				        </th:block>
+				        <th:block th:unless="${pb.endPage < pb.totalPage}"> 
+				            <li><img th:src="@{images/btn/paging_2.png}" style="width: 13px; height: 13px; cursor: not-allowed; margin-left: 5px;"></li>          
+				        </th:block>
+				    </ul>
+				</div>
+			</div>
+		</div>	
+	</div>
+</body>
+</html>

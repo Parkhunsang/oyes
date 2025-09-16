@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:insert="~{/header.html::header}"></th:block>
+<head><meta charset="UTF-8"><title>Insert title here</title>
+</head><body>
+<div th:if="${result} > 0">
+	<script type="text/javascript">
+		alert("로그인 되었습니다")
+		location.href="/index"
+	</script>
+</div>
+<div th:if="${result} == 0">
+	<script type="text/javascript">
+		alert("암호가 다릅니다")
+		history.go(-1)
+	</script>
+</div>
+<div th:if="${result} == -1">
+	<script type="text/javascript">
+		alert("없는 아이디입니다")
+		history.go(-1)
+	</script>
+</div>
+</body>
+</html>

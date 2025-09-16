@@ -1,0 +1,63 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.5.5'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.green'
+version = '0.0.1-SNAPSHOT'
+description = 'oyes project for Spring Boot'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+    /*1. Spring Boot Starter*/
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'    /* 서버사이드 템플릿 엔진인 Thymeleaf 사용 가능하게 함. HTML 뷰 렌더링에 사용.*/
+    implementation 'org.springframework.boot:spring-boot-starter-web'          /* Spring MVC + Tomcat + JSON 처리(Jackson) 등을 포함한 웹 애플리케이션 기본 스타터.*/
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.5' /* MyBatis와 Spring Boot 연동을 쉽게 해주는 스타터. SQL 매퍼 기반 ORM 지원.*/
+    implementation 'org.springframework.boot:spring-boot-starter-mail'         /* 메일 발송 기능 제공 (JavaMailSender 기반). SMTP 서버 연동 가능.*/
+    
+    /*2. Thymeleaf 추가 기능*/
+    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'          /* Thymeleaf에서 레이아웃(템플릿 조각 재사용) 기능을 제공. (예: header, footer 공통화)*/
+    
+    /* 3. 파일 처리*/
+    implementation 'commons-io:commons-io:2.6'                                 /* 파일/스트림/입출력 관련 유틸리티 제공.*/
+    implementation 'commons-fileupload:commons-fileupload:1.4'                 /* 파일 업로드 처리 (multipart/form-data 요청) 지원.*/
+    
+    /*4. 보안/암호화*/
+    implementation group: 'org.springframework.security', name: 'spring-security-crypto', version: '4.2.4.RELEASE'  /* 비밀번호 해싱(BCrypt), 암호화/복호화 등 보안 유틸 제공.*/
+    
+    /*5. 개발 편의 기능*/
+    compileOnly 'org.projectlombok:lombok'                                     /* Lombok: getter/setter, toString, builder 등을 자동 생성. (컴파일 시에만 필요)*/
+    annotationProcessor 'org.projectlombok:lombok'                             /* Lombok 애노테이션(@Getter, @Setter 등) 처리.*/
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor' /* @ConfigurationProperties 사용 시 자동 완성/메타데이터 지원.*/
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'            /* 코드 변경 시 자동 재시작 & LiveReload 지원. (개발 환경 전용)*/
+    
+    /*6. DB 연동*/
+    runtimeOnly 'com.oracle.database.jdbc:ojdbc11'                             /* Oracle JDBC 드라이버 (런타임에만 필요).*/
+    
+    /*7. 테스트*/ 
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'     /* JUnit, Mockito, Spring Test 지원.*/
+    testImplementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter-test:3.0.5'  /* MyBatis 관련 테스트 유틸 지원.*/
+    
+    
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<th:block th:insert="~{/header.html::header}"></th:block>
+<head>
+<meta charset="UTF-8">
+<title>[[${department.department_name}]] | 부서안내</title>
+<link rel="stylesheet" th:href="@{/css/departmentDetail.css}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+/* [2025-09-15 Gemini 추가] 클릭 드롭다운 JQuery 코드 시작 */
+$(document).ready(function() {
+    $('ul.top_util_list > li > span').on('click', function(event) {
+        var $dropdown = $(this).siblings('ul.drop_list');
+        $dropdown.toggleClass('show');
+        event.stopPropagation();
+    });
+
+    $(document).on('click', function() {
+        if ($('ul.drop_list').hasClass('show')) {
+            $('ul.drop_list').removeClass('show');
+        }
+    });
+
+    $('ul.drop_list').on('click', function(event) {
+        event.stopPropagation();
+    });
+});
+/* [2025-09-15 Gemini 추가] 클릭 드롭다운 JQuery 코드 끝 */
+</script>
+<style>
+div.info_wrap {
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+div.info_img_wrap {
+	width: 100%;
+	height: 310px;
+	margin-bottom: 70px;
+}
+div.info_img_wrap img {
+	width: 100%;
+	height: 100%;
+}
+div.info_text_wrap {
+	display: flex;
+	flex-direction: column;
+	word-break: break-all;
+}
+p.info_summary {
+	font: 700 24px 'pretendard';
+	margin-bottom: 10px;
+}
+p.info_intro {
+	font-family: 'pretendard';
+	color: #666;
+	margin-bottom: 20px;
+	line-height: 1.5;
+}
+p.info_description {
+	font-family: 'pretendard';
+	line-height: 1.4;
+}
+</style>
+</head>
+<body>
+	<div layout:fragment="contentFragment" id="container">
+		<div class="top_bar">
+			<ul class="top_util_list">
+				<li><a th:href="@{/index}"><span class="home_icon"></span></a></li>
+				<li><span>진료과</span>
+					<ul class="drop_list">
+						<li th:each="link : ${navLinks}">
+							<a th:href="@{${link.url}}" th:text="${link.text}">메뉴 항목</a>
+						</li>
+					</ul>
+				</li>
+				<li><span>[[${department.department_name}]]</span>
+					<ul class="drop_list">
+						<li th:each="dept : ${allDepartments}">
+							<a th:href="@{/department/departmentDetail(department_id=${dept.department_id})}" th:text="${dept.department_name}">진료과 이름</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div class=center_div>
+			<section class="detail_section">
+				<h1>[[${department.department_name}]]</h1>
+				<ul class="choose_btn_list">
+					<li class="selected"><a
+						th:href=@{/department/departmentDetail(department_id=${department.department_id})}>진료과소개</a></li>
+					<li><a
+						th:href="@{/department/doctorList(department_id=${department.department_id})}">의료진소개</a></li>
+					<li><a
+						th:href="@{/clinicReservation/clinicReservation(department_id=${department.department_id})}">진료시간표</a></li>
+					<li><a
+						th:href="@{/department/departmentPlace(department_id=${department.department_id})}">위치안내</a></li>
+				</ul>
+				<div class="info_wrap">
+					<div class="info_img_wrap">
+						<img th:src="@{/images/}+${department.department_hero_image_url}"
+							alt="Hero Image">
+					</div>
+					<div class="info_text_wrap">
+						<p class="info_summary">[[${department.department_summary}]]</p>
+						<p class="info_intro">[[${department.department_intro}]]</p>
+						<p class="info_description">[[${department.department_description}]]</p>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+</body>
+</html>

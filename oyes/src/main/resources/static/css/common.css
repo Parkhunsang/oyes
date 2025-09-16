@@ -1,0 +1,32 @@
+/* 공통 스타일 */
+body,html{
+    height:100%;
+}
+a{
+    text-decoration:none;
+    color:black;
+}
+.hidden{
+    width:1px;
+    height:1px;
+    font-size:0px;
+    line-height:0px;
+    position:absolute;
+    top:0px;
+}
+/* 상단영역 */
+header {
+    width: 100%;
+    height: 163px;
+    background-color:red; /* 밝은 회색 배경 */
+    border-bottom: 1px solid #dee2e6; /* 연한 회색 테두리 */
+    text-align: center;
+}
+/* 하단영역 */
+footer {
+    width: 100%;
+    height: 200px; 
+    background-color: #343a40; /* 어두운 회색 배경 */
+    color: white; /* 흰색 글씨 */
+    text-align: center;
+}

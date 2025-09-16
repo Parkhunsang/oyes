@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}"
+>
+	<th:block th:insert="~{/header.html::header}"></th:block>
+<head><meta charset="UTF-8"><title>로그인</title>
+<script type="text/javascript">
+/*
+	function idChk() {
+		if (!joinForm.patient_id.value) {
+			alert("아이디를 입력한 후에 체크 하시오")
+			joinForm.patient_id.focus()
+			return false;
+		}
+		
+		$.post('/idChk', 'id='+joinForm.patient_id.value, function(msg) {
+			$('#idChk').html(msg);
+		})
+	}
+*/	
+	function chk() {
+		if($('input[name="patient_id"]').val().trim() == "") {
+			validCheck = false;
+			$('input[name="patient_id"]').focus();
+		}
+
+		if($('input[name="password"]').val().trim() == "") {
+			validCheck = false;
+			$('input[name="password"]').focus();
+		}
+
+		if(!validCheck) {
+			alert("필수입력 항목을 확인해 주세요.");
+			return false;
+		}
+		
+		return true;
+	}
+</script>
+
+</head><body>
+	<div layout:fragment="contentFragment">
+
+	<!-- Google Tag Manager (noscript) -->
+	<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5K4DZ3X" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+	<!-- End Google Tag Manager (noscript) -->
+	
+	<!-- wrap -->
+	<div id="wrap">
+
+			<!-- reservationWrap -->
+			<div id="reservation01" class="reservation item01"></div>
+			<!-- //reservationWrap -->
+
+			<!-- reservationWrap -->
+			<div id="reservation02" class="reservation item02"></div>
+			<!-- //reservationWrap -->
+		<!-- //header -->
+
+		<!-- container -->
+		<div class="container">
+			
+
+
+		<div class="contTopBar">
+			<!-- inner -->
+			<div class="inner">
+				<!-- breadcrumb -->
+				<div class="breadcrumb cf">
+					<strong class="he">현재 위치:</strong>
+					<div class="item">
+						<a th:href="@{/}" class="home ht">Home</a>
+					</div>
+					
+					<div class="item">
+						<em>회원</em>
+						<button type="button" class="bcLinkLayerBtn ht">주 메뉴 목록 열기</button>
+						<ul class="bcLinkLayer">
+							
+							<li><a th:href="@{/medical/dept/deptList.do}">진료과</a></li>
+							<li><a th:href="@{/medical/dept/centerList.do}">센터</a></li>
+							<li><a th:href="@{/guide/reservationInfo.do}">이용안내</a></li>
+							<li><a th:href="@{/customer/info.do}">고객서비스</a></li>
+							<li><a th:href="@{/health/lecture/list.do}">건강정보</a></li>
+							<li><a th:href="@{/intro/greeting2.do}">병원소개</a></li>
+							<!-- <li><a th:href="@{/w/index.do}">통합검색</a></li> -->
+							
+						</ul>
+					</div>
+					
+					<div class="item">
+						<em>회원가입</em>
+						<button type="button" class="bcLinkLayerBtn ht">서브 메뉴 목록 열기</button>
+						<ul class="bcLinkLayer">
+							
+							<li><a th:href="@{/findIdPw.do}">아이디/비밀번호찾기</a></li>
+							
+							<li><a th:href="@{/member/joinForm}">회원가입</a></li>
+							
+							<li><a th:href="@{/reservation/reservation.do}">외래진료예약</a></li>
+							
+						</ul>
+					</div>
+					
+					
+					
+				</div>
+				<!-- //breadcrumb -->
+				
+
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	var url = window.location.href;
+	var dec = $('h2.title').text();
+	var siteTitle = $('head title').text();
+	Kakao.init('8a7ce70a0329833253a66ddde14fc28d');
+	$(".twitter").click(function(){
+		share('twitter', url, '', '',dec);
+		return false;
+	});
+	
+	$(".faceBook").click(function(){
+		share('facebook', url, '', '',dec);
+	});
+	
+	$("#kakaostory-share-button").click(function(){
+		share("kakao", url, '', '',dec);
+		return false;
+	});
+	
+	$(".url").click(function(){
+		copyToClipboard(url);
+		alert('URL이 복사되었습니다.\nCtrl+v를 이용하여 붙여넣기하실 수 있습니다.');
+	});
+});
+
+
+function copyToClipboard(val) {
+  var t = document.createElement("textarea");
+  document.body.appendChild(t);
+  t.value = val;
+  t.select();
+  document.execCommand('copy');
+  document.body.removeChild(t);
+}
+	
+function share(gubn, surl, imgLink, gname, dec) {
+	console.log(surl + ' // ' + dec)
+	if (gubn == 'twitter') {
+  	window.open('http://twitter.com/share?text='+encodeURIComponent('이화여자대학교병원 | ' + dec)+'&url=' + encodeURIComponent(surl),'twittershare','width=500,height=400,scrollbars=no,resiable=no');
+	} else if (gubn == "facebook") {
+		var ua = navigator.userAgent;
+		var slink = "https://www.facebook.com/dialog/feed?app_id=922614774754618&redirect_uri=" + encodeURIComponent(surl) + "&link=" + encodeURIComponent(surl);
+		if (ua.indexOf("PIBS_APP") > -1) {
+			document.location.href = slink;
+		} else {
+			window.open(slink,"facebook","width=1000,height=520,scrollbars=no,resiable=no");
+		}
+	} else {
+    Kakao.Link.sendDefault({
+    	objectType: 'feed',
+    	content: {
+      	title: dec,
+        description: dec,
+        imageUrl: 'https://seoul.eumc.ac.kr/asset/img/common/kakao_img.png',
+        link: {
+        	mobileWebUrl: surl,
+          webUrl: surl
+        }
+      }
+    });
+	}
+}
+
+function defaultMailReg() {
+	var url = '/common/emailReg.do';
+
+	$.ajax({
+		type: "GET",
+		url: url,
+		success: function(data)
+		{
+			feUI.modalMethod.viewLayer('modal-defaultMail');
+			$("#defaultMailReg").html(data);
+		}
+	});
+}
+
+//인쇄
+function printMain(obj){
+	//common.print($("#content"), $("head title").text());
+	document.print();
+}
+</script>
+<div class="utilMenu">
+	<a href="javascript:void(0)" role="button" class="email modalJs" onclick="defaultMailReg();"><i class="icon-email ht">메일</i></a>
+	<div class="cont">
+		<a href="#" role="button"><i class="icon-share ht">관심콘텐츠</i></a>
+		<ul>
+			<li><a href="#" role="button" class="twitter"><i class="icon-twitter ht">트위터</i></a></li>
+			<li><a href="#" role="button" class="faceBook"><i class="icon-faceBook ht">페이스북</i></a></li>
+			<li><a href="#" role="button" class="kakao" id="kakaostory-share-button"><i class="icon-kakao ht">카카오</i></a></li>
+			<li><a href="#" role="button" class="url"><i class="icon-url ht">URL 공유</i></a></li>
+		</ul>
+	</div>
+	<a th:href="@{/}" role="button" class="print" onclick="printMain(this);"><i class="icon-print ht">프린트</i></a>
+	<span class="zoomOut">
+		<button type="button" class="zoomOut minus ht">화면 축소</button>
+	</span>
+	<span class="zoomIn">
+		<button type="button" class="zoomIn plus ht">화면 확대</button>
+	</span>
+</div>
+
+<!-- 메일발송 레이아웃 -->
+<section class="modal modal-sizeM modal-defaultMail" id="defaultMailReg"></section>
+<!-- //메일발송 레이아웃 -->
+
+			</div>
+			<!-- //inner -->
+		</div>
+		<script type="text/javascript">
+		var locationInfo = {
+			cate0: $(".viewTitle h3").text(),
+			cate1: $(".breadcrumb em:eq(2)").text(),
+			cate2: $(".breadcrumb em:eq(1)").text(),
+			cate3: $(".breadcrumb em:eq(0)").text()
+		};
+		</script>
+
+				
+
+<main id="content" class="content content-bg">
+	<div class="inner">
+		<div class="heading heading-depth01 alignC">
+			<h2 class="title">로그인</h2>
+		</div>
+		<form id="memberVo" name="loginForm" action="/member/login" method="post" enctype="multipart/form-data" onsubmit="return chk()">
+			<input type="hidden" name="vdiscrno" id="vdiscrno" />
+			<input type="hidden" name="discrhash" id="discrhash" />
+			<input type="hidden" name="ciscrhash" id="ciscrhash" />
+			<input type="hidden" name="zipcode" />
+			<input type="hidden" name="addr1" />
+			<input type="hidden" name="buildingno" />
+			<fieldset>
+				<legend>로그인</legend>
+				<div class="card-mem">
+					<div class="caption">
+						<p class="color04">* 표시는 필수 입력 항목입니다.</p>
+					</div>
+					<div class="form-filed login">
+						<div class="item" style="position:relative">
+							<strong class="title">
+								<i class="required">
+									*
+									<span class="he">필수입력</span>
+								</i>
+								아이디
+							</strong>
+							<div>
+							<input type="text" name="patient_id" class="input" id="patient_id" title="아이디" required="required" />
+							<span role="alert" class="validation idTxt" id="idTxt"></span>
+							</div>
+						</div>
+						<div class="item">
+							<strong class="title">
+								<i class="required">
+									*
+									<span class="he">필수입력</span>
+								</i>
+								비밀번호
+							</strong>
+							<div>
+							<input type="password" name="password" id="password" class="input pass" title="비밀번호" required="required" />
+							<span role="alert" class="validation passTxt" id="passTxt"></span>
+							</div>
+						</div>
+						<div class="item">
+							<ul class="inner">
+								<li>아이디/비밀번호 찾기&nbsp;&nbsp; |&nbsp;&nbsp; <a th:href="@{/member/joinForm}">회원가입</a></li>
+								
+							</ul>
+						</div>
+					</div>
+					<!-- //term -->
+				</div>
+				<div class="btnWrap">
+					<button type="button" class="button button-sizeM" id="btnLoginCancel">취소</button>
+					<!-- <button type="button" class="button button-sizeM button-bg03" id="joinSubmitBtn">가입</button> -->
+					<input type="submit" class="button button-sizeM button-bg03" id="loginSubmitBtn" value="로그인"/>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</main>
+
+			<section class="modal modal-sizeXS modal-alert" id="alertMsgLayer"></section>
+			<!-- 진료시간표 레이아웃 -->
+			<section class="modal modal-sizeL modal-schedule" id="modalSchedule"></section>
+			<!-- //진료시간표 레이아웃 -->
+		</div>
+		<!-- //container -->
+
+</div>
+</body>
+</html>

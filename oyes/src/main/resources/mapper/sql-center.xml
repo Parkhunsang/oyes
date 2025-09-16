@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.oyes.mapper.CenterMapper">
+	<select id="list" resultType="center">
+		select * from center order by center_name
+	</select>
+	<select id="keywordList" parameterType="map" resultType="center">
+		select * from center where center_name >= #{start} and center_name &lt; #{end} order by center_name 
+	</select>
+	
+	<select id="select" parameterType="integer" resultType="center">
+		select * from center where center_id=#{centerId}
+	</select>
+	
+	<resultMap id="doctorResultMap" type="doctor">
+		<id property="doctor_id" column="doctor_id"/>
+		<result property="doctor_name" column="doctor_name"/>
+		<result property="doctor_title" column="doctor_title"/>
+		<result property="doctor_profile_image" column="doctor_profile_image"/>
+		<result property="doctor_doctor_specialty" column="doctor_doctor_specialty"/>
+		<result property="doctor_is_active" column="doctor_is_active"/>
+		<result property="doctor_created_at" column="doctor_created_at"/>
+		<result property="doctor_updated_at" column="doctor_updated_at"/>
+		<result property="department_id" column="department_id"/>
+		<result property="center_id" column="center_id"/>
+		
+		<result property="department_name" column="department_name"/> <!-- 의사 상세 정보에 진료과 이름 포함 -->
+		
+		<collection  property="centerNames" ofType="java.lang.String">		
+			<result column="center_name"/>
+		</collection>
+		
+		<collection property="clinicList" ofType="ClinicSession">
+			<result column="week"/>		
+			<result column="amPm"/>		
+		</collection>
+		
+	</resultMap>
+
+	<select id="selectC" parameterType="int" resultType="center">
+		SELECT *  FROM center WHERE center_id=#{center_id}
+	</select>
+	
+	<select id="getSchedule" parameterType="int"  resultType="ClinicSession">
+        SELECT
+           clinic_id,
+           doctor_id,
+           visit_type,
+           reservation_date,
+            to_char(reservation_date,'dy') week,
+           to_char(reservation_date,'am') amPm
+        FROM
+            CLINIC_SESSION 
+        WHERE
+            doctor_id = #{doctor_id}
+    </select>
+</mapper>

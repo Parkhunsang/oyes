@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:insert="~{/header.html::header}"></th:block>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- 
+	<link rel="stylesheet" th:href="@{/css/feCommon_seoul.min.css}">
+	<link rel="stylesheet" th:href="@{/css/notosanskr.min.css}">
+ -->
+</head>
+<body>
+	<footer th:fragment="footerFragment"  id="footer" class="footer">
+			<!-- footer-linkWrap -->
+			<div class="footer-linkWrap">
+				<div class="inner">
+					<ul class="footer-link">
+						<li><a th:href="@{/medical/payment1.do}">비급여진료비</a></li>
+						<li><a href="javascript:void(0)" class="modalJs"
+							onclick="footerView('3');">이용약관</a></li>
+						<li><a href="javascript:void(0)" class="modalJs"
+							onclick="footerView('2');">환자의 권리와 의무</a></li>
+						<li><a th:href="@{/customer/privacyPolicy.do}"
+							style="font-weight: bold; color: yellow;">개인정보 처리방침</a></li>
+					</ul>
+					<!-- footer-sns -->
+					<ul class="footer-sns">
+						<li><a href="https://blog.naver.com/ewhamedi"
+							class="foot-snsB ht">네이버 블로그</a></li>
+						<li><a href="https://post.naver.com/ewhamedi"
+							class="foot-snsP ht">포스트</a></li>
+						<li><a href="https://tv.naver.com/ewhahealth"
+							class="foot-snsT ht">네이버 TV</a></li>
+						<li><a
+							href="https://www.youtube.com/channel/UCzg1Ive5NEVKeTEfiopLSUA"
+							class="foot-snsY ht">유투브</a></li>
+						<li><a href="https://www.instagram.com/eumc_in/"
+							class="foot-snsI ht">인스타</a></li>
+					</ul>
+					<!-- //footer-sns -->
+				</div>
+			</div>
+			<!-- //footer-linkWrap -->
+			<!-- footer-info -->
+			<div class="footer-info">
+				<div class="inner">
+					<!-- footer-call -->
+					<ul class="footer-call">
+						<li>대표번호 : 1522.7000</li>
+					</ul>
+					<!-- //footer-call -->
+
+					<!-- selectMenuWrap -->
+					<div class="selectMenuWrap">
+						<!-- selectMenu -->
+						<div class="selectMenu">
+							<button type="button">
+								연구/교육기관 <i class="icon-arrow"></i>
+							</button>
+							<ul>
+								<!-- <li><a title="새창" target="_blank" th:href="@{/}">이화의생명연구원</a></li> -->
+								<li><a title="새창" target="_blank"
+									href="http://part.eumc.ac.kr/dept/RDPC/index.do">연구진흥단/첨단의생명연구원</a></li>
+
+
+								<li><a title="새창" target="_blank"
+									href="https://seoul.eumc.ac.kr/ctc/main.do">이대서울병원 임상시험센터</a></li>
+								<li><a title="새창" target="_blank"
+									href="http://part.eumc.ac.kr/dept/inform/index.do">이화의료데이터사업단</a></li>
+
+
+
+								<li><a title="새창" target="_blank"
+									href="http://part.eumc.ac.kr/dept/hrpp/index.do">연구대상자보호센터</a></li>
+								<li><a title="새창" target="_blank"
+									href="http://part.eumc.ac.kr/dept/hubig/index.do">이화의료아카데미</a></li>
+							</ul>
+						</div>
+						<!-- //selectMenu -->
+						<!-- selectMenu -->
+						<div class="selectMenu">
+							<button type="button">
+								패밀리사이트 <i class="icon-arrow"></i>
+							</button>
+							<ul>
+								<li><a title="새창" target="_blank"
+									href="https://www.eumc.ac.kr/">이화여자대학교 의료원</a></li>
+								<li><a title="새창" target="_blank"
+									href="https://www.eumc.ac.kr/fund/">이화여자대학교 의료원 발전기금</a></li>
+								<li><a title="새창" target="_blank"
+									href="https://mokdong.eumc.ac.kr/main.do">이대목동병원</a></li>
+								<li><a title="새창" target="_blank"
+									href="https://wch.eumc.ac.kr/main.do">이대여성암병원</a></li>
+								<li><a title="새창" target="_blank"
+									href="https://ewui.eumc.ac.kr/main.do/">이대비뇨기병원</a></li>
+								<li><a title="새창" target="_blank"
+									href="https://blood.eumc.ac.kr/">이대혈액암병원</a></li>
+								<li><a title="새창" target="_blank"
+									href="https://ewhabrain.eumc.ac.kr/">이대뇌혈관병원</a></li>
+								<li><a title="새창" target="_blank"
+									href="https://aorta.eumc.ac.kr/">이대대동맥혈관병원</a></li>
+								<li><a title="새창" target="_blank"
+									href="https://mombaby.eumc.ac.kr/">이대엄마아기병원</a></li>
+								<li><a title="새창" target="_blank"
+									href="https://part.eumc.ac.kr/dept/pogoonyogoan/index.do">보구녀관</a></li>
+								<li><a title="새창" target="_blank"
+									href="http://www.ewha.ac.kr/mbs/ewhakr/index.jsp">이화여자대학교</a></li>
+								<li><a title="새창" target="_blank"
+									href="http://www.ewhamed.ac.kr/">이화여자대학교 의과대학</a></li>
+								<li><a title="새창" target="_blank"
+									href="http://nursing.ewha.ac.kr/">이화여자대학교 간호대학</a></li>
+							</ul>
+						</div>
+						<!-- //selectMenu -->
+					</div>
+					<!-- //selectMenuWrap -->
+					<div class="text">
+						<ul>
+							<li>
+								<address>(07804) 서울특별시 강서구 공항대로 260</address>
+							</li>
+						</ul>
+					</div>
+					<p class="copyright">Copyright (c) Ewha Womans University
+						Medical Center. All rights reserved.</p>
+					<!-- <ul class="awardWrap">
+							<li class="award01">
+								[ 인증범위 ]   의료정보시스템<br>
+								(OCS/EMR) 및 홈페이지 운영
+							</li>
+						</ul> -->
+				</div>
+			</div>
+			<!-- //footer-info -->
+			<!-- </footer> -->
+
+			<!-- 병원윤리강령 상세레이아웃 -->
+			<section class="modal modal-footer1" id="footer1"></section>
+			<!-- //병원윤리강령 상세레이아웃 -->
+
+			<!-- 환자의권리와의무 상세레이아웃 -->
+			<section class="modal modal-sizeM modal-footer2" id="footer2"></section>
+			<!-- //환자의권리와의무 상세레이아웃 -->
+
+			<!-- 이용약관 상세레이아웃 -->
+			<section class="modal modal-sizeM modal-footer3" id="footer3"></section>
+			<!-- //이용약관 상세레이아웃 -->
+
+			<!-- 개인정보처리방침 상세레이아웃 -->
+			<section class="modal modal-sizeXL modal-footer4" id="footer4"></section>
+			<!-- //개인정보처리방침 상세레이아웃 -->
+
+			<!-- 채용 개인정보처리방침 상세레이아웃 -->
+			<section class="modal modal-footer5" id="footer5"></section>
+			<!-- //채용 개인정보처리방침 상세레이아웃 -->
+
+			<!-- 세션연장 레이아웃 -->
+			<section class="modal modal-alert02 alertSession" id="modalSession">
+				<p class="icon icon-warning">
+					로그인 시간이 1분 남았습니다.<br>연장하시겠습니까?
+				</p>
+				<div class="btnWrap">
+					<button type="button" class="button button-sizeM closeBtn"
+						id="exitSessBtn">아니오</button>
+					<button type="button" class="button button-sizeM button-color01"
+						id="extendSessBtn">예</button>
+				</div>
+			</section>
+			<!-- //세션연장 레이아웃 -->
+
+			<!-- 층별 외래번호 안내 레이아웃 -->
+			<section class="modal modal-sizeM modal-floorInfo" id="floorInfo"></section>
+			<!-- //층별 외래번호 안내 레이아웃 -->
+
+
+
+			<script type="text/javascript">
+				$(document).ready(function() {
+
+					/* $.ajax({
+						url: "/common/buseoListAjax.do",
+						type: "GET",
+						success: function(data){
+							if(data.buseoList != null ){
+								var str = "";
+								for(var i = 0; i < data.buseoList.length; i++){
+									str += "<li><a title=\""+data.buseoList[i].part_nm+"\" target=\"_blank\" href=\"http://part.kuh.ac.kr/dept/"+data.buseoList[i].part_cd+"/index.do\">"+data.buseoList[i].part_nm+"</a></li>";
+								}
+								$("#buseopage").append(str);
+							}
+						}
+					}); */
+
+				});
+
+				function footerView(type) {
+					var url = '/footer' + type + '.do';
+
+					$.ajax({
+						type : "GET",
+						url : url,
+						success : function(data) {
+							feUI.defaultFuncSet()
+						}
+					});
+				}
+			</script>
+
+	</footer>
+</body>
+</html>

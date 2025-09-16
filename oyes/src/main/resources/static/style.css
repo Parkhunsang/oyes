@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+#btn{
+    border:0;
+}
+.scedule_header{
+	width:100%;
+	height:30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 8px;
+    box-sizing:border-box;
+}
+.scedule_header h2{
+	margin:0 8px;
+}
+.scedule_main{
+	width:100%;
+	height:484px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.calendar{
+	width:100%;
+	height:100%;
+    display: flex; /* 변경: 캘린더를 flex 컨테이너로 설정 */
+    flex-direction: column; /* 변경: 자식 요소들을 세로로 정렬 */
+}
+.grid_box {
+	width:100%;
+    display: grid;
+    grid-template-columns: repeat(7,1fr); /*열(세로) 7개 생성*/
+}
+.grid_box.date-board {
+	flex-grow: 1; /* 변경: 남은 공간을 채우도록 설정 */
+	grid-template-rows: repeat(auto, 1fr); /* 변경: 6개의 행이 동일한 높이를 가지도록 설정 */
+}
+.grid_box.date-board p{
+	font:400 12px 'pretendard';
+}
+.grid_box.date-title{
+	text-align:center;
+	border-bottom: 1px solid #ddd;
+
+}
+/* 그리드 각 블록을 div로 정의한다. */
+.grid_box div {
+    cursor: pointer;
+}
+.date-board>div{
+    color: #222;
+    font-weight: bold;
+    padding: 10px 5px;
+    border-bottom: 1px solid #ddd;
+    position:relative;
+}
+.date-board .has-visit {
+    border: 1px solid #1B7EAF; /* Example border color */
+    box-sizing:border-box;
+}
+.date-board .has-visit p:nth-child(1) {
+	width:8px;
+	height:8px;
+	border-radius:4px;
+	text-indent:-9999px;
+	background:green;
+	position:absolute;
+	left:10px;
+	top:50px;
+}
+.date-board .has-visit p:nth-child(2){
+	position:absolute;
+	right:4px;
+	top:14px;
+	padding:2px;
+	background:#0f51b3;
+	color:#fff;
+}

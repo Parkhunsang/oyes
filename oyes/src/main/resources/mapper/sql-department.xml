@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.oyes.mapper.DepartmentMapper">
+<!-- 
+관리자 게시판 제작시, 참조할 것
+<insert id="insert" parameterType="member">
+      <selectKey keyProperty="patient_no" order="BEFORE" resultType="integer">
+         select nvl(max(patient_id),0) + 1 from member
+      </selectKey>
+      insert into member values 
+      (#{patient_no}, #{patient_id}, #{password}, #{patient_name}, #{birth_date}, #{mobile_no}, #{email}, 'n', sysdate, sysdate, 'y') 
+</insert> 
+-->
+	<select id="list" resultType="department">
+		select * from department order by department_name
+	</select>
+	<select id="keywordList" parameterType="map" resultType="department">
+		select * from department where department_name >= #{start} and department_name &lt; #{end} order by department_name 
+	</select>
+	<select id="select" parameterType="integer" resultType="department">
+		SELECT * FROM department WHERE department_id = #{departmentId}
+	</select>
+</mapper>

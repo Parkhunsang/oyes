@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<th:block th:insert="~{/header.html::header}"></th:block>
+<head><meta charset="UTF-8"><title>Insert title here</title>
+</head><body>
+<div class="container text-center">
+	<h2 class="text-primary">회원정보 상세</h2>
+<table class="table table-bordered">
+	<tr class="table-info"><td>아이디</td><td>[[${member.id}]]</td></tr>
+	<tr class="table-primary"><td>이름</td><td>[[${member.name}]]</td></tr>
+	<tr class="table-success"><td>이메일</td><td>[[${member.email}]]</td></tr>
+	<tr class="table-warning"><td>등록일</td><td>[[${member.regdate}]]</td></tr>
+	<tr class="table-danger"><td>사진</td><td>
+		<img th:src="@{/upload/}+${member.fileName}" 
+			class="rounded img-thumbnail" width="200">
+	</td></tr>
+</table>
+	<a class="btn btn-info" href="main">메인</a>
+</div>
+</body>
+</html>
