@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.oyes.mapper.ComplimentMapper">
+
+<!-- compliment list 공개목록 불러오기 -->
+	<select id="compliment_list" parameterType="map" resultType="compliment">
+		select m.*, 
+			   c.*,
+			   d.doctor_id,
+			   d.doctor_doctor_specialty,
+			   d.doctor_name,
+			   d.doctor_title,
+			   d.doctor_profile_image
+		from compliment c
+			 join member m on c.patient_no = m.patient_no 
+			 left join doctor d on c.doctor_id = d.doctor_id
+		where
+			compliment_open = 1
+		    <!-- 검색어가 입력 되었으면 -->
+<!--			<if test="keyword!=null and keyword!=''">
+				<if test="search=='subcon'">
+					subject like '%'||#{keyword}||'%' or
+					content like '%'||#{keyword}||'%'
+				</if>
+				<if test="search!='subcon'">
+					${search} like '%'||#{keyword}||'%'
+				</if>		
+			</if>
+	-->
+		order by compliment_no offset #{startRow} rows
+			fetch next #{rowPerPage} rows only
+	</select>
+	
+	<!-- compliment 공개/비공개 전체 목록 -->
+	<select id="compliment_all_list" resultType="compliment">
+	     select m.*, 
+			   c.*,
+			   d.doctor_id,
+			   d.doctor_doctor_specialty,
+			   d.doctor_name,
+			   d.doctor_title,
+			   d.doctor_profile_image
+		from compliment c
+			 join member m on c.patient_no = m.patient_no 
+			 left join doctor d on c.doctor_id = d.doctor_id
+		    <!-- 검색어가 입력 되었으면 -->
+<!--			<if test="keyword!=null and keyword!=''">
+				<if test="search=='subcon'">
+					subject like '%'||#{keyword}||'%' or
+					content like '%'||#{keyword}||'%'
+				</if>
+				<if test="search!='subcon'">
+					${search} like '%'||#{keyword}||'%'
+				</if>		
+			</if>
+	-->
+		order by compliment_no offset #{startRow} rows
+			fetch next #{rowPerPage} rows only
+	</select>
+	
+	<!-- compliment 총 갯수 -->
+	<select id="getTotal" resultType="integer">
+		select count(*) from compliment
+	</select>
+	
+	<!-- 칭찬 상세보기-->	
+	<select id="select" resultType="compliment">
+		<!--select * from compliment where patient_no = #{patient_no}-->
+		select m.*, 
+			   c.*,
+			   d.doctor_id,
+			   d.doctor_doctor_specialty,
+			   d.doctor_name,
+			   d.doctor_title,
+			   d.doctor_profile_image
+		from compliment c
+			 join member m on c.patient_no = m.patient_no 
+			 left join doctor d on c.doctor_id = d.doctor_id
+		where c.compliment_no = #{compliment_no}
+	</select>
+	
+	<!-- 칭찬 입력 -->
+	<insert id="insert" parameterType="compliment">
+		insert into compliment (patient_no, compliment_open,compliment_title, compliment_for,
+								doctor_id, compliment_content, create_date, is_active)
+		values (#{patient_no}, #{compliment_open}, #{compliment_title}, #{compliment_for},
+				 #{doctor_id,jdbcType=INTEGER}, #{compliment_content}, sysdate, 'y')
+	</insert>
+	
+	<!-- 칭찬 수정 -->
+	<update id="update" parameterType="compliment">
+		update compliment set 
+			compliment_open = #{compliment_open},
+			compliment_title = #{compliment_title}, 
+			compliment_for = #{compliment_for},
+			doctor_id =  #{doctor_id,jdbcType=INTEGER}, 
+			compliment_content =  #{compliment_content}
+		where compliment_no=#{compliment_no}
+	</update>
+	
+	<!-- 칭찬 삭제 -->
+	<delete id="delete" parameterType="integer">
+		delete from compliment where compliment_no=#{compliment_no}
+	</delete>
+</mapper>

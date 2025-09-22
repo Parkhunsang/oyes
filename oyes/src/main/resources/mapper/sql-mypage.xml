@@ -6,7 +6,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="select" parameterType="string" resultType="member">
 		select * from member where patient_id = #{patient_id}
 	</select>
-	
 	<select id="select_mydoctor" parameterType="integer" resultType="favorite">
 		select a.*, b.DOCTOR_NAME, b.DOCTOR_TITLE, c.DEPARTMENT_ID, c.department_name
         from   favorite a, 
@@ -18,35 +17,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         and    c.department_id(+) = b.department_id
         order by a.create_date desc, a.doctor_id
 	</select>
-	
 	<select id="select_proposal" parameterType="integer" resultType="proposal">
 		select *
         from   proposal 
         where  patient_no  = #{patient_no}
         order by create_date desc
 	</select>
-	
 	<select id="select_compliment" parameterType="integer" resultType="compliment">
 		select *
         from   compliment 
         where  patient_no  = #{patient_no}
         order by create_date desc, doctor_id
 	</select>
-	
-	<update id="update_myinfo" parameterType="member">
+	<update id="updateMyinfo" parameterType="member">
 		update member 
-		set    password     = #{password}, 
+		set    patient_name = #{patient_name}, 
+		       birth_date   = #{birth_date}, 
 		       mobile_no    = #{mobile_no}, 
 		       email        = #{email},
 		       update_date  = sysdate
 		where patient_id = #{patient_id}
 	</update>
-	
 	<update id="deleteFavorite" parameterType="integer">
 		update favorite 
 		set    is_active = 'n',
 		       update_date = sysdate 
 		where favorite_no = #{favorite_no}
 	</update>
-	
 </mapper>

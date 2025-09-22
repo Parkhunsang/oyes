@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.oyes.mapper.HealthSeminarMapper">
+	<select id="getTotal" parameterType="map" resultType="integer">
+		select count(*) from health_seminar
+		<where>
+			<if test="keyword!=null and keyword!=''">
+				${search} like '%'||#{keyword}||'%'
+			</if>
+		</where>
+	</select>
+	<select id="list" parameterType="map" resultType="healthSeminar">
+		select * from health_seminar
+		where is_active='y' <!-- 삭제된 강좌 안보이게 하기위해 -->
+		<where>
+			<if test="keyword!=null and keyword!=''">
+				${search} like '%'||#{keyword}||'%'
+			</if>
+		</where>
+		order by seminar_no desc offset #{startRow} rows fetch next
+		#{rowPerPage} rows only
+	</select>
+	<select id="select" resultType="healthSeminar">
+		select * from health_seminar where seminar_no = #{seminar_no}
+	</select>
+	<insert id="insert" parameterType="healthSeminar">
+		<selectKey keyProperty="seminar_no" order="BEFORE" resultType="integer">
+			select nvl(max(seminar_no),0) + 1 from health_seminar
+		</selectKey>
+		INSERT INTO health_seminar (
+		seminar_no,
+		seminar_date,
+		seminar_time,
+		seminar_title,
+		seminar_lecturer,
+		seminar_site,
+		seminar_text,
+		create_date
+		) VALUES (
+		#{seminar_no},
+		#{seminar_date},
+		#{seminar_time},
+		#{seminar_title},
+		#{seminar_lecturer},
+		#{seminar_site},
+		#{seminar_text},
+		sysdate
+		)
+	</insert>
+	<update id="update" parameterType="healthSeminar">
+		update health_seminar set seminar_title=#{seminar_title}, seminar_lecturer=#{seminar_lecturer},
+				seminar_date=#{seminar_date}, seminar_time=#{seminar_time}, seminar_site=#{seminar_site},
+				seminar_text=#{seminar_text}, update_date=sysdate where seminar_no=#{seminar_no}
+	</update>
+	<update id="delete" parameterType="healthSeminar">
+		update health_seminar set is_active = 'n' where seminar_no=#{seminar_no}
+	</update>
+
+</mapper>

@@ -8,5 +8,5 @@ public interface MemberMapper {
 	int insert(Member member);
 	int update(Member member);
 	int delete(String patientId);
-
+	Member select_p(int patient_no);
 }

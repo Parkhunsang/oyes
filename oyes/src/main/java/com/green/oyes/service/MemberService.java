@@ -6,5 +6,5 @@ public interface MemberService {
 	int insert(Member member);
 	int update(Member member);
 	int delete(String patient_id);
-
+	Member select_p(int patient_no);
 }

@@ -15,4 +15,5 @@ public interface CenterService {
 
 	Center selectC(int center_id);
 
+
 }

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<th:block th:insert="~{/header.html::header}"></th:block>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	function del(doctor_id){
+		alert(doctor_id);
+		location.href="/admin/doctor/delete?doctor_id="+doctor_id; 
+	}
+</script>
+ <style>
+    div#container { 
+    	width:100%;
+    	height:auto; 
+    	margin-top:150px;
+    	margin-bottom:70px;
+    	display:flex;
+    	justify-content:center; 
+   	}
+    section#admin_doctor_list_wrap{
+    	width:1200px;
+    	min-height:200px;
+    	position:relative;
+    }
+    section#admin_doctor_list_wrap h2{
+    	font-size:30px;
+    	font-weight:600;
+    	color:#000;
+    }
+    table.doctor_list_table { 
+	    width: 100%; 
+	    height: 700px;
+	    border-collapse: collapse; 
+	    margin-top:24px;
+    }
+    div.admin_dcotor_info_wrap{
+    	display:flex;
+    	flex-direction:column;
+    	align-items: flex-end;
+    }
+    div.add_doctor_wrap{
+		width:100px;
+		height:40px;
+		background:#1b7eaf;
+		text-align:center;
+		border-radius:4px;
+    }
+    div.add_doctor_wrap a{
+    	line-height:40px;
+    	font-size:14px;
+    	color:#fff;
+    }
+    th, td { 
+	    border: 1px solid #ddd; 
+	    padding: 8px; 
+	    text-align: center; 
+	    vertical-align: middle;
+    }
+    td.btn-group{
+    	display:flex;
+    	gap:8px;
+    	justify-content:center;
+    	width:100%;
+    	height:100%;
+		align-items:center;
+    }
+    td.btn-group a{
+        display: inline-block;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-align:center;
+        color:#fff;
+    }
+    td.btn-group a.update{
+    	  background:#0e7758;
+    }
+    td.btn-group a.delete{
+    	  background:#1b7eaf;
+    }
+    th { 
+    	  background-color: #f2f2f2; 
+   	}
+    .btn-group a { 
+    	  margin-right: 5px; 
+    }
+</style>
+</head>
+<body>
+<div layout:fragment="contentFragment" id="container">
+	<section id="admin_doctor_list_wrap">
+	<h2>관리자 정보 수정</h2>
+	
+    <div class="admin_dcotor_info_wrap">
+	    <div class="add_doctor_wrap">
+			<a href="/admin/doctor/addForm">의사 추가</a>
+	    </div>
+      	<table class="doctor_list_table">
+          	<thead>
+	              <tr>
+	                  <th>ID</th>
+	                  <th>이름</th>
+	                  <th>직함</th>
+	                  <th>진료과</th>
+	                  <th>소속 센터</th>
+	                  <th>관리</th>
+	              </tr>
+          	</thead>
+          	<tbody>
+	              <tr th:each="doctor : ${doctorList}">
+	              	<th:block th:if="${doctor.doctor_is_active}=='Y'">
+	                  <td th:text="${doctor.doctor_id}"></td>
+	                  <td th:text="${doctor.doctor_name}"></td>
+	                  <td th:text="${doctor.doctor_title}"></td>
+	                  <td th:text="${doctor.department_name}"></td>
+	                  <td>
+	                      <span th:each="center, iterStat : ${doctor.centerNames}" th:text="${center} + (${iterStat.last} ? '' : ', ')"></span>
+	                  </td>
+	                  <td class="btn-group">
+	                      <a th:href="@{/admin/doctor/updateForm(doctor_id=${doctor.doctor_id})}" class="update">수정</a>
+	                      <a class="delete" th:onclick="del([[${doctor.doctor_id}]])">삭제</a>
+	                  </td>
+	                  </th:block>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</section>
+</div>
+</body>
+</html>

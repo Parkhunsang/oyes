@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layouts/layout}">
+<head>
+<th:block th:insert="~{/header.html::header}"></th:block>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" th:href="@{/css/outpatient.css}">
+<link rel="stylesheet" th:href="@{/css/doctorlist.css}">
+</head>
+<body>
+<div layout:fragment="contentFragment">
+	<div id=contents_wrap>
+		<div class="outpatient_header">
+		<h1 class="title">외래진료예약</h1>
+		<p>
+			<b class="color_red"> *환자 본인 예약만 가능합니다.<br> *만 14세 미만 소아청소년의
+				경우, 소아청소년 환자 명의로 회원가입 후 보호자(법적 대리인) 명의로 인증하시어 예약을 진행해주시기 바랍니다.<br>
+				*이대목동병원은 의료전달체계가 필요한 종합전문요양기관(3차 진료기관)으로 1차 또는 2차(의원, 병원) 진료기관에서 발급한
+				요양급여의뢰서(진료의뢰서)나 건강검진, 건강진단결과서를 제출해야 건강보험 적용을 받을 수 있습니다. 단, 의료급여환자는
+				모든 진료과에 대해 2차진료기관(병원급)에서 발급한 의료급여의뢰서를 제출해야 의료급여 적용을 받을 수 있습니다.
+			</b>
+		</p>
+		<ul id="step_wrap">
+			<li class="selected">
+				<p class="step_num">STEP.01</p>
+				<p class="step_title">진료과/센터 선택</p>
+				<span class="step_chk"><img alt="체크모양" src="/images/step_chk.png"></span>
+			</li>
+			<li class="selected">
+				<p class="step_num">STEP.02</p>
+				<p class="step_title">의료진 선택</p>
+				<span class="step_chk"><img alt="체크모양" src="/images/step_chk.png"></span>
+			</li>
+			<li>
+				<p class="step_num">STEP.03</p>
+				<p class="step_title">예약일/시간 선택</p>
+				<span class="step_chk"><img alt="체크모양" src="/images/step_chk.png"></span>
+			</li>
+		</ul>
+		</div>
+		<form action="outpatient" method="post">
+			<div id="container">
+				<div id="list_box">
+					<div class="doctor_list" th:if="${#lists.size(list)} == 0">데이터가 없습니다.</div>
+					<div class="doctor_list" th:if="${#lists.size(list) } > 0"
+						th:each="doctor:${list}">
+						<div class="doctor_pic"><img th:src="@{/images/} + ${doctor.doctor_profile_image}" alt="의사 프로필 사진"/></div>
+						<div class="doctor_info">
+							<p class="doctor_name">[[${doctor.doctor_name}]]<span>교수</span></p>
+							<ul>
+							<li class="department_name"><strong>진료과</strong><span>[[${doctor.department_name}]]</span></li>
+							<li class="specialty"><strong>진료 분야</strong><span>[[${doctor.doctor_doctor_specialty}]]</span></li>
+							</ul>
+						</div>
+						<div class="doctor_calendar schedule_cell">
+<!-- 								<table class="schedule_inner_table"> -->
+<!-- 									<colgroup> -->
+<!-- 										<col style="width: 10%;"> -->
+<!-- 										<col style="width: 10%;"> -->
+<!-- 										<col style="width: 10%;"> -->
+<!-- 										<col style="width: 10%;"> -->
+<!-- 										<col style="width: 10%;"> -->
+<!-- 										<col style="width: 10%;"> -->
+<!-- 										<col style="width: 10%;"> -->
+<!-- 										<col style="width: 30%;"> -->
+<!-- 									</colgroup> -->
+<!-- 									<tbody> -->
+<!-- 										<tr> -->
+<!-- 											<td>오전</td> -->
+<!-- 												<td th:with="scheduleStatus=${doctor.scheduleMap['월']?.get('오전')}"> -->
+												
+<!-- 											    <span th:if="${scheduleStatus == '외래진료'}" class="schedule-available-box"></span> -->
+<!-- 											    <span th:if="${scheduleStatus == '휴진'}" class="schedule-closed">휴진</span> -->
+<!-- 											    <span th:if="${scheduleStatus == '공휴일'}" class="schedule-holiday">공휴일</span> -->
+<!-- 											    스케줄이 없는 경우 (빈 칸) -->
+											    
+<!-- 											    <span th:if="${scheduleStatus == null or scheduleStatus == ''}"></span> -->
+<!-- 											</td> -->
+<!-- 											<td th:with="scheduleStatus=${doctor.scheduleMap['화']?.get('오전')}"> -->
+<!-- 											    <span th:if="${scheduleStatus == '외래진료'}" class="schedule-available-box"></span> -->
+<!-- 											    <span th:if="${scheduleStatus == '휴진'}" class="schedule-closed">휴진</span> -->
+<!-- 											    <span th:if="${scheduleStatus == '공휴일'}" class="schedule-holiday">공휴일</span> -->
+<!-- 											    스케줄이 없는 경우 (빈 칸) -->
+<!-- 											    <span th:if="${scheduleStatus == null or scheduleStatus == ''}"></span> -->
+<!-- 											</td> -->
+<!-- 											<td th:with="scheduleStatus=${doctor.scheduleMap['수']?.get('오전')}"> -->
+<!-- 											    <span th:if="${scheduleStatus == '외래진료'}" class="schedule-available-box"></span> -->
+<!-- 											    <span th:if="${scheduleStatus == '휴진'}" class="schedule-closed">휴진</span> -->
+<!-- 											    <span th:if="${scheduleStatus == '공휴일'}" class="schedule-holiday">공휴일</span> -->
+<!-- 											    스케줄이 없는 경우 (빈 칸) -->
+<!-- 											    <span th:if="${scheduleStatus == null or scheduleStatus == ''}"></span> -->
+<!-- 											</td> -->
+<!-- 											<td th:with="scheduleStatus=${doctor.scheduleMap['목']?.get('오전')}"> -->
+<!-- 											    <span th:if="${scheduleStatus == '외래진료'}" class="schedule-available-box"></span> -->
+<!-- 											    <span th:if="${scheduleStatus == '휴진'}" class="schedule-closed">휴진</span> -->
+<!-- 											    <span th:if="${scheduleStatus == '공휴일'}" class="schedule-holiday">공휴일</span> -->
+<!-- 											    스케줄이 없는 경우 (빈 칸) -->
+<!-- 											    <span th:if="${scheduleStatus == null or scheduleStatus == ''}"></span> -->
+<!-- 											</td> -->
+<!-- 											<td th:with="scheduleStatus=${doctor.scheduleMap['금']?.get('오전')}"> -->
+<!-- 											    <span th:if="${scheduleStatus == '외래진료'}" class="schedule-available-box"></span> -->
+<!-- 											    <span th:if="${scheduleStatus == '휴진'}" class="schedule-closed">휴진</span> -->
+<!-- 											    <span th:if="${scheduleStatus == '공휴일'}" class="schedule-holiday">공휴일</span> -->
+<!-- 											    스케줄이 없는 경우 (빈 칸) -->
+<!-- 											    <span th:if="${scheduleStatus == null or scheduleStatus == ''}"></span> -->
+<!-- 											</td> -->
+<!-- 											<td th:with="scheduleStatus=${doctor.scheduleMap['토']?.get('오전')}"> -->
+<!-- 											    <span th:if="${scheduleStatus == '외래진료'}" class="schedule-available-box"></span> -->
+<!-- 											    <span th:if="${scheduleStatus == '휴진'}" class="schedule-closed">휴진</span> -->
+<!-- 											    <span th:if="${scheduleStatus == '공휴일'}" class="schedule-holiday">공휴일</span> -->
+<!-- 											    스케줄이 없는 경우 (빈 칸) -->
+<!-- 											    <span th:if="${scheduleStatus == null or scheduleStatus == ''}"></span> -->
+<!-- 											</td> -->
+<!-- 											<td rowspan="2"><a href="#" class="btn btn-info">예약</a></td> -->
+<!-- 										</tr> -->
+<!-- 										<tr> -->
+<!-- 											<td>오후</td> -->
+<!-- 											<td th:with="scheduleStatus=${doctor.scheduleMap['월']?.get('오후')}"> -->
+<!-- 											    <span th:if="${scheduleStatus == '외래진료'}" class="schedule-available-box"></span> -->
+<!-- 											    <span th:if="${scheduleStatus == '휴진'}" class="schedule-closed">휴진</span> -->
+<!-- 											    <span th:if="${scheduleStatus == '공휴일'}" class="schedule-holiday">공휴일</span> -->
+<!-- 											    스케줄이 없는 경우 (빈 칸) -->
+<!-- 											    <span th:if="${scheduleStatus == null or scheduleStatus == ''}"></span> -->
+<!-- 											</td> -->
+<!-- 											<td th:with="scheduleStatus=${doctor.scheduleMap['화']?.get('오후')}"> -->
+<!-- 											    <span th:if="${scheduleStatus == '외래진료'}" class="schedule-available-box"></span> -->
+<!-- 											    <span th:if="${scheduleStatus == '휴진'}" class="schedule-closed">휴진</span> -->
+<!-- 											    <span th:if="${scheduleStatus == '공휴일'}" class="schedule-holiday">공휴일</span> -->
+<!-- 											    스케줄이 없는 경우 (빈 칸) -->
+<!-- 											    <span th:if="${scheduleStatus == null or scheduleStatus == ''}"></span> -->
+<!-- 											</td> -->
+<!-- 											<td th:with="scheduleStatus=${doctor.scheduleMap['수']?.get('오후')}"> -->
+<!-- 											    <span th:if="${scheduleStatus == '외래진료'}" class="schedule-available-box"></span> -->
+<!-- 											    <span th:if="${scheduleStatus == '휴진'}" class="schedule-closed">휴진</span> -->
+<!-- 											    <span th:if="${scheduleStatus == '공휴일'}" class="schedule-holiday">공휴일</span> -->
+<!-- 											    스케줄이 없는 경우 (빈 칸) -->
+<!-- 											    <span th:if="${scheduleStatus == null or scheduleStatus == ''}"></span> -->
+<!-- 											</td> -->
+<!-- 											<td th:with="scheduleStatus=${doctor.scheduleMap['목']?.get('오후')}"> -->
+<!-- 											    <span th:if="${scheduleStatus == '외래진료'}" class="schedule-available-box"></span> -->
+<!-- 											    <span th:if="${scheduleStatus == '휴진'}" class="schedule-closed">휴진</span> -->
+<!-- 											    <span th:if="${scheduleStatus == '공휴일'}" class="schedule-holiday">공휴일</span> -->
+<!-- 											    스케줄이 없는 경우 (빈 칸) -->
+<!-- 											    <span th:if="${scheduleStatus == null or scheduleStatus == ''}"></span> -->
+<!-- 											</td> -->
+<!-- 											<td th:with="scheduleStatus=${doctor.scheduleMap['금']?.get('오후')}"> -->
+<!-- 											    <span th:if="${scheduleStatus == '외래진료'}" class="schedule-available-box"></span> -->
+<!-- 											    <span th:if="${scheduleStatus == '휴진'}" class="schedule-closed">휴진</span> -->
+<!-- 											    <span th:if="${scheduleStatus == '공휴일'}" class="schedule-holiday">공휴일</span> -->
+<!-- 											    스케줄이 없는 경우 (빈 칸) -->
+<!-- 											    <span th:if="${scheduleStatus == null or scheduleStatus == ''}"></span> -->
+<!-- 											</td> -->
+<!-- 											<td th:with="scheduleStatus=${doctor.scheduleMap['토']?.get('오후')}"> -->
+<!-- 											    <span th:if="${scheduleStatus == '외래진료'}" class="schedule-available-box"></span> -->
+<!-- 											    <span th:if="${scheduleStatus == '휴진'}" class="schedule-closed">휴진</span> -->
+<!-- 											    <span th:if="${scheduleStatus == '공휴일'}" class="schedule-holiday">공휴일</span> -->
+<!-- 											    스케줄이 없는 경우 (빈 칸) -->
+<!-- 											    <span th:if="${scheduleStatus == null or scheduleStatus == ''}"></span> -->
+<!-- 											</td> -->
+<!-- 										</tr> -->
+<!-- 									</tbody> -->
+<!-- 								</table> -->
+							</div>
+						<div class="btn_wrap">
+							<a class="appointment_btn" th:href="@{/outpatient/doctorSelect(doctor_id=${doctor.doctor_id}, department_id=${doctor.department_id})}">진료예약</a>
+							<a class="doctorview_btn" th:href="@{/center/doctorDetail(doctor_id=${doctor.doctor_id})}">의료진정보</a>
+						</div>
+					</div>
+				</div><!-- listbox 끝 -->
+				<div class="state_box">
+					<table class="state_table">
+						<tr>
+							<th colspan="2" class="box_title">진료예약 내역</th>
+						</tr>
+						<tr>
+							<th>성함</th>
+							<td class="member_active">[[${member.patient_name}]]</td>
+						</tr>
+						<tr>
+							<th>환자번호</th>
+							<td class="member_active">[[${member.patient_no}]]</td>
+						</tr>
+						<tr>
+							<th>진료과</th>
+							<td class="dept_active">[[${department.department_name}]]</td>
+						</tr>
+						<tr>
+							<th>의료진</th>
+							<td>선택해주세요</td>
+						</tr>
+						<tr>
+							<th>진료일</th>
+							<td>선택해주세요</td>
+						</tr>
+						<tr>
+							<th>시간</th>
+							<td>선택해주세요</td>
+						</tr>
+					</table>
+					<div id="submit_btnwrap">
+						<a href="/outpatient/outpatientForm">이전보기</a>
+						<button class="unactive_btn">예약하기</button>
+					</div>
+				</div> <!-- state_box 끝 -->
+			</div>
+		</form>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,214 @@
+@charset "UTF-8";
+p {
+	margin: 0px;
+	padding: 0px;
+}
+ul, ol {
+	list-style: none;
+	margin:0px;
+	padding:0px;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+button {
+  all: unset;
+}
+body {
+	display: flex;
+	flex-direction:column;
+	align-items: center;
+}
+.contents_wrap {
+	width: 1200px;
+	min-height:800px;
+	margin:150px 0px;
+}
+.title {
+	color: #000;
+	font-size: 34px;
+	font-weight: 700;
+	margin-bottom: 36px;
+}
+.color_red {
+	color: #db0000;
+}
+
+#step_wrap {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	gap: 16px;
+	margin: 32px 0px;
+}
+#step_wrap li {
+	width: 100%;
+	height: 100px;
+	background: white;
+	border: 1px solid #aaa;
+	position: relative;
+	padding: 24px;
+	box-sizing: border-box;
+	text-align: start;
+	color: #444;
+}
+#step_wrap li.selected {
+	border: 1px solid #108663;
+	color: #108663;
+}
+#step_wrap li.selected .step_chk {
+	background: #108663;
+}
+.step {
+	font-size: 14px;
+}
+.step_title {
+	font-size: 18px;
+	font-weight: 700;
+}
+.step_chk {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	background: #777;
+	position: absolute;
+	right: 24px;
+	top: 50%;
+	transform: translatey(-50%);
+	display: inline-flex;
+ 	justify-content: center;
+	align-items: center;
+}
+#container {
+	width:100%;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 32px;
+	border: 1px solid #aaa;
+}
+#container>div {
+	padding: 32px;
+	box-sizing: border-box;
+	min-height: 500px;
+}
+.list_box {
+	width: 940px;
+	box-sizing:border-box;
+}
+.list_btn {
+	list-style: none;
+	display: flex;
+	gap: 20px;
+	margin: 0px 0px 20px 0px;
+	padding: 0px;
+}
+.list_btn>li {
+	color: #444;
+	font-size: 18px;
+	font-weight: 700;
+}
+.list_btn>li.selected {
+	color: #108663;
+}
+.lists {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: repeat(auto, 1fr);
+}
+.lists>li {
+	width: auto;
+	height: 24px;
+	margin-bottom: 12px;
+	display: flex;
+	align-items: center;
+	position:relative;
+	font-weight:500;
+	color:#444;
+}
+.lists>li::before{
+	content:"";
+	display:block;
+	width:4px;
+	height:4px;
+	background:#108663;
+	left:16px;
+	top:16px;
+	margin-right:8px;
+}
+.state_box {
+	width: 260px;
+	position: relative;
+	border-left: 1px solid #aaa;
+}
+.state_table {
+	width: 100%;
+	box-sizing:border-box;
+	color:#444;
+    border-collapse: separate; /* 기본값이 separate이면 셀 사이 간격 가능 */
+    border-spacing: 0 12px;    /* 수직 간격 12px 줌 */
+    margin-bottom:44px;
+}
+.state_table tr td {
+	text-align:right;
+}
+.box_title {
+	color: #222;
+	font-size: 20px;
+	font-weight: 700;
+	padding-bottom: 20px;
+}
+.state_table tbody>tr {
+	/* HTML 구조상 tr이 직접 자식이 아니라 tbody 안에 있기 때문 */
+	height: 24px;
+	margin: 12px 0px;
+}
+.member_active{
+	color: #1b7eaf;
+    font-weight: 600;
+}
+.dept_active{
+    color: #fff;
+    background: #09847d;
+    display:block;
+    padding:0px 4px;
+    float: right;
+}
+#submit_btnwrap {
+	width: 100%;
+	padding: 0px 12px;
+	position: absolute;
+	left: 0px;
+	bottom: 36px;
+	display: flex;
+	flex-direction:column;
+	gap:16px;
+}
+#submit_btnwrap a {
+	width: 100%;
+	height: 44px;
+	line-height:44px;
+	text-align: center;
+	background:#fff;
+	border: 1px solid #aaa;
+	color: #888;
+}
+.unactive_btn {
+	width: 100%;
+	height: 44px;
+	line-height:44px;
+	border: 1px solid #ddd;
+	text-align: center;
+	background: #eee;
+	color: #888;
+}
+#submit_btn button.active_btn {
+	width: 100%;
+	height: 44px;
+	line-height:44px;
+	text-align: center;
+	background:#09847d;
+	border-color:#09847d;
+	color:#fff;
+}

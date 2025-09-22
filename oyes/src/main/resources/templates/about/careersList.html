@@ -1,0 +1,309 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<th:block th:insert="~{/header.html::header}"></th:block>
+<head>
+<meta charset="UTF-8">
+<title>채용공고 | 이대서울병원</title>
+<style type="text/css">
+.wrap{
+    max-width: 1200px;
+    margin: 200px auto;
+    padding: 20px;
+    line-height: 1.8;
+    color: #333;
+}
+h1{
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 24px;
+}
+/* 상단 검색 + 버튼 줄 */
+.toolbar {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
+.toolbar .search {
+  display: flex;
+  gap: 8px;
+}
+
+.toolbar input[type=text] {
+  width: 260px;
+  height: 36px;
+  padding: 0 10px;
+  border: 1px solid #e5e7eb; /* --line */
+  border-radius: 4px;
+}
+
+.btn {
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid #e5e7eb; /* --line */
+  background: #38bdf8;
+  color: #fff;
+  border-radius: 4px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-outline {
+  background: #fff;
+  color: #111;
+  border-color: #cbd5e1;
+}
+
+/* 모집중/마감 탭 (세그먼트 컨트롤) */
+.seg {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 16px 0 8px;
+}
+
+.seg a {
+  text-align: center;
+  padding: 14px 0;
+  text-decoration: none;
+  color: #111;
+  background: #fff;
+}
+
+.seg a.active {
+  background: #0C8B6A; /* --brand */
+  color: #fff;
+  font-weight: 700;
+}
+/* 채용공고 카드 레이아웃 */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.card {
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 16px 18px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+  line-height: 1.4;
+}
+
+.card-title a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.card-date {
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.badge {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.badge-open { background: #fef3c7; color: #92400e; }
+.badge-closed { background: #e5e7eb; color: #374151; }
+.badge-today { background: #fee2e2; color: #b91c1c; }
+
+.pagination {
+  display: flex;
+  justify-content: center; /* 가운데 정렬 */
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+
+.pagination li {
+  margin: 0 5px;
+}
+
+.pagination a {
+  display: block;
+  padding: 6px 12px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  color: #333;
+  border-radius: 4px;
+}
+
+.pagination a:hover {
+  background-color: #f0f0f0;
+}
+
+.pagination .active a {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+</style>
+</head>
+<body>
+	<div layout:fragment="contentFragment">
+		<div class="contTopBar contTopBar-bg01">
+			<!-- inner -->
+			<div class="inner">
+				<!-- breadcrumb -->
+				<div class="breadcrumb cf">
+					<strong class="he">현재 위치:</strong>
+					<div class="item">
+						<a th:href="@{/}" class="home ht">Home</a>
+					</div>
+					<div class="item">
+						<em>병원소개</em>
+						<button type="button" class="bcLinkLayerBtn ht">주 메뉴 목록 열기</button>
+						<ul class="bcLinkLayer">
+							<li><a th:href="@{/about/greeting}">병원소개</a></li>
+						</ul>
+					</div>
+					<div class="item">
+						<em>병원소식</em>
+						<button type="button" class="bcLinkLayerBtn ht">서브 메뉴 목록 열기</button>
+						<ul class="bcLinkLayer">
+							<li><a th:href="@{/about/greeting}">병원장 인사말</a></li>
+							<li><a th:href="@{/about/tour}">병원 둘러보기</a></li>
+							<li><a th:href="@{/about/mission}">미션과 비전</a></li>
+							<li><a th:href="@{/about/history}">연혁</a></li>
+							<li><a th:href="@{/about/hi}">HI</a></li>
+							<li><a th:href="@{/about/boardList}">병원소식</a></li>							
+						</ul>	
+					</div>
+					<div class="item">
+						<em>채용공고</em>
+						<button type="button" class="bcLinkLayerBtn ht">서브 메뉴 목록 열기</button>
+						<ul class="bcLinkLayer">
+							<li><a th:href="@{/about/boardList(board_kind='NOTICE')}">공지사항</a></li>
+							<li><a th:href="@{/about/boardList(board_kind='PRESS')}">보도자료</a></li>
+							<li><a th:href="@{/about/careersList}">채용공고</a></li>							
+						</ul>	
+					</div>
+				</div>
+			</div>
+		</div>
+		<main class="wrap">
+			<h1>채용공고</h1>
+			<!-- 검색 -->
+			<form class="toolbar" th:action="@{/about/careersList}" method="get">
+			    <select name="search">
+					<option value="careers_title" th:selected="${search}=='careers_title'">제목</option>
+					<option value="careers_content" th:selected="${search}=='careers_content'">내용</option>
+					<option value="subcon" th:selected="${search}=='subcon'">제목+내용</option>
+			    </select>
+		    	<input type="text" name="keyword" th:value="${keyword}" placeholder="검색어를 입력하세요">
+		    	<button class="btn" type="submit">검색</button>
+			</form>
+			<!-- 모집중 / 마감-->
+			<div class="seg">
+			  <a th:href="@{/about/careersList(careers_status='OPEN')}" 
+			     th:classappend="${careers_status=='OPEN'} ? 'active' : ''">진행중</a>
+			  <a th:href="@{/about/careersList(careers_status='CLOSED')}" 
+			     th:classappend="${careers_status=='CLOSED'} ? 'active' : ''">마감</a>
+			</div>
+			<div class="cards">
+			  <th:block th:each="careers : ${list}">
+			    <div class="card">
+			      <!-- D-day 뱃지 -->
+			      <div>
+			        <span class="badge badge-open"
+			              th:if="${careers_status=='OPEN' and careers.daysLeft > 0}"
+			              th:text="'D-' + ${careers.daysLeft}"></span>
+			        <span class="badge badge-today"
+			              th:if="${careers_status=='OPEN' and careers.daysLeft == 0}">D-day</span>
+			        <span class="badge badge-closed"
+			              th:if="${careers_status=='CLOSED'}">마감</span>
+			      </div>
+			
+			      <!-- 제목 -->
+			      <div class="card-title">
+			        <a th:href="@{/about/careersView(num=${careers.careersno})}"
+			           th:text="${careers.careers_title}">채용공고 제목</a>
+			      </div>
+			
+			      <!-- 기간 -->
+			      <div class="card-date"
+			           th:text="${careers.careers_create_date} + ' ~ ' + ${careers.careers_end_date}">
+			        2025-09-18 ~ 2025-09-24
+			      </div>
+			    </div>
+			  </th:block>
+			</div>
+
+			<!-- 게시물 없을 때 -->
+			<div th:if="${#lists.isEmpty(list)}" 
+			     style="text-align:center; color:#6b7280; padding:40px 0;">
+			  채용공고가 없습니다.
+			</div>
+			<!-- 페이징 -->
+			<ul class="pagination justify-content-center">
+			    <!-- 앞에 보여줄게 있다 -->
+			    <th:block th:if="${pb.startPage > pb.pagePerBlock}">
+			        <li class="page-item">
+			            <a class="page-link"
+			               th:href="@{/about/careersList(pageNum=1, careers_status=${careers_status}, search=${search}, keyword=${keyword})}">
+			                <i class="icofont-duotone icofont-arrow-first"></i>
+			            </a>
+			        </li>
+			        <li class="page-item">
+			            <a class="page-link"
+			               th:href="@{/about/careersList(pageNum=${pb.startPage - 1}, careers_status=${careers_status}, search=${search}, keyword=${keyword})}">
+			                <i class="bi bi-arrow-left-circle"></i>
+			            </a>
+			        </li>
+			    </th:block>
+			
+			    <!-- 페이지 번호 -->
+			    <th:block th:each="i : ${#numbers.sequence(pb.startPage, pb.endPage)}">
+			        <li class="page-item">
+			            <a class="page-link"
+			               th:classappend="${i == pb.currentPage} ? 'active'"
+			               th:href="@{/about/careersList(pageNum=${i}, careers_status=${careers_status}, search=${search}, keyword=${keyword})}">
+			                [[${i}]]
+			            </a>
+			        </li>
+			    </th:block>
+			
+			    <!-- 뒤에 보여줄게 있다 -->
+			    <th:block th:if="${pb.endPage < pb.totalPage}">
+			        <li class="page-item">
+			            <a class="page-link"
+			               th:href="@{/about/careersList(pageNum=${pb.endPage + 1}, careers_status=${careers_status}, search=${search}, keyword=${keyword})}">
+			                <i class="bi bi-arrow-right-circle"></i>
+			            </a>
+			        </li>
+			        <li class="page-item">
+			            <a class="page-link"
+			               th:href="@{/about/careersList(pageNum=${pb.totalPage}, careers_status=${careers_status}, search=${search}, keyword=${keyword})}">
+			                <i class="icofont-duotone icofont-arrow-last"></i>
+			            </a>
+			        </li>
+			    </th:block>
+			</ul>
+		</main>
+	</div>
+</body>
+</html>

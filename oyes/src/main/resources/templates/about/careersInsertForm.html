@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<th:block th:insert="~{/header.html::header}"></th:block>
+<head>
+<th:block th:insert="~{/header.html::header}"></th:block>
+<meta charset="UTF-8">
+<title>채용공고 등록폼 | 이화서울병원</title>
+<style type="text/css">
+	/* 등록 폼 */
+	.container{
+		max-width:1200px;
+		margin:200px auto;
+	}
+	h2{
+	font-size:28px;
+	margin:8px 0 18px;
+	font-weight:600
+	}
+	form {
+	  max-width: 700px;
+	  margin: 0 auto;
+	  text-align: left;
+	}
+	
+	form label {
+	  display: block;
+	  font-weight: bold;
+	  margin: 12px 0 6px;
+	}
+	
+	form input[type="text"],
+	form textarea,
+	form select {
+	  width: 100%;
+	  padding: 10px;
+	  font-size: 15px;
+	  border: 1px solid #ccc;
+	  border-radius: 4px;
+	  margin-bottom: 15px;
+	  box-sizing: border-box;
+	}
+	
+	form textarea {
+	  resize: vertical;
+	  min-height: 150px;
+	}
+	
+	/* 버튼 */
+	.submit_btn,
+	.back_btn {
+	  display: inline-block;
+	  padding: 10px 25px;
+	  margin: 5px;
+	  font-size: 14px;
+	  font-weight: 500;
+	  border-radius: 4px;
+	  cursor: pointer;
+	  transition: all 0.2s ease-in-out;
+	}
+	
+	.submit_btn {
+	  background-color: #17a2b8; /* 파랑 */
+	  color: #fff;
+	  border: none;
+	}
+	
+	.back_btn {
+	  background-color: #6c757d; /* 회색 */
+	  color: #fff;
+	  border: none;
+	}
+	
+	.submit_btn:hover,
+	.back_btn:hover {
+	  opacity: 0.85;
+	}
+	
+</style>
+</head>
+<body>
+	<div layout:fragment="contentFragment">
+		<div class="contTopBar contTopBar-bg01">
+				<!-- inner -->
+			<div class="inner">
+				<!-- breadcrumb -->
+				<div class="breadcrumb cf">
+					<strong class="he">현재 위치:</strong>
+					<div class="item">
+						<a th:href="@{/}" class="home ht">Home</a>
+					</div>
+					<div class="item">
+						<em>병원소개</em>
+						<button type="button" class="bcLinkLayerBtn ht">주 메뉴 목록 열기</button>
+						<ul class="bcLinkLayer">
+							<li><a th:href="@{/about/greeting}">병원소개</a></li>
+						</ul>
+					</div>
+					<div class="item">
+						<em>병원소식</em>
+						<button type="button" class="bcLinkLayerBtn ht">서브 메뉴 목록 열기</button>
+						<ul class="bcLinkLayer">
+							<li><a th:href="@{/about/greeting}">병원장 인사말</a></li>
+							<li><a th:href="@{/about/tour}">병원 둘러보기</a></li>
+							<li><a th:href="@{/about/mission}">미션과 비전</a></li>
+							<li><a th:href="@{/about/history}">연혁</a></li>
+							<li><a th:href="@{/about/hi}">HI</a></li>
+							<li><a th:href="@{/about/boardList}">병원소식</a></li>							
+						</ul>	
+					</div>
+					<div class="item">
+						<em>채용공고</em>
+						<button type="button" class="bcLinkLayerBtn ht">서브 메뉴 목록 열기</button>
+						<ul class="bcLinkLayer">
+							<li><a th:href="@{/about/boardList(board_kind='NOTICE')}">공지사항</a></li>
+							<li><a th:href="@{/about/boardList(board_kind='PRESS')}">보도자료</a></li>
+							<li><a th:href="@{/about/careersList}">채용공고</a></li>							
+						</ul>	
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<h2>채용공고 등록</h2>
+			<div id="padding" style="width: 100%; min-height: 1px; height: 30px;"></div>
+			<form th:action="@{/about/careersInsert}" method="post">
+			    <label>제목</label>
+			    <input type="text" name="careers_title" required><br>
+			
+			    <label>부서</label>
+			    <input type="text" name="careers_department" required><br>
+			
+			    <label>직무</label>
+			    <input type="text" name="careers_position" required><br>
+			
+			    <label>고용형태</label>
+			    <input type="text" name="careers_type" required><br>
+			
+			    <label>모집인원</label>
+			    <input type="number" name="careers_headcount" required><br>
+			
+			    <label>내용</label>
+			    <textarea name="careers_content"></textarea><br>
+			
+			    <label>급여</label>
+			    <input type="text" name="careers_salary"><br>
+			
+			    <label>마감일</label>
+			    <input type="date" name="careers_end_date" required><br>
+			
+			    <label>상태</label>
+			    <select name="careers_status">
+			        <option value="OPEN">모집중</option>
+			        <option value="CLOSED">마감</option>
+			    </select>
+			    <input type="hidden" name="patient_no" value="10000000">
+			    <div id="padding" style="width: 100%; min-height: 1px; height: 50px;"></div>
+				<div style="text-align: center; display: flex; justify-content: center;">
+					<input type="submit" class="submit_btn" value="입력 완료">
+					<button type="button" onclick="history.back()" class="back_btn">이전</button>
+				</div>
+			</form>
+	
+		</div>
+	</div>
+</body>
+</html>

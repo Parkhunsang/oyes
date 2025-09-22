@@ -20,7 +20,8 @@ public class WebMvcConfiguration implements WebMvcConfigurer{
 		list.add("/**/kakaomain"); list.add("/**/buyAcademy");
 		list.add("/**/buyComplete"); list.add("/**/cartList");
 		list.add("/**/academyDetail"); list.add("/**/attend");
-		
+		list.add("/**/outpatientForm"); list.add("/**/departmentSelect"); list.add("/**/centerSelect"); list.add("/**/doctorSelect");
+		list.add("/**/compliment_list"); list.add("/**/proposal_info");
 		//세션체크할 URL을 담은 list객체로 세션체크
 		registry.addInterceptor(new SessionChk()).addPathPatterns(list);	// /**/[어떤패키지든관계없이]main url들어오면 체크해 .... ~ 
 	}

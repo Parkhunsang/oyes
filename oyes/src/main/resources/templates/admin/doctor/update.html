@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><meta charset="UTF-8"><title>Insert title here</title>
+</head><body>
+<th:block th:if="${result} > 0">
+	<script>
+		alert("수정 성공 ㅋㅋ");
+		location.href="/admin/doctor/doctorList"
+	</script>
+</th:block>
+<th:block th:if="${result} == 0">
+	<script>
+		alert("수정 실패 ㅠㅠ");
+		history.back()
+	</script>
+</th:block>
+</body>
+</html>

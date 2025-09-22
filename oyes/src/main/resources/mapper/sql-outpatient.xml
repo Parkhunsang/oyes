@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.oyes.mapper.OutpatientMapper">
+	<select id="select" parameterType="string">
+		select o.*, d.department_name, m.patient_name, dt.doctor_name
+		from outpatient o, department d, member m, doctor dt 
+		where o.patient_no = m.patient_no
+		and o.department_id = d.department_id
+		and o.doctor_id = dt.doctor_id
+		and m.patient_id=#{patient_id}
+		order by outpatient_date desc
+	</select>
+	<insert id="insert" parameterType="outpatient">
+        <selectKey keyProperty="outpatient_no" order="BEFORE" resultType="integer">
+			select nvl(max(outpatient_no),0) + 1 from outpatient
+		</selectKey>
+		INSERT INTO outpatient (
+		outpatient_no,
+        patient_no,
+        department_id,
+        doctor_id,
+        outpatient_date,
+        outpatient_time,
+        create_date,
+        outpatient_status
+    ) VALUES (
+        #{outpatient_no},
+        #{patient_no},
+        #{department_id},
+        #{doctor_id},
+        #{outpatient_date},
+        #{outpatient_time},
+        SYSDATE,
+        1
+    )
+	</insert>
+	<insert id="insertC" parameterType="outpatient">
+        <selectKey keyProperty="outpatient_no" order="BEFORE" resultType="integer">
+			select nvl(max(outpatient_no),0) + 1 from outpatient
+		</selectKey>
+		INSERT INTO outpatient (
+		outpatient_no,
+        patient_no,
+        department_id,
+        center_id,
+        doctor_id,
+        outpatient_date,
+        outpatient_time,
+        create_date,
+        outpatient_status
+    ) VALUES (
+        #{outpatient_no},
+        #{patient_no},
+        #{department_id},
+        #{center_id},
+        #{doctor_id},
+        #{outpatient_date},
+        #{outpatient_time},
+        SYSDATE,
+        1
+    )
+	</insert>
+	<update id="delete" parameterType="integer">
+		update outpatient set outpatient_status = '3' where outpatient_no=#{outpatient_no}
+	</update>
+</mapper>

@@ -23,5 +23,8 @@ public class MemberServiceImpl implements MemberService {
 	public int delete(String patient_id) {
 		return mm.delete(patient_id);
 	}
+	public Member select_p(int patient_no) {
+		return mm.select_p(patient_no);
+	}
 
 }

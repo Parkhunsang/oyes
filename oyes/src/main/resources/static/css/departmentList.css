@@ -5,6 +5,9 @@ div.top_bar{
 	background-color:#0E7758;	
 	display:flex;
 	justify-content:center;
+	position:fixed;
+	top:120px;
+	index:3;
 }
 div.center_div{
 	display:flex;

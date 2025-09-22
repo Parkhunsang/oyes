@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layouts/layout}">
+<th:block th:insert="~{/header.html::header}"></th:block>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div layout:fragment="contentFragment">
+<div th:if="${result} > 0">
+	<script type="text/javascript">
+		alert("예약이 완료되었습니다.");
+		location.href="/mypage/myreservation_1";
+	</script>
+</div>
+<div th:if="${result} == 0">
+	<script type="text/javascript">
+		alert("얘약이 실패되었습니다.");
+		history.back();
+	</script>
+</div>
+</div>
+</body>
+</html>

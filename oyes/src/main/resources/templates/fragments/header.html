@@ -113,7 +113,7 @@
 							<ul class="topRsv">
 								
 								<li>
-									<a href="javascript:void(0)" role="button" class="button button-sizeS button-color02" id="treatRsv01">외래진료 예약</a>
+									<a href="/outpatient/outpatientForm" role="button" class="button button-sizeS button-color02" id="treatRsv01">외래진료 예약</a>
 								</li>
 								<li>
 									<a href="javascript:void(0)" role="button" class="button button-sizeS button-color03" id="btnHealthRsv">건강검진 예약</a>
@@ -126,7 +126,7 @@
                                     <li><a th:href="@{/mypage/myreservation_1}">마이페이지</a></li>
                                     <li><a th:href="@{/member/logout}">로그아웃</a></li>
                                     <th:block th:if="${session.is_admin == 'y'}">
-                                	    <li><a th:href="@{/admin/admin_main}">관리자페이지</a></li>
+                                	    <li><a th:href="@{/admin/adminMain}">관리자페이지</a></li>
                                     </th:block>
                                 </th:block>
 
@@ -192,6 +192,9 @@
 					<div class="row">
 						<div class="item">
 							<ul class="bullet bullet-type01 bullet-inline" id="gnbSubMenu01">
+								<li th:each="department : ${alldepartments}"> 
+									<a th:href="@{/department/{id}(id=${department.id})}" th:text="${department.department_name}">Department Name</a>                                              
+          						</li>
 							</ul>
 						</div>
 					</div>
@@ -225,122 +228,122 @@
 			</div>
 			<!-- //sub -->
 		</li>
+<!-- 		<li> -->
+<!-- 			<a th:href="@{/guide/reservationInfo.do}">이용안내</a> -->
+<!-- 			<!-- sub -->
+<!-- 			<div class="sub sub-item03"> -->
+<!-- 				inner -->
+<!-- 				<div class="inner"> -->
+<!-- 					<strong class="title">이용안내</strong> -->
+<!-- 					<div class="row"> -->
+<!-- 						<div class="item"> -->
+<!-- 							<ul> -->
+<!-- 								<li> -->
+<!-- 									<a th:href="@{/guide/reservationInfo.do}">진료안내</a> -->
+<!-- 									<ul class="bullet bullet-type01"> -->
+<!-- 										<li><a th:href="@{/guide/reservationInfo.do}">예약안내</a></li> -->
+<!-- 										<li><a th:href="@{/guide/procedureInfo.do}">진료절차안내</a></li> -->
+<!-- 										<li><a th:href="@{/medical/payment1.do}">비급여 진료비용 안내</a></li> -->
+<!-- 										<li><a th:href="@{/guide/internationalMediInfo.do}">국제진료안내</a></li> -->
+<!-- 									</ul> -->
+<!-- 								</li> -->
+<!-- 							</ul> -->
+<!-- 							<ul> -->
+<!-- 								<li> -->
+<!-- 									<a th:href="@{/guide/directions.do}">위치안내</a> -->
+<!-- 									<ul class="bullet bullet-type01"> -->
+<!-- 										<li><a th:href="@{/guide/directions.do}">오시는길</a></li> -->
+<!-- 										<li><a th:href="@{/guide/parking.do}">주차안내</a></li> -->
+<!-- 									</ul> -->
+<!-- 								</li> -->
+<!-- 							</ul> -->
+<!-- 						</div> -->
+<!-- 						<div class="item" style="margin: 42px 0px 42px 45px;"> -->
+<!-- 							<ul> -->
+<!-- 								<li> -->
+<!-- 									<a th:href="@{/medical/checkup.do}">국가건강검진</a> -->
+<!-- 								</li> -->
+<!-- 							</ul>	 -->
+<!-- 							<ul> -->
+<!-- 								<li> -->
+<!-- 									<a th:href="@{/guide/special.do}">특수건강진단</a> -->
+<!-- 								</li> -->
+<!-- 							</ul>											 -->
+<!-- 							<ul> -->
+<!-- 								<li> -->
+<!-- 									<a th:href="@{/medical/procedure1.do}">입원/퇴원 안내</a> -->
+<!-- 								</li> -->
+<!-- 							</ul> -->
+<!-- 							<ul> -->
+<!-- 								<li> -->
+<!-- 									<a th:href="@{/guide/nursingService.do}">간호·간병 통합<br/>서비스병동 안내</a> -->
+<!-- 								</li> -->
+<!-- 							</ul>	 -->
+<!-- 							<ul> -->
+<!-- 								<li><a th:href="@{/medical/emergency.do}">응급진료안내</a></li> -->
+<!-- 							</ul> -->
+<!-- 							<ul> -->
+<!-- 								<li><a th:href="@{/guide/proofInfo.do}">신청/발급안내</a></li> -->
+<!-- 							</ul> -->
+<!-- 							<ul> -->
+<!-- 								<li><a th:href="@{/guide/visitInfo.do}">병문안 안내</a></li> -->
+<!-- 							</ul> -->
+<!-- 							<ul> -->
+<!-- 								<li><a th:href="@{/guide/preview.do?floor=B2}">층별안내</a></li> -->
+<!-- 							</ul> -->
+<!-- 						</div> -->
+<!-- 						<div class="item" style="margin: 42px 0px 42px 45px;"> -->
+<!-- 							<ul> -->
+<!-- 								<li><a th:href="@{/guide/convenience1.do}">편의시설</a></li> -->
+<!-- 							</ul> -->
+<!-- 							<ul> -->
+<!-- 								<li><a th:href="@{/guide/infoTel.do}">안내전화</a></li> -->
+<!-- 							</ul> -->
+<!-- 							<ul> -->
+<!-- 								<li><a th:href="@{/guide/churchInfo.do}">원목실 안내</a></li> -->
+<!-- 							</ul> -->
+<!-- 							<ul> -->
+<!-- 								<li><a th:href="@{/guide/rental.do}">대관 안내</a></li> -->
+<!-- 							</ul> -->
+<!-- 							<ul> -->
+<!-- 								<li><a th:href="@{/funeral/main.do}" target="_blank">장례식장</a></li> -->
+<!-- 							</ul> -->
+<!-- 						</div> -->
+<!-- 						<div class="bannerWrap"> -->
+<!-- 							<div class="item item-banner"> -->
+<!-- 								<a th:href="@{/guide/reservationInfo.do}"> -->
+<!-- 									<strong class="title">예약안내</strong> -->
+<!-- 									<img src="/asset/img/common/img_gnb_banner03.jpg" alt="예약안내" /> -->
+<!-- 									<p>진료예약절차에 대해 안내해드립니다.</p> -->
+<!-- 									<span class="more"> -->
+<!-- 										바로가기 -->
+<!-- 										<i class="icon-shortcut"></i> -->
+<!-- 									</span> -->
+<!-- 								</a> -->
+<!-- 							</div> -->
+<!-- 							<div class="item item-banner"> -->
+<!-- 								<a th:href="@{/guide/procedureInfo.do}"> -->
+<!-- 									<strong class="title">진료절차안내</strong> -->
+<!-- 									<img src="/asset/img/common/img_gnb_banner04.jpg" alt="진료절차안내" /> -->
+<!-- 									<p> -->
+<!-- 										처음 방문하시는 고객님께 진료절차를<br/> -->
+<!-- 										안내해드리겠습니다. -->
+<!-- 									</p> -->
+<!-- 									<span class="more"> -->
+<!-- 										바로가기 -->
+<!-- 										<i class="icon-shortcut"></i> -->
+<!-- 									</span> -->
+<!-- 								</a> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 				//inner -->
+<!-- 			</div> -->
+<!-- 			<!-- //sub -->
+<!-- 		</li> -->
 		<li>
-			<a th:href="@{/guide/reservationInfo.do}">이용안내</a>
-			<!-- sub -->
-			<div class="sub sub-item03">
-				<!-- inner -->
-				<div class="inner">
-					<strong class="title">이용안내</strong>
-					<div class="row">
-						<div class="item">
-							<ul>
-								<li>
-									<a th:href="@{/guide/reservationInfo.do}">진료안내</a>
-									<ul class="bullet bullet-type01">
-										<li><a th:href="@{/guide/reservationInfo.do}">예약안내</a></li>
-										<li><a th:href="@{/guide/procedureInfo.do}">진료절차안내</a></li>
-										<li><a th:href="@{/medical/payment1.do}">비급여 진료비용 안내</a></li>
-										<li><a th:href="@{/guide/internationalMediInfo.do}">국제진료안내</a></li>
-									</ul>
-								</li>
-							</ul>
-							<ul>
-								<li>
-									<a th:href="@{/guide/directions.do}">위치안내</a>
-									<ul class="bullet bullet-type01">
-										<li><a th:href="@{/guide/directions.do}">오시는길</a></li>
-										<li><a th:href="@{/guide/parking.do}">주차안내</a></li>
-									</ul>
-								</li>
-							</ul>
-						</div>
-						<div class="item" style="margin: 42px 0px 42px 45px;">
-							<ul>
-								<li>
-									<a th:href="@{/medical/checkup.do}">국가건강검진</a>
-								</li>
-							</ul>	
-							<ul>
-								<li>
-									<a th:href="@{/guide/special.do}">특수건강진단</a>
-								</li>
-							</ul>											
-							<ul>
-								<li>
-									<a th:href="@{/medical/procedure1.do}">입원/퇴원 안내</a>
-								</li>
-							</ul>
-							<ul>
-								<li>
-									<a th:href="@{/guide/nursingService.do}">간호·간병 통합<br/>서비스병동 안내</a>
-								</li>
-							</ul>	
-							<ul>
-								<li><a th:href="@{/medical/emergency.do}">응급진료안내</a></li>
-							</ul>
-							<ul>
-								<li><a th:href="@{/guide/proofInfo.do}">신청/발급안내</a></li>
-							</ul>
-							<ul>
-								<li><a th:href="@{/guide/visitInfo.do}">병문안 안내</a></li>
-							</ul>
-							<ul>
-								<li><a th:href="@{/guide/preview.do?floor=B2}">층별안내</a></li>
-							</ul>
-						</div>
-						<div class="item" style="margin: 42px 0px 42px 45px;">
-							<ul>
-								<li><a th:href="@{/guide/convenience1.do}">편의시설</a></li>
-							</ul>
-							<ul>
-								<li><a th:href="@{/guide/infoTel.do}">안내전화</a></li>
-							</ul>
-							<ul>
-								<li><a th:href="@{/guide/churchInfo.do}">원목실 안내</a></li>
-							</ul>
-							<ul>
-								<li><a th:href="@{/guide/rental.do}">대관 안내</a></li>
-							</ul>
-							<ul>
-								<li><a th:href="@{/funeral/main.do}" target="_blank">장례식장</a></li>
-							</ul>
-						</div>
-						<div class="bannerWrap">
-							<div class="item item-banner">
-								<a th:href="@{/guide/reservationInfo.do}">
-									<strong class="title">예약안내</strong>
-									<img src="/asset/img/common/img_gnb_banner03.jpg" alt="예약안내" />
-									<p>진료예약절차에 대해 안내해드립니다.</p>
-									<span class="more">
-										바로가기
-										<i class="icon-shortcut"></i>
-									</span>
-								</a>
-							</div>
-							<div class="item item-banner">
-								<a th:href="@{/guide/procedureInfo.do}">
-									<strong class="title">진료절차안내</strong>
-									<img src="/asset/img/common/img_gnb_banner04.jpg" alt="진료절차안내" />
-									<p>
-										처음 방문하시는 고객님께 진료절차를<br/>
-										안내해드리겠습니다.
-									</p>
-									<span class="more">
-										바로가기
-										<i class="icon-shortcut"></i>
-									</span>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- //inner -->
-			</div>
-			<!-- //sub -->
-		</li>
-		<li>
-			<a href="#" onclick="cust_info('/customer/info.do');">고객서비스</a>
+			<a href="/compliment/compliment_info" >고객서비스</a>
 			<!-- sub -->
 			<div class="sub sub-item04">
 				<!-- inner -->
@@ -349,14 +352,14 @@
 					<div class="row">
 						<div class="item">
 							<ul>
-								<li><a href="#" onclick="cust_info('/customer/info.do');">고객상담실 이용안내</a></li>
+								<li><a href="/compliment/compliment_info">고객상담실 이용안내</a></li>
 							</ul>
 							<ul>
 								<!-- <li><a href="#" onclick="cust_info('/customer/write.do');">고맙습니다</a></li> -->
-								<li><a th:href="@{/customer/write.do}">고맙습니다</a></li>
+								<li><a href="/compliment/compliment_list">고맙습니다</a></li>
 							</ul>
 							<ul>
-								<li><a href="#" onclick="cust_info('/customer/suggestWrite.do');">건의합니다</a></li>
+								<li><a href="/proposal/proposal_info">건의합니다</a></li>
 							</ul>
 							<!-- <ul>
 								<li><a th:href="@{/customer/volunteer/info.do}">의료사회사업 및 자원봉사 안내</a></li>
@@ -364,7 +367,7 @@
 						</div>
 						<div class="bannerWrap">
 							<div class="item item-banner">
-								<a th:href="@{/customer/write.do}">
+								<a href="/compliment/compliment_list">
 									<strong class="title">고맙습니다</strong>
 									<img src="/asset/img/common/img_gnb_banner05.jpg" alt="고맙습니다" />
 									<p>감사한 마음을 표현해주세요.</p>
@@ -375,7 +378,7 @@
 								</a>
 							</div>
 							<div class="item item-banner">
-								<a th:href="@{/customer/suggestWrite.do}">
+								<a href="/proposal/proposal_info">
 									<strong class="title">건의합니다</strong>
 									<img src="/asset/img/common/img_gnb_banner06.jpg" alt="건의합니다" />
 									<p>고객님의 소중한 말씀 감사합니다</p>
@@ -393,7 +396,7 @@
 			<!-- //sub -->
 		</li>
 		<li>
-			<a th:href="@{/health/lecture/list.do}">건강정보</a>
+			<a href="/health/seminarList">건강정보</a>
 			<!-- sub -->
 			<div class="sub sub-item05">
 				<!-- inner -->
@@ -403,48 +406,9 @@
 						<div class="item">
 							<ul>
 								<li>
-									<a th:href="@{/health/replay/list.do}">건강강좌 영상</a>
+									<a href="/health/seminarList">건강 강좌</a>
 								</li>
 							</ul>
-							<ul>
-								<li><a th:href="@{/health/encyclo/search.do}">질환/수술/검사정보</a></li>
-							</ul>
-							<ul>
-								<li><a th:href="@{/health/nutrition/list.do}">건강이야기</a></li>
-							</ul>
-							<ul>
-								<li><a th:href="@{/health/healthVideo/list.do}">건강동영상</a></li>
-							</ul>
-						</div>
-						<div class="bannerWrap">
-							<div class="item item-banner">
-								<a th:href="@{/health/replay/list.do}">
-									<strong class="title">건강강좌 영상</strong>
-									<img src="/asset/img/common/img_gnb_banner07.jpg" alt="건강강좌 영상" />
-									<p>
-										이대서울병원만의 차별화된<br/>
-										건강강좌에 참여해보세요
-									</p>
-									<span class="more">
-										바로가기
-										<i class="icon-shortcut"></i>
-									</span>
-								</a>
-							</div>
-							<div class="item item-banner">
-								<a th:href="@{/health/encyclo/search.do}">
-									<strong class="title">질환/수술/검사정보</strong>
-									<img src="/asset/img/common/img_gnb_banner08.jpg" alt="질환/수술/검사정보" />
-									<p>
-										질환, 수술, 검사와 관련된 모든 정보를<br/>
-										전달해드립니다
-									</p>
-									<span class="more">
-										바로가기
-										<i class="icon-shortcut"></i>
-									</span>
-								</a>
-							</div>
 						</div>
 					</div>
 				</div>
@@ -453,7 +417,7 @@
 			<!-- //sub -->
 		</li>
 		<li>
-			<a th:href="@{/intro/greeting2.do}">병원소개</a>
+			<a href="/about/history">병원소개</a>
 			<!-- sub -->
 			<div class="sub sub-item06">
 				<!-- inner -->
@@ -462,69 +426,25 @@
 					<div class="row">
 						<div class="item">
 							<ul>
-								<li><a th:href="@{/intro/greeting2.do}">병원장 인사말</a></li>
-							</ul>
-							<ul>
-								<li><a th:href="@{/intro/preview.do}">병원 둘러보기</a></li>
-							</ul>
-							<ul>
-								<li><a th:href="@{/intro/vision.do}">미션과 비전</a></li>
-							</ul>
-							<ul>
-								<li><a th:href="@{/intro/history6.do}">연혁</a></li>
-							</ul>
-							<ul>
-								<li><a href="https://part.eumc.ac.kr/dept/pogoonyogoan/index.do" target="_blank" title="새창">보구녀관</a></li>
-							</ul>
-							<ul>
-								<li><a th:href="@{/intro/hi.do}">HI</a></li>
+								<li><a href="/about/history">연혁</a></li>
 							</ul>
 						</div>
 						<div class="item">
 							<ul>
 								<li>
-									<a th:href="@{/intro/notice/list.do}">병원소식</a>
+									병원소식
 									<ul class="bullet bullet-type01">
-										<li><a th:href="@{/intro/notice/list.do}">공지사항</a></li>
-										<li><a th:href="@{/intro/newdata/list.do}">보도자료</a></li>
-										<li><a th:href="@{/intro/press/list.do}">언론보도</a></li>
-										<li><a th:href="@{/intro/bid/list.do}">입찰공고</a></li>
-										<li><a th:href="@{/intro/recrut/list.do}">채용공고</a></li>
+										<li><a href="/about/boardList">공지사항</a></li>
+										<li><a href="/about/careersList">채용공고</a></li>
 									</ul>
 								</li>
 							</ul>
 						</div>
 						<div class="item">
-							<ul>
-								<li><a th:href="@{/intro/newsletter/list.do}">정기간행물</a></li>
-							</ul>
-							<ul>
-								<li><a th:href="@{/intro/promotion/list.do}">홍보동영상</a></li>
-							</ul>
-							<ul>
-								<li><a th:href="@{/guide/medicalSupport.do}">진료지원부서</a></li>
-							</ul>
-							<ul>
-								<li><a title="새창" target="_blank" href="https://www.eumc.ac.kr/fund/" >발전기금</a></li>
-							</ul>
 						</div>
 						<div class="bannerWrap">
 							<div class="item item-banner">
-								<a th:href="@{/intro/newsletter/list.do}">
-									<strong class="title">뉴스레터</strong>
-									<img src="/asset/img/common/img_gnb_banner09.jpg" alt="뉴스레터" />
-									<p>
-										이대서울병원의 소식과 건강 정보를<br/>
-										보내드립니다.
-									</p>
-									<span class="more">
-										바로가기
-										<i class="icon-shortcut"></i>
-									</span>
-								</a>
-							</div>
-							<div class="item item-banner">
-								<a th:href="@{/intro/notice/list.do}">
+								<a href="/about/boardList">
 									<strong class="title">공지사항</strong>
 									<img src="/asset/img/common/img_gnb_banner10.jpg" alt="공지사항" />
 									<p>
@@ -841,10 +761,11 @@
 		$('#treatRsv01').click(function() {
 			//alert("코로나19 확산으로 고위험 장소 방문 여부와 증상 등을 확인하기 위해 당분간 전화로만 진료예약/변경/취소가 가능합니다.");
 			//return false;
-			if ('' == null || '' == "") {
+			let patient_id = "${session.patient_id}";
+			if (patient_id == null || patient_id == '') {
 				alert("로그인 후 사용이 가능합니다.");
 				callLoginLayer();
-			} else if ('' == null || '' == "") {
+			/* } else if ('' == null || '' == "") {
 				var now = new Date();
 				var pastYear = now.getFullYear() - 14;
 				var month = now.getMonth() + 1;
@@ -858,7 +779,7 @@
 					callParentCertifyLayer();
 				} else {
 					callSelfCertifyLayer('R');
-				}
+				} */
 			} else {
 				//callRsv01();
 				location.href = '/reservation/index.do';

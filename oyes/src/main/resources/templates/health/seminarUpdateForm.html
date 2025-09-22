@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layouts/layout}">
+<th:block th:insert="~{/header.html::header}"></th:block>
+<link rel="stylesheet" th:href="@{/css/outpatient.css}">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+body {
+	display: flex;
+	flex-direction:column;
+	align-items: center;
+}
+.contents_wrap {
+	width: 1200px;
+	min-height:800px;
+	margin:150px 0px;
+}
+.title {
+	color: #000;
+	font-size: 34px;
+	font-weight: 700;
+	margin-bottom: 36px;
+}
+.submit_btn {
+	width:120px;
+	height:40px;
+	border:none;
+	background:#0e7758;
+	color:white;
+}
+.seminarlist_btn{
+display:block;
+width:180px;
+height:44px;
+border:1px solid #0E7758;
+background:white;
+text-align:center;
+line-height:44px;
+margin:52px auto;
+}
+input {
+width:440px;
+height:44px;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+display:inline;
+opacity:1;
+cursor:pointer;
+}
+</style>
+</head><body>
+<div layout:fragment="contentFragment">
+<div class="contents_wrap">
+	<h2 class="title">건강 강좌 등록</h2>
+	<form action="/health/seminarUpdate" name="frm" method="post">
+	<table class="table">
+	<input type="hidden" name="seminar_no" th:value="${list.seminar_no}" />
+	<tr><th>강좌명</th><td><input type="text" name="seminar_title" required="required" th:value="${list.seminar_title}"></td></tr>
+	<tr><th>강사명</th><td><input type="text" name="seminar_lecturer" required="required" th:value="${list.seminar_lecturer}"></td></tr>
+	<tr><th>강좌일</th><td><input type="date" name="seminar_date" required="required"  th:value="${list.seminar_date}"></td></tr>
+	<tr><th>강좌시간</th><td><input type="text" name="seminar_time" required="required"  th:value="${list.seminar_time}"
+           placeholder="예: 09:00 ~ 12:00"
+           pattern="^([01]\d|2[0-3]):([0-5]\d)\s*~\s*([01]\d|2[0-3]):([0-5]\d)$"
+           title="시간 형식은 00:00 ~ 00:00 으로 입력해주세요."></td></tr>
+	<tr><th>위치</th><td><input type="text" name="seminar_site" required="required" th:value="${list.seminar_site}"></td></tr>
+	<tr><th>강좌설명</th><td><textarea name="seminar_text" id="seminar_text" required="required"
+			maxlength="2000" placeholder="최대 2000자까지 입력 가능합니다." th:text="${list.seminar_text}"></textarea>
+			<div id="textCount" style="text-align: right; font-size: 0.9em; color: gray;">
+				0 / 2000
+    		</div>
+    </td></tr>
+	<tr><td colspan="2" class="text-center"><input type="submit" value="수정완료" class="submit_btn"></td></tr>
+	</table>
+</form>
+<a class="seminarlist_btn" href="/health/seminarList">강좌목록</a>
+</div>
+<script>
+  const textarea = document.getElementById("seminar_text");
+  const textCount = document.getElementById("textCount");
+
+  textarea.addEventListener("input", () => {
+    const len = textarea.value.length;
+    textCount.textContent = `${len} / 2000`;
+  });
+</script>
+</div>
+</body>
+</html>

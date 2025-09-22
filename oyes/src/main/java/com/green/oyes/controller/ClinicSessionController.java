@@ -1,5 +1,6 @@
 package com.green.oyes.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,14 +41,23 @@ public class ClinicSessionController {
 			Map<String, Map<String, String>> scheduleMap = new HashMap<>();
 			if (scheduleList != null) {
 				for (ClinicSession session : scheduleList) {
-	//				if (session != null && session.getWeek() != null && session.getAmPm() != null) {
-						// session.getWeek()를 키로 하는 내부 맵을 찾거나 새로 생성
 						scheduleMap.computeIfAbsent(session.getWeek(), k -> new HashMap<String, String>()).put(session.getAmPm(), session.getVisit_type());
-		//			}
 				}
 			}
 			doctor.setScheduleMap(scheduleMap);
 		}
+		
+		 List<Map<String, String>> navLinks = new ArrayList<>();
+		    navLinks.add(Map.of("url", "/department/departmentList", "text", "진료과"));
+		    navLinks.add(Map.of("url", "/center/centerList", "text", "센터"));
+		    navLinks.add(Map.of("url", "/#", "text", "이용안내"));
+		    navLinks.add(Map.of("url", "/#", "text", "고객서비스"));
+		    navLinks.add(Map.of("url", "/#", "text", "건강정보"));
+		    navLinks.add(Map.of("url", "/#", "text", "병원안내"));
+		    model.addAttribute("navLinks", navLinks);
+
+		    List<Department> allDepartments = dps.list();
+		    model.addAttribute("allDepartments", allDepartments);
 		
 		model.addAttribute("doctorList", doctorList);  
 		model.addAttribute("department",department);

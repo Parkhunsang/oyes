@@ -5,23 +5,65 @@
 <th:block th:insert="~{/header.html::header}"></th:block>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" th:href="@{/css/departmentDetail.css}">
 <title>[[${center.center_name}]] | 위치안내</title>
+<link rel="stylesheet" th:href="@{/css/departmentDetail.css}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('ul.top_util_list > li > span').on('click', function(event) {
+        var $dropdown = $(this).siblings('ul.drop_list');
+        $dropdown.toggleClass('show');
+        event.stopPropagation();
+    });
+
+    $(document).on('click', function() {
+        if ($('ul.drop_list').hasClass('show')) {
+            $('ul.drop_list').removeClass('show');
+        }
+    });
+
+    $('ul.drop_list').on('click', function(event) {
+        event.stopPropagation();
+    });
+});
+
+</script>
 </head>
 <body>
 	<div layout:fragment="contentFragment" id="container">
-		<section class="detail_section">
-				<h1>[[${center.center_name}]]</h1>
-				<ul class="choose_btn_list">
-					<li><a th:href=@{/center/centerDetail(center_id=${center.center_id})}>진료과소개</a></li>
-					<li><a th:href=@{/center/doctorList(center_id=${center.center_id})}>의료진소개</a></li>
-					<li><a th:href="@{/center/clinicReservation(center_id=${center.center_id})}">진료시간표</a></li>
-					<li class="selected"><a th:href="@{/center/centerPlace(center_id=${center.center_id})}">위치안내</a></li>
-				</ul>
-				<div th:if="${center.center_place_img != null}">
-		              <img th:src="@{/images/} + ${center.center_place_img}" alt="위치 이미지">
-		        </div>
-		</section>      
+	<div class="top_bar">
+			<ul class="top_util_list">
+				<li><a th:href="@{/index}"><span class="home_icon"></span></a></li>
+				<li><span>진료과</span>
+					<ul class="drop_list">
+						<li th:each="link : ${navLinks}">
+							<a th:href="@{${link.url}}" th:text="${link.text}">메뉴 항목</a>
+						</li>
+					</ul>
+				</li>
+				<li><span>[[${center.center_name}]]</span>
+					<ul class="drop_list">
+						<li th:each="cent : ${allCenters}">
+							<a th:href="@{/center/centerDetail(center_id=${cent.center_id})}" th:text="${cent.center_name}">진료과 이름</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div class=center_div>
+			<section class="detail_section">
+					<h1>[[${center.center_name}]]</h1>
+					<ul class="choose_btn_list">
+						<li><a th:href=@{/center/centerDetail(center_id=${center.center_id})}>진료과소개</a></li>
+						<li><a th:href=@{/center/doctorList(center_id=${center.center_id})}>의료진소개</a></li>
+						<li><a th:href="@{/center/clinicReservation(center_id=${center.center_id})}">진료시간표</a></li>
+						<li class="selected"><a th:href="@{/center/centerPlace(center_id=${center.center_id})}">위치안내</a></li>
+					</ul>
+					<div th:if="${center.center_place_img != null}">
+			              <img th:src="@{/images/} + ${center.center_place_img}" alt="위치 이미지">
+			        </div>
+			</section>   
+		</div>   
 	</div>
 </body>
 </html>

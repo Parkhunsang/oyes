@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.oyes.mapper.BoardMapper">
+	<select id="getTotal"  parameterType="map" resultType="integer">
+		select count(*) from board where board_kind = #{board_kind, jdbcType=VARCHAR} and board_is_active = 'n'	   
+			 <!-- 검색어가 입력 되었으면 -->
+			<if test="keyword != null and keyword != ''">
+		        <choose>
+		            <when test="search == 'board_title'">
+		                and board_title like '%'||#{keyword}||'%'
+		            </when>
+		            <when test="search == 'board_content'">
+		                and board_content like '%'||#{keyword}||'%'
+		            </when>
+		            <when test="search == 'subcon'">
+		                and (board_title like '%'||#{keyword}||'%' 
+		                  or board_content like '%'||#{keyword}||'%')
+		            </when>
+		        </choose>
+    		</if>
+	</select>
+	<select id="list" parameterType="map" resultType="com.green.oyes.dto.Board">
+		select * from board where board_kind = #{board_kind, jdbcType=VARCHAR} and board_is_active = 'n'
+		    <!-- 검색어가 입력 되었으면 -->
+			<if test="keyword != null and keyword != ''">
+		        <choose>
+		            <when test="search == 'board_title'">
+		                and board_title like '%'||#{keyword}||'%'
+		            </when>
+		            <when test="search == 'board_content'">
+		                and board_content like '%'||#{keyword}||'%'
+		            </when>
+		            <when test="search == 'subcon'">
+		                and (board_title like '%'||#{keyword}||'%' 
+		                  or board_content like '%'||#{keyword}||'%')
+		            </when>
+		        </choose>
+    		</if>		
+		order by boardno desc offset #{startRow} rows
+			fetch next #{rowPerPage} rows only
+	</select>
+	<select id="select" parameterType="integer" resultType="com.green.oyes.dto.Board">
+		select * from board where boardno=#{boardno}
+	</select>
+	<insert id="insert" parameterType="board">
+		insert into board (
+        boardno, patient_no, board_title, board_content,
+        board_file, board_kind, board_create_date, board_is_active
+	    ) values (
+	        board_seq.NEXTVAL, 1000000, #{board_title}, #{board_content},
+	        #{board_file, jdbcType=VARCHAR}, #{board_kind}, sysdate, 'n'
+	    )
+	</insert>
+	<update id="updateReadcount" parameterType="integer">
+		update board set board_readCnt = board_readCnt + 1 where boardno=#{boardno}
+	</update>
+	<update id="update" parameterType="com.green.oyes.dto.Board">
+	    update board set
+	    	board_title = #{board_title},
+	        board_content = #{board_content},
+	        board_file = #{board_file, jdbcType=VARCHAR},
+	        board_kind = #{board_kind},
+	        board_update_date = SYSDATE
+	     where boardno = #{boardno}
+	</update>
+	<update id="delete" parameterType="integer">
+		update board set board_is_active='y' where boardno=#{boardno}
+	</update>
+</mapper>

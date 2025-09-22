@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.oyes.mapper.CareersMapper">
+	<select id="getTotal"  parameterType="map" resultType="integer">
+		select count(*) from careers c where 1=1
+			<if test="careers_status == 'OPEN'">
+		        and c.careers_end_date &gt;= trunc(sysdate)
+		    </if>
+		    <if test="careers_status == 'CLOSED'">
+		        and c.careers_end_date &lt; trunc(sysdate)
+		    </if>	   
+			 <!-- 검색어가 입력 되었으면 -->
+			<if test="keyword != null and keyword != ''">
+		        <choose>
+		            <when test="search == 'careers_title'">
+		                and c.careers_title like '%'||#{keyword}||'%'
+		            </when>
+		            <when test="search == 'careers_content'">
+		                and c.careers_content like '%'||#{keyword}||'%'
+		            </when>
+		            <when test="search == 'subcon'">
+		                and (c.carees_title like '%'||#{keyword}||'%' 
+		                     or c.careerrs_content like '%'||#{keyword}||'%')
+		            </when>
+		        </choose>
+    		</if>
+	</select>
+	<select id="list" parameterType="map" resultType="com.green.oyes.dto.Careers">
+	    select c.*, trunc(c.careers_end_date - sysdate) as daysLeft
+	    from careers c where 1=1
+	        <!-- 상태 필터 -->
+	        <if test="careers_status == 'OPEN'">
+	            and c.careers_end_date &gt;= trunc(sysdate)
+	        </if>
+	        <if test="careers_status == 'CLOSED'">
+	            and c.careers_end_date &lt; trunc(sysdate)
+	        </if>
+	        <!-- 검색어 필터 -->
+	        <if test="keyword != null and keyword != ''">
+	            <choose>
+	                <when test="search == 'careers_title'">
+	                    and c.careers_title like '%'||#{keyword}||'%'
+	                </when>
+	                <when test="search == 'careers_content'">
+	                    and c.careers_content like '%'||#{keyword}||'%'
+	                </when>
+	                <when test="search == 'subcon'">
+	                    and (c.careers_title like '%'||#{keyword}||'%' 
+	                         or c.careers_content like '%'||#{keyword}||'%')
+	                </when>
+	            </choose>
+	        </if>
+	    order by c.careersno desc
+	    offset #{startRow} rows fetch next #{rowPerPage} rows only
+	</select>
+	<select id="select" parameterType="integer" resultType="com.green.oyes.dto.Careers">
+	    select c.*, trunc(c.careers_end_date - sysdate) as daysLeft
+	    from careers c where c.careersno = #{careersno}
+	</select>
+	<insert id="insert" parameterType="careers">
+		insert into careers (
+        careersno, patient_no, careers_title, careers_department, careers_position,
+        careers_type, careers_headcount, careers_content, careers_salary, careers_create_date,
+        careers_update_date, careers_end_date, careers_status, careers_is_active
+	    ) values (
+	        careers_seq.NEXTVAL, 1000000, #{careers_title}, #{careers_department},
+	        #{careers_position}, #{careers_type}, #{careers_headcount}, #{careers_content},
+        	#{careers_salary}, sysdate, sysdate, #{careers_end_date}, #{careers_status}, 'n'
+	    )
+	</insert>
+	<update id="update" parameterType="com.green.oyes.dto.Careers">
+	    update careers set
+	    	careers_title = #{careers_title},
+	        careers_department = #{careers_department},
+	        careers_position = #{careers_position},
+	        careers_type = #{careers_type},
+	        careers_headcount = #{careers_headcount},
+	        careers_content = #{careers_content},
+	        careers_salary = #{careers_salary},
+	        careers_status = #{careers_status},
+	        careers_update_date = SYSDATE
+	     where careersno = #{careersno}
+	</update>
+	<update id="delete" parameterType="integer">
+		update careers set careers_is_active='y' where careersno=#{careersno}
+	</update>
+</mapper>

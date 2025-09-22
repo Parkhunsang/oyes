@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<htmlxmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layouts/layout}"
+>
+	<th:block th:insert="~{/header.html::header}"></th:block>
+	<head>
+	<meta charset="UTF-8">
+	<title>proposalInsertForm</title>
+<style type="text/css">
+/*compliment_list 페이지 스타일 시작*/
+	div#comp_wrap {
+		margin-top: 200px;
+		width:100%;
+		height:100%;
+		display:flex;
+		flex-direction: column;	
+		flex-wrap: wrap;
+		align-content: center;
+	}
+	h2#compliment_h2{
+		font: bold 32px/12px 'pretendard';
+		height: 56px;
+		width: 100%;
+		text-align: center;
+		margin-bottom: 32px;
+		border-bottom: 2px solid black;
+	}
+/*main 이미지 스타일 시작*/
+	div#compliment_main {
+		position:relative;
+		top:0px;
+		left:0px;
+		width: 80%;
+		height: 400px;
+		background: url("/images/img_jumbotron03.jpg") no-repeat center center / cover;
+		margin-bottom: 32px;
+	}
+	div#compliment_main_textbox {
+		width: 50%;
+		height:80%;
+		padding: 56px 35px 40px;
+		background:#108663;
+		box-sizing: border-box;
+		position: relative;
+		top:50%;
+		right:-50%;
+		margin-right:-80%;
+		margin-top: -14%;
+	}
+	i#comp_main_icon {
+		display: block;
+		width:44px;
+		height:44px;
+		overflow: hidden;
+		background: url("/images/spr_iconM.png") no-repeat;
+		background-position-x: -230px;
+		margin-bottom: 5px;
+	}
+	div#compliment_main_textbox>p {
+		color:ghostwhite;
+		font: normal 16px 'pretendard';
+	}
+	div#compliment_main_textbox>p#comp_main_title {
+		font: bold 30px 'pretendard';
+		margin-bottom: 8px;
+	}
+	div#compliment_main_textbox>p#comp_main_text {
+		margin-bottom: 24px;
+	}
+	button.main-insert-btn {
+		width: 100px;	
+		height: 40px;
+		padding: 0 20px;
+		font-size: 16px;
+		line-height: 38px;
+		box-sizing: border-box;
+		color:#666;
+		text-align: center;
+		cursor: pointer;
+		background:white;
+	}
+/*main 이미지 스타일 끝*/
+
+/*compliment_insertForm 페이지 스타일 시작*/
+	div#compliment_insert_wrap {
+		width:100%;
+		height:auto;
+		position:relative;
+		top:0px;
+		left:0px;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: center;
+		padding-top: 32px;
+		margin-top: 120px;
+	}
+	h2#compliment_insert_h2 {
+		width:100%;
+		height:100px;
+		text-align: center;
+	}
+	h2#compliment_insert_h2>span {
+		display: block;
+		width: 100%;
+		height: 40px;
+	}
+	span#compliment_insert_title {
+		font:bold 32px 'pretendard';
+	}
+	span#compliment_insert_subtitle {
+		font:normal 24px 'pretendard';
+	}
+	p#compliment_insert_warning {
+		width:360px;
+		height:40px;
+		text-align: center;
+		font:normal 16px/36px 'pretendard';
+		color:red;
+		margin-bottom: 40px;
+	}
+	form.compliment_insert_form {
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: column;
+		justify-content: center;
+		align-content: center;
+	}
+	ul.compliment_insert_list {
+		width:100%;
+		height:auto;
+		display: flex;
+		flex-direction: column;
+		flex-wrap: wrap;
+		text-align: center;
+		margin-bottom: 24px;
+		align-content: center;
+	}
+	ul.compliment_insert_list>li {
+		position: relative;
+		width: 100%;
+		font:normal 16px/68px 'pretendard';
+		display: flex;
+		flex-wrap: wrap;
+		flex-direction: row;
+		justify-content: center;
+		align-content: center;
+		border-bottom: 1px dotted black;
+	}
+	ul.compliment_insert_list>li:last-child {
+		border-bottom: none;
+	}
+	ul.compliment_insert_list>li>p {
+		width:220px;
+		height: 72px;
+	}
+	select.open_select {
+		width: 100px;
+		height: 24px;
+		text-align: center;
+		float: left;
+		margin-right: 12px;
+		box-sizing: border-box;
+	}
+	ul.compliment_insert_list>li>p#compliment_select_info {
+		width: 300px;
+		color: lightslategray;
+		font-size: 14px;
+		float: left;
+		text-align: left;
+		text-indent: 16px;
+	}
+	.compliment_input {
+		width: 400px;
+		height: 40px;
+		margin-top: 14px;
+	}
+	ul.compliment_insert_list>li>p:last-child{
+		width:100%;
+		height:auto;
+	}
+	ul.compliment_insert_list>li>textarea.compliment_input {
+		width:400;
+		height:400px;
+		margin-bottom: 24px;
+	}
+	div#compliment_btns {
+		width:100%;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		margin-bottom: 24px;
+		position:relative;
+		left:50%;
+		margin-left: -40%;
+	}
+	input.btn {
+		width: 100px;
+		height: 40px;
+		border:none;
+		border-radius: 8px;
+		font:normal 16px 'pretendard';
+	}
+	input.reset_btn {
+		background:white;
+		border: 1px solid black;
+	}
+	input.submit_btn {
+		background:#1b7eaf;
+		color: white;
+	}
+/*compliment_insertForm 페이지 스타일 끝*/
+				
+</style>
+
+</head>
+<body>
+	<div layout:fragment="contentFragment">
+		<div id="comp_wrap">
+			<section id="proposal_insert">
+				<h2 id="compliment_h2">
+					<span id="prop_h2_title">건의합니다</span>
+					<span id="prop_h2_text">- 수정하기 -</span>
+				</h2>
+				<p id="compliment_insert_warning">* 표시된 부분은 반드시 작성해 주셔야 합니다.</p>
+				<form action="/proposal/proposal_update" method="post" name="frm" enctype="multipart/form-data"
+					class="compliment_insert_form">
+					<input type="hidden" name="proposal_no" th:value="${proposal.proposal_no}">
+					<ul id="proposal_insert_list">
+						<li>
+							<p class="prop_insert_title">건의사항 번호</p>
+							<p class="prop_insert_noEdit">[[${proposal.proposal_no}]]</p>
+						</li>
+						<li>
+							<p class="prop_insert_title">제목</p>
+							<p class="prop_insert_noEdit">[[${proposal.proposal_title}]]</p>
+						</li>
+						<li>
+							<p class="prop_insert_title">내용</p>
+							<p class="prop_insert_noEdit">[[${proposal.proposal_content}]]</p>
+						</li>
+						<li>
+							<p class="prop_insert_title">ACTIVE *</p>
+							<div id="is_active">
+								<label for="Y">
+									<input type="radio" name="is_active" id="Y" title="Y" value="y" checked>
+									<span>Y</span>
+								</label>
+								<label for="N">
+									<input type="radio" name="is_active" id="N" title="N" value="n">
+									<span>N</span>
+								</label>
+							</div>
+						</li>
+						<li>
+							<p class="prop_insert_title">진행상황 *</p>
+							<div id="progress">
+								<label for="type01">
+									<input type="radio" name="progress" id="type01" title="문의" value="1" checked>
+									<span>접수중</span>
+								</label>
+								<label for="type02">
+									<input type="radio" name="progress" id="type02" title="불편사항" value="2">
+									<span>검토중</span>
+								</label>
+								<label for="type03">
+									<input type="radio" name="progress" id="type03" title="제안 및 건의사항" value="3">
+									<span>답변완료</span>
+								</label>
+							</div>
+						</li>
+					</ul>
+					<div id="compliment_btns">
+						<input type="reset" class="reset_btn btn" value="다시쓰기">
+						<input type="submit" class="submit_btn btn" value="수정완료">
+					</div>
+				</form>
+			</section>
+		</div>
+	</div>
+</body>
+</html>

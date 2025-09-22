@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<th:block th:insert="~{/header.html::header}"></th:block>
+<head>
+<meta charset="UTF-8">
+<title>병원 둘러보기 | 이화서울병원</title>
+<style type="text/css">
+.tour-container {
+  max-width: 1200px;
+  margin: 200px auto;
+  padding: 20px;
+  line-height: 1.8;
+  color: #333;
+}
+
+.tour-container h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+.slider {
+  position: relative;
+  overflow: hidden;
+}
+
+.slides img {
+  width: 100%;
+  display: none;
+}
+.slides img.active {
+  display: block;
+}
+
+.caption {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  padding: 10px;
+  font-size: 16px;
+  text-align: left;
+}
+
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+.prev { left: 10px; }
+.next { right: 10px; }
+
+</style>
+</head>
+<body>
+	<div layout:fragment="contentFragment">
+		<div class="contTopBar contTopBar-bg01">
+			<!-- inner -->
+			<div class="inner">
+				<!-- breadcrumb -->
+				<div class="breadcrumb cf">
+					<strong class="he">현재 위치:</strong>
+					<div class="item">
+						<a th:href="@{/}" class="home ht">Home</a>
+					</div>
+					<div class="item">
+						<em>병원소개</em>
+						<button type="button" class="bcLinkLayerBtn ht">주 메뉴 목록 열기</button>
+						<ul class="bcLinkLayer">
+							<li><a th:href="@{/about/greeting}">병원소개</a></li>
+						</ul>
+					</div>
+					<div class="item">
+						<em>병원 둘러보기</em>
+						<button type="button" class="bcLinkLayerBtn ht">서브 메뉴 목록 열기</button>
+						<ul class="bcLinkLayer">
+							<li><a th:href="@{/about/greeting}">병원장 인사말</a></li>
+							<li><a th:href="@{/about/tour}">병원 둘러보기</a></li>
+							<li><a th:href="@{/about/mission}">미션과 비전</a></li>
+							<li><a th:href="@{/about/history}">연혁</a></li>
+							<li><a th:href="@{/about/hi}">HI</a></li>
+							<li><a th:href="@{/about/boardList}">병원소식</a></li>							
+						</ul>	
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="tour-container">
+		  <h2>병원 둘러보기</h2>
+		  <div class="slider">
+		    <div class="slides">
+		      	<img src="/upload/about/tour01.jpg" alt="병원외관사진" data-caption="병원외관사진" class="active">
+			    <img src="/upload/about/tour02.jpg" alt="병원외관사진" data-caption="병원외관사진">
+			    <img src="/upload/about/tour03.jpg" alt="병원외관사진" data-caption="병원외관사진">
+			    <img src="/upload/about/tour04.jpg" alt="아뜨리움" data-caption="아뜨리움">
+			    <img src="/upload/about/tour05.jpg" alt="아뜨리움" data-caption="아뜨리움">
+			    <img src="/upload/about/tour06.jpg" alt="아뜨리움" data-caption="아뜨리움">
+			    <img src="/upload/about/tour07.jpg" alt="보구녀관" data-caption="보구녀관">
+			    <img src="/upload/about/tour08.jpg" alt="보구녀관" data-caption="보구녀관">
+			    <img src="/upload/about/tour09.jpg" alt="입원실" data-caption="입원실">
+			    <img src="/upload/about/tour10.jpg" alt="입원실" data-caption="입원실">
+			    <img src="/upload/about/tour11.jpg" alt="입원실" data-caption="입원실">
+			    <img src="/upload/about/tour12.jpg" alt="입원실" data-caption="입원실">
+			    <img src="/upload/about/tour13.jpg" alt="중환자실" data-caption="중환자실">
+			    <img src="/upload/about/tour14.jpg" alt="중환자실" data-caption="중환자실">
+			    <img src="/upload/about/tour15.jpg" alt="운동치료실" data-caption="운동치료실">
+			    <img src="/upload/about/tour16.jpg" alt="운동치료실" data-caption="운동치료실">
+			    <img src="/upload/about/tour17.jpg" alt="운동치료실" data-caption="운동치료실">
+			    <img src="/upload/about/tour18.jpg" alt="아뜨리움" data-caption="아뜨리움">
+			    <img src="/upload/about/tour19.jpg" alt="아뜨리움" data-caption="아뜨리움">
+			    <img src="/upload/about/tour20.jpg" alt="로비" data-caption="로비">
+			    <img src="/upload/about/tour21.jpg" alt="로비" data-caption="로비">
+			    <img src="/upload/about/tour22.jpg" alt="입원실" data-caption="입원실">
+		    </div>
+		    <div class="caption" id="caption">종합진료실</div>
+		
+		    <!-- 좌우 버튼 -->
+		    <button class="prev">&#10094;</button>
+		    <button class="next">&#10095;</button>
+		  </div>
+		</div>
+		
+		<script>
+			const slides = document.querySelectorAll('.slides img');
+			const caption = document.getElementById('caption');
+			const prevBtn = document.querySelector('.prev');
+			const nextBtn = document.querySelector('.next');
+	
+			let currentIndex = 0;
+			let autoSlide;
+	
+			// 슬라이드 표시
+			function showSlide(index) {
+			  slides.forEach(s => s.classList.remove('active'));
+			  slides[index].classList.add('active');
+			  caption.textContent = slides[index].dataset.caption;
+			  currentIndex = index;
+			}
+	
+			// 버튼 이벤트
+			prevBtn.addEventListener('click', () => {
+			  let newIndex = (currentIndex - 1 + slides.length) % slides.length;
+			  showSlide(newIndex);
+			  resetAutoSlide();
+			});
+			nextBtn.addEventListener('click', () => {
+			  let newIndex = (currentIndex + 1) % slides.length;
+			  showSlide(newIndex);
+			  resetAutoSlide();
+			});
+	
+			// 자동 슬라이드
+			function startAutoSlide() {
+			  autoSlide = setInterval(() => {
+			    let newIndex = (currentIndex + 1) % slides.length;
+			    showSlide(newIndex);
+			  }, 4000); // 4초마다
+			}
+			function resetAutoSlide() {
+			  clearInterval(autoSlide);
+			  startAutoSlide();
+			}
+	
+			// 초기화
+			showSlide(0);
+			startAutoSlide();
+
+		</script>
+	</div>
+</body>
+</html>

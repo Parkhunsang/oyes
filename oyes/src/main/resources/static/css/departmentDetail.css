@@ -5,6 +5,9 @@ div.top_bar{
 	background-color:#0E7758;	
 	display:flex;
 	justify-content:center;
+	position:fixed;
+	top:120px;
+	index:3;
 }
 div.center_div{
 	display:flex;
@@ -47,7 +50,7 @@ span.home_icon{
 	background:url('/images/home_icon.png') no-repeat center;
 	background-size:cover;
 }
-/* [Gemini 추가] 클릭 드롭다운 스타일 시작 */
+
 ul.top_util_list > li {
     position: relative;
 }
@@ -68,7 +71,7 @@ ul.drop_list {
 ul.top_util_list li:nth-child(3) ul.drop_list{
 	left:54%;
 }
-/* JS로 토글할 .show 클래스 */
+
 ul.drop_list.show {
     display: block;
 }
@@ -95,8 +98,6 @@ ul.drop_list li a:hover {
 ul.top_util_list > li:nth-child(2)>span, ul.top_util_list > li:nth-child(3)>span{
     cursor: pointer;
 }
-/* [Gemini 추가] 클릭 드롭다운 스타일 끝 */
-
 
 div#container{
 	width:100%;

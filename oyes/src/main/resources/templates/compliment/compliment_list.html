@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+	<htmlxmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}"
+	>
+<th:block th:insert="~{/header.html::header}"></th:block>
+<head>
+	<meta charset="UTF-8">
+	<title>complimentList</title>
+	<script>
+	function openModal(element) {
+		document.getElementById("modalTitle").innerText = element.dataset.title;
+		document.getElementById("modalFor").innerText = "for . " + element.dataset.for;
+		document.getElementById("modalContent").innerText = element.dataset.content;
+		document.getElementById("modalDate").innerText = element.dataset.date;
+
+		const doctorCard = document.getElementById("modal_doctor_card");
+		const hasDoctorInfo = element.dataset.doctorName && element.dataset.doctorName.trim() !== "";
+		const placeholderImg = "profile_default.png";
+		
+		if(hasDoctorInfo) {
+			document.getElementById("modalDoctorName").innerText = element.dataset.doctorName+" 교수" || "";
+			document.getElementById("modalDoctorSpecialty").innerText = element.dataset.doctorSpecialty || "전문분야 설정 안함";
+			document.getElementById("modalDoctorTitle").innerText = element.dataset.doctorTitle || "";
+
+			img = element.dataset.doctorImg || placeholderImg;
+			document.getElementById("modalDoctorImg").src = "/images/"+img;
+			doctorCard.style.display = "flex";
+		}else {
+			doctorCard.style.display = "none";
+		}
+
+		document.getElementById("complimentModal").style.display = "block";
+	}
+	
+	function closeModal(){
+		document.getElementById("complimentModal").style.display = "none";
+		}
+		
+	window.onclick = function(event){
+		const modal = document.getElementById("complimentModal");
+		if(event.target === modal) {
+			closeModal();
+		}
+	}
+</script>
+	
+<style type="text/css">
+/*compliment_list 페이지 스타일 시작*/
+div#comp_wrap {
+	margin-top: 200px;
+	width:100%;
+	height:100%;
+	display:flex;
+	flex-direction: row;	
+	flex-wrap: wrap;
+	justify-content: center;
+}
+section#comp_center {
+	width:1200px;
+	height:auto;
+	position: relative;
+	left:0px;
+	top:0px;
+}
+h2#compliment_h2{
+	font: bold 32px/12px 'pretendard';
+	height: 56px;
+	width: 100%;
+	text-align: center;
+	margin-bottom: 32px;
+	border-bottom: 2px solid black;
+}
+/*main 이미지 스타일 시작*/
+div#compliment_main {
+	position:relative;
+	top:0px;
+	left:0px;
+	width: 100%;
+	height: 400px;
+	background: url("/images/img_jumbotron03.jpg") no-repeat center center / cover;
+	margin-bottom: 32px;
+}
+div#compliment_main_textbox {
+	width: 50%;
+	height:80%;
+	padding: 56px 35px 40px;
+	background:#108663;
+	box-sizing: border-box;
+	position: relative;
+	top:10%;
+	right:-50%;
+	margin-right:-80%;
+	margin-top: -14%;
+}
+i#comp_main_icon {
+	display: block;
+	width:44px;
+	height:44px;
+	overflow: hidden;
+	background: url("/images/spr_iconM.png") no-repeat;
+	background-position-x: -230px;
+	margin-bottom: 5px;
+}
+div#compliment_main_textbox>p {
+	color:ghostwhite;
+	font: normal 16px 'pretendard';
+}
+div#compliment_main_textbox>p#comp_main_title {
+	font: bold 30px 'pretendard';
+	margin-bottom: 8px;
+}
+div#compliment_main_textbox>p#comp_main_text {
+	margin-bottom: 24px;
+}
+button.main-insert-btn {
+	width: 100px;	
+	height: 40px;
+	padding: 0 20px;
+	font-size: 16px;
+	line-height: 38px;
+	box-sizing: border-box;
+	color:#666;
+	text-align: center;
+	cursor: pointer;
+	background:white;
+}
+/*main 이미지 스타일 끝*/
+/*compliment_list info 스타일 시작*/
+div#compInfo_process {
+	width: 100%;
+	height:auto;
+	display:flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	color:#222222;
+	margin-bottom: 40px;
+}
+div#compInfo_process>h3 {
+	width:100%;
+	height:40px;
+	font: bold 24px 'pretendard';
+	margin-bottom: 24px;
+}
+ul#compInfo_warnList {
+	width:100%;
+	font: normal 16px 'pretendard';
+	height: 100px;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	margin-bottom: 32px;
+}
+ul#compInfo_warnList>li {
+	list-style: disc !important;
+	margin-left: 24px;
+	color: #666;
+}
+ul#compInfo_processList {
+	width:100%;
+	height: 220px;
+	display: grid;
+	grid-template-columns: repeat(4, 1fr) ;
+	column-gap: 28px;
+	align-items: stretch;
+}
+ul#compInfo_processList>li{
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	justify-content: space-around;
+	border: 1px solid #108663;
+	padding: 24px;
+	box-sizing: border-box;
+	position: relative;
+	left: 0px;
+	top:0px;
+}
+ul#compInfo_processList>li::after {
+	content: "";
+	display: block;
+	position: absolute;
+	width: 6px;
+	height: 9px;
+	background: url("/images/spr_icon_etc.png") no-repeat -32px -92px;
+	left:276px;
+}
+ul#compInfo_processList>li::before {
+	content:"";
+	display: block;
+	position: absolute;
+	width:31px;
+	height:31px;
+	border-radius: 50%;
+	background: #108663;
+	left: 262px;
+}
+ul#compInfo_processList>li:last-child::before {
+	display: none;
+}
+ul#compInfo_processList>li:last-child::after {
+	display: none;
+}
+li>p.process_step {
+	width: 60px;
+	height: 32px;
+	text-align: center;
+	font: normal 14px/32px 'pretendard';
+	font-weight: 500;
+	background:#108663;
+	color:white;
+}
+li>p.process_title {
+	width:100%;
+	height: 32px;
+	font: normal 20px 'pretendard';
+	font-weight: 500;
+}
+li>p.process_text{
+	width:100%;
+	height: 40px;
+	font: normal 16px 'pretendard';
+	color: #666;
+}
+li>p#process_text {
+	width: 100%;
+	height: 24px;
+	color: #108663;
+}
+li>a>button.compInfo_btn {
+	width: 80px;
+	height: 32px;
+	border: 1px solid #108663;
+	font: normal 14px/32px 'pretendard';
+	text-align: center;
+}
+/*compliment_list info 스타일 끝*/
+/*compliment list 목록 스타일 시작*/
+div#comp_list {
+	width: 100%;
+	min-height: 320px;
+	display:grid;
+	grid-template-columns: repeat(3, 1fr);
+	grid-gap: 24px;
+	margin-bottom: 24px;
+}
+ul.comp_content {
+	width:100%;
+	height:100%;
+	border-radius: 24px;
+	border: 1px solid #1b7eaf;
+	padding: 16px;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+li.compliment_title {
+	font: bold 16px 'pretendard';
+	height: 32px;
+	cursor: pointer;
+}
+li.compliment_for {
+	font: normal 14px 'pretendard';
+	height:40px;
+	text-align: right;
+	border-bottom: 1px dotted black;
+}
+li.compliment_content {
+	font:normal 16px 'pretendard';
+	padding-top:12px;
+	box-sizing: border-box;
+	display: -webkit-box;             /* 플렉스 박스 대신 웹킷 박스 모델 사용 */
+	-webkit-box-orient: vertical;     /* 박스 방향을 수직으로 설정 */
+	-webkit-line-clamp: 5;            /* 보여줄 줄 수 지정 (예: 3줄) */
+	overflow: hidden;                 /* 넘치는 텍스트 숨김 */
+	text-overflow: ellipsis;          /* 넘치는 부분을 ... 으로 표시 */
+	margin-bottom: 48px;
+	text-align: justify;
+	cursor: pointer;
+}
+li.compliment_date {
+	font:normal 14px 'pretendard';
+	text-align: right;
+}
+div.complist_btn_wrap {
+	width: 180px;
+	height: 40px;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: space-around;
+}
+a.btn {
+	display: block;
+	border-radius: 12px;
+	box-sizing: border-box;
+	font: normal 16px/34px 'pretendard';
+	text-align: center;
+	color:aliceblue;
+}
+a.comp-btn-update {
+	width: 80px;
+	height: 40px;
+	background: #1b7eaf;
+	border: 2px solid white;
+}
+a.comp-btn-delete {
+	width: 80px;
+	height: 40px;
+	background: rgb(152, 3, 3);
+	border: 2px solid white;
+}
+ul.pagination {
+	width:100%;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: center;
+}
+div#compliment_paging {
+	width: 100%;
+	height: 48px;
+	margin-top: 36px;
+}
+ul.pagination>li {
+	margin-right: 8px;
+	font:normal 16px 'pretendard';
+}
+ul.pagination>li:last-child {
+	margin-right: none;
+}
+a.page-link {
+	color:lightslategray;
+}
+a.page-link-active {
+	font-weight: bold;
+	text-decoration: underline;
+}
+button.go-insert-btn {
+	position:relative;
+	top:-32px;
+	right:0px;
+	width: 120px;
+	height: 40px;
+	float: right;
+	border-radius: 12px;
+	background: #108663;
+	font: normal 18px/40px 'pretendard';
+	color:white;
+}
+div#search_compliment {
+	width: 100%;
+	height: 20px;
+	display:flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: center;
+	margin-bottom: 150px;
+}
+div#search_compliment>.feFoSelect {
+	width: 120px !important;
+	height: 40px !important;
+	line-height: 40px !important;
+	text-align: center !important;
+}
+input.searchInput {
+	width: 400px;
+	height: 40px;
+	margin-right: 16px;
+}
+div#search_compliment>input.comp_search_btn {
+	width: 60px;
+	height:40px;
+	background: white;
+	border: 1px solid #1b7eaf;
+	color:#1b7eaf;
+}
+/*compliment list 목록 스타일, 페이지 스타일 끝*/
+/*compliment_list > modal 스타일 시작*/
+#complimentModal {
+	display:none;	/*이거 좀따 display:none; 으로 바꿔야함*/
+	position:fixed;
+	z-index: 1000;
+	left:0px; top:0px;
+	width:100%;
+	height:100%;
+	background: rgba(0,0,0,0.6);
+}
+div.modal-content{
+	width: 600px;
+	min-height: 600px;
+	border-radius: 16px;
+	position:absolute;
+	left:50%;
+	margin-left:-300px;
+	top:50%;
+	margin-top:-300px;
+	padding:8px;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	align-content: center;
+	box-sizing: border-box;
+	font-family: 'pretendard';
+	background:white;
+	color:black;
+}
+span.close {
+	font: bold 32px 'pretendard';
+	display: block;
+	width:40px;
+	height:40px;
+	position:absolute;
+	margin-left:100%;
+	left:8px;
+	top:-12px;
+	color:white;
+	cursor: pointer;
+}
+h2#modalTitle {
+	width:90%;
+	height:32px;
+	font: bold 24px 'pretendard';
+	text-align:center;
+	height:auto;
+}
+p#modalFor {
+	width:90%;
+	height:auto;
+	text-align: right;
+	margin-right: 16px;
+	font:normal 14px 'pretendard';
+	padding-right:24px;
+	margin-bottom: 12px;
+}
+div#modal_doctor_card {
+	width:80%;
+	height: auto;
+	border-radius: 12px;
+	position:relative;
+	left:50%;
+	margin-left:-45%;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-bottom:24px;
+}
+div#modal_doctor_card::after{
+	content: "";
+	display: block;
+	width: 100%;
+	height:2px;
+	background:lightslategray;
+	position: relative;
+	top: 12px;
+	margin-bottom:12px;
+}
+img#modalDoctorImg {
+	width:120px;
+	height:120px;
+	object-fit: cover;
+	background-color: #f0f0f0;
+	float: left;
+	font-size: 14px;
+}
+div#modal_card_text {
+	width: 70%;
+	height:100%;
+	display:flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: 8px;
+	box-sizing: border-box;
+}
+div#modal_card_text>p {
+	height:14px;
+	font: normal 14px 'pretendard';
+}
+div#doctorNameSpecial {
+	width:100%;
+	height:14px;
+	margin-bottom:16px;
+}
+p#modalDoctorName {
+	width: 100px;
+	float: left;
+	font:bold 14px 'pretendard';
+}
+p#modalDoctorSpecialty {
+	width: 200px;
+	float: left;
+	font:normal 14px 'pretendard';
+	display: -webkit-box;             /* 플렉스 박스 대신 웹킷 박스 모델 사용 */
+	-webkit-box-orient: vertical;     /* 박스 방향을 수직으로 설정 */
+	-webkit-line-clamp: 1;            /* 보여줄 줄 수 지정 (예: 3줄) */
+	overflow: hidden;                 /* 넘치는 텍스트 숨김 */
+	text-overflow: ellipsis;
+}
+p#modalContent {
+	width: 80%;
+	min-height: 160px;
+	font: normal 14px 'pretendard';
+	position: relative;
+	left:50%;
+	margin-left: -45%;
+	text-align: justify;
+	margin-bottom:24px;
+	margin-top: 12px;
+}
+p#modalDate {
+	width: 90%;
+	text-align: right;
+	font:normal 12px 'pretendard';
+	padding-right: 16px;
+}
+/*compliment_list > modal 스타일 끝*/
+/*compliment_insertForm 페이지 스타일 시작*/
+div#compliment_insert_wrap {
+	width:100%;
+	height:auto;
+	position:relative;
+	top:0px;
+	left:0px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	padding-top: 32px;
+	margin-top: 120px;
+}
+h2#compliment_insert_h2 {
+	width:100%;
+	height:100px;
+	text-align: center;
+}
+h2#compliment_insert_h2>span {
+	display: block;
+	width: 100%;
+	height: 40px;
+}
+span#compliment_insert_title {
+	font:bold 32px 'pretendard';
+}
+span#compliment_insert_subtitle {
+	font:normal 24px 'pretendard';
+}
+p#compliment_insert_warning {
+	width:360px;
+	height:40px;
+	text-align: center;
+	font:normal 16px/36px 'pretendard';
+	color:red;
+	margin-bottom: 40px;
+}
+form.compliment_insert_form {
+	width: 80%;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+}
+ul.compliment_insert_list {
+	width:100%;
+	height:auto;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	text-align: center;
+	margin-bottom: 24px;
+	align-content: center;
+}
+ul.compliment_insert_list>li {
+	position: relative;
+	width: 80%;
+	font:normal 16px/68px 'pretendard';
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: center;
+	align-content: center;
+	border-bottom: 1px dotted black;
+}
+ul.compliment_insert_list>li:last-child {
+	border-bottom: none;
+}
+ul.compliment_insert_list>li>p {
+	width:220px;
+	height: 72px;
+}
+select.open_select {
+	width: 100px;
+	height: 24px;
+	text-align: center;
+	float: left;
+	margin-right: 12px;
+	box-sizing: border-box;
+}
+ul.compliment_insert_list>li>p#compliment_select_info {
+	width: 300px;
+	color: lightslategray;
+	font-size: 14px;
+	float: left;
+	text-align: left;
+	text-indent: 16px;
+}
+.compliment_input {
+	width: 400px;
+	height: 40px;
+	margin-top: 14px;
+}
+ul.compliment_insert_list>li>p:last-child{
+	width:100%;
+	height:auto;
+}
+ul.compliment_insert_list>li>textarea.compliment_input {
+	width:400;
+	height:400px;
+	margin-bottom: 24px;
+}
+div#compliment_btns {
+	width:80%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	margin-bottom: 24px;
+	position:relative;
+	left:50%;
+	margin-left: -40%;
+}
+input.btn {
+	width: 100px;
+	height: 40px;
+	border:none;
+	border-radius: 8px;
+	font:normal 16px 'pretendard';
+}
+input.reset_btn {
+	background:white;
+	border: 1px solid black;
+}
+input.submit_btn {
+	background:#1b7eaf;
+	color: white;
+}
+/* 의사검색 부분 부트스트랩 */
+.list-group {
+  display: block;
+  width: 60%;
+  padding: 0;
+  margin: 0;
+  border-radius: .25rem;
+}
+.list-group-item {
+  max-height: 200px;
+  position: relative;
+  display: block;
+  padding: .5rem 1rem;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+.list-group-item.active {
+  background-color: #0d6efd;
+  color: #fff;
+}
+#suggestions {
+  position: absolute !important;
+  top: 48px; /* input 바로 밑 */
+  left: 30%;
+  right: 0;
+  z-index: 2000 !important; /* bootstrap modal보다 높은 값 */
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+/*의사 검색 부분 부트스트랩 끝*/
+/*compliment_insertForm 페이지 스타일 끝*/
+/*compliment_info 페이지 스타일 시작*/
+			
+		</style>
+</head>
+<body>
+		<div layout:fragment="contentFragment" id="container">
+			<div id="comp_wrap">
+				<section id="comp_center">
+					<h2 id="compliment_h2">고맙습니다</h2>
+					<div id="compliment_main">
+						<div id="compliment_main_textbox">
+							<i id="comp_main_icon"></i>
+							<p id="comp_main_title">고맙습니다</p>
+							<p id="comp_main_text">칭찬은 하는 사람과 받는 사람 모두를 즐겁게 합니다.<br>
+								하나의 칭찬이 또 다른 칭찬을 만들어 갈 수 있도록 직원들을 칭찬해주세요.</p>
+							<a th:href="@{/compliment/compliment_insertForm}">
+								<button class="btn main-insert-btn">글쓰기</button>
+							</a>
+						</div>
+					</div>
+					<div id="compInfo_process">
+						<h3>고객의 소리 회신 절차</h3>
+						<ul id="compInfo_warnList">
+							<li>올려 주신 글 중 사안에 따라 회신을 드려야 할 경우엔 가능한 빠른 시간 내 회신드리도록 하겠습니다.</li>
+							<li>진료와 관련된 내용은 담당 책임의 진료 및 상담을 권유합니다.</li>
+							<li>광고나 욕설이 포함된 글에 대해 답변드리지 않으며 임의 삭제할 수 있습니다.</li>
+						</ul>
+						<ul id="compInfo_processList">
+							<li>
+								<p class="process_step">STEP 1</p>
+								<p class="process_title">접수</p>
+								<p class="process_text">방문, 전화, 서면, 온라인</p>
+							</li>
+							<li>
+								<p class="process_step">STEP 2</p>
+								<p class="process_title">검토</p>
+								<p class="process_text">내용 파악 조사 분석</p>
+							</li>
+							<li>
+								<p class="process_step">STEP 3</p>
+								<p class="process_title">개선</p>
+								<p class="process_text">처리방안 검토 개선 활동</p>
+							</li>
+							<li>
+								<p class="process_step">STEP 4</p>
+								<p class="process_title">회신</p>
+								<p class="process_text">결과 회신</p>
+								<p id="process_text">내 진료정보 - '내가 쓴 글'에서 확인</p>
+								<a th:href="@{/mypage/mythank}">
+									<button class="btn compInfo_btn">내가 쓴 글</button>
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div id="comp_list">
+						<th:block th:if="${compliment_list == null or #lists.isEmpty(compliment_list)}">데이터가 없습니다</th:block>
+						<!-- 제목,내용을 클릭하면 상세페이지 모달 open -->
+						<ul th:each="ca : ${compliment_list}" class="comp_content">
+							<li class="compliment_title" th:text="${ca.compliment_title}" th:data-title="${ca.compliment_title}"
+								th:data-for="${ca.compliment_for}" th:data-content="${ca.compliment_content}"
+								th:data-date="${ca.create_date}" th:data-doctor-name="${ca.doctor_name}"
+								th:data-doctor-title="${ca.doctor_title}"
+								th:data-doctor-specialty="${ca.doctor_doctor_specialty}"
+								th:data-doctor-img="${ca.doctor_profile_image}" onclick="openModal(this)">
+								[[${ca.compliment_title}]]</li>
+							<li class="compliment_for">for . [[${ca.compliment_for}]]</li>
+							<li class="compliment_content" th:text="${ca.compliment_content}"
+								th:data-title="${ca.compliment_title}" th:data-for="${ca.compliment_for}"
+								th:data-content="${ca.compliment_content}" th:data-date="${ca.create_date}"
+								th:data-doctor-name="${ca.doctor_name}" th:data-doctor-title="${ca.doctor_title}"
+								th:data-doctor-specialty="${ca.doctor_doctor_specialty}"
+								th:data-doctor-img="${ca.doctor_profile_image}" onclick="openModal(this)">
+								[[${ca.compliment_content}]]</li>
+							<li class="compliment_date">[[${ca.create_date}]]</li>
+							<!-- 관리자 계정이면 보이는 수정, 삭제 버튼 -->
+							<div th:if="${member.is_admin == 'y'}" class="complist_btn_wrap">
+								<a class="btn comp-btn-update"
+									th:href="@{/compliment/compliment_updateForm(compliment_no=${ca.compliment_no})}">수정</a>
+								<a class="btn comp-btn-delete"
+									th:href="@{/compliment/compliment_delete(compliment_no=${ca.compliment_no})}">삭제</a>
+							</div>
+						</ul>
+					</div>
+					<!-- compliment 상세 div 시작 -->
+					<div id="complimentModal" class="modal">
+						<div class="modal-content">
+							<span class="close" onclick="closeModal()">&times;</span>
+							<h2 id="modalTitle"></h2>
+							<p id="modalFor"></p>
+							<th:block>
+								<div id="modal_doctor_card">
+									<img id="modalDoctorImg" alt="의사 프로필 사진" style="max-width:120px; border-radius: 12px;">
+									<div id="modal_card_text">
+										<div id="doctorNameSpecial">
+											<p id="modalDoctorName"></p>
+											<p id="modalDoctorSpecialty"></p>
+										</div>
+										<p id="modalDoctorTitle"></p>
+										<p id="modalDoctorBio"></p>
+									</div>
+								</div>
+								<p id="modalContent"></p>
+								<p id="modalDate"></p>
+							</th:block>
+						</div>
+					</div>
+					<!-- compliment 상세 div 끝 -->
+					<!-- paging -->
+					<div id="compliment_paging">
+						<ul class="pagination justify-content-center">
+							<!-- 앞에 보여줄 것이 있다(이전) -->
+							<th:block th:if="${pb.startPage > pb.pagePerBlock}">
+								<li><a class="page-link" th:href="@{/compliment/compliment_list(pageNum=${pb.startPage - 3})}">
+										<i class="icofont-duotone icofont-arrow-first"></i>
+									</a>
+								</li>
+							</th:block>
+							<th:block th:unless="${pb.startPage > pb.pagePerBlock}">
+								<li>
+									<a class="page-link" th:href="@{/compliment/compliment_list(pageNum=${pb.startPage - 1})}">
+										<i class="bi bi-arrow-left-circle"></i>
+									</a>
+								</li>
+							</th:block>
+							<th:block th:each="i : ${#numbers.sequence(pb.startPage, pb.endPage)}">
+								<th:block th:if="${pb.currentPage == i}">
+									<li>
+										<a class="page-link-active"
+											th:href="@{/compliment/compliment_list(pageNum=${i})}">[[${i}]]</a>
+									</li>
+								</th:block>
+								<th:block th:if="${pb.currentPage != i}">
+									<li>
+										<a class="page-link" th:href="@{/compliment/compliment_list(pageNum=${i})}">[[${i}]]</a>
+									</li>
+								</th:block>
+							</th:block>
+							<!-- 뒤에 보여줄 것이 남아 있다(다음) -->
+							<th:block th:if="${pb.endPage < pb.totalPage}">
+								<li>
+									<a class="page-link" th:href="@{/compliment/compliment_list(pageNum=${pb.endPage + 1})}">
+										<i class="icofont-duotone icofont-arrow-last"></i>
+									</a>
+								</li>
+							</th:block>
+							<th:block th:unless="${pb.endPage < pb.totalPage}">
+								<li>
+									<a class="page-link" th:href="@{/compliment/compliment_list(pageNum=${pb.endPage})}">
+										<i class="bi bi-arrow-right-circle"></i>
+									</a>
+								</li>
+							</th:block>
+						</ul>
+						<a th:href="@{/compliment/compliment_insertForm}">
+							<button class="btn btn-warning go-insert-btn">작성하기</button>
+						</a>
+					</div>
+					<div id="search_compliment">
+						<select id="select_keyword" name="search_compliment">
+							<option value="subject">제목</option>
+							<option value="content">내용</option>
+							<option value="subcon">제목+내용</option>
+							<option value="doctor">의사이름</option>
+						</select>
+						<input type="text" name="search" class="searchInput" placeholder="검색 필터링을 선택한 후 검색할 단어를 입력하세요">
+						<input type="button" onclick="" value="검색" class="btn comp_search_btn">
+					</div>
+				</section>
+			</div>
+		</div>
+	</body>
+</html>

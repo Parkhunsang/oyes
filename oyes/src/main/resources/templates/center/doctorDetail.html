@@ -6,39 +6,155 @@
 <head>
 <meta charset="UTF-8">
 <title>[[${doctor.doctor_name}]] 의사 상세 정보</title>
+<link rel="stylesheet" th:href="@{/style.css}">
+<link rel="stylesheet" th:href="@{/css/departmentDetail.css}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
-		function showTab(tabId) {
-			// 모든 탭 컨텐츠를 숨김
-			document.getElementById('content1').style.display = 'none';
-			document.getElementById('content2').style.display = 'none';
-			
-			// 모든 탭의 selected 클래스를 제거
-			document.getElementById('tab1').classList.remove('selected');
-			document.getElementById('tab2').classList.remove('selected');
-			
-			// 클릭된 탭에 해당하는 컨텐츠를 보여줌
-			const contentId = 'content' + tabId.replace('tab', '');
-			document.getElementById(contentId).style.display = 'block';
-			
-			// 클릭된 탭에 selected 클래스를 추가
-			document.getElementById(tabId).classList.add('selected');
+	$(document).ready(function() {
+	    $('ul.top_util_list > li > span').on('click', function(event) {
+	        var $dropdown = $(this).siblings('ul.drop_list');
+	        $dropdown.toggleClass('show');
+	        event.stopPropagation();
+	    });
+	
+	    $(document).on('click', function() {
+	        if ($('ul.drop_list').hasClass('show')) {
+	            $('ul.drop_list').removeClass('show');
+	        }
+	    });
+	
+	    $('ul.drop_list').on('click', function(event) {
+	        event.stopPropagation();
+	    });
+	});
+
+	function showTab(tabId) {
+		// 모든 탭 컨텐츠를 숨김
+		document.getElementById('content1').style.display = 'none';
+		document.getElementById('content2').style.display = 'none';
+		
+		// 모든 탭의 selected 클래스를 제거
+		document.getElementById('tab1').classList.remove('selected');
+		document.getElementById('tab2').classList.remove('selected');
+		
+		// 클릭된 탭에 해당하는 컨텐츠를 보여줌
+		const contentId = 'content' + tabId.replace('tab', '');
+		document.getElementById(contentId).style.display = 'block';
+		
+		// 클릭된 탭에 selected 클래스를 추가
+		document.getElementById(tabId).classList.add('selected');
+	}
+	
+	let date=new Date() //인스턴스 선언
+	// 캘린더 
+	const data = [];
+		let calendarList = [];
+		let doctor_id = "[[${doctor.doctor_id}]]";
+		k1(doctor_id)  
+		    
+		setTimeout(() => {
+		k2()
+		//이번달 달력 생성
+		renderCal(date)
+	 },300)
+
+	function k1(doctor_id) {
+		$.post('/data','doctor_id='+doctor_id, function(item) {
+
+		for(let i in item) {
+			let imsi = {};
+			imsi['date']=item[i].reservation_date.substring(0,10);
+			let hour = parseInt(item[i].reservation_date.substring(11,13), 10);
+			if (hour >= 12) {
+				imsi['hour'] = '<span class="pm-background">오후</span>';
+			} else {
+				imsi['hour'] = '<span class="am-background">오전</span>';
+			}
+ 			imsi['content']=item[i].visit_type;
+			data.push(imsi);		
+			}
+		});
+	}
+	function k2() {
+		calendarList = data.reduce(
+		(acc, v) => ({ ...acc, [v.date]: [...(acc[v.date] || []), v.content,v.hour] }), {});
 		}
+		//pad method
+		Number.prototype.pad = function() {
+		return this > 9 ? this : '0' + this;
+	}
+	function renderCal(date) {
+		const viewYear=date.getFullYear() 
+		const viewMonth=date.getMonth() + 1 //월은 0부터 시작하므로 +1해야됨.
+		const viewDay=date.getDay() //요일은 일요일~토요일까지 0~6까지 표현된다.
+	    
+		document.querySelector('.date-now').textContent=`${viewYear}년 ${viewMonth}월`
+		const firstDay = new Date(date.setDate(1)).getDay();
+		const lastDay = new Date(date.getFullYear(), date.getDay(), 0).getDate();
+		
+		const limitDay = firstDay + lastDay;
+		const nextDay = Math.ceil(limitDay / 7) * 7;
+	 
+		let htmlDummy = '';
+		  //날짜 아이템 생성
+		for (let i = 0; i < firstDay; i++) {
+		    htmlDummy += '<div class="noColor"></div>';
+		}
+		for (let i = 1; i <= lastDay; i++) {  
+			let date = `${viewYear}-${viewMonth.pad()}-${i.pad()}`  
+			
+			const visitContent = calendarList[date]?.join('</p><p>') || '';
+			
+			const hasVisitClass = visitContent ? 'has-visit' : '';
+			htmlDummy += `
+			<div class="${hasVisitClass}">${i}
+			<p>${visitContent}
+			</p>
+			</div>`
+		}
+		for (let i = limitDay; i < nextDay; i++) {
+			htmlDummy += `<div class="noColor"></div>`;
+		}
+  
+  //HTML에 날짜 아이템 넣기
+		document.querySelector(`.date-board`).innerHTML = htmlDummy;	  
+	}
+	 
+	//저번달 달력 생성
+	
+// 	document.querySelector('.date-last').onclick=()=>{
+// 		alert('.date-last');
+// 		renderCal(new Date(date.setMonth(date.getMonth()-1)))
+// 	}
+	 function a1() {
+		 renderCal(new Date(date.setMonth(date.getMonth()-1)))	 
+	 }
+	//다음달 달력 생성
+	
+// 	document.querySelector('.date-next').onclick=()=>{
+// 		alert('.date-last');
+// 		renderCal(new Date(date.setMonth(date.getMonth()+1)))
+// 	}
+	function a2() {
+		renderCal(new Date(date.setMonth(date.getMonth()+1)))	 
+	 }
 	</script>
 <style>
+div.center_div{
+	display:flex;
+	justify-content:center;
+}
 div#container {
 	width: 100%;
 	height: auto;
-	display: flex;
-	justify-content: center;
-	margin-top: 70px;
+	margin-top: 50px;
 	margin-bottom: 120px;
 }
-
 div.doctor_detail_container {
 	width: 1200px;
 	height: 100%;
+	margin-top: 70px;
 }
-
 div.doctor_detail_container h1 {
 	font: 700 34px 'pretendard';
 	float: left;
@@ -50,26 +166,22 @@ div.doctor_heading {
 	justify-content: space-between;
 	margin-bottom: 35px;
 }
-
 div.doctor_list_btn {
 	width: 150px;
 	height: 40px;
 	background-color: #1B7EAF;
 	text-align: center;
 }
-
 div.doctor_list_btn a {
 	line-height: 40px;
 	font-family: 'pretendard';
 	color: white;
 }
-
 div.profile_img_wrap {
 	width: 460px;
 	height: 850px;
 	float: left;
 }
-
 div.profile_img_wrap img {
 	width: 100%;
 	height: 100%;
@@ -82,19 +194,17 @@ div.profile_info_wrap {
 	overflow-x: hidden;
 	overflow-y: scroll;
 }
-
 div.profile_title_wrap {
 	margin-bottom: 52px;
 }
-
 div.profile_title_wrap h3 {
 	font: 700 40px 'pretendard';
 	display: inline-block;
 	margin-right: 12px;
 	position: relative;
 	margin-bottom: 26px;
+	color: #000;
 }
-
 div.profile_title_wrap h3::after {
 	content: '';
 	display: block;
@@ -105,17 +215,15 @@ div.profile_title_wrap h3::after {
 	left: 0px;
 	bottom: -14px;
 }
-
 div.profile_title_wrap span {
 	font: 700 40px 'pretendard';
 	margin-bottom: 20px;
+	color: #000;
 }
-
 div.profile_title_wrap p {
 	font: 600 18px 'pretendard';
 	color: #222;
 }
-
 div.profile_specialty_wrap {
 	display: flex;
 	flex-direction: column;
@@ -124,31 +232,64 @@ div.profile_specialty_wrap {
 	padding: 8px 0px;
 	box-sizing: border-box;
 }
-
 div.profile_specialty_wrap p:first-child {
 	font: 600 18px 'pretendard';
 	color: #222;
 }
-
 div.profile_specialty_wrap p:last-child {
 	font: 400 16px 'pretendard';
 	color: #666;
 }
-
 div.profile_scedule_wrap {
 	width: 100%;
-	height: 514px;
-	border: 1px solid #666;
-}
-
-div.profile_scedule_wrap {
+	min-height: 200px;
+	gap:18px;
+	border-top:2px solid #666;
 	margin-bottom: 50px;
+	display: flex;
+	flex-direction: column;
 }
-
 div.profile_rutil_btn_wrap {
 	width: 100%;
-	height: 100px;
-	border: 1px solid #666;
+	height: 50px;
+	display:flex;
+	flex-direction:row;
+	justify-content:center;
+}
+div.center_rediv{
+	width:60%;
+	display:flex;
+	flex-direction:row;
+	justify-content:space-between;
+	gap:12px;
+}
+div.profile_rutil_btn_wrap a{
+	flex:1;
+	color:#fff;
+	text-align:center;
+	line-height:50px;
+}
+a.reservation_btn{
+	background:#1b7eaf;
+}
+a.reservation_btn span{
+	display:inline-block;
+	width:16px;
+	height:16px;
+	background:url('/images/reservation_icon.png') no-repeat center;
+	background-size:cover;
+	margin-right:6px;
+}
+a.thanks_btn span{
+	display:inline-block;
+	width:16px;
+	height:16px;
+	background:url('/images/heart_icon.png') no-repeat center;
+	background-size:cover;
+	margin-right:6px;
+}
+a.thanks_btn{
+	background:#09847d;
 }
 
 ul.profile_util_list {
@@ -157,36 +298,29 @@ ul.profile_util_list {
 	flex-direction: row;
 	margin: 40px 0 45px;
 }
-
 ul.profile_util_list li {
 	flex: 1;
 	border: 1px solid #ddd;
 	text-align: center;
 	cursor: pointer;
 }
-
 ul.profile_util_list li:nth-child(1) {
 	border-right: none;
 }
-
 ul.profile_util_list li a {
 	color: #666;
 	line-height: 50px;
 }
-
 ul.profile_util_list li.selected {
 	border: 1px solid #1B7EAF;
 	background-color: #1B7EAF;
 }
-
 ul.profile_util_list li.selected a {
 	color: #fff;
 }
-
 div.profile_education_wrap, div.profile_research_wrap {
 	margin-bottom: 14px;
 }
-
 div.profile_education_wrap h2, div.profile_research_wrap h2, div.profile_academic_wrap h2,
 	div.profile_write_wrap h2 {
 	width: 100%;
@@ -195,7 +329,6 @@ div.profile_education_wrap h2, div.profile_research_wrap h2, div.profile_academi
 	font: 600 16px/70px 'pretendard';
 	color: #222;
 }
-
 div.profile_education_wrap p, div.profile_research_wrap p, div.profile_academic_wrap p,
 	div.profile_write_wrap p {
 	width: 100%;
@@ -205,65 +338,175 @@ div.profile_education_wrap p, div.profile_research_wrap p, div.profile_academic_
 	font: 400 16px 'pretendard';
 	color: #666;
 }
+
+/* 17일 추가 부분 */
+div.profile_scedule_heading{
+	width:100%;
+	height:24px;
+	display:flex;
+	flex-direction:row;
+	justify-content:space-between;
+	margin-bottom:8px;
+}
+div.scedule_icon_wrap{
+	display:flex;
+	flex-direction:row;
+	gap:4px;
+	align-items:center;
+}
+div.scedule_time_wrap,div.scedule_available_wrap{
+	display:flex;
+	gap:4px;
+    border-right: 1px solid #ddd;
+    padding: 0px 12px;
+    box-sizing: border-box;
+}
+span.schedule_am,span.schedule_pm,span.schedule_holiday{
+    width:12px;
+    height:12px;
+    display:block;
+	margin-top:2px;
+}
+span.schedule_am{
+	background-color:#0f51b3;
+}
+
+span.schedule_pm{
+	background-color:#a9a9ac;
+}
+span.schedule_holiday{
+	background-color:#2ea8e6;
+}
+span.reservation_available{
+	border:1px solid #3086c9;
+	display:block;
+	width:12px;
+	height:12px; 
+	margin-top:2px;
+	
+}
+
 </style>
 </head>
 <body>
 	<div layout:fragment="contentFragment" id="container">
-		<div class="doctor_detail_container">
-			<div class="doctor_heading">
-				<h1>의료진 소개</h1>
-				<div class="doctor_list_btn">
-					<a th:href="@{/center/centerList(center_id=${center.center_id})}">진료과
-						의료진</a>
-				</div>
-			</div>
-			<div class="profile_wrap">
-				<div class="profile_img_wrap">
-					<img th:src="@{/images/} + ${doctor.doctor_profile_image}"
-						alt="의사 프로필 사진" />
-				</div>
-				<div class="profile_info_wrap">
-					<div class="profile_title_wrap">
-						<h3>[[${doctor.doctor_name}]]</h3>
-						<span>[[${doctor.doctor_title}]]</span>
-						<p>[[${doctor.department_name}]]</p>
-					</div>
-					<div class="profile_specialty_wrap">
-						<p>전문 진료 분야</p>
-						<p>[[${doctor.doctor_doctor_specialty}]]</p>
-					</div>
-					<div class="profile_scedule_wrap">
-						<!--예약 달력 공간-->
-					</div>
-					<div class="profile_rutil_btn_wrap"></div>
-					<ul class="profile_util_list">
-						<li id="tab1" class="selected" onclick="showTab('tab1')"><a>학력
-								및 경력사항</a></li>
-						<li id="tab2" onclick="showTab('tab2')"><a>논문 및 저서</a></li>
+	<div class="top_bar">
+			<ul class="top_util_list">
+				<li><a th:href="@{/index}"><span class="home_icon"></span></a></li>
+				<li><span>진료과</span>
+					<ul class="drop_list">
+						<li th:each="link : ${navLinks}">
+							<a th:href="@{${link.url}}" th:text="${link.text}">메뉴 항목</a>
+						</li>
 					</ul>
-					<div class="profile_axios_wrap">
-						<div id="content1">
-							<div class="profile_education_wrap">
-								<h2>학력사항</h2>
-								<p th:each="extra : ${doctorExtraList}"
-									th:if="${extra.sort_code == 1}" th:text="${extra.extra_data}"></p>
-							</div>
-							<div class="profile_research_wrap">
-								<h2>교육 및 연구경력</h2>
-								<p th:each="extra : ${doctorExtraList}"
-									th:if="${extra.sort_code == 2}" th:text="${extra.extra_data}"></p>
-							</div>
-							<div class="profile_academic_wrap">
-								<h2>기타 학술 관련 경력</h2>
-								<p th:each="extra : ${doctorExtraList}"
-									th:if="${extra.sort_code == 3}" th:text="${extra.extra_data}"></p>
+				</li>
+				<li><span>[[${center.center_name}]]</span>
+					<ul class="drop_list">
+						<li th:each="cent : ${allCenters}">
+							<a th:href="@{/center/centerDetail(center_id=${cent.center_id})}" th:text="${cent.center_name}">진료과 이름</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+		<div class=center_div>
+			<div class="doctor_detail_container">
+				<div class="doctor_heading">
+					<h1>의료진 소개</h1>
+					<div class="doctor_list_btn">
+						<a th:href="@{/center/doctorList(center_id=${center.center_id})}">진료과
+							의료진</a>
+					</div>
+				</div>
+				<div class="profile_wrap">
+					<div class="profile_img_wrap">
+						<img th:src="@{/images/} + ${doctor.doctor_profile_image}"
+							alt="의사 프로필 사진" />
+					</div>
+					<div class="profile_info_wrap">
+						<div class="profile_title_wrap">
+							<h3>[[${doctor.doctor_name}]]</h3>
+							<span>[[${doctor.doctor_title}]]</span>
+							<p>[[${doctor.department_name}]]</p>
+						</div>
+						<div class="profile_specialty_wrap">
+							<p>전문 진료 분야</p>
+							<p>[[${doctor.doctor_doctor_specialty}]]</p>
+						</div>
+						<div class="profile_scedule_heading">
+							<h2>진료일정</h2>
+							<div class="scedule_icon_wrap">
+								<span>외래진료</span>
+								<div class="scedule_time_wrap">
+									<span class="schedule_am"></span>
+									<span>오전</span>
+									<span class="schedule_pm"></span>
+									<span>오후</span>
+								</div>
+								<div class="scedule_available_wrap">
+									<span class="schedule_holiday"></span>
+									<span>휴진</span>
+									<span class="reservation_available"></span>
+									<span>예약가능</span>
+								</div>
 							</div>
 						</div>
-						<div id="content2" style="display: none;">
-							<div class="profile_write_wrap">
-								<h2>논문 및 저서</h2>
-								<p th:each="extra : ${doctorExtraList}"
-									th:if="${extra.sort_code == 4}" th:text="${extra.extra_data}"></p>
+						<div class="profile_scedule_wrap">
+							<div class="scedule_header">
+								<button class=`date-last` id="btn" onclick="a1()">&lt;</button>
+								<h2 class='date-now'></h2>
+								<button class=`date-next` id="btn" onclick="a2()">&gt;</button>
+							</div>
+							<div class="scedule_main">
+								<div class="calendar">
+									<div class="grid_box date-title">
+										<div>일</div>
+										<div>월</div>
+										<div>화</div>
+										<div>수</div>
+										<div>목</div>
+										<div>금</div>
+										<div>토</div>
+									</div>
+									<div class="grid_box date-board"></div>
+								</div>
+							</div>
+						</div>
+						<div class="profile_rutil_btn_wrap">
+							<div class="center_rediv">
+								<a class="reservation_btn"><span></span>진료예약</a>
+								<a class="thanks_btn"><span></span>고맙습니다</a>
+							</div>
+						</div>
+						<ul class="profile_util_list">
+							<li id="tab1" class="selected" onclick="showTab('tab1')"><a>학력
+									및 경력사항</a></li>
+							<li id="tab2" onclick="showTab('tab2')"><a>논문 및 저서</a></li>
+						</ul>
+						<div class="profile_axios_wrap">
+							<div id="content1">
+								<div class="profile_education_wrap">
+									<h2>학력사항</h2>
+									<p th:each="extra : ${doctorExtraList}"
+										th:if="${extra.sort_code == 1}" th:text="${extra.extra_data}"></p>
+								</div>
+								<div class="profile_research_wrap">
+									<h2>교육 및 연구경력</h2>
+									<p th:each="extra : ${doctorExtraList}"
+										th:if="${extra.sort_code == 2}" th:text="${extra.extra_data}"></p>
+								</div>
+								<div class="profile_academic_wrap">
+									<h2>기타 학술 관련 경력</h2>
+									<p th:each="extra : ${doctorExtraList}"
+										th:if="${extra.sort_code == 3}" th:text="${extra.extra_data}"></p>
+								</div>
+							</div>
+							<div id="content2" style="display: none;">
+								<div class="profile_write_wrap">
+									<h2>논문 및 저서</h2>
+									<p th:each="extra : ${doctorExtraList}"
+										th:if="${extra.sort_code == 4}" th:text="${extra.extra_data}"></p>
+								</div>
 							</div>
 						</div>
 					</div>

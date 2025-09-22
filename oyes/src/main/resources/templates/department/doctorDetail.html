@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html> -->
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="~{layouts/layout}">
@@ -7,8 +7,27 @@
 <meta charset="UTF-8">
 <title>[[${doctor.doctor_name}]] 의사 상세 정보</title>
 <link rel="stylesheet" th:href="@{/style.css}">
+<link rel="stylesheet" th:href="@{/css/departmentDetail.css}">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
+	$(document).ready(function() {
+	    $('ul.top_util_list > li > span').on('click', function(event) {
+	        var $dropdown = $(this).siblings('ul.drop_list');
+	        $dropdown.toggleClass('show');
+	        event.stopPropagation();
+	    });
+	
+	    $(document).on('click', function() {
+	        if ($('ul.drop_list').hasClass('show')) {
+	            $('ul.drop_list').removeClass('show');
+	        }
+	    });
+	
+	    $('ul.drop_list').on('click', function(event) {
+	        event.stopPropagation();
+	    });
+	});
+
 	function showTab(tabId) {
 		// 모든 탭 컨텐츠를 숨김
 		document.getElementById('content1').style.display = 'none';
@@ -30,7 +49,7 @@
 	// 캘린더 
 	const data = [];
 		let calendarList = [];
-		let doctor_id = "[[${doctor_id}]]";
+		let doctor_id = "[[${doctor.doctor_id}]]";
 		k1(doctor_id)  
 		    
 		setTimeout(() => {
@@ -41,14 +60,17 @@
 
 	function k1(doctor_id) {
 		$.post('/data','doctor_id='+doctor_id, function(item) {
+
 		for(let i in item) {
 			let imsi = {};
 			imsi['date']=item[i].reservation_date.substring(0,10);
-			let hour = item[i].reservation_date.substring(11,13);
-			if (hour > '12') hour = '오후';
-			else hour = '오전';
-			imsi['hour']=hour;
-			imsi['content']=item[i].visit_type;
+			let hour = parseInt(item[i].reservation_date.substring(11,13), 10);
+			if (hour >= 12) {
+				imsi['hour'] = '<span class="pm-background">오후</span>';
+			} else {
+				imsi['hour'] = '<span class="am-background">오전</span>';
+			}
+ 			imsi['content']=item[i].visit_type;
 			data.push(imsi);		
 			}
 		});
@@ -114,17 +136,11 @@
 // 		renderCal(new Date(date.setMonth(date.getMonth()+1)))
 // 	}
 	function a2() {
-		renderCal(new Date(date.setMonth(date.getMonth()-1)))	 
+		renderCal(new Date(date.setMonth(date.getMonth()+1)))	 
 	 }
 </script>
 
 <style>
-div.top_bar {
-	width: 100%;
-	height: 42px;
-	background: yellow;
-	margin-top: 120px;
-}
 div.center_div{
 	display:flex;
 	justify-content:center;
@@ -132,7 +148,7 @@ div.center_div{
 div#container {
 	width: 100%;
 	height: auto;
-	margin-top: 70px;
+	margin-top: 50px;
 	margin-bottom: 120px;
 }
 div.doctor_detail_container {
@@ -227,7 +243,7 @@ div.profile_specialty_wrap p:last-child {
 }
 div.profile_scedule_wrap {
 	width: 100%;
-	height: 514px;
+	min-height: 200px;
 	gap:18px;
 	border-top:2px solid #666;
 	margin-bottom: 50px;
@@ -324,18 +340,81 @@ div.profile_education_wrap p, div.profile_research_wrap p, div.profile_academic_
 	color: #666;
 }
 
+/* 17일 추가 부분 */
+div.profile_scedule_heading{
+	width:100%;
+	height:24px;
+	display:flex;
+	flex-direction:row;
+	justify-content:space-between;
+	margin-bottom:8px;
+}
+div.scedule_icon_wrap{
+	display:flex;
+	flex-direction:row;
+	gap:4px;
+	align-items:center;
+}
+div.scedule_time_wrap,div.scedule_available_wrap{
+	display:flex;
+	gap:4px;
+    border-right: 1px solid #ddd;
+    padding: 0px 12px;
+    box-sizing: border-box;
+}
+span.schedule_am,span.schedule_pm,span.schedule_holiday{
+    width:12px;
+    height:12px;
+    display:block;
+	margin-top:2px;
+}
+span.schedule_am{
+	background-color:#0f51b3;
+}
+
+span.schedule_pm{
+	background-color:#a9a9ac;
+}
+span.schedule_holiday{
+	background-color:#2ea8e6;
+}
+span.reservation_available{
+	border:1px solid #3086c9;
+	display:block;
+	width:12px;
+	height:12px; 
+	margin-top:2px;
+	
+}
 </style>
 </head>
 <body>
 	<div layout:fragment="contentFragment" id="container">
-		<div class="top_bar"></div>
+		<div class="top_bar">
+			<ul class="top_util_list">
+				<li><a th:href="@{/index}"><span class="home_icon"></span></a></li>
+				<li><span>진료과</span>
+					<ul class="drop_list">
+						<li th:each="link : ${navLinks}">
+							<a th:href="@{${link.url}}" th:text="${link.text}">메뉴 항목</a>
+						</li>
+					</ul>
+				</li>
+				<li><span>[[${department.department_name}]]</span>
+					<ul class="drop_list">
+						<li th:each="dept : ${allDepartments}">
+							<a th:href="@{/department/departmentDetail(department_id=${dept.department_id})}" th:text="${dept.department_name}">진료과 이름</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
 		<div class="center_div">
 			<div class="doctor_detail_container">
 				<div class="doctor_heading">
 					<h1>의료진 소개</h1>
 					<div class="doctor_list_btn">
-						<a
-							th:href="@{/department/doctorList(department_id=${department.department_id})}">진료과
+						<a th:href="@{/department/doctorList(department_id=${department.department_id})}">진료과
 							의료진</a>
 					</div>
 				</div>
@@ -355,6 +434,24 @@ div.profile_education_wrap p, div.profile_research_wrap p, div.profile_academic_
 							<p>[[${doctor.doctor_doctor_specialty}]]</p>
 						</div>
 						
+						<div class="profile_scedule_heading">
+							<h2>진료일정</h2>
+							<div class="scedule_icon_wrap">
+								<span>외래진료</span>
+								<div class="scedule_time_wrap">
+									<span class="schedule_am"></span>
+									<span>오전</span>
+									<span class="schedule_pm"></span>
+									<span>오후</span>
+								</div>
+								<div class="scedule_available_wrap">
+									<span class="schedule_holiday"></span>
+									<span>휴진</span>
+									<span class="reservation_available"></span>
+									<span>예약가능</span>
+								</div>
+							</div>
+						</div>
 						<div class="profile_scedule_wrap">
 							<div class="scedule_header">
 								<button class=`date-last` id="btn" onclick="a1()">&lt;</button>
@@ -379,8 +476,8 @@ div.profile_education_wrap p, div.profile_research_wrap p, div.profile_academic_
 						
 						<div class="profile_rutil_btn_wrap">
 							<div class="center_rediv">
-								<a class="reservation_btn"><span></span>진료예약</a>
-								<a class="thanks_btn"><span></span>고맙습니다</a>
+								<a th:href="@{/outpatient/departmentSelect(department_id=${department.department_id})}" class="reservation_btn"><span></span>진료예약</a>
+								<a href="/compliment/compliment_info" class="thanks_btn"><span></span>고맙습니다</a>
 							</div>
 						</div>
 						<ul class="profile_util_list">

@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.green.oyes.dto.Compliment;
 import com.green.oyes.dto.Favorite;
 import com.green.oyes.dto.Member;
+import com.green.oyes.dto.Outpatient;
 import com.green.oyes.dto.Proposal;
 import com.green.oyes.service.MypageService;
+import com.green.oyes.service.OutpatientService;
 
 import jakarta.servlet.http.HttpSession;
 @Controller
@@ -23,6 +25,8 @@ public class MypageController {
 	private MypageService ys;
 	@Autowired
 	private BCryptPasswordEncoder bpe;
+	@Autowired
+	private OutpatientService os;
 
 	@PostMapping("/mypage/deleteFavorite/{favorite_no}")
     public String deleteFavorite(@PathVariable("favorite_no") int favorite_no) {
@@ -47,6 +51,9 @@ public class MypageController {
 			Member member = ys.select(patient_id);
 			model.addAttribute("member", member);
 		}
+//		예약내역 뿌리기
+		List<Outpatient> list = os.select(patient_id);
+		model.addAttribute("list",list);
 	}
 	@GetMapping("/mypage/myreservation_2")
 	public void myreservation_2(Model model, HttpSession session) {
@@ -77,6 +84,7 @@ public class MypageController {
 			model.addAttribute("member", member);
 			model.addAttribute("propList", propList);
 		}
+		
 	}
 	@GetMapping("/mypage/myinfo")
 	public void myinfo(Model model, HttpSession session) {

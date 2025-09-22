@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<th:block th:insert="~{/header.html::header}"></th:block>
+	<head>
+		<meta charset="UTF-8">
+		<title>complimentInsert</title>
+	</head>
+	<body>
+		<div th:if="${result} > 0">
+			<script type="text/javascript">
+				alert("칭찬합니다 게시글 작성이 완료되었습니다");
+				location.href="/compliment/compliment_list";
+			</script>
+		</div>
+		<div th:if="${result} <= 0">
+			<script type="text/javascript">
+				alert("칭찬합니다 게시글 작성 실패");
+				history.back();
+			</script>
+		</div>
+	</body>
+</html>

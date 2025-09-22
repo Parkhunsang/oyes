@@ -24,7 +24,6 @@ public class DepartmentController {
 		List<Department> departmentList = ds.list();
 		model.addAttribute("departmentList",departmentList);
 
-		// [2025-09-15 Gemini 추가] 상단 드롭다운 메뉴(고정) 데이터 추가
 	    List<Map<String, String>> navLinks = new ArrayList<>();
 	    navLinks.add(Map.of("url", "/department/departmentList", "text", "진료과"));
 	    navLinks.add(Map.of("url", "/center/centerList", "text", "센터"));
@@ -34,7 +33,6 @@ public class DepartmentController {
 	    navLinks.add(Map.of("url", "/#", "text", "병원안내"));
 	    model.addAttribute("navLinks", navLinks);
 
-	    // [2025-09-15 Gemini 추가] 상단 드롭다운 메뉴(DB) 데이터 추가
 	    List<Department> allDepartments = ds.list();
 	    model.addAttribute("allDepartments", allDepartments);
 	}
@@ -52,7 +50,6 @@ public class DepartmentController {
 	    navLinks.add(Map.of("url", "/#", "text", "건강정보"));
 	    navLinks.add(Map.of("url", "/#", "text", "병원안내"));
 
-	    // [2025-09-15 Gemini 추가] 전체 진료과 목록을 가져와 모델에 추가
 	    List<Department> allDepartments = ds.list();
 	    model.addAttribute("allDepartments", allDepartments);
 	}
@@ -61,8 +58,7 @@ public class DepartmentController {
 	public void departmentPlce(@RequestParam("department_id") int department_id, Model model) {
 		Department department = ds.select(department_id);
 		model.addAttribute("department",department);
-		
-		// [2025-09-15 Gemini 추가] 상단 드롭다운 메뉴(고정) 데이터 추가
+
 	    List<Map<String, String>> navLinks = new ArrayList<>();
 	    navLinks.add(Map.of("url", "/department/departmentList", "text", "진료과"));
 	    navLinks.add(Map.of("url", "/center/centerList", "text", "센터"));
@@ -72,7 +68,6 @@ public class DepartmentController {
 	    navLinks.add(Map.of("url", "/#", "text", "병원안내"));
 	    model.addAttribute("navLinks", navLinks);
 
-	    // [2025-09-15 Gemini 추가] 상단 드롭다운 메뉴(DB) 데이터 추가
 	    List<Department> allDepartments = ds.list();
 	    model.addAttribute("allDepartments", allDepartments);
 	}

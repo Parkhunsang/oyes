@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.oyes.mapper.DoctorSearchMapper">
+  <select id="findByNameContaining" resultType="DoctorSearch">
+    SELECT
+      doctor_id,
+      doctor_name,
+      doctor_doctor_specialty
+    FROM doctor
+    WHERE doctor_name LIKE '%' || #{keyword,jdbcType=VARCHAR} || '%'
+    ORDER BY doctor_name ASC
+    FETCH FIRST #{limit} ROWS ONLY
+  </select>
+</mapper>

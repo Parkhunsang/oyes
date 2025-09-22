@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="~{layouts/layout}">
+	layout:decorate="~{/layouts/layout}">
 <th:block th:insert="~{/header.html::header}"></th:block>
 <head>
 <title>오예스종합병원｜진료과</title>
 <link rel="stylesheet" th:href="@{/css/departmentList.css}">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script type="text/javascript">
 	function ch(keyword, clickedElement) {
 		jQuery.post('/department/search', 'keyword=' + keyword, function(data) {
@@ -16,39 +16,31 @@
 		jQuery(clickedElement).parent('li').addClass('selected');
 	}
 
-	/* [2025-09-15 Gemini 최종 수정] 클릭 드롭다운 JQuery 코드 시작 */
 	jQuery(document).ready(function() {
 	    var $triggers = jQuery('ul.top_util_list > li > span');
 
-	    // feCommon.js에 의해 추가된 기존 호버 이벤트를 강제로 제거하여 충돌 방지
 	    $triggers.off('mouseenter focusin');
 
 	    $triggers.on('click', function(event) {
-	        // 다른 스크립트의 이벤트 및 브라우저 기본 동작을 모두 중지
 	        event.preventDefault();
 	        event.stopImmediatePropagation();
 
 	        var $dropdown = jQuery(this).siblings('ul.drop_list');
 	        var wasOpen = $dropdown.hasClass('show');
 
-	        // 모든 드롭다운을 먼저 닫음
 	        jQuery('ul.drop_list').removeClass('show');
 
-	        // 클릭한 드롭다운이 닫혀 있었다면, 다시 연다
 	        if (!wasOpen) {
 	            $dropdown.addClass('show');
 	        }
 	    });
 
-	    // 문서 전체를 클릭했을 때 드롭다운을 닫는 기능
 	    jQuery(document).on('click', function(event) {
-	        // 클릭된 요소가 드롭다운 메뉴의 일부가 아닐 경우에만 닫음
 	        if (!jQuery(event.target).closest('.top_util_list > li').length) {
 	            jQuery('ul.drop_list').removeClass('show');
 	        }
 	    });
 	});
-	/* [2025-09-15 Gemini 최종 수정] 클릭 드롭다운 JQuery 코드 끝 */
 </script>
 
 </head>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<th:block th:insert="~{/header.html::header}"></th:block>
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+	<div th:if="${result > 0}">
+		<script type="text/javascript">
+			alert("게시글이 수정 되었습니다")
+			location.href="/about/careersList"
+		</script>
+	</div>
+	<div th:if="${result == 0}">
+		<script type="text/javascript">
+			alert("게시글이 수정 실패했습니다")
+			history.back()
+		</script>
+	</div>
+</body>
+</html>

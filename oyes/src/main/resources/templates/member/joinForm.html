@@ -94,58 +94,60 @@
 		<!-- //header -->
 
 		<!-- container -->
-		<div class="container">
-			
-				
-				
+			<div class="container">
 
 
 
-		<div class="contTopBar">
-			<!-- inner -->
-			<div class="inner">
-				<!-- breadcrumb -->
-				<div class="breadcrumb cf">
-					<strong class="he">현재 위치:</strong>
-					<div class="item">
-						<a th:href="@{/}" class="home ht">Home</a>
-					</div>
-					
-					<div class="item">
-						<em>회원</em>
-						<button type="button" class="bcLinkLayerBtn ht">주 메뉴 목록 열기</button>
-						<ul class="bcLinkLayer">
-							
-							<li><a th:href="@{/medical/dept/deptList.do}">진료과</a></li>
-							<li><a th:href="@{/medical/dept/centerList.do}">센터</a></li>
-							<li><a th:href="@{/guide/reservationInfo.do}">이용안내</a></li>
-							<li><a th:href="@{/customer/info.do}">고객서비스</a></li>
-							<li><a th:href="@{/health/lecture/list.do}">건강정보</a></li>
-							<li><a th:href="@{/intro/greeting2.do}">병원소개</a></li>
-							<!-- <li><a th:href="@{/w/index.do}">통합검색</a></li> -->
-							
-						</ul>
-					</div>
-					
-					<div class="item">
-						<em>회원가입</em>
-						<button type="button" class="bcLinkLayerBtn ht">서브 메뉴 목록 열기</button>
-						<ul class="bcLinkLayer">
-							
-							<li><a th:href="@{/findIdPw.do}">아이디/비밀번호찾기</a></li>
-							
-							<li><a th:href="@{/join.do}">회원가입</a></li>
-							
-							<li><a th:href="@{/reservation/reservation.do}">외래진료예약</a></li>
-							
-						</ul>
-					</div>
-					
-					
-					
-				</div>
-				<!-- //breadcrumb -->
-				
+
+
+
+				<div class="contTopBar">
+					<!-- inner -->
+					<div class="inner">
+						<!-- breadcrumb -->
+						<div class="breadcrumb cf">
+							<strong class="he">현재 위치:</strong>
+							<div class="item">
+								<a th:href="@{/}" class="home ht">Home</a>
+							</div>
+
+							<div class="item">
+								<em>회원</em>
+								<button type="button" class="bcLinkLayerBtn ht">주 메뉴 목록
+									열기</button>
+								<ul class="bcLinkLayer">
+
+									<li><a th:href="@{/medical/dept/deptList.do}">진료과</a></li>
+									<li><a th:href="@{/medical/dept/centerList.do}">센터</a></li>
+									<li><a th:href="@{/guide/reservationInfo.do}">이용안내</a></li>
+									<li><a th:href="@{/customer/info.do}">고객서비스</a></li>
+									<li><a th:href="@{/health/lecture/list.do}">건강정보</a></li>
+									<li><a th:href="@{/intro/greeting2.do}">병원소개</a></li>
+									<!-- <li><a th:href="@{/w/index.do}">통합검색</a></li> -->
+
+								</ul>
+							</div>
+
+							<div class="item">
+								<em>회원가입</em>
+								<button type="button" class="bcLinkLayerBtn ht">서브 메뉴
+									목록 열기</button>
+								<ul class="bcLinkLayer">
+
+									<li><a th:href="@{/findIdPw.do}">아이디/비밀번호찾기</a></li>
+
+									<li><a th:href="@{/join.do}">회원가입</a></li>
+
+									<li><a th:href="@{/reservation/reservation.do}">외래진료예약</a></li>
+
+								</ul>
+							</div>
+
+
+
+						</div>
+						<!-- //breadcrumb -->
+
 
 <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script type="text/javascript">
@@ -232,329 +234,317 @@ function printMain(obj){
 	document.print();
 }
 </script>
-<div class="utilMenu">
-	<a href="javascript:void(0)" role="button" class="email modalJs" onclick="defaultMailReg();"><i class="icon-email ht">메일</i></a>
-	<div class="cont">
-		<a href="#" role="button"><i class="icon-share ht">관심콘텐츠</i></a>
-		<ul>
-			<li><a href="#" role="button" class="twitter"><i class="icon-twitter ht">트위터</i></a></li>
-			<li><a href="#" role="button" class="faceBook"><i class="icon-faceBook ht">페이스북</i></a></li>
-			<li><a href="#" role="button" class="kakao" id="kakaostory-share-button"><i class="icon-kakao ht">카카오</i></a></li>
-			<li><a href="#" role="button" class="url"><i class="icon-url ht">URL 공유</i></a></li>
-		</ul>
-	</div>
-	<a th:href="@{/}" role="button" class="print" onclick="printMain(this);"><i class="icon-print ht">프린트</i></a>
-	<span class="zoomOut">
-		<button type="button" class="zoomOut minus ht">화면 축소</button>
-	</span>
-	<span class="zoomIn">
-		<button type="button" class="zoomIn plus ht">화면 확대</button>
-	</span>
-</div>
-
-<!-- 메일발송 레이아웃 -->
-<section class="modal modal-sizeM modal-defaultMail" id="defaultMailReg"></section>
-<!-- //메일발송 레이아웃 -->
-
-			</div>
-			<!-- //inner -->
-		</div>
-		<script type="text/javascript">
-		var locationInfo = {
-			cate0: $(".viewTitle h3").text(),
-			cate1: $(".breadcrumb em:eq(2)").text(),
-			cate2: $(".breadcrumb em:eq(1)").text(),
-			cate3: $(".breadcrumb em:eq(0)").text()
-		};
-		</script>
-
-				
-			
-			
-
-
-
-
-
-
-<main id="content" class="content content-bg">
-	<div class="inner">
-		<div class="heading heading-depth01 alignC">
-			<h2 class="title">회원가입</h2>
-		</div>
-		<form id="memberVo" name="joinForm" action="/member/join" method="post" enctype="multipart/form-data" onsubmit="return chk()">
-			<input type="hidden" name="vdiscrno" id="vdiscrno" />
-			<input type="hidden" name="discrhash" id="discrhash" />
-			<input type="hidden" name="ciscrhash" id="ciscrhash" />
-			<input type="hidden" name="zipcode" />
-			<input type="hidden" name="addr1" />
-			<input type="hidden" name="buildingno" />
-			<fieldset>
-				<legend>회원가입</legend>
-				<div class="card-mem">
-					<div class="caption">
-						<p class="color04">* 표시는 필수 입력 항목입니다.</p>
-					</div>
-					<div class="form-filed join">
-						<p>
-							이대목동병원 홈페이지 회원은 별도의 회원가입 절차 없이<br/>
-							같은 아이디로 이대서울병원 홈페이지를 이용하실 수 있습니다.
-						</p>
-						<p>
-							<br>
-							<b>
-								*대리인 예약이 가능합니다. 환자 본인 가입이 어려우신 경우, 가능하신 분께서 회원가입 후 대리인 예약을 진행해 주세요.<br/>
-								*만 14세 미만 소아청소년 회원가입시, 보호자(법적 대리인)의 본인 인증이 필요합니다.
-							</b>
-						</p>
-						<div class="item" style="position:relative">
-							<strong class="title">
-								<i class="required">
-									*
-									<span class="he">필수입력</span>
-								</i>
-								아이디
-							</strong>
-							<div>
-							<input type="text" name="patient_id" class="input" id="patient_id" title="아이디" placeholder="영문포함 6글자 이상" required="required" />
-							<span role="alert" class="validation idTxt" id="idTxt"></span>
+						<div class="utilMenu">
+							<a href="javascript:void(0)" role="button" class="email modalJs"
+								onclick="defaultMailReg();"><i class="icon-email ht">메일</i></a>
+							<div class="cont">
+								<a href="#" role="button"><i class="icon-share ht">관심콘텐츠</i></a>
+								<ul>
+									<li><a href="#" role="button" class="twitter"><i
+											class="icon-twitter ht">트위터</i></a></li>
+									<li><a href="#" role="button" class="faceBook"><i
+											class="icon-faceBook ht">페이스북</i></a></li>
+									<li><a href="#" role="button" class="kakao"
+										id="kakaostory-share-button"><i class="icon-kakao ht">카카오</i></a></li>
+									<li><a href="#" role="button" class="url"><i
+											class="icon-url ht">URL 공유</i></a></li>
+								</ul>
 							</div>
+							<a th:href="@{/}" role="button" class="print"
+								onclick="printMain(this);"><i class="icon-print ht">프린트</i></a>
+							<span class="zoomOut">
+								<button type="button" class="zoomOut minus ht">화면 축소</button>
+							</span> <span class="zoomIn">
+								<button type="button" class="zoomIn plus ht">화면 확대</button>
+							</span>
 						</div>
-						<div class="item">
-							<strong class="title">
-								<i class="required">
-									*
-									<span class="he">필수입력</span>
-								</i>
-								비밀번호
-							</strong>
-							<p style="margin-bottom: 10px;">
-								대문자, 소문자, 숫자 조합으로 8자리 이상 입력하시면 자동으로 ‘사용 가능’으로 바뀝니다.
-                            </p>
-							<div>
-							<input type="password" name="password" id="password" class="input pass" title="비밀번호" placeholder="영문 대소문자+숫자 8자 이상" required="required" />
-							<span role="alert" class="validation passTxt" id="passTxt"></span>
-							</div>
-							<div style="margin-top:10px">
-							<input type="password" name="passChk" id="passChk"  class="input passChk" title="비밀번호" placeholder="영문 대소문자+숫자 8자 이상" required="required" />
-							<span role="alert" class="validation passChkTxt" id="passChkTxt"></span>
-							</div>
-							<!-- error -->
-							<!-- <div>
+
+						<!-- 메일발송 레이아웃 -->
+						<section class="modal modal-sizeM modal-defaultMail"
+							id="defaultMailReg"></section>
+						<!-- //메일발송 레이아웃 -->
+
+					</div>
+					<!-- //inner -->
+				</div>
+<script type="text/javascript">
+		var locationInfo = {
+					cate0 : $(".viewTitle h3").text(),
+						cate1 : $(".breadcrumb em:eq(2)").text(),
+						cate2 : $(".breadcrumb em:eq(1)").text(),
+						cate3 : $(".breadcrumb em:eq(0)").text()
+					};
+				</script>
+
+
+
+
+				<main id="content" class="content content-bg">
+					<div class="inner">
+						<div class="heading heading-depth01 alignC">
+							<h2 class="title">회원가입</h2>
+						</div>
+						<form id="memberVo" name="joinForm" action="/member/join"
+							method="post" enctype="multipart/form-data"
+							onsubmit="return chk()">
+							<input type="hidden" name="vdiscrno" id="vdiscrno" /> <input
+								type="hidden" name="discrhash" id="discrhash" /> <input
+								type="hidden" name="ciscrhash" id="ciscrhash" /> <input
+								type="hidden" name="zipcode" /> <input type="hidden"
+								name="addr1" /> <input type="hidden" name="buildingno" />
+							<fieldset>
+								<legend>회원가입</legend>
+								<div class="card-mem">
+									<div class="caption">
+										<p class="color04">* 표시는 필수 입력 항목입니다.</p>
+									</div>
+									<div class="form-filed join">
+										<p>
+											이대목동병원 홈페이지 회원은 별도의 회원가입 절차 없이<br /> 같은 아이디로 이대서울병원 홈페이지를
+											이용하실 수 있습니다.
+										</p>
+										<p>
+											<br> <b> *대리인 예약이 가능합니다. 환자 본인 가입이 어려우신 경우, 가능하신 분께서
+												회원가입 후 대리인 예약을 진행해 주세요.<br /> *만 14세 미만 소아청소년 회원가입시, 보호자(법적
+												대리인)의 본인 인증이 필요합니다.
+											</b>
+										</p>
+										<div class="item" style="position: relative">
+											<strong class="title"> <i class="required"> * <span
+													class="he">필수입력</span>
+											</i> 아이디
+											</strong>
+											<div>
+												<input type="text" name="patient_id" class="input"
+													id="patient_id" title="아이디" placeholder="영문포함 6글자 이상"
+													required="required" /> <span role="alert"
+													class="validation idTxt" id="idTxt"></span>
+											</div>
+										</div>
+										<div class="item">
+											<strong class="title"> <i class="required"> * <span
+													class="he">필수입력</span>
+											</i> 비밀번호
+											</strong>
+											<p style="margin-bottom: 10px;">대문자, 소문자, 숫자 조합으로 8자리 이상
+												입력하시면 자동으로 ‘사용 가능’으로 바뀝니다.</p>
+											<div>
+												<input type="password" name="password" id="password"
+													class="input pass" title="비밀번호"
+													placeholder="영문 대소문자+숫자 8자 이상" required="required" /> <span
+													role="alert" class="validation passTxt" id="passTxt"></span>
+											</div>
+											<div style="margin-top: 10px">
+												<input type="password" name="passChk" id="passChk"
+													class="input passChk" title="비밀번호"
+													placeholder="영문 대소문자+숫자 8자 이상" required="required" /> <span
+													role="alert" class="validation passChkTxt" id="passChkTxt"></span>
+											</div>
+											<!-- error -->
+											<!-- <div>
 								<input type="password" class="input error" title="비밀번호 확인" required="">
 								<span role="alert" class="validation color04">일치하지 않음</span>
 							</div> -->
-							<!-- //error -->
-						</div>
-						<div class="row">
-							<div class="item">
-								<strong class="title">
-									<i class="required">
-										*
-										<span class="he">필수입력</span>
-									</i>
-									이름
-								</strong>
-								<input type="text" name="patient_name" id="patient_name" class="input" title="이름" placeholder="홍길동" required="required" maxlength="20" />
-							</div>
-							<div class="item">
-								<strong class="title">
-									<i class="required">
-										*
-										<span class="he">필수입력</span>
-									</i>
-									생년월일
-								</strong>
-								<input type="text" name="birth_date" class="input birth" title="생년월일" required="required" placeholder="예) 19800320" maxlength="8" onkeydown="onlyNum(this);" />
-							</div>
-							</div>
+											<!-- //error -->
+										</div>
+										<div class="row">
+											<div class="item">
+												<strong class="title"> <i class="required"> * <span
+														class="he">필수입력</span>
+												</i> 이름
+												</strong> <input type="text" name="patient_name" id="patient_name"
+													class="input" title="이름" placeholder="홍길동"
+													required="required" maxlength="20" />
+											</div>
+											<div class="item">
+												<strong class="title"> <i class="required"> * <span
+														class="he">필수입력</span>
+												</i> 생년월일
+												</strong> <input type="text" name="birth_date" class="input birth"
+													title="생년월일" required="required" placeholder="예) 19800320"
+													maxlength="8" onkeydown="onlyNum(this);" />
+											</div>
+										</div>
 
-						    <div class="item">
-						    	<strong class="title">
-						    		<i class="required">
-						    			*
-						    			<span class="he">필수입력</span>
-						    		</i>
-						    		휴대전화번호
-						    	</strong>
-						    	<input type="text" name="mobile_no" class="input" title="휴대전화번호" placeholder="‘-’ 제외하고 입력" maxlength="11" onkeydown="onlyNum(this);" />
-						    </div>
-						    <p>※ 나이스평가정보에서 인증 받은 휴대폰 번호를 사용하고 있습니다.</p>
-						    <div class="item">
-						    	<strong class="title">
-						    		<i class="required">
-						    			*
-						    			<span class="he">필수입력</span>
-						    		</i>
-						    		이메일
-						    	</strong>
-						    	<div>
-						    		<input type="text" name="email" class="input mail" title="이메일"  required="required" />
-						    		<span role="alert" class="validation emailChkTxt" id="emailChkTxt" ></span>
-						    	</div>
-						    </div>
-						</div>
+										<div class="item">
+											<strong class="title"> <i class="required"> * <span
+													class="he">필수입력</span>
+											</i> 휴대전화번호
+											</strong> <input type="text" name="mobile_no" class="input"
+												title="휴대전화번호" placeholder="‘-’ 제외하고 입력" maxlength="11"
+												onkeydown="onlyNum(this);" />
+										</div>
+										<p>※ 나이스평가정보에서 인증 받은 휴대폰 번호를 사용하고 있습니다.</p>
+										<div class="item">
+											<strong class="title"> <i class="required"> * <span
+													class="he">필수입력</span>
+											</i> 이메일
+											</strong>
+											<div>
+												<input type="text" name="email" class="input mail"
+													title="이메일" required="required" /> <span role="alert"
+													class="validation emailChkTxt" id="emailChkTxt"></span>
+											</div>
+										</div>
+									</div>
+								</div>
 					</div>
-				</div>
-				<div class="card-mem">
-					<!-- term -->
-					<div class="term">
-						<div class="heading heading-depth03">
-							<em class="title">이대서울병원 회원 이용약관</em>
-							<div class="right">
-								<i class="pointstar">
-									*
-									<span class="he">필수입력</span>
-								</i>
-								<input type="checkbox" id="sign01_member"  data-fe-wrap="form-right" data-fe-label="동의함"/>
+					<div class="card-mem">
+						<!-- term -->
+						<div class="term">
+							<div class="heading heading-depth03">
+								<em class="title">이대서울병원 회원 이용약관</em>
+								<div class="right">
+									<i class="pointstar"> * <span class="he">필수입력</span>
+									</i> <input type="checkbox" id="sign01_member"
+										data-fe-wrap="form-right" data-fe-label="동의함" />
+								</div>
+							</div>
+							<div class="scroll">
+								[제1조] 약관 동의<br /> 이화여자대학교 의료원 및 산하 기관은(이하 “의료원”) 본원 홈페이지 이용자 및
+								산하 홈페이지 이용자(이하 "이용자")가 홈페이지 서비스 약관(이하 "약관")에 동의하는 것을 조건으로 하여
+								홈페이지 서비스를 제공한다.<br /> <br /> [제2조] 목적<br /> 홈페이지 서비스 약관은
+								홈페이지가 제공하는 여러 인터넷 서비스(이하 "서비스")를 이용자가 이용 함에 있어 홈페이지와 이용자의 이용 및
+								절차, 기타 필요한 사항 등을 규정함을 그 목적으로 한다.<br /> <br /> [제3조] 이용자의 정의 및
+								대상<br /> - 일반인, 의사(병원 인터넷 진료의뢰 서비스 이용시)의 경우<br /> ① 이용자란 본원 각
+								대학 홈페이지에 접속하여 약관에 동의하고 ID(사용자 계정)와 Password(비밀번호)를 발급받은 본원 각 대학
+								홈페이지가 제공하는 서비스를 받는자를 말한다.<br /> ② 가입대상 중 진료의뢰 서비스를 이용하고자 하는 의사는
+								의사면허를 소지한 사람으로 병.의원에 적을 두고 진료목적의 용도로 이용하고자 하는 의사에 한한다.<br /> <br />
+								- 각 대학 학부생, 대학원생 및 동문의 경우:<br /> ① 이용자란 의과대학 홈페이지에 접속하여 약관에
+								동의하고 ID(사용자 계정)와 Password(비밀번호)를 발급받은 의과대학이 제공하는 서비스를 받는자를 말한다.<br />
+								② 가입대상은 본원 의과대학, 치과대학, 간호대학에 재학중인 학부생, 보건대학원, 대학원 보건학과, 협동과정에
+								재학중인 대학원생 및 상기학교를 졸업한 동문으로 한다.<br /> <br /> - 교수 및 교직원의 경우<br />
+								① 이용자란 본원 각 대학(교직원의 경우 교직원광장 홈페이지)홈페이지에 접속하여 약관에 동의하고 ID(사용자
+								계정)와 Password(비밀번호)를 발급받은 본원 각 대학 및 의료원 홈페이지가 제공하는 서비스를 받는자를
+								말한다.<br /> ② 가입대상은 본원에 근무하고 있는 전 교직원을 한다.<br /> <br /> [제4조]
+								이용자의 의무<br /> ① 이용자는 서비스 이용을 위해 등록할 경우 현재의 사실과 일치하는 완전한
+								정보("등록정보")를 제공하여야 한다.<br /> ② 이용자는 등록정보에 변경사항이 발생할 경우 즉시 갱신하여야
+								한다. 이용자가 제공한 정보 및 갱신한 정보가 부정확할 경우, 기타 이용자가 본 조 제4항에 명시된 행위를 한
+								경우에 의료원은 본 서비스 약관 제12조에 의해 이용자의 홈페이지 서비스 이용을 제한 또는 중지할 수 있다.<br />
+								③ 이용자가 서비스 등록절차를 완료하면 ID(사용자 계정)와 Password(비밀번호)를 지정 받게 된다. 이용자는
+								이용자의 책임 하에 ID(사용자 계정)와 Password(비밀번호)의 보안을 유지 하여야 한다. 이용자의
+								ID(사용자 계정)와 Password(비밀번호)의 보안을 위해 이용자는 이용자 본인의 승인 없이 ID(사용자
+								계정)와 Password(비밀번호)가 사용되는 등 문제가 발생 하면 즉시 홈페이지 관리자에게 신고하여야 하고, 매
+								접속 종료 시 이용자의 계정으로부터 확실히 사용 종료(로그아웃) 하여야 한다.<br /> ④ 이용자는 다음과 같은
+								행위를 행 할시 서비스의 제한을 받게 됨에 동의한다.<br /> ⓐ 타인(소수를 포함)에게 해를 입히는 모든 행위<br />
+								ⓑ 저속 또는 음란한 데이터, 텍스트, 소프트웨어, 음악, 사진, 그래픽, 비디오 메시지 등(이하 "컨텐츠")을
+								게시하는 행위 등<br /> ⓒ 타인으로 가장하는 행위 및 개인정보를 허위로 명시하는 행위<br /> ⓓ
+								권리(지적재산권을 포함한 모든 권리)가 없는 컨텐츠를 게시, 게재하는 행위 등<br /> ⓔ 불필요하거나 승인되지
+								않은 광고, 판촉물을 게재하거나, "정크 메일(junk mail)", "스팸<br /> (spam)", "행운의
+								편지(chain letters)", "피라미드 조직" 등을 권유하거나 게시하는 행위 등<br /> ⓕ 컴퓨터
+								소프트웨어, 하드웨어, 전기통신 장비를 파괴, 방해 또는 기능을 제한하기 위한 소프트웨어 바이러스를 게시, 게재하는
+								행위 등<br /> ⓖ 다른 컴퓨터 코드, 파일, 프로그램을 포함하고 있는 자료를 게시, 게재하는 행위 등<br />
+								ⓗ 다른 사용자의 개인정보를 수집 또는 저장하는 행위<br /> ⓘ 사람을 비방할 목적으로 사실 또는 허위의
+								사실을 적시하여 사람의 명예를 훼손하는 행위<br /> ⓙ 자기 또는 타인에게 재산상의 이익을 주거나 타인에게
+								손해를 가할 목적으로 허위의 정보를 유통시키는 행위<br /> ⓚ 재물을 걸고 도박하거나 사행행위를 하는 행위<br />
+								ⓛ 윤락행위를 알선하거나 음행을 매개하는 내용의 정보를 유통시키는 행위<br /> ⓜ 수치심이나 혐오감 또는
+								공포심을 일으키는 말이나 음향, 글이나 화상 또는 영상을 계속 하여 상대방에게 도달하게 하여 상대방의 일상적 생활을
+								방해하는 행위<br /> ⓝ 타인의 정보통신서비스 이용명의를 도용하여 사용하는 행위<br /> ⓞ 기타
+								불법적이거나 부당한 행위<br /> ⑤ 이용자는 인터넷의 전세계적인 성격을 인정하여 온라인상의 행위 및 용인할 수
+								있는 컨텐츠에 대한 현지 규정을 준수할 것을 동의한다.<br /> ⑥ 이용자는 상업적인 목적을 위하여 본 서비스
+								자체, 서비스의 이용 또는 서비스에의 접속을 복사, 복제, 판매, 재판매 또는 이용하지 않을 것에 동의한다.<br />
+								<br /> [제5조] 의료원의 의무<br /> ① 의료원은 정보통신망 이용촉진에 관한 법률, 통신비밀보호법,
+								전기통신기본법 등 서비스의 운영, 유지와 관련 있는 법규를 준수한다.<br /> <br /> [제6조] 의료원의
+								개인정보 보호정책<br /> 의료원은 이용자의 개인정보를 매우 중요하게 취급하고 있다. 의료원이 약관을 개정할
+								경우에는 적용일자 및 개정내용, 개정사유 등을 명시하여 그 적용일자로부터 최소 7일 이전부터 초기화면 또는
+								초기화면과의 연결화면을 통해 공지한다.<br /> 이용자는 변경된 약관에 대해 거부할 권리가 있다. 이용자는
+								변경된 약관이 공지된 후 15일 이내에 거부의사를 표명할 수 있으며, 이용자가 거부하는 경우 의료원은 당해
+								이용자와의 계약을 해지할 수 있다. 만약 이용자가 변경된 약관이 공지된 후 15일 이내에 거부의사를 표시하지 않는
+								경우에는 동의하는 것으로 간주한다.<br /> <br /> [제7조] 사용 및 저장에 관한 일반 관례<br />
+								이용자는 홈페이지 서비스의 이용에 관한 일반 관례 및 제한을 만들 수 있음을 인정한다.<br /> <br />
+								[제8조] 링크<br /> 홈페이지에 월드와이드웹 사이트 혹은 자료에 대한 링크를 제공할 수 있다. 의료원은
+								그러한 사이트 및 자료에 대한 통제권이 없으므로 의료원에게 고의나 중과실이 인정될 만한 특별한 사유가 있는 경우를
+								제외하고는 사이트 및 자료의 내용, 광고, 제품 등에 대해 책임을 부담하지 않는다.<br /> <br />
+								[제9조] 컨텐츠 관련<br /> 이용자는 컨텐츠의 정확성, 안정성 또는 품질 등과 관련하여 의문사항이 있으시면
+								직접 컨텐츠를 만든 사람에게 문의한다. 또한, 이용자는 의료원에 제공되거나 의료원이 만든 컨텐츠에 의존하지 않음을
+								인정한다. 의료원은 컨텐츠의 정확성, 안전성 등과 관련하여 고의나 중과실이 인정되는 경우를 제외 하고는 면책된다.
+								의료원은 이용자가 제공한 컨텐츠를 적절한 카테고리로 재분류할 수 있다. 이용자는 의료원이 컨텐츠를 미리 검토하지는
+								않으나 서비스를 통하여 공개적으로 이용 가능한 컨텐츠를 거절하거나 이동할 수 있는 권리(의무사항은 아님)를 가지고
+								있음을 인정한다. 의료원은 서비스 약관을 위배하거나 불법적인 컨텐츠를 삭제할 수 있다.<br /> <br />
+								[제10조] 의료원에 제출된 공개적인 컨텐츠<br /> ① "공개적으로 접속 가능한 서비스 구역"이라 함은 일반
+								대중이 접속할 수 있는 곳을 의미한다. (예: 커뮤니티, 게시판 등)<br /> <br /> [제11조]
+								개인정보의 공개<br /> 병원은 본 서비스의 원활한 활용을 위해 필요한 이용자의 신상정보를 수집할 수 있다.
+								병원은 정보 주체의 동의, 법률의 특별한 규정 등 개인정보 보호법 제17조 및 제18조에 해당하는 경우를 제외하고는
+								개인정보를 제3자에게 제공하지 않는다.<br /> 다만, 아래의 경우는 예외로 한다.<br /> 가. 정보
+								주체로부터 동의를 받은 경우(병원간 상호진료 협조를 위하여 의뢰한 의사에게만 본인의 진료정보 제공)<br />
+								나. 다른 법률에 특별한 규정이 있는 경우<br /> 다. 정보 주체나 법정대리인의 의사를 확인할 수 없는 상태에
+								있거나 주소 불명 등 여러 이유로 사전 동의를 받을 수 없는 경우<br /> 라. 수사 목적으로 법령에 정해진
+								절차와 방법에 따라 수사기관의 요구가 있는 경우<br /> - 통계작성 및 학술연구 등의 목적을 위하여 필요한
+								경우로 특정 개인을 알아볼 수 없는 형태로 가공하여 제공하는 경우<br /> 마. 진료비 청구 기관, 업무협력
+								체결 업체와 본원과 협약을 체결한 협력 병의원 의사에게 필요로 하는 정보를 제공하는 경우<br /> <br />
+								[제12조] 사용의 중지 및 내용 삭제<br /> 이용자가 다음과 같은 행위를 할 경우에 이용자는 의료원이
+								이용자의 서비스 이용을 중지 시키거나 서비스 내에 포함되어 있는 내용을 삭제할 수 있음에 동의한다. 의료원은
+								이용자에 대해 서비스 이용 중지 조치를 취할 경우 통지를 하고 소명 기회를 부여한다. 의료원은 귀하의 소명이
+								타당하다고 판단할 경우에 서비스 이용 중지 조치를 철회한다.<br /> ① 부당한 방법으로 정보통신망에 의하여
+								처리. 보관. 전송되는 타인의 정보를 훼손하거나 타인의 비밀을 침해,도용 또는 누설하는 행위<br /> ② 트로이
+								목마, 컴퓨터 바이러스 등 악성 프로그램의 유포 행위<br /> ③ 음란, 폭력물 등의 불건전한 자료의 게재,
+								유포하는 행위<br /> ④ 의료원에서 제공하는 서비스와 관련 없는 내용<br /> ⑤ 불필요하거나 승인되지
+								않는 광고, 판촉물을 게재하는 행위<br /> ⑥ 동일한 내용을 중복하여 다수 게시하는 등 게시의 목적에 어긋나는
+								행위<br /> ⑦ 기타 관련 법률에서 금지하는 행위 또는 본 서비스의 약관의 내용에 위배되는 행위<br />
+								<br /> [제13조] 권리 침해의 금지<br /> ① 이용자는 본 서비스 또는 이와 관련하여 사용되는 필요한
+								소프트웨어에 의료원의 지적 재산권 및 기타 법률에 의해 보호되는 전속적이고 기밀인 정보가 포함되어 있음을 인정하고
+								이를 침해하는 어떠한 행위도 하지 아니할 것에 동의한다.<br /> ② 후원 광고에 포함되어 있는 내용이나 본
+								서비스 또는 광고주를 통하여 이용자에게 제공되는 정보는 저작권, 상표, 서비스 마크, 특허 등 법에 의해 보호되고
+								인정됨을 인정하고 동의한다.<br /> ③ 이용자는 의료원이나 광고주에 의해 명시적으로 승인된 경우를 제외하고는
+								본 서비스나 소프트웨어에 근거한 창작물을 전부 또는 일부라도 수정하거나 대여, 대출, 판매, 배포 또는 제작할 수
+								없음에 동의한다.<br /> ④ 의료원은 이용자에게 한 대의 컴퓨터에서 소프트웨어의 오프젝트 코드를 사용할 수
+								있는 개인적이고, 양도 불가능하며, 비독점적인 사용권을 부여한다. 이용자는 소프트웨어를 복사, 수정, 창작물의
+								제작, 리버스 엔지니어링, 리버서 어셈블 또는 소스 코드를 발견하려고 시도 하거나, 판매, 양도, 재라이선스,
+								담보권을 설정하거나 소프트웨어상의 어떠한 권리도 양도 하여서는 안되며, 제3자로 하여금 위와 같은 행위를 하도록
+								허락하여서도 안 된다. 이용자는 본 서비스에 접속하기 위해 승인 받지 않은 어떤 방식으로든 소프트웨어를 수정하거나
+								소프트웨어 수정본을 사용하지 않기로 하고 본 서비스에 접속하는데 사용하도록 의료원이 제공한 인터페이스를 통하는 것
+								이외에 다른 방법으로 본 서비스에 접속하지 않기로 동의 한다.<br /> <br /> [제14조] UI에 관한
+								정보<br /> 이용자는 의료원의 사전 승인 없이 의료원UI를 어떠한 방식으로든 전시 또는 사용하지 않기로 동의
+								한다.<br /> <br /> [제15조] 약관의 개정<br /> 의료원은 관련법에 위배되지 않는 범위 내에서
+								약관을 개정할 수 있다.<br /> <br /> [제16조] 재판권 및 준거법<br /> ① 본 서비스의
+								이용과 관련하여 분쟁이 발생할 경우 소송은 민사소송법상의 관할 법원에 제기한다.<br /> ② 상기 ①항의 경우
+								준거법은 한국 법을 적용한다.<br /> <br /> [제17조] 불만사항 및 침해사고 발생시 처리 절차<br />
+								이용자가 홈페이지를 통해 제공되는 서비스를 이용하던 중 불만 사항이나 침해 사고 피해가 발생할 경우에는 홈페이지
+								관리자 (30379@eumc.ac.kr)에게 메일로 통보하며, 의료원은 최대한 단기간 내에 적절한 조치를 취한다.<br />
+								<br /> [부칙]<br /> ① 이상의 본원 개인정보보호정책은 2018년 3월 28일로부터 시행된다.
+							</div>
+							<div class="heading heading-depth03">
+								<em class="title">개인정보 수집 및 이용에 대한 안내</em>
+								<div class="right">
+									<i class="pointstar"> * <span class="he">필수입력</span>
+									</i> <input type="checkbox" id="sign02_member"
+										data-fe-wrap="form-right" data-fe-label="동의함" />
+								</div>
+							</div>
+							<div class="heading heading-depth03">
+								<p style="font-size: 13px;">
+									귀하는 본 개인 정보 수집·이용에 대한 동의를 거부할 권리가 있습니다.<br /> 다만, 수집하는 개인정보는
+									원활한 서비스 제공을 위해 필요한 최소한의 기본정보로서, 동의하지 않을 시에는 회원가입 및 이화여자대학교 의료원
+									홈페이지 서비스 이용이 제한될 수 있습니다.
+								</p>
+							</div>
+							<div class="scroll">
+								1. 개인정보 등의 수집·이용 목적<br /> 이화여자대학교 의료원은 홈페이지 회원의 가입 및 관리를 위해 다음과
+								같이 귀하의 개인정보를 수집 및 이용합니다.<br /> ① 진료/건강검진 예약, 예약조회 및 건강검진 결과조회,
+								온라인 상담 답변 처리 등 회원제 서비스 제공<br /> ② 이용자 확인 및 의사소통 경로 확보<br /> <br />
+								2. 수집하려는 개인정보의 항목<br /> [만 14세 이상] (필수) 아이디, 비밀번호, 이름, 휴대폰번호,
+								이메일, 기타 본인 확인기관에서 제공하는 C.I, D.I의 추가적인 본인확인 정보<br /> [만 14세 미만]
+								(필수) 만 14세 미만 회원의 이름, 아이디, 비밀번호, 본인 확인기관에서 제공하는 C.I, D.I의 추가적인
+								법정대리인 본인확인 정보<br /> <br />
+								<p class="pointtxt">
+									3. 개인정보 등의 보유 및 이용 기간<br /> 홈페이지 회원 탈퇴시 파기(홈페이지 1년 이상 미이용 시에는
+									개인정보가 분리 보관됨)
+								</p>
 							</div>
 						</div>
-						<div class="scroll">
-							[제1조] 약관 동의<br/>
-							이화여자대학교 의료원 및 산하 기관은(이하 “의료원”) 본원 홈페이지 이용자 및 산하 홈페이지 이용자(이하 "이용자")가 홈페이지 서비스 약관(이하 "약관")에 동의하는 것을 조건으로 하여 홈페이지 서비스를 제공한다.<br/>
-							<br/>
-							[제2조] 목적<br/>
-							홈페이지 서비스 약관은 홈페이지가 제공하는 여러 인터넷 서비스(이하 "서비스")를 이용자가 이용 함에 있어 홈페이지와 이용자의 이용 및 절차, 기타 필요한 사항 등을 규정함을 그 목적으로 한다.<br/>
-							<br/>
-							[제3조] 이용자의 정의 및 대상<br/>
-							- 일반인, 의사(병원 인터넷 진료의뢰 서비스 이용시)의 경우<br/>
-							① 이용자란 본원 각 대학 홈페이지에 접속하여 약관에 동의하고 ID(사용자 계정)와 Password(비밀번호)를 발급받은 본원 각 대학 홈페이지가 제공하는 서비스를 받는자를 말한다.<br/>
-							② 가입대상 중 진료의뢰 서비스를 이용하고자 하는 의사는 의사면허를 소지한 사람으로 병.의원에 적을 두고 진료목적의 용도로 이용하고자 하는 의사에 한한다.<br/>
-							<br/>
-							- 각 대학 학부생, 대학원생 및 동문의 경우:<br/>
-							① 이용자란 의과대학 홈페이지에 접속하여 약관에 동의하고 ID(사용자 계정)와 Password(비밀번호)를 발급받은 의과대학이 제공하는 서비스를 받는자를 말한다.<br/>
-							② 가입대상은 본원 의과대학, 치과대학, 간호대학에 재학중인 학부생, 보건대학원, 대학원 보건학과, 협동과정에 재학중인 대학원생 및 상기학교를 졸업한 동문으로 한다.<br/>
-							<br/>
-							- 교수 및 교직원의 경우<br/>
-							① 이용자란 본원 각 대학(교직원의 경우 교직원광장 홈페이지)홈페이지에 접속하여 약관에 동의하고 ID(사용자 계정)와 Password(비밀번호)를 발급받은 본원 각 대학 및 의료원 홈페이지가 제공하는 서비스를 받는자를 말한다.<br/>
-							② 가입대상은 본원에 근무하고 있는 전 교직원을 한다.<br/>
-							<br/>
-							[제4조] 이용자의 의무<br/>
-							① 이용자는 서비스 이용을 위해 등록할 경우 현재의 사실과 일치하는 완전한 정보("등록정보")를 제공하여야 한다.<br/>
-							② 이용자는 등록정보에 변경사항이 발생할 경우 즉시 갱신하여야 한다. 이용자가 제공한 정보 및 갱신한 정보가 부정확할 경우, 기타 이용자가 본 조 제4항에 명시된 행위를 한 경우에 의료원은 본 서비스 약관 제12조에 의해 이용자의 홈페이지 서비스 이용을 제한 또는 중지할 수 있다.<br/>
-							③ 이용자가 서비스 등록절차를 완료하면 ID(사용자 계정)와 Password(비밀번호)를 지정 받게 된다. 이용자는 이용자의 책임 하에 ID(사용자 계정)와 Password(비밀번호)의 보안을 유지 하여야 한다. 이용자의 ID(사용자 계정)와 Password(비밀번호)의 보안을 위해 이용자는 이용자 본인의 승인 없이 ID(사용자 계정)와 Password(비밀번호)가 사용되는 등 문제가 발생 하면 즉시 홈페이지 관리자에게 신고하여야 하고, 매 접속 종료 시 이용자의 계정으로부터 확실히 사용 종료(로그아웃) 하여야 한다.<br/>
-							④ 이용자는 다음과 같은 행위를 행 할시 서비스의 제한을 받게 됨에 동의한다.<br/>
-							ⓐ 타인(소수를 포함)에게 해를 입히는 모든 행위<br/>
-							ⓑ 저속 또는 음란한 데이터, 텍스트, 소프트웨어, 음악, 사진, 그래픽, 비디오 메시지 등(이하 "컨텐츠")을 게시하는 행위 등<br/>
-							ⓒ 타인으로 가장하는 행위 및 개인정보를 허위로 명시하는 행위<br/>
-							ⓓ 권리(지적재산권을 포함한 모든 권리)가 없는 컨텐츠를 게시, 게재하는 행위 등<br/>
-							ⓔ 불필요하거나 승인되지 않은 광고, 판촉물을 게재하거나, "정크 메일(junk mail)", "스팸<br/>
-							(spam)", "행운의 편지(chain letters)", "피라미드 조직" 등을 권유하거나 게시하는 행위 등<br/>
-							ⓕ 컴퓨터 소프트웨어, 하드웨어, 전기통신 장비를 파괴, 방해 또는 기능을 제한하기 위한 소프트웨어 바이러스를 게시, 게재하는 행위 등<br/>
-							ⓖ 다른 컴퓨터 코드, 파일, 프로그램을 포함하고 있는 자료를 게시, 게재하는 행위 등<br/>
-							ⓗ 다른 사용자의 개인정보를 수집 또는 저장하는 행위<br/>
-							ⓘ 사람을 비방할 목적으로 사실 또는 허위의 사실을 적시하여 사람의 명예를 훼손하는 행위<br/>
-							ⓙ 자기 또는 타인에게 재산상의 이익을 주거나 타인에게 손해를 가할 목적으로 허위의 정보를 유통시키는 행위<br/>
-							ⓚ 재물을 걸고 도박하거나 사행행위를 하는 행위<br/>
-							ⓛ 윤락행위를 알선하거나 음행을 매개하는 내용의 정보를 유통시키는 행위<br/>
-							ⓜ 수치심이나 혐오감 또는 공포심을 일으키는 말이나 음향, 글이나 화상 또는 영상을 계속 하여 상대방에게 도달하게 하여 상대방의 일상적 생활을 방해하는 행위<br/>
-							ⓝ 타인의 정보통신서비스 이용명의를 도용하여 사용하는 행위<br/>
-							ⓞ 기타 불법적이거나 부당한 행위<br/>
-							⑤ 이용자는 인터넷의 전세계적인 성격을 인정하여 온라인상의 행위 및 용인할 수 있는 컨텐츠에 대한 현지 규정을 준수할 것을 동의한다.<br/>
-							⑥ 이용자는 상업적인 목적을 위하여 본 서비스 자체, 서비스의 이용 또는 서비스에의 접속을 복사, 복제, 판매, 재판매 또는 이용하지 않을 것에 동의한다.<br/>
-							<br/>
-							[제5조] 의료원의 의무<br/>
-							① 의료원은 정보통신망 이용촉진에 관한 법률, 통신비밀보호법, 전기통신기본법 등 서비스의 운영, 유지와 관련 있는 법규를 준수한다.<br/>
-							<br/>
-							[제6조] 의료원의 개인정보 보호정책<br/>
-							의료원은 이용자의 개인정보를 매우 중요하게 취급하고 있다. 의료원이 약관을 개정할 경우에는 적용일자 및 개정내용, 개정사유 등을 명시하여 그 적용일자로부터 최소 7일 이전부터 초기화면 또는 초기화면과의 연결화면을 통해 공지한다.<br/>
-							이용자는 변경된 약관에 대해 거부할 권리가 있다. 이용자는 변경된 약관이 공지된 후 15일 이내에 거부의사를 표명할 수 있으며, 이용자가 거부하는 경우 의료원은 당해 이용자와의 계약을 해지할 수 있다. 만약 이용자가 변경된 약관이 공지된 후 15일 이내에 거부의사를 표시하지 않는 경우에는 동의하는 것으로 간주한다.<br/>
-							<br/>
-							[제7조] 사용 및 저장에 관한 일반 관례<br/>
-							이용자는 홈페이지 서비스의 이용에 관한 일반 관례 및 제한을 만들 수 있음을 인정한다.<br/>
-							<br/>
-							[제8조] 링크<br/>
-							홈페이지에 월드와이드웹 사이트 혹은 자료에 대한 링크를 제공할 수 있다. 의료원은 그러한 사이트 및 자료에 대한 통제권이 없으므로 의료원에게 고의나 중과실이 인정될 만한 특별한 사유가 있는 경우를 제외하고는 사이트 및 자료의 내용, 광고, 제품 등에 대해 책임을 부담하지 않는다.<br/>
-							<br/>
-							[제9조] 컨텐츠 관련<br/>
-							이용자는 컨텐츠의 정확성, 안정성 또는 품질 등과 관련하여 의문사항이 있으시면 직접 컨텐츠를 만든 사람에게 문의한다. 또한, 이용자는 의료원에 제공되거나 의료원이 만든 컨텐츠에 의존하지 않음을 인정한다. 의료원은 컨텐츠의 정확성, 안전성 등과 관련하여 고의나 중과실이 인정되는 경우를 제외 하고는 면책된다. 의료원은 이용자가 제공한 컨텐츠를 적절한 카테고리로 재분류할 수 있다. 이용자는 의료원이 컨텐츠를 미리 검토하지는 않으나 서비스를 통하여 공개적으로 이용 가능한 컨텐츠를 거절하거나 이동할 수 있는 권리(의무사항은 아님)를 가지고 있음을 인정한다. 의료원은 서비스 약관을 위배하거나 불법적인 컨텐츠를 삭제할 수 있다.<br/>
-							<br/>
-							[제10조] 의료원에 제출된 공개적인 컨텐츠<br/>
-							① "공개적으로 접속 가능한 서비스 구역"이라 함은 일반 대중이 접속할 수 있는 곳을 의미한다. (예: 커뮤니티, 게시판 등)<br/>
-							<br/>
-							[제11조] 개인정보의 공개<br/>
-							병원은 본 서비스의 원활한 활용을 위해 필요한 이용자의 신상정보를 수집할 수 있다. 병원은 정보 주체의 동의, 법률의 특별한 규정 등 개인정보 보호법 제17조 및 제18조에 해당하는 경우를 제외하고는 개인정보를 제3자에게 제공하지 않는다.<br/>
-							다만, 아래의 경우는 예외로 한다.<br/>
-							가. 정보 주체로부터 동의를 받은 경우(병원간 상호진료 협조를 위하여 의뢰한 의사에게만 본인의 진료정보 제공)<br/>
-							나. 다른 법률에 특별한 규정이 있는 경우<br/>
-							다. 정보 주체나 법정대리인의 의사를 확인할 수 없는 상태에 있거나 주소 불명 등 여러 이유로 사전 동의를 받을 수 없는 경우<br/>
-							라. 수사 목적으로 법령에 정해진 절차와 방법에 따라 수사기관의 요구가 있는 경우<br/>
-							- 통계작성 및 학술연구 등의 목적을 위하여 필요한 경우로 특정 개인을 알아볼 수 없는 형태로 가공하여 제공하는 경우<br/>
-							마. 진료비 청구 기관, 업무협력 체결 업체와 본원과 협약을 체결한 협력 병의원 의사에게 필요로 하는 정보를 제공하는 경우<br/>
-							<br/>
-							[제12조] 사용의 중지 및 내용 삭제<br/>
-							이용자가 다음과 같은 행위를 할 경우에 이용자는 의료원이 이용자의 서비스 이용을 중지 시키거나 서비스 내에 포함되어 있는 내용을 삭제할 수 있음에 동의한다. 의료원은 이용자에 대해 서비스 이용 중지 조치를 취할 경우 통지를 하고 소명 기회를 부여한다. 의료원은 귀하의 소명이 타당하다고 판단할 경우에 서비스 이용 중지 조치를 철회한다.<br/>
-							① 부당한 방법으로 정보통신망에 의하여 처리. 보관. 전송되는 타인의 정보를 훼손하거나 타인의 비밀을 침해,도용 또는 누설하는 행위<br/>
-							② 트로이 목마, 컴퓨터 바이러스 등 악성 프로그램의 유포 행위<br/>
-							③ 음란, 폭력물 등의 불건전한 자료의 게재, 유포하는 행위<br/>
-							④ 의료원에서 제공하는 서비스와 관련 없는 내용<br/>
-							⑤ 불필요하거나 승인되지 않는 광고, 판촉물을 게재하는 행위<br/>
-							⑥ 동일한 내용을 중복하여 다수 게시하는 등 게시의 목적에 어긋나는 행위<br/>
-							⑦ 기타 관련 법률에서 금지하는 행위 또는 본 서비스의 약관의 내용에 위배되는 행위<br/>
-							<br/>
-							[제13조] 권리 침해의 금지<br/>
-							① 이용자는 본 서비스 또는 이와 관련하여 사용되는 필요한 소프트웨어에 의료원의 지적 재산권 및 기타 법률에 의해 보호되는 전속적이고 기밀인 정보가 포함되어 있음을 인정하고 이를 침해하는 어떠한 행위도 하지 아니할 것에 동의한다.<br/>
-							② 후원 광고에 포함되어 있는 내용이나 본 서비스 또는 광고주를 통하여 이용자에게 제공되는 정보는 저작권, 상표, 서비스 마크, 특허 등 법에 의해 보호되고 인정됨을 인정하고 동의한다.<br/>
-							③ 이용자는 의료원이나 광고주에 의해 명시적으로 승인된 경우를 제외하고는 본 서비스나 소프트웨어에 근거한 창작물을 전부 또는 일부라도 수정하거나 대여, 대출, 판매, 배포 또는 제작할 수 없음에 동의한다.<br/>
-							④ 의료원은 이용자에게 한 대의 컴퓨터에서 소프트웨어의 오프젝트 코드를 사용할 수 있는 개인적이고, 양도 불가능하며, 비독점적인 사용권을 부여한다. 이용자는 소프트웨어를 복사, 수정, 창작물의 제작, 리버스 엔지니어링, 리버서 어셈블 또는 소스 코드를 발견하려고 시도 하거나, 판매, 양도, 재라이선스, 담보권을 설정하거나 소프트웨어상의 어떠한 권리도 양도 하여서는 안되며, 제3자로 하여금 위와 같은 행위를 하도록 허락하여서도 안 된다. 이용자는 본 서비스에 접속하기 위해 승인 받지 않은 어떤 방식으로든 소프트웨어를 수정하거나 소프트웨어 수정본을 사용하지 않기로 하고 본 서비스에 접속하는데 사용하도록 의료원이 제공한 인터페이스를 통하는 것 이외에 다른 방법으로 본 서비스에 접속하지 않기로 동의 한다.<br/>
-							<br/>
-							[제14조] UI에 관한 정보<br/>
-							이용자는 의료원의 사전 승인 없이 의료원UI를 어떠한 방식으로든 전시 또는 사용하지 않기로 동의 한다.<br/>
-							<br/>
-							[제15조] 약관의 개정<br/>
-							의료원은 관련법에 위배되지 않는 범위 내에서 약관을 개정할 수 있다.<br/>
-							<br/>
-							[제16조] 재판권 및 준거법<br/>
-							① 본 서비스의 이용과 관련하여 분쟁이 발생할 경우 소송은 민사소송법상의 관할 법원에 제기한다.<br/>
-							② 상기 ①항의 경우 준거법은 한국 법을 적용한다.<br/>
-							<br/>
-							[제17조] 불만사항 및 침해사고 발생시 처리 절차<br/>
-							이용자가 홈페이지를 통해 제공되는 서비스를 이용하던 중 불만 사항이나 침해 사고 피해가 발생할 경우에는 홈페이지 관리자 (30379@eumc.ac.kr)에게 메일로 통보하며, 의료원은 최대한 단기간 내에 적절한 조치를 취한다.<br/>
-							<br/>
-							[부칙]<br/>
-							① 이상의 본원 개인정보보호정책은 2018년 3월 28일로부터 시행된다.
-						</div>
-						<div class="heading heading-depth03">
-							<em class="title">개인정보 수집 및 이용에 대한 안내</em>
-							<div class="right">
-								<i class="pointstar">
-									*
-									<span class="he">필수입력</span>
-								</i>
-								<input type="checkbox" id="sign02_member" data-fe-wrap="form-right" data-fe-label="동의함" />
-							</div>
-						</div>
-						<div class="heading heading-depth03">
-							<p style="font-size:13px;">
-								귀하는 본 개인 정보 수집·이용에 대한 동의를 거부할 권리가 있습니다.<br/>
-								다만, 수집하는 개인정보는 원활한 서비스 제공을 위해 필요한 최소한의 기본정보로서, 동의하지 않을 시에는 회원가입 및 이화여자대학교 의료원 홈페이지 서비스 이용이 제한될 수 있습니다.
-							</p>
-						</div>
-						<div class="scroll">
-							1. 개인정보 등의 수집·이용 목적<br/>
-							이화여자대학교 의료원은 홈페이지 회원의 가입 및 관리를 위해 다음과 같이 귀하의 개인정보를 수집 및 이용합니다.<br/>
-							① 진료/건강검진 예약, 예약조회 및 건강검진 결과조회, 온라인 상담 답변 처리 등 회원제 서비스 제공<br/>
-							② 이용자 확인 및 의사소통 경로 확보<br/>
-							<br/>
-							2. 수집하려는 개인정보의 항목<br/>
-							[만 14세 이상] (필수) 아이디, 비밀번호, 이름, 휴대폰번호, 이메일, 기타 본인 확인기관에서 제공하는 C.I, D.I의 추가적인 본인확인 정보<br/>
-							[만 14세 미만] (필수) 만 14세 미만 회원의 이름, 아이디, 비밀번호, 본인 확인기관에서 제공하는 C.I, D.I의 추가적인 법정대리인 본인확인 정보<br/>
-							<br/>
-							<p class="pointtxt">3. 개인정보 등의 보유 및 이용 기간<br/>
-							홈페이지 회원 탈퇴시 파기(홈페이지 1년 이상 미이용 시에는 개인정보가 분리 보관됨)</p>
-						</div>
+						<!-- //term -->
 					</div>
-					<!-- //term -->
-				</div>
-				<div class="btnWrap">
-					<button type="button" class="button button-sizeM" id="btnJoinCancel">취소</button>
-					<!-- <button type="button" class="button button-sizeM button-bg03" id="joinSubmitBtn">가입</button> -->
-					<input type="submit" class="button button-sizeM button-bg03" id="joinSubmitBtn" value="가입"/>
-				</div>
-			</fieldset>
-		</form>
-	</div>
-</main>
+					<div class="btnWrap">
+						<button type="button" class="button button-sizeM"
+							id="btnJoinCancel">취소</button>
+						<!-- <button type="button" class="button button-sizeM button-bg03" id="joinSubmitBtn">가입</button> -->
+						<input type="submit" class="button button-sizeM button-bg03"
+							id="joinSubmitBtn" value="가입" />
+					</div>
+					</fieldset>
+					</form>
+			</div>
+			</main>
 
 <script type="text/javascript">
 $(function(){

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.green.oyes.mapper.ProposalMapper">
+	<!--건의합니다 상세보기-->
+	<select id="select" resultType="proposal">
+		select	m.patient_no,
+				m.patient_name,
+				m.mobile_no,
+				m.email,
+				p.*
+		from	proposal p
+		join	member m on p.patient_no = m.patient_no
+		where	p.proposal_no = #{proposal_no}
+	</select>
+	<!--건의합니다 목록 불러오기-->
+	<select id="proposal_list" parameterType="map" resultType="proposal">
+		select	m.*, 
+			  	p.*
+		from	proposal p
+		join	member m on p.patient_no = m.patient_no 
+		    <!-- 검색어가 입력 되었으면 -->
+<!--			<if test="keyword!=null and keyword!=''">
+				<if test="search=='subcon'">
+					subject like '%'||#{keyword}||'%' or
+					content like '%'||#{keyword}||'%'
+				</if>
+				<if test="search!='subcon'">
+					${search} like '%'||#{keyword}||'%'
+				</if>		
+			</if>
+	-->
+		order by proposal_no offset #{startRow} rows
+			fetch next #{rowPerPage} rows only
+	</select>
+	<!-- proposal 총 갯수 -->
+	<select id="getTotal" resultType="integer">
+		select count(*) from proposal
+	</select>
+	<!--건의합니다 입력-->
+	<insert id="insert" parameterType="proposal">
+		insert into proposal (patient_no, related, proposal_title, proposal_type, proposal_content, create_date,for_patient_name,for_patient_no)
+		values (#{patient_no},#{related},#{proposal_title},#{proposal_type},#{proposal_content},sysdate,#{for_patient_name},#{for_patient_no, jdbcType=INTEGER})
+	</insert>
+	<!-- 건의합니다 수정 -->
+	<update id="update" parameterType="proposal">
+		update proposal set 
+			is_active = #{is_active},
+			progress = #{progress}
+		where proposal_no=#{proposal_no}
+	</update>
+	<!--건의합니다 삭제-->
+	<delete id="delete" parameterType="proposal">
+		delete from proposal where proposal_no = #{proposal_no}
+	</delete>
+
+</mapper>

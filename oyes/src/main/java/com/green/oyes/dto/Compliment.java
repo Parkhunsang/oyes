@@ -16,4 +16,13 @@ public class Compliment {
 	private String  compliment_content;
 	private Date    create_date;
 	private String  is_active;
+	
+	//조회용
+    private String patient_name;
+
+    private String doctor_name;
+    private String doctor_title;
+    private String doctor_profile_image;
+    private String doctor_bio_short;
+    private String doctor_doctor_specialty;
 }

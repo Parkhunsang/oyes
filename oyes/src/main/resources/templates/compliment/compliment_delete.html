@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<th:block th:insert="~{/header.html::header}"></th:block>
+	<head>
+		<meta charset="UTF-8">
+		<title>complimentDelete</title>
+	</head>
+	<body>
+		<div th:if="${result} > 0">
+			<script type="text/javascript">
+				alert("삭제 되었습니다")
+				location.href="/compliment/compliment_list"
+			</script>
+		</div>
+		<div th:if="${result} == 0">
+			<script type="text/javascript">
+				alert("삭제 실패했습니다")
+				history.go(-1);
+			</script>
+		</div>
+	</body>
+</html>

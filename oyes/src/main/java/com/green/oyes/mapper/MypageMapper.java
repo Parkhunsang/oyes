@@ -16,5 +16,6 @@ public interface MypageMapper {
 	int deleteFavorite(int favorite_no);
 	List<Compliment> select_compliment(int patient_no);
 	List<Proposal> select_proposal(int patient_no);
+	int updateMyinfo(Member member);
 
 }

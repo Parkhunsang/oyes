@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layouts/layout}">
+<th:block th:insert="~{/header.html::header}"></th:block>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+body {
+	display: flex;
+	flex-direction:column;
+	align-items: center;
+}
+.contents_wrap {
+	width: 1200px;
+	min-height:800px;
+	margin:150px 0px;
+}
+.title {
+	color: #000;
+	font-size: 34px;
+	font-weight: 700;
+	margin-bottom: 36px;
+}
+.board_table {
+	color: #555;
+	word-break: break-all;
+	word-spacing: -1px;
+	letter-spacing: -0.5px;
+	margin: 0;
+	padding: 0;
+	font-family: "Noto Sans CJK KR", "Noto Sans KR", "New Gulim", sans-serif;
+	width: 100%;
+	border-spacing: 0;
+	border-collapse: collapse;
+	table-layout: fixed;
+	border-top: 2px solid #666;
+	text-align: center;
+	vertical-align: middle !important;
+}
+.board_table thead tr {
+	background: #f8f8f8;
+	color: #222;
+	border-bottom: 1px solid #ddd;
+	height: 72px;
+}
+.board_table tbody tr {
+	border-bottom: 1px dotted #ddd;
+	height: 70px;
+}
+.alignL {
+	text-align: left;
+}
+.alignR {
+	text-align: right;
+}
+.body_text {
+	text-align: center;
+}
+.text_wrap {
+min-height:300px;
+}
+thead {
+font-size:24px;
+font-weight:700;
+}
+b {
+color: black;
+}
+.seminarbtn_wrap {
+width:440px;
+height:44px;
+margin:44px auto;
+display:flex;
+justify-content:center;
+gap:16px;
+}
+.seminarbtn_wrap a {
+display:inline-block;
+width:120px;
+height:44px;
+line-height:44px;
+background:white;
+border:1px solid #0E7758;
+text-align:center;
+}
+</style>
+</head>
+<body>
+<div layout:fragment="contentFragment">
+	<div class=contents_wrap>
+		<h2 class="title">건강강좌 한눈에 보기</h2>
+		<div id="seminar_board">
+			<table class="board_table">
+				<thead>
+				<tr><td colspan="2">[[${list.seminar_title}]]</td></tr>
+				</thead>
+				<tbody>
+				<tr><td class="alignL">강사 : [[${list.seminar_lecturer}]]</td>
+					<td class="alignR">등록일 : [[${list.create_date}]]</td></tr>
+				<tr><td colspan="2" class="body_text">
+					<div class="text_wrap">
+						<br>
+						<b>일정 : </b>[[${list.seminar_date}]][[${list.seminar_time}]] <br>
+						<b>장소 : </b>[[${list.seminar_site}]] <br>
+						<br>
+						[[${list.seminar_text}]]
+					</div>
+				</td><tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="seminarbtn_wrap">
+			<a class="seminar_back_btn" href="/health/seminarList">목록</a>
+			<a class="seminar_update_btn" th:if="${member != null && member.patient_id=='admin1'}"
+				th:href="@{/health/seminarUpdateForm(seminar_no=${list.seminar_no})}">수정</a>
+			<a class="seminar_delete_btn" th:if="${member != null && member.patient_id=='admin1'}"
+				th:href="@{/health/seminarDelete(seminar_no=${list.seminar_no})}"
+				onclick="return confirm('정말 삭제하시겠습니까?')">삭제</a>
+		</div>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<th:block th:insert="~{/header.html::header}"></th:block>
+<head>
+<meta charset="UTF-8">
+<title>연혁 | 이화서울병원</title>
+<style type="text/css">
+	.history-container {
+	    max-width: 1200px;
+	    margin: 200px auto;
+	    padding: 20px;
+	    line-height: 1.8;
+    	color: #333;
+	}
+	
+	.history-container h2 {
+	    font-size: 28px;
+	    font-weight: 700;
+	    margin-bottom: 24px;
+	}
+	
+	.history-tabs {
+	    display: flex;
+	    gap: 5px;
+	    margin-bottom: 30px;
+	    border-bottom: 2px solid #ddd;
+	    padding-bottom: 5px;
+	}
+	
+	.history-tabs a {
+	    padding: 8px 16px;
+	    text-decoration: none;
+	    color: #555;
+	    border-radius: 4px 4px 0 0;
+	    background: #f7f7f7;
+	    transition: 0.3s;
+	}
+	
+	.history-tabs a:hover {
+	    background: #eaeaea;
+	    color: #000;
+	}
+	
+	.history-tabs a.active {
+	    background: #007a5c;
+	    color: #fff;
+	    font-weight: bold;
+	}
+	
+	.history-content {
+	    margin-top: 20px;
+	}
+	
+	.history-year {
+	    font-size: 24px;
+	    font-weight: bold;
+	    color: #007a5c;
+	    margin: 30px 0 10px;
+	}
+	
+	.history-list {
+	    list-style: none;
+	    padding-left: 0;
+	    margin: 0 0 30px;
+	    border-left: 2px solid #ddd;
+	}
+	
+	.history-list li {
+	    position: relative;
+	    padding: 10px 20px;
+	    margin-bottom: 8px;
+	}
+	
+	.history-list li::before {
+	    content: "";
+	    position: absolute;
+	    left: -6px;
+	    top: 18px;
+	    width: 12px;
+	    height: 12px;
+	    background: #007a5c;
+	    border-radius: 50%;
+	}
+	
+	.month {
+	    font-weight: bold;
+	    margin-right: 8px;
+	    color: #444;
+	}
+</style>
+</head>
+<body>
+	<div layout:fragment="contentFragment">
+		<div class="contTopBar contTopBar-bg01">
+			<!-- inner -->
+			<div class="inner">
+				<!-- breadcrumb -->
+				<div class="breadcrumb cf">
+					<strong class="he">현재 위치:</strong>
+					<div class="item">
+						<a th:href="@{/}" class="home ht">Home</a>
+					</div>
+					<div class="item">
+						<em>병원소개</em>
+						<button type="button" class="bcLinkLayerBtn ht">주 메뉴 목록 열기</button>
+						<ul class="bcLinkLayer">
+							<li><a th:href="@{/about/greeting}">병원소개</a></li>
+						</ul>
+					</div>
+					<div class="item">
+						<em>연혁</em>
+						<button type="button" class="bcLinkLayerBtn ht">서브 메뉴 목록 열기</button>
+						<ul class="bcLinkLayer">
+							<li><a th:href="@{/about/greeting}">병원장 인사말</a></li>
+							<li><a th:href="@{/about/tour}">병원 둘러보기</a></li>
+							<li><a th:href="@{/about/mission}">미션과 비전</a></li>
+							<li><a th:href="@{/about/history}">연혁</a></li>
+							<li><a th:href="@{/about/hi}">HI</a></li>
+							<li><a th:href="@{/about/boardList}">병원소식</a></li>							
+						</ul>	
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="history-container">
+		    <h2>연혁</h2>
+		
+		    <!-- 상단 탭 -->
+		    <div class="history-tabs">
+			    <a th:href="@{/about/history(period=2024)}"
+			       th:classappend="${title}=='현재~2024' ? 'active'">현재~2024</a>
+			    <a th:href="@{/about/history(period='2023-2022')}"
+			       th:classappend="${title}=='2023~2022' ? 'active'">2023~2022</a>
+			    <a th:href="@{/about/history(period='2021-2020')}"
+			       th:classappend="${title}=='2021~2020' ? 'active'">2021~2020</a>
+			</div>
+
+		
+		    <!-- 연혁 본문 -->
+		    <div class="history-content">
+			    <div class="history-year" th:text="${title}"></div>
+			    <ul class="history-list">
+			        <li th:each="event : ${events}" th:text="${event}"></li>
+			    </ul>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

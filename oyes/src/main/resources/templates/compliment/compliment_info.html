@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<htmlxmlns:th="http: //www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+	<th:block th:insert="~{/header.html::header}"></th:block>
+
+<head>
+	<meta charset="UTF-8">
+	<title>complimentInfo</title>
+
+	<style type="text/css">
+		/*compliment_list 페이지 스타일 시작*/
+		div#comp_wrap {
+			margin-top: 200px;
+			width: 100%;
+			height: 100%;
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			justify-content: center;
+		}
+
+		section#comp_center {
+			width: 1200px;
+			height: auto;
+			position: relative;
+			left: 0px;
+			top: 0px;
+		}
+
+		h2#compliment_h2 {
+			font: bold 32px/12px 'pretendard';
+			height: 56px;
+			width: 100%;
+			text-align: center;
+			margin-bottom: 32px;
+			border-bottom: 2px solid black;
+			color: #222222;
+		}
+
+		/*compliment_list info 스타일 시작*/
+		div#compInfo_process {
+			width: 100%;
+			height: auto;
+			display: flex;
+			flex-wrap: wrap;
+			flex-direction: column;
+			color: #222222;
+			margin-bottom: 100px;
+		}
+
+		div#compInfo_process>h3 {
+			width: 100%;
+			height: 40px;
+			font: bold 24px 'pretendard';
+			margin-bottom: 24px;
+		}
+
+		ul#compInfo_warnList {
+			width: 100%;
+			font: normal 16px 'pretendard';
+			height: 100px;
+			display: flex;
+			flex-wrap: wrap;
+			flex-direction: column;
+			margin-bottom: 32px;
+		}
+
+		ul#compInfo_warnList>li {
+			list-style: disc !important;
+			margin-left: 24px;
+			color: #666;
+		}
+
+		ul#compInfo_processList {
+			width: 100%;
+			height: 220px;
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			column-gap: 28px;
+			align-items: stretch;
+		}
+
+		ul#compInfo_processList>li {
+			width: 100%;
+			display: flex;
+			flex-wrap: wrap;
+			flex-direction: column;
+			justify-content: space-around;
+			border: 1px solid #108663;
+			padding: 24px;
+			box-sizing: border-box;
+			position: relative;
+			left: 0px;
+			top: 0px;
+		}
+
+		ul#compInfo_processList>li::after {
+			content: "";
+			display: block;
+			position: absolute;
+			width: 6px;
+			height: 9px;
+			background: url("/images/spr_icon_etc.png") no-repeat -32px -92px;
+			left: 276px;
+		}
+
+		ul#compInfo_processList>li::before {
+			content: "";
+			display: block;
+			position: absolute;
+			width: 31px;
+			height: 31px;
+			border-radius: 50%;
+			background: #108663;
+			left: 262px;
+		}
+
+		ul#compInfo_processList>li:last-child::before {
+			display: none;
+		}
+
+		ul#compInfo_processList>li:last-child::after {
+			display: none;
+		}
+
+		li>p.process_step {
+			width: 60px;
+			height: 32px;
+			text-align: center;
+			font: normal 14px/32px 'pretendard';
+			font-weight: 500;
+			background: #108663;
+			color: white;
+		}
+
+		li>p.process_title {
+			width: 100%;
+			height: 32px;
+			font: normal 20px 'pretendard';
+			font-weight: 500;
+		}
+
+		li>p.process_text {
+			width: 100%;
+			height: 40px;
+			font: normal 16px 'pretendard';
+			color: #666;
+		}
+
+		li>p#process_text {
+			width: 100%;
+			height: 24px;
+			color: #108663;
+		}
+
+		li>a>button.compInfo_btn {
+			width: 80px;
+			height: 32px;
+			border: 1px solid #108663;
+			font: normal 14px/32px 'pretendard';
+			text-align: center;
+		}
+
+		/*compliment_list info 스타일 끝*/
+		a.btn {
+			display: block;
+			border-radius: 12px;
+			box-sizing: border-box;
+			font: normal 16px/34px 'pretendard';
+			text-align: center;
+			color: aliceblue;
+		}
+
+		/*compliment list 목록 스타일, 페이지 스타일 끝*/
+		/*compliment_info 페이지 스타일 시작*/
+		section#compliment_Info {
+			width: 1200px;
+			height: auto;
+			position: relative;
+			left: 0px;
+			top: 0px;
+		}
+
+		/*main 이미지 스타일 시작*/
+		div#compInfo_main {
+			position: relative;
+			top: 0px;
+			left: 0px;
+			width: 100%;
+			height: 400px;
+			background: url("/images/img_jumbotron02.jpg") no-repeat center center / cover;
+			margin-bottom: 32px;
+		}
+
+		div#comp_main_textbox {
+			min-width: 400px;
+			height: auto;
+			padding: 56px 35px 40px;
+			background: #108663;
+			box-sizing: border-box;
+			position: absolute;
+			top: 50%;
+			right: 0px;
+			margin-top:-12%;
+		}
+
+		i#compInfo_main_icon {
+			display: block;
+			width: 44px;
+			height: 44px;
+			overflow: hidden;
+			background: url("/images/spr_iconM.png") no-repeat;
+			background-position-x: -138px;
+			margin-bottom: 5px;
+		}
+
+		div#comp_main_textbox>p {
+			color: ghostwhite;
+			font: normal 16px 'pretendard';
+		}
+
+		div#comp_main_textbox>p#comp_main_title {
+			font: bold 30px 'pretendard';
+			margin-bottom: 8px;
+		}
+
+		div#comp_main_textbox>p#comp_main_text {
+			margin-bottom: 24px;
+		}
+
+		button.main-insert-btn {
+			width: 100px;
+			height: 40px;
+			padding: 0 20px;
+			font-size: 16px;
+			line-height: 38px;
+			box-sizing: border-box;
+			color: #666;
+			text-align: center;
+			cursor: pointer;
+			background: white;
+		}
+		/*main 이미지 스타일 끝*/
+		/*이용 방법 스타일 시작*/
+		div#compInfo_how{
+			width: 100%;
+			height:auto;
+			margin-bottom: 40px;
+		}
+		div#compInfo_how>h3 {
+			width:100%;
+			height:40px;
+			font: bold 24px 'pretendard';
+			margin-bottom: 24px;
+			color: #222222;
+		}
+		ul#compInfo_howList {
+			width: 100%;
+			height: auto;
+			display: grid;
+			grid-template-columns: repeat(4, 1fr);
+			align-items: stretch;
+		}
+		ul#compInfo_howList>li {
+			width: 100%;
+			display: flex;
+			flex-wrap: wrap;
+			flex-direction: column;
+			align-content: center;
+			border-right: 1px solid #ddd;
+			padding: 24px;
+			box-sizing: border-box;
+			position: relative;
+			left: 0px;
+			top: 0px;
+		}
+		ul#compInfo_howList>li::before {
+			content: "";
+			display: block;
+			width:44px;
+			height:44px;
+			background:url("/images/spr_iconM.png") no-repeat;
+			background-position: 0 -46px;
+			position: relative;
+			left:50%;
+			margin-left:-22px;
+			margin-bottom: 24px;
+		}
+		ul#compInfo_howList>li>p {
+			width:100%;
+			height: auto;
+			font: normal 15px 'pretendard';
+			text-align: center;
+		}
+		ul#compInfo_howList>li>p.howList_title {
+			font: normal 20px 'pretendard';
+			font-weight: 500;
+			color:#222222;
+			margin-bottom: 24px;
+		}
+		p>span {
+			display: block;
+		}
+		/*이용 방법 스타일 끝*/
+	</style>
+
+</head>
+
+<body>
+	<div layout:fragment="contentFragment">
+		<div id="comp_wrap">
+			<section id="compliment_Info">
+				<h2 id="compliment_h2">고객상담실 이용안내</h2>
+				<div id="compInfo_main">
+					<div id="comp_main_textbox">
+						<i id="compInfo_main_icon"></i>
+						<p id="comp_main_title">고객의 의견을 반영합니다.</p>
+						<p id="comp_main_text">이대서울병원에서는 고객의 의견을 적극 반영하고 있습니다.<br>
+							병원을 이용시 불편한 점이나 건의사항이 있으시면 작성하고 등록할 수 있습니다.</p>
+					</div>
+				</div>
+				<div id="compInfo_how">
+					<h3>이용 방법 </h3>
+					<ul id="compInfo_howList">
+						<li>
+							<p class="howList_title">위치 / 상담시간</p>
+							<p class="howList_text">
+								<span>1층 고객만족실</span>
+								<span>평일 : 09:00 ~ 16:30 / 점심 : 12:00~13:00</span>
+								<span>토요일 : 운영하지 않음</span>
+							</p>
+						</li>
+						<li>
+							<p class="howList_title">전화/팩스</p>
+							<p class="howList_text">
+								<span>TEL : 02-6986-5573</span>
+								<span>FAX : 02-6986-5576</span>
+							</p>
+						</li>
+						<li>
+							<p class="howList_title">인터넷</p>
+							<p class="howList_text">
+								<span>홈페이지</span>
+								<span>“고객서비스”</span>
+							</p>
+						</li>
+						<li>
+							<p class="howList_title">고객의 소리함</p>
+							<p class="howList_text">
+								<span>“고객의 소리 카드” 작성</span>
+								<span>각 층에 비치된 고객의 소리함에 접수</span>
+							</p>
+						</li>
+					</ul>
+				</div>
+				<div id="compInfo_process">
+					<h3>고객의 소리 회신 절차</h3>
+					<ul id="compInfo_warnList">
+						<li>올려 주신 글 중 사안에 따라 회신을 드려야 할 경우엔 가능한 빠른 시간 내 회신드리도록 하겠습니다.</li>
+						<li>진료와 관련된 내용은 담당 책임의 진료 및 상담을 권유합니다.</li>
+						<li>광고나 욕설이 포함된 글에 대해 답변드리지 않으며 임의 삭제할 수 있습니다.</li>
+					</ul>
+					<ul id="compInfo_processList">
+						<li>
+							<p class="process_step">STEP 1</p>
+							<p class="process_title">접수</p>
+							<p class="process_text">방문, 전화, 서면, 온라인</p>
+						</li>
+						<li>
+							<p class="process_step">STEP 2</p>
+							<p class="process_title">검토</p>
+							<p class="process_text">내용 파악 조사 분석</p>
+						</li>
+						<li>
+							<p class="process_step">STEP 3</p>
+							<p class="process_title">개선</p>
+							<p class="process_text">처리방안 검토 개선 활동</p>
+						</li>
+						<li>
+							<p class="process_step">STEP 4</p>
+							<p class="process_title">회신</p>
+							<p class="process_text">결과 회신</p>
+							<p id="process_text">내 진료정보 - '내가 쓴 글'에서 확인</p>
+							<a th:href="@{/mypage/mythank}">
+								<button class="btn compInfo_btn">내가 쓴 글</button>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</section>
+		</div>
+	</div>
+</body>
+</html>

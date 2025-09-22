@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<th:block th:insert="~{/header.html::header}"></th:block>
+<head>
+<meta charset="UTF-8">
+<title>채용공고 상세보기 | 이화서울병원</title>
+<style type="text/css">
+	#view_wrap{
+		 max-width: 1200px;
+	    margin: 200px auto;
+	    padding: 20px;
+	    line-height: 1.8;
+	    color: #333;
+	}
+	h2{
+		font-size: 28px;
+	    font-weight: 700;
+	    margin-bottom: 24px;
+	}
+	.view_table {
+	  width: 100%;
+	  border-collapse: collapse;
+	  margin: 20px 0;
+	  font-size: 15px;
+	}
+	
+	.view_table tr {
+	  border-bottom: 1px solid #e0e0e0;
+	}
+	
+	.view_table td {
+	  padding: 12px 15px;
+	  text-align: left;
+	}
+	
+	.view_table td:first-child {
+	  width: 20%;
+	  background-color: #f9f9f9;
+	  font-weight: bold;
+	  text-align: center;
+	  border-right: 1px solid #e0e0e0;
+	}
+	
+	/* 버튼 스타일 */
+	.btn {
+	  display: inline-block;
+	  padding: 8px 18px;
+	  margin: 5px;
+	  font-size: 14px;
+	  font-weight: 500;
+	  text-align: center;
+	  text-decoration: none;
+	  border-radius: 4px;
+	  transition: all 0.2s ease-in-out;
+	  background-color: #17a2b8;
+	}
+	
+	.btn-info {
+	  background-color: #17a2b8;
+	  color: #fff;
+	}
+	
+	.btn-warning {
+	  background-color: #ffc107;
+	  color: #000;
+	}
+	
+	.btn-danger {
+	  background-color: #dc3545;
+	  color: #fff;
+	}
+	
+	.btn:hover {
+	  opacity: 0.85;
+	}
+</style>
+</head>
+<body>
+	<div layout:fragment="contentFragment">
+		<div id="view_wrap">
+			<div class="container text-center">
+				<div class="contTopBar contTopBar-bg01">
+			<!-- inner -->
+					<div class="inner">
+						<!-- breadcrumb -->
+						<div class="breadcrumb cf">
+							<strong class="he">현재 위치:</strong>
+							<div class="item">
+								<a th:href="@{/}" class="home ht">Home</a>
+							</div>
+							<div class="item">
+								<em>병원소개</em>
+								<button type="button" class="bcLinkLayerBtn ht">주 메뉴 목록 열기</button>
+								<ul class="bcLinkLayer">
+									<li><a th:href="@{/about/greeting}">병원소개</a></li>
+								</ul>
+							</div>
+							<div class="item">
+								<em>병원소식</em>
+								<button type="button" class="bcLinkLayerBtn ht">서브 메뉴 목록 열기</button>
+								<ul class="bcLinkLayer">
+									<li><a th:href="@{/about/greeting}">병원장 인사말</a></li>
+									<li><a th:href="@{/about/tour}">병원 둘러보기</a></li>
+									<li><a th:href="@{/about/mission}">미션과 비전</a></li>
+									<li><a th:href="@{/about/history}">연혁</a></li>
+									<li><a th:href="@{/about/hi}">HI</a></li>
+									<li><a th:href="@{/about/boardList}">병원소식</a></li>							
+								</ul>	
+							</div>
+							<div class="item">
+								<em>채용공고</em>
+								<button type="button" class="bcLinkLayerBtn ht">서브 메뉴 목록 열기</button>
+								<ul class="bcLinkLayer">
+									<li><a th:href="@{/about/boardList(board_kind='NOTICE')}">공지사항</a></li>
+									<li><a th:href="@{/about/boardList(board_kind='PRESS')}">보도자료</a></li>
+									<li><a th:href="@{/about/careersList}">채용공고</a></li>							
+								</ul>	
+							</div>
+						</div>
+					</div>
+				</div>
+				<h2>채용공고 상세내역</h2>
+				<table class="view_table">
+					<tr>
+						<td>제목</td>
+						<td>[[${careers.careers_title}]]</td>
+					</tr>
+					<tr>
+						<td>작성일</td>
+						<td>[[${careers.careers_create_date}]]</td>
+					</tr>
+					<tr>
+						<td>모집부서</td>
+						<td>[[${careers.careers_department}]]</td>
+					</tr>
+					<tr>
+						<td>직무</td>
+						<td>[[${careers.careers_position}]]</td>
+					</tr>
+					<tr>
+						<td>고용형태</td>
+						<td>[[${careers.careers_type}]]</td>
+					</tr>
+					<tr>
+						<td>채용인원</td>
+						<td>[[${careers.careers_headcount}]]</td>
+					</tr>
+					<tr>
+						<td>상세 공고내용</td>
+						<td>[[${careers.careers_content}]]</td>
+					</tr>
+					<tr>
+						<td>급여</td>
+						<td>[[${careers.careers_salary}]]</td>
+					</tr>
+					<tr>
+						<td>모집 마감일</td>
+						<td>[[${careers.careers_end_date}]]</td>
+					</tr>
+					<tr>
+						<td colspan="2" class="text-center">
+							<a class="btn" th:href="@{/about/careersList(careers_status=${careers.careers_status})}">게시글 목록</a>
+							<!-- <th:block th:if="${session.userId == 10000000}"> -->
+							    <a class="btn btn-info" th:href="@{/about/careersInsertForm}">등록</a>
+							    <a class="btn btn-warning" th:href="@{/about/careersUpdateForm(num=${careers.careersno}, careers_status=${careers.careers_status})}">수정</a>
+								<a class="btn btn-danger" th:href="@{/about/careersDelete(num=${careers.careersno}, careers_status=${careers.careers_status})}">삭제</a>
+							<!-- </th:block> -->
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

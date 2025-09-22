@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/layouts/layout}">
+<head>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+<th:block th:insert="~{/header.html::header}"></th:block>
+<link rel="stylesheet" th:href="@{/css/outpatient.css}">
+<link rel="stylesheet" th:href="@{/css/doctorlist.css}">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+#submit_btn {
+	width: 100%;
+	padding: 0px 12px;
+	position: absolute;
+	left: 0px;
+	bottom: 36px;
+	display: flex;
+	justify-content: space-between;
+}
+
+#outpatient_btn {
+	width: 100%;
+	height: 44px;
+	line-height: 44px;
+	border: 1px solid #ddd;
+	text-align: center;
+	background: #eee;
+	color: #888;
+}
+
+p {
+	margin: 0px;
+	padding: 0px;
+}
+
+ul, ol {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+}
+
+button {
+	all: unset;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+#contents_wrap {
+	width: 1200px;
+	min-height: 800px;
+	margin: 150px 0px;
+}
+
+.title {
+	color: #000;
+	font-size: 34px;
+	font-weight: 700;
+	margin-bottom: 36px;
+}
+
+.color_red {
+	color: #db0000;
+}
+
+#step_wrap {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	gap: 16px;
+	margin: 32px 0px;
+}
+
+#step_wrap li {
+	width: 100%;
+	height: 100px;
+	background: white;
+	border: 1px solid #aaa;
+	position: relative;
+	padding: 24px;
+	box-sizing: border-box;
+	text-align: start;
+	color: #444;
+}
+
+#step_wrap li.selected {
+	border: 1px solid #108663;
+	color: #108663;
+}
+
+#step_wrap li.selected .step_chk {
+	background: #108663;
+}
+
+.step_num {
+	font-size: 14px;
+}
+
+.step_title {
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.step_chk {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	background: #777;
+	position: absolute;
+	right: 24px;
+	top: 50%;
+	transform: translatey(-50%);
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#container {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	margin-top: 32px;
+	border: 1px solid #aaa;
+}
+
+#container>div {
+	padding: 32px;
+	box-sizing: border-box;
+	min-height: 500px;
+}
+
+.list_box {
+	width: 940px;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+}
+
+.list_btn {
+	list-style: none;
+	display: flex;
+	gap: 20px;
+	margin: 0px 0px 20px 0px;
+	padding: 0px;
+}
+
+.list_btn>li {
+	color: #444;
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.list_btn>li.selected {
+	color: #108663;
+}
+
+.lists {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: repeat(auto, 1fr);
+}
+
+.lists>li {
+	width: auto;
+	height: 24px;
+	margin-bottom: 12px;
+	display: flex;
+	align-items: center;
+	position: relative;
+	font-weight: 500;
+	color: #444;
+}
+
+.lists>li::before {
+	content: "";
+	display: block;
+	width: 4px;
+	height: 4px;
+	background: #108663;
+	left: 16px;
+	top: 16px;
+	margin-right: 8px;
+}
+.state_box {
+	width: 260px;
+	position: relative;
+	border-left: 1px solid #aaa;
+}
+.state_table {
+	width: 100%;
+	box-sizing: border-box;
+	color: #444;
+	border-collapse: separate; /* 기본값이 separate이면 셀 사이 간격 가능 */
+	border-spacing: 0 12px; /* 수직 간격 12px 줌 */
+	margin-bottom: 44px;
+}
+.state_table tr td {
+	text-align: right;
+}
+.box_title {
+	color: #222;
+	font-size: 20px;
+	font-weight: 700;
+	padding-bottom: 20px;
+}
+
+.state_table tbody>tr {
+	/* HTML 구조상 tr이 직접 자식이 아니라 tbody 안에 있기 때문 */
+	height: 24px;
+	margin: 12px 0px;
+}
+.member_active {
+	color: #1b7eaf;
+	font-weight: 600;
+}
+.dept_active {
+	color: #fff;
+	background: #09847d;
+	display: block;
+	padding: 0px 4px;
+	float: right;
+}
+#submit_btnwrap {
+	width: 100%;
+	padding: 0px 12px;
+	position: absolute;
+	left: 0px;
+	bottom: 36px;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+#submit_btnwrap a {
+	width: 100%;
+	height: 44px;
+	line-height: 44px;
+	text-align: center;
+	background: #fff;
+	border: 1px solid #aaa;
+	color: #888;
+}
+#reserve_btn.active_btn {
+	width: 100%;
+	height: 44px;
+	line-height: 44px;
+	text-align: center;
+	background: #09847d;
+	border-color: #09847d;
+	color: #fff;
+}
+input[type="submit"] {
+	width: 100%;
+	height: 44px;
+	line-height: 44px;
+	text-align: center;
+	border: 1px solid #ddd;
+	background: #eee;
+	font-size:16px;
+}
+.schedule_wrap {
+margin:32px 0px;
+display:flex;
+flex-direction:column;
+}
+input[type="date"]::-webkit-calendar-picker-indicator {
+display:inline;
+opacity:1;
+cursor:pointer;
+}
+.date_input {
+width:300px;
+height:44px;
+background:white;
+margin:24px auto;
+}
+.schedule_title {
+font-size:18px;
+font-weight:600;
+padding-bottom:24px;
+color:#222;
+border-bottom:2px solid #222;
+}
+.time_wrap {
+display:none;
+}
+.option-group {
+margin-top:24px;
+}
+.option-group input[type="radio"] {
+  display: none;
+}
+.option-group label {
+  display: inline-block;
+  padding: 10px 20px;
+  margin: 5px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+.option-group input[type="radio"]:checked + label {
+  background-color: #1b7eaf;
+  color: white;
+  border-color: #1b7eaf;
+}
+</style>
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+	const dateInput = document.querySelector('input[name="outpatient_date"]');
+	const timeWrap = document.querySelector('.time_wrap');
+    const selectedDateTd = document.getElementById('selected_date');
+    const selectedTimeTd = document.getElementById('selected_time');
+    const reserveBtn = document.getElementById('reserve_btn');
+    const timeOptions = document.querySelectorAll('input[name="outpatient_time"]');
+    
+    reserveBtn.disabled = true; // 이게 버튼 비활성화 상태. (초기값)
+    
+    dateInput.addEventListener('change', () => {
+	    dateInput.style.border="1px solid red";
+        if (dateInput.value) {
+          timeWrap.style.display = 'block'; //선택되는지 확인 테스트용
+          console.log(selectedDateTd); //선택되는지 확인 테스트용
+          selectedDateTd.textContent = dateInput.value;
+          checkReady();
+        } else {
+          timeWrap.style.display = 'none';
+          selectedDateTd.textContent = '선택해주세요';
+          selectedTimeTd.textContent = '선택해주세요';
+          reserveBtn.disabled = true;
+          reserveBtn.classList.remove('active_btn');
+          timeOptions.forEach(opt => opt.checked = false);
+        }
+      });
+
+      timeOptions.forEach(option => {
+        option.addEventListener('change', () => {
+          if (option.checked) {
+            selectedTimeTd.textContent = option.value;
+            checkReady();
+          }
+        });
+      });
+
+      function checkReady() {
+        if (dateInput.value && [...timeOptions].some(opt => opt.checked)) {
+          reserveBtn.disabled = false; // 버튼활성화됨
+          reserveBtn.classList.add('active_btn');
+        } else {
+          reserveBtn.disabled = true;
+          reserveBtn.classList.remove('active_btn');
+        }
+      }
+})
+</script>
+</head>
+<body>
+	<div layout:fragment="contentFragment">
+		<div id="contents_wrap">
+			<div class="outpatient_header">
+				<h1 class="title">외래진료예약</h1>
+				<p>
+					<b class="color_red"> *환자 본인 예약만 가능합니다.<br> *만 14세 미만
+						소아청소년의 경우, 소아청소년 환자 명의로 회원가입 후 보호자(법적 대리인) 명의로 인증하시어 예약을 진행해주시기
+						바랍니다.<br> *이대목동병원은 의료전달체계가 필요한 종합전문요양기관(3차 진료기관)으로 1차 또는
+						2차(의원, 병원) 진료기관에서 발급한 요양급여의뢰서(진료의뢰서)나 건강검진, 건강진단결과서를 제출해야 건강보험 적용을
+						받을 수 있습니다. 단, 의료급여환자는 모든 진료과에 대해 2차진료기관(병원급)에서 발급한 의료급여의뢰서를 제출해야
+						의료급여 적용을 받을 수 있습니다.
+					</b>
+				</p>
+				<ul id="step_wrap">
+					<li class="selected">
+						<p class="step_num">STEP.01</p>
+						<p class="step_title">진료과/센터 선택</p> <span class="step_chk"><img
+							alt="체크모양" src="/images/step_chk.png"></span>
+					</li>
+					<li class="selected">
+						<p class="step_num">STEP.02</p>
+						<p class="step_title">의료진 선택</p> <span class="step_chk"><img
+							alt="체크모양" src="/images/step_chk.png"></span>
+					</li>
+					<li class="selected">
+						<p class="step_num">STEP.03</p>
+						<p class="step_title">예약일/시간 선택</p> <span class="step_chk"><img
+							alt="체크모양" src="/images/step_chk.png"></span>
+					</li>
+				</ul>
+			</div>
+			<form action="/outpatient/outpatientInsert" method="post">
+				<div id="container">
+					<div id="list_box">
+						<div class="doctor_list" th:if="${doctor != null}">
+							<div class="doctor_pic">
+								<img th:src="@{'/images/' + ${doctor.doctor_profile_image}}"
+									alt="의사 프로필 사진" />
+							</div>
+							<div class="doctor_info">
+								<p class="doctor_name">
+									[[${doctor.doctor_name}]]<span>교수</span>
+								</p>
+								<ul>
+									<li class="department_name"><strong>진료과</strong><span>[[${doctor.department_name}]]</span></li>
+									<li class="specialty"><strong>진료 분야</strong><span>[[${doctor.doctor_doctor_specialty}]]</span></li>
+								</ul>
+							</div>
+							<div class="doctor_calendar schedule_cell"></div>
+						</div> <!-- doctor_list 끝 -->
+						<div class="schedule_wrap">
+							<h3 class="schedule_title">진료일정을 선택하세요</h3>
+							<input type="date" class="date_input" name="outpatient_date" required="required">
+						</div>
+						<div class="time_wrap">
+							<h3 class="schedule_title">진료시간을 선택하세요</h3>
+							<div class="option-group">
+  								<input type="radio" id="option1" name="outpatient_time" value="09:00">
+								<label for="option1">09:00</label>
+  								<input type="radio" id="option2" name="outpatient_time" value="09:30">
+  								<label for="option2">09:30</label>
+  								<input type="radio" id="option3" name="outpatient_time" value="10:00">
+  								<label for="option3">10:00</label>
+  								<input type="radio" id="option4" name="outpatient_time" value="10:30">
+  								<label for="option4">10:30</label>
+  							</div>
+  						</div>
+					</div><!-- list_box 끝 -->
+					<div class="state_box">
+						<table class="state_table">
+							<tr>
+								<th colspan="2" class="box_title">진료예약 내역</th>
+							</tr>
+							<tr>
+								<th>성함</th>
+								<td class="member_active">[[${member.patient_name}]]</td>
+							</tr>
+							<tr>
+								<th>환자번호</th>
+								<td class="member_active">[[${member.patient_no}]]</td>
+							</tr>
+							<tr>
+								<th>진료과</th>
+								<td class="dept_active" th:text="${center != null} ? ${center.center_name} : ${doctor.department_name}">진료과명</td>
+							</tr>
+							<tr>
+								<th>의료진</th>
+								<td class="member_active">[[${doctor.doctor_name}]]</td>
+							</tr>
+							<tr>
+								<th>진료일</th>
+								<td id="selected_date">선택해주세요</td>
+							</tr>
+							<tr>
+								<th>시간</th>
+								<td id="selected_time">선택해주세요</td>
+							</tr>
+						</table>
+						<div id="submit_btnwrap">
+							<a href="/outpatient/outpatientForm">이전보기</a>
+							<input type="submit" id="reserve_btn" value="예약하기" disabled>
+						</div>
+					</div>
+					<!-- state_box 끝 -->
+				</div>
+				<input type="hidden" name="patient_no" th:value="${member.patient_no}">
+				<input type="hidden" name="doctor_id" th:value="${doctor.doctor_id}">
+				<input type="hidden" name="department_id" th:value="${doctor.department_id}">
+				<input type="hidden" th:if="${center != null}" name="center_id" th:value="${center.center_id}">
+
+			</form>
+		</div>
+	</div>
+</body>
+</html>

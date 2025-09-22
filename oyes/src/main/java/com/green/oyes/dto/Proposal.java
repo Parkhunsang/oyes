@@ -16,4 +16,8 @@ public class Proposal {
 	private Date    create_date;
 	private String  is_active;
 	private int     progress;
+	
+	private Integer	for_patient_no;
+	private String	for_patient_name;
+	
 }

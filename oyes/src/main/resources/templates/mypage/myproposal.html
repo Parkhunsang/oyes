@@ -263,7 +263,7 @@ $(function() {
 		<!-- //mypage_lnb -->
 		<ul class="tab tab-type02">
 			<li><a th:href="@{/mypage/mythank}">고맙습니다</a></li>
-			<li class="current"><a th:href="@{/mypage/myproposal}">건의합니다</a></li>
+			<li class="current"><a href="/mypage/myproposal">건의합니다</a></li>
 		</ul>
 		<h4 class="he">건의합니다</h4>
 		<div class="table table-bg01">
@@ -291,11 +291,15 @@ $(function() {
                     
                     <!-- 데이터 있을 때 -->
                     <tr th:each="item : ${propList}">
-                        <td th:if="${item.is_active == 'y'}">[[${item.proposal_type}]]</td>
+                        <td th:if="${item.is_active == 'y'} and ${item.proposal_type == 1}">문의</td>
+						<td th:if="${item.is_active == 'y'} and ${item.proposal_type == 2}">불편사항</td>
+						<td th:if="${item.is_active == 'y'} and ${item.proposal_type == 3}">제안 및 건의사항</td>
                         <td th:if="${item.is_active == 'y'}">
-                            <a href="#">[[${item.proposal_title}]]</a>
+                            <a th:href="@{/proposal/proposal_detail(proposal_no=${item.proposal_no})}">[[${item.proposal_title}]]</a>
                         </td>
-                        <td th:if="${item.is_active == 'y'}">[[${item.progress}]]</td>
+                        <td th:if="${item.is_active == 'y'} and ${item.progress == 1}">접수중</td>
+						<td th:if="${item.is_active == 'y'} and ${item.progress == 2}">검토중</td>
+						<td th:if="${item.is_active == 'y'} and ${item.progress == 3}">답변완료</td>
                         <td th:if="${item.is_active == 'y'}">[[${item.create_date}]]</td>
                     
                         <!-- 삭제된 경우 -->

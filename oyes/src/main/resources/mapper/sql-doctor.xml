@@ -65,6 +65,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	    order by num
 	</select>
 	
+	<select id="doctorlist" resultType="doctor">
+		select * from doctor order by doctor_name
+	</select>
+	
 	<select id="selectCenter" parameterType="integer" resultType="string">
 		select center_name from center where center_id in (select center_id from center_doctor where doctor_id=#{doctor_id}) 
 	</select>
@@ -86,4 +90,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		    d.doctor_id = #{doctor_id}
 	</select>
 	
+	<select id="listAdmin" resultMap="doctorResultMap">
+      SELECT
+          d.*,
+          dp.department_name
+      FROM
+          doctor d,
+          department dp
+      WHERE
+          d.department_id = dp.department_id(+)
+      ORDER BY
+          d.doctor_id
+  </select>
+  <update id="update" parameterType="doctor">
+  	update doctor set department_id=#{department_id}, center_id=#{center_id}, doctor_title=#{doctor_title}, doctor_doctor_specialty=#{doctor_doctor_specialty}
+  		<if test="doctor_profile_image!=null and doctor_profile_image!=''">
+  			,doctor_profile_image=#{doctor_profile_image}
+  		</if>
+  		where doctor_id=#{doctor_id}
+  </update>
+  <update id="delete" parameterType="integer">
+  	update doctor set doctor_is_active='N' where doctor_id=#{doctor_id}
+  </update>
+  <insert id="insert" parameterType="doctor">
+  	<selectKey keyProperty="doctor_id" order="BEFORE" resultType="integer">
+  		select nvl(max(doctor_id), 0) + 1 doctor_id from doctor
+  	</selectKey>
+  	insert into doctor values (#{doctor_id},#{doctor_name},#{doctor_title},#{doctor_profile_image},#{doctor_doctor_specialty},
+  		'Y',sysdate,sysdate,#{department_id},#{center_id})
+  </insert>
+  <insert id="insertCenterDoctor" parameterType="center_doctor">
+  	<selectKey keyProperty="num" order="BEFORE" resultType="integer">
+  		select nvl(max(num), 0) + 1 num from center_doctor
+  	</selectKey>
+  	insert into center_doctor values (#{num},#{doctor_id},#{center_id})
+  </insert>
 </mapper>

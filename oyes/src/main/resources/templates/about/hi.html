@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<th:block th:insert="~{/header.html::header}"></th:block>
+<head>
+<meta charset="UTF-8">
+<title>Hi | 이화서울병원</title>
+<style type="text/css">
+.hi-container {
+    max-width: 1200px;
+   	margin: 200px auto;
+   	padding: 20px;
+   	line-height: 1.8;
+  	color: #333;
+}
+
+.hi-container h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 24px;
+}
+
+/* 탭 스타일 */
+.hi-tabs {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #ddd;
+}
+
+.hi-tabs li {
+    padding: 10px 20px;
+    cursor: pointer;
+    background: #f7f7f7;
+    margin-right: 5px;
+    border-radius: 4px 4px 0 0;
+    transition: 0.3s;
+}
+
+.hi-tabs li.active {
+    background: #007a5c;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* 콘텐츠 */
+.hi-content {
+    display: none;
+}
+.hi-content.active {
+    display: block;
+}
+
+.hi-grid {
+    display: flex;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.hi-item {
+    flex: 1;
+    text-align: center;
+}
+
+.hi-item img {
+    max-width: 100%;
+    border: 1px solid #eee;
+    background: #fff;
+    padding: 10px;
+}
+
+.download-box {
+    margin-top: 30px;
+}
+
+.download-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #007a5c;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+}
+.download-btn:hover {
+    background: #005a45;
+}
+
+</style>
+</head>
+<body>
+	<div layout:fragment="contentFragment">
+		<div class="contTopBar contTopBar-bg01">
+			<!-- inner -->
+			<div class="inner">
+				<!-- breadcrumb -->
+				<div class="breadcrumb cf">
+					<strong class="he">현재 위치:</strong>
+					<div class="item">
+						<a th:href="@{/}" class="home ht">Home</a>
+					</div>
+					<div class="item">
+						<em>병원소개</em>
+						<button type="button" class="bcLinkLayerBtn ht">주 메뉴 목록 열기</button>
+						<ul class="bcLinkLayer">
+							<li><a th:href="@{/about/greeting}">병원소개</a></li>
+						</ul>
+					</div>
+					<div class="item">
+						<em>HI</em>
+						<button type="button" class="bcLinkLayerBtn ht">서브 메뉴 목록 열기</button>
+						<ul class="bcLinkLayer">
+							<li><a th:href="@{/about/greeting}">병원장 인사말</a></li>
+							<li><a th:href="@{/about/tour}">병원 둘러보기</a></li>
+							<li><a th:href="@{/about/mission}">미션과 비전</a></li>
+							<li><a th:href="@{/about/history}">연혁</a></li>
+							<li><a th:href="@{/about/hi}">HI</a></li>
+							<li><a th:href="@{/about/boardList}">병원소식</a></li>							
+						</ul>	
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="hi-container">
+
+		    <h2>HI</h2>
+		
+		    <!-- 탭 메뉴 -->
+		    <ul class="hi-tabs">
+		        <li class="active" data-tab="tab1">휘장</li>
+		        <li data-tab="tab2">워드마크</li>
+		    </ul>
+		
+		    <!-- 휘장 -->
+		    <div id="tab1" class="hi-content active">
+		        <h3>이화여자대학교 의료원 휘장</h3>
+		        <p>
+		            이화여자대학교 의료원의 휘장은 이화학당과 이화여자대학교 의료원의 정통성을 전달하는 매개체로 
+		            이화의 상징인 ‘배꽃’을 바탕으로 표현했다. 배꽃은 이화여자대학교와 의료원의 역사적 뿌리를 나타낸다.
+		        </p>
+		
+		        <div class="hi-grid">
+		            <div class="hi-item">
+		                <img src="/upload/about/hi_01.jpg" alt="휘장 기본형">
+		                <p>기본형</p>
+		            </div>
+		            <div class="hi-item">
+		                <img src="/upload/about/hi_02.jpg" alt="휘장 1도">
+		                <p>1도 표현</p>
+		            </div>
+		        </div>
+		
+		        <h3>이화여자대학교 의료원 휘장 시그니처</h3>
+		        <div class="hi-grid">
+		            <div class="hi-item">
+		                <img src="/upload/about/hi_03.jpg" alt="상하조합">
+		                <p>상하조합</p>
+		            </div>
+		            <div class="hi-item">
+		                <img src="/upload/about/hi_04.jpg" alt="좌우조합">
+		                <p>좌우조합</p>
+		            </div>
+		        </div>
+		
+		        <div class="download-box">
+		            <a href="/download/hi_logo.ai" class="download-btn">휘장 AI파일 다운로드</a>
+		        </div>
+		    </div>
+		
+		    <!-- 워드마크 -->
+		    <div id="tab2" class="hi-content">
+		        <h3>이화여자대학교 의료원 워드마크</h3>
+		        <p>병원의 워드마크는 이화여자대학교 의료원의 영문 약칭인 EUMC를 유연하고 현대적인 이미지로 표현했다.
+					EUMC를 심플하게 강조하면서 'M'을 바이오리듬, 유전자 구조를 상징할 수 있는 띠로 표현하고 환자들의 건강한 생활 리듬을 만드는 병원 기능을 상징화했다.</p>
+		        <img src="/upload/about/hi_05.jpg" alt="워드마크">
+		    </div>
+		
+		</div>
+		
+		<script>
+		    const tabs = document.querySelectorAll('.hi-tabs li');
+		    const contents = document.querySelectorAll('.hi-content');
+		
+		    tabs.forEach(tab => {
+		        tab.addEventListener('click', () => {
+		            // 탭 활성화
+		            tabs.forEach(t => t.classList.remove('active'));
+		            tab.classList.add('active');
+		
+		            // 콘텐츠 전환
+		            contents.forEach(c => c.classList.remove('active'));
+		            document.getElementById(tab.dataset.tab).classList.add('active');
+		        });
+		    });
+		</script>	
+	</div>
+</body>
+</html>

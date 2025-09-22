@@ -6,11 +6,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="select_no" parameterType="integer" resultType="member">
 		select * from member where patient_no = #{patient_no}
 	</select>
-	
 	<select id="select" parameterType="string" resultType="member">
 		select * from member where patient_id = #{patient_id}
 	</select>
-	
+	<select id="select_p" parameterType="integer" resultType="member">
+		select * from member where patient_no = #{patient_no}
+	</select>
 	<insert id="insert" parameterType="member">
 		<selectKey keyProperty="patient_no" order="BEFORE" resultType="integer">
 			select nvl(max(patient_no),0) + 1 from member
@@ -18,7 +19,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into member values 
 		(#{patient_no}, #{patient_id}, #{password}, #{patient_name}, #{birth_date}, #{mobile_no}, #{email}, 'n', sysdate, sysdate, 'y')
 	</insert>
-	
 	<update id="update" parameterType="member">
 		update member 
 		set    password     = #{password}, 
@@ -29,7 +29,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		       update_date  = sysdate
 		where patient_id = #{patient_id}
 	</update>
-	
 	<update id="delete" parameterType="string">
 		update member 
 		set    is_active = 'n' 

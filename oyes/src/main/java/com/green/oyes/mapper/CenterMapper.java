@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.green.oyes.dto.Center;
+
 @Mapper
 public interface CenterMapper {
 
@@ -16,5 +17,7 @@ public interface CenterMapper {
 	Center select(int center_id);
 
 	Center selectC(int center_id);
+
+
 
 }

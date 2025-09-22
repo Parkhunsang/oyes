@@ -6,8 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" th:href="@{/css/departmentDetail.css}">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script type="text/javascript">
-/* [2025-09-15 Gemini 추가] 클릭 드롭다운 JQuery 코드 시작 */
 $(document).ready(function() {
     $('ul.top_util_list > li > span').on('click', function(event) {
         var $dropdown = $(this).siblings('ul.drop_list');
@@ -25,7 +25,7 @@ $(document).ready(function() {
         event.stopPropagation();
     });
 });
-/* [2025-09-15 Gemini 추가] 클릭 드롭다운 JQuery 코드 끝 */
+
 </script>
 <title>[[${department.department_name}]] | 위치안내</title>
 </head>

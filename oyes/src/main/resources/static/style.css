@@ -17,7 +17,7 @@
 }
 .scedule_main{
 	width:100%;
-	height:484px;
+	min-height:200px;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -36,6 +36,9 @@
 .grid_box.date-board {
 	flex-grow: 1; /* 변경: 남은 공간을 채우도록 설정 */
 	grid-template-rows: repeat(auto, 1fr); /* 변경: 6개의 행이 동일한 높이를 가지도록 설정 */
+}
+.grid_box.date-board div{
+	height:90px;
 }
 .grid_box.date-board p{
 	font:400 12px 'pretendard';
@@ -61,7 +64,7 @@
     box-sizing:border-box;
 }
 .date-board .has-visit p:nth-child(1) {
-	width:8px;
+/* 	width:8px; */
 	height:8px;
 	border-radius:4px;
 	text-indent:-9999px;
@@ -75,6 +78,16 @@
 	right:4px;
 	top:14px;
 	padding:2px;
-	background:#0f51b3;
-	color:#fff;
+}
+.pm-background {                                                                                
+	background-color: #a9a9ac;                                                                     
+	 color: white;                                                                                   
+	padding: 2px 5px;                                                                               
+	border-radius: 2px;                                                                            
+}
+.am-background {
+	background-color: #0f51b3;
+	color: white;
+    padding: 2px 5px;
+    border-radius: 2px;  
 }

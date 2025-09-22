@@ -30,4 +30,6 @@ public class CenterServiceImpl implements CenterService{
 		return cm.selectC(center_id);
 	}
 
+
+
 }

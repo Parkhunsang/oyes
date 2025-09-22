@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{layouts/layout}">
+<th:block th:insert="~{/header.html::header}"></th:block>
+<head>
+<meta charset="UTF-8">
+<title>미션과 비전 | 이화서울병원</title>
+</head>
+<body>
+	<div layout:fragment="contentFragment">
+		<div class="contTopBar contTopBar-bg01">
+			<!-- inner -->
+				<div class="inner">
+					<!-- breadcrumb -->
+					<div class="breadcrumb cf">
+						<strong class="he">현재 위치:</strong>
+						<div class="item">
+							<a th:href="@{/}" class="home ht">Home</a>
+						</div>
+						<div class="item">
+							<em>병원소개</em>
+							<button type="button" class="bcLinkLayerBtn ht">주 메뉴 목록 열기</button>
+							<ul class="bcLinkLayer">
+								<li><a th:href="@{/about/greeting}">병원소개</a></li>
+							</ul>
+						</div>
+						<div class="item">
+							<em>미션과 비전</em>
+							<button type="button" class="bcLinkLayerBtn ht">서브 메뉴 목록 열기</button>
+							<ul class="bcLinkLayer">
+								<li><a th:href="@{/about/greeting}">병원장 인사말</a></li>
+								<li><a th:href="@{/about/tour}">병원 둘러보기</a></li>
+								<li><a th:href="@{/about/mission}">미션과 비전</a></li>
+								<li><a th:href="@{/about/history}">연혁</a></li>
+								<li><a th:href="@{/about/hi}">HI</a></li>
+								<li><a th:href="@{/about/boardList}">병원소식</a></li>							
+							</ul>	
+						</div>
+					</div>
+				</div>
+			</div>
+		<main id="content" class="content">
+			<div class="inner">
+				<div class="heading heading-depth01">
+					<h2 class="title">미션과 비전</h2>
+				</div>
+				<div class="jumbotron jumbotron-bgType01">
+					<!-- <div class="info">
+						<i class="icon-type01 icon-sizeM"></i>
+						<strong class="title">
+							<img src="/asset/img/hos/img_hos02_jumbotron_title_01.png" alt="EUMC 이대서울병원" />
+						</strong>
+						<p>섬김과 나눔이라는<br>이화여자대학교의료원의 설립 정신을 담아<br>진정한 환자 중심의 의료 서비스를 실현할 것입니다.</p>
+					</div> -->
+				</div>
+				<div class="heading heading-depth02 alignC">
+					<h3 class="title">Mission</h3>
+				</div>
+				<div class="heading heading-depth03 alignC">
+					<h4 class="title color05">사랑의 기독교 정신으로 인류를 질병으로부터 보호하고 구한다.</h4>
+				</div>
+				<!-- <div class="imgWrap">
+					<img src="/asset/img/hos/img_hos02_01.jpg" alt="사랑 + 기독교 정신 -> 인류보호" />
+				</div> -->
+			</div>
+			<div class="vision vision_0920">
+				<div class="inner">
+					<div class="heading heading-depth02 alignC">
+						<h3 class="title">Vision</h3>
+					</div>
+					<div class="heading heading-depth03 alignC">
+						<h4 class="title color05">무한 가치를 창출하는 상생의 헬스케어 시스템<br>공감과 화합을 바탕으로 이화 가족이 행복한 병원</h4>
+					</div>
+				</div>
+			</div>
+					
+			<div class="core_new">
+				<div class="inner">
+					<div class="heading heading-depth02 alignC">
+						<h3 class="title">CORE VALUE</h3>
+					</div>
+					<ul class="vision-list">
+						<li class="item01">
+							<i class="icon-type15 icon-sizeM"></i>
+							<strong>진료</strong>
+							<p>
+								전인적 진료를 통한<br>
+								최상의 치유 경험을 제공하는 병원
+							</p>
+						</li>
+						<li class="item02">
+							<i class="icon-type16 icon-sizeM"></i>
+							<strong>교육</strong>
+							<p>
+								창의적 교육을 통한<br>
+								미래 의료 리더를 양성하는 병원
+							</p>
+						</li>
+						<li class="item03">
+							<i class="icon-type17 icon-sizeM"></i>
+							<strong>연구</strong>
+							<p>
+								실용적 융합연구를 통한<br>
+								헬스케어 산업을 선도하는 병원
+							</p>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="inner">
+				<div class="imgWrap">
+					<img src="/upload/about/img_hos02_02.jpg" alt="공감, 공감과 화합을 바탕으로 이화 가족이 행복한 병원, 화합">
+				</div>
+			</div>
+		</main>
+	</div>
+</body>
+</html>

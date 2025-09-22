@@ -16,6 +16,7 @@ import com.green.oyes.service.ClinicSessionService;
 import com.green.oyes.service.DoctorExtraService;
 import com.green.oyes.service.DoctorService;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,18 +35,51 @@ public class CenterController {
 	public void  centerList(Model model){
 		List<Center> centerList = cs.list();
 		model.addAttribute("centerList", centerList);
+		
+		List<Map<String, String>> navLinks = new ArrayList<>();
+	    navLinks.add(Map.of("url", "/department/departmentList", "text", "진료과"));
+	    navLinks.add(Map.of("url", "/center/centerList", "text", "센터"));
+	    navLinks.add(Map.of("url", "/#", "text", "이용안내"));
+	    navLinks.add(Map.of("url", "/#", "text", "고객서비스"));
+	    navLinks.add(Map.of("url", "/#", "text", "건강정보"));
+	    navLinks.add(Map.of("url", "/#", "text", "병원안내"));
+	    model.addAttribute("navLinks", navLinks);
 	}
 	
 	@GetMapping("/center/centerDetail")
 	public void centerDetail(@RequestParam("center_id") int center_id, Model model) {
 		Center center = cs.select(center_id);
 		model.addAttribute("center", center);
+		
+		List<Map<String, String>> navLinks = new ArrayList<>();
+	    navLinks.add(Map.of("url", "/department/departmentList", "text", "진료과"));
+	    navLinks.add(Map.of("url", "/center/centerList", "text", "센터"));
+	    navLinks.add(Map.of("url", "/#", "text", "이용안내"));
+	    navLinks.add(Map.of("url", "/#", "text", "고객서비스"));
+	    navLinks.add(Map.of("url", "/#", "text", "건강정보"));
+	    navLinks.add(Map.of("url", "/#", "text", "병원안내"));
+	    model.addAttribute("navLinks", navLinks);
+	    
+	    List<Center> allCenters = cs.list();
+	    model.addAttribute("allCenters", allCenters);
 	}
 	
 	@GetMapping("/center/centerPlace")
 	public void departmentPlce(@RequestParam("center_id") int center_id, Model model) {
 		Center center = cs.select(center_id);
 		model.addAttribute("center", center);
+		
+		List<Map<String, String>> navLinks = new ArrayList<>();
+	    navLinks.add(Map.of("url", "/department/departmentList", "text", "진료과"));
+	    navLinks.add(Map.of("url", "/center/centerList", "text", "센터"));
+	    navLinks.add(Map.of("url", "/#", "text", "이용안내"));
+	    navLinks.add(Map.of("url", "/#", "text", "고객서비스"));
+	    navLinks.add(Map.of("url", "/#", "text", "건강정보"));
+	    navLinks.add(Map.of("url", "/#", "text", "병원안내"));
+	    model.addAttribute("navLinks", navLinks);
+	    
+	    List<Center> allCenters = cs.list();
+	    model.addAttribute("allCenters", allCenters);
 	}
 	
 	@GetMapping("/center/doctorList")
@@ -54,6 +88,19 @@ public class CenterController {
         List<Doctor> doctorList = ds.listC(center_id);
         model.addAttribute("center",center);
         model.addAttribute("doctorList", doctorList);
+        
+        List<Map<String, String>> navLinks = new ArrayList<>();
+	    navLinks.add(Map.of("url", "/department/departmentList", "text", "진료과"));
+	    navLinks.add(Map.of("url", "/center/centerList", "text", "센터"));
+	    navLinks.add(Map.of("url", "/#", "text", "이용안내"));
+	    navLinks.add(Map.of("url", "/#", "text", "고객서비스"));
+	    navLinks.add(Map.of("url", "/#", "text", "건강정보"));
+	    navLinks.add(Map.of("url", "/#", "text", "병원안내"));
+	    model.addAttribute("navLinks", navLinks);
+	    
+	    List<Center> allCenters = cs.list();
+	    model.addAttribute("allCenters", allCenters);
+        
     }
 	
 	// 의료진 소개 부분
@@ -142,5 +189,19 @@ public class CenterController {
 		}
 		model.addAttribute("doctorList", doctorList);  
 		model.addAttribute("center",center);
+		
+		List<Map<String, String>> navLinks = new ArrayList<>();
+	    navLinks.add(Map.of("url", "/department/departmentList", "text", "진료과"));
+	    navLinks.add(Map.of("url", "/center/centerList", "text", "센터"));
+	    navLinks.add(Map.of("url", "/#", "text", "이용안내"));
+	    navLinks.add(Map.of("url", "/#", "text", "고객서비스"));
+	    navLinks.add(Map.of("url", "/#", "text", "건강정보"));
+	    navLinks.add(Map.of("url", "/#", "text", "병원안내"));
+	    model.addAttribute("navLinks", navLinks);
+	    
+	    List<Center> allCenters = cs.list();
+	    model.addAttribute("allCenters", allCenters);
+		
 	}
+	
 }
